@@ -1,0 +1,40 @@
+{
+    "results":[
+        {
+        "Name": "Know-Base- Worlds Best Online Learning Platform",
+        "Description": "This Online Learning Website Created by me @DhruvShere which is Helpful for Student of Standerd 1 to 10.",
+        "Language": "HTML, CSS, BootStrap",
+        "video": "./Videos/Know-Base®.com.mp4"
+        },
+        {
+        "Name": "Oracle Clone",
+        "Description": "This Oracle Clone is Created by me @DhruvShere.",
+        "Language": "HTML, CSS",
+        "video": "./Videos/Oracle®.com.mp4"
+        },
+        {
+        "Name": "Rate-IT- Worlds Best Review Website",
+        "Description": "This is the Review Website, Which is our Last sem Project in Diploma in Engineering Which We Have Created with my Collage Buddy's.",
+        "Language": "HTML, CSS, BootStrap, JavaScript, Java",
+        "video": "./Videos/RATE-IT®.com.mp4"
+        },
+        {
+        "Name": "REJOUICE Clone- An Animated Website",
+        "Description": "This Rejoice Clone is Created by me @DhruvShere which is full of Exciting Animation Which may be Joyful for all.",
+        "Language": "HTML, CSS, Javascript, GSAP",
+        "video": "./Videos/REJOUICE®.com.mp4"
+        },
+        {
+        "Name": "Amazon Clone - Worlds Best Shopping Site",
+        "Description": "This Amazon Clone Website Created by me @DhruvShere Which is the one of the Best Shopping Site.",
+        "Language": "HTML, CSS",
+        "image": "./Videos/Amazon®.com.jpg"
+        },
+        {
+        "Name": "Spotify Clone - World's Best Music Site",
+        "Description": "This Spotify Clone Created by me @DhruvShere which Works Same as Real Spotify You can Play Music On It Also Create Playists and much more.",
+        "Language": "HTML, CSS, JavaScript",
+        "image": "./Videos/Spotify®.com.jpg"
+        }
+    ]
+}
