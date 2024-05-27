@@ -14,3 +14,31 @@
 body{
     font-family: rejoy;
 }
+.main .container-2{
+    margin: auto;
+    padding: 2.5vw;
+    display: flex;
+    width: 85%;
+    background-color:azure;
+    margin-top: 3vw;
+}
+.container-2 h3{
+    font-weight: 500;
+    font-family: nb;
+    margin: 0.5vw;
+    margin-top: 2vw;
+}
+.container-2 h4{
+    font-weight: 500;
+    margin: 0.5vw;
+    margin-top: 2vw;
+}
+#api-result{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+#video{
+    width: 80vw;
+    height: auto;
+}
