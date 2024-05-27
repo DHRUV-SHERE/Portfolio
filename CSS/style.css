@@ -1,10 +1,10 @@
 @font-face {
     font-family: nb;
-    src: url(./NBInternationalProBoo.ttf);
+    src: url(../Fonts/NBInternationalProBoo.ttf);
 }
 @font-face {
     font-family: rejoy;
-    src: url(./Rejouice-Headline.ttf);
+    src: url(../Fonts/Rejouice-Headline.ttf);
 }
 *{
     margin: 0;
@@ -12,6 +12,7 @@
     box-sizing: border-box;
 }
 body{
+    font-family: rejoy;
     height: 100vh;
     width: 100vw;
     background: linear-gradient(45deg, #FFFFFF, #3498DB); /* Updated background gradient */

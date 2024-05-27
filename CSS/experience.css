@@ -1,0 +1,16 @@
+@font-face {
+    font-family: nb;
+    src: url(../Fonts/NBInternationalProBoo.ttf);
+}
+@font-face {
+    font-family: rejoy;
+    src: url(../Fonts/Rejouice-Headline.ttf);
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: rejoy;
+}
