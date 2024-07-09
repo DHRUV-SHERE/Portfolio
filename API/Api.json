@@ -5,6 +5,7 @@
             "Description": "This Online Learning Website Created by me @DhruvShere which is Helpful for Student of Standerd 1 to 10.",
             "Language": "HTML, CSS, BootStrap",
             "Link": "https://dhruv-shere.github.io/KnowBase/",
+            "Link2":"https://github.com/DHRUV-SHERE/KnowBase",
             "video": "../Videos/knowbase.mp4"
         },
         {
@@ -12,6 +13,7 @@
             "Description": "This Oracle Clone is Created by me @DhruvShere.",
             "Language": "HTML, CSS",
             "Link": "https://dhruv-shere.github.io/Oracle/",
+            "Link2":"https://github.com/DHRUV-SHERE/Oracle",
             "video": "../Videos/oracle.mp4"
         },
         {
@@ -19,6 +21,7 @@
             "Description": "This Amazon Clone Website Created by me @DhruvShere Which is the one of the Best Shopping Site.",
             "Language": "HTML, CSS",
             "Link": "https://dhruv-shere.github.io/Amazon/",
+            "Link2":"https://github.com/DHRUV-SHERE/Amazon",
             "image": "../Videos/amazon.jpg"
         },
         {
@@ -26,6 +29,7 @@
             "Description": "This Spotify Clone Created by me @DhruvShere which Works Same as Real Spotify You can Play Music On It Also Create Playists and much more.",
             "Language": "HTML, CSS, JavaScript",
             "Link": "https://dhruv-shere.github.io/Spotify/",
+            "Link2":"https://github.com/DHRUV-SHERE/Spotify",
             "image": "../Videos/spotify.jpg"
         },
         {
@@ -33,6 +37,7 @@
             "Description": "This Rejoice Clone is Created by me @DhruvShere which is full of Exciting Animation Which may be Joyful for all.",
             "Language": "HTML, CSS, Javascript, GSAP",
             "Link": "https://dhruv-shere.github.io/RejoiuceClone/",
+            "Link2":"https://github.com/DHRUV-SHERE/RejoiuceClone",
             "video": "../Videos/rejouice.mp4"
         },
         {
@@ -40,6 +45,7 @@
             "Description": "This is the Review Website, Which is our Last sem Project in Diploma in Engineering Which We Have Created with my Collage Buddy's.",
             "Language": "HTML, CSS, BootStrap, JavaScript, Java",
             "Link": "https://dhruv-shere.github.io/Login-Page/",
+            "Link2":"https://github.com/DHRUV-SHERE/Login-Page",
             "video": "../Videos/rateit.mp4"
         }
     ]

@@ -18,9 +18,11 @@ body{
     margin: auto;
     padding: 2.5vw;
     display: flex;
-    width: 85%;
-    background-color:azure;
+    width: 95%;
     margin-top: 3vw;
+    background-color: antiquewhite;
+    margin-bottom: 3vw;
+    border-radius: 20px;
 }
 .container-2 h3{
     font-weight: 500;
@@ -39,6 +41,7 @@ body{
     justify-content: center;
 }
 #video{
+    margin: auto;
     width: 80vw;
     height: auto;
 }

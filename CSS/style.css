@@ -44,3 +44,11 @@ body{
     width: 100vw;
     height: 100vh;
 }
+
+.main-container{
+    width: 100vw;
+    height: 60vh;
+    background-image: url(../IMG/LiteBg.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+}

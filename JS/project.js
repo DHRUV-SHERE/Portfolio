@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const description = document.getElementById('description');
         const language = document.getElementById('language');
         const link = document.getElementById('link');
+        const link2 = document.getElementById('link2');
         const video = document.getElementById('video');
         const image = document.getElementById('image');
 
@@ -24,6 +25,8 @@ document.addEventListener("DOMContentLoaded", () => {
         language.textContent = project.Language;
         link.href = project.Link;
         link.textContent = project.Link;
+        link2.href = project.Link2;
+        link2.textContent = project.Link2;
 
         console.log("Project Data:", project);
 
