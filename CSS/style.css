@@ -98,3 +98,71 @@ body {
 .main {
     padding: 20px;
 }
+
+/* Social Media Button Styles */
+.social-media-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.social-media-button {
+    width: 50px;
+    height: 50px;
+    background-color: #BB86FC;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.social-media-button i {
+    color: #121212;
+    font-size: 24px;
+}
+
+.social-media-button:hover {
+    background-color: #03DAC5;
+    transform: scale(1.1); /* Scale up slightly on hover */
+}
+
+.social-media-icons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    bottom: 60px;
+    right: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+}
+
+.social-media-icons a {
+    margin: 10px 0;
+    font-size: 24px;
+    color: #ECECEC;
+    transition: color 0.3s;
+}
+
+.social-media-icons a:hover {
+    color: #BB86FC;
+}
+
+.social-media-container.open .social-media-icons {
+    opacity: 1;
+    visibility: visible;
+}
+
+.social-media-container.open .social-media-icons a {
+    transform: translateY(0);
+}
+
+.social-media-icons a {
+    transform: translateY(20px);
+    transition: transform 0.3s, opacity 0.3s;
+}

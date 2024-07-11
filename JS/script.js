@@ -65,3 +65,13 @@ tl.from(".container-1",{
 tl.to(".load",{
     display:"none"
 })
+
+// Social Media
+document.addEventListener("DOMContentLoaded", () => {
+    const socialMediaContainer = document.querySelector(".social-media-container");
+    const socialMediaButton = document.querySelector(".social-media-button");
+
+    socialMediaButton.addEventListener("click", () => {
+        socialMediaContainer.classList.toggle("open");
+    });
+});
