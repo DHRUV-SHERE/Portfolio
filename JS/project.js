@@ -1,9 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const apiUrl = '../API/API.json';
+    const apiUrl = '../API/Api.json';
 
     async function fetchData() {
         try {
             const response = await fetch(apiUrl);
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
             const data = await response.json();
             return data.results;
         } catch (error) {
@@ -28,25 +31,20 @@ document.addEventListener("DOMContentLoaded", () => {
         link2.href = project.Link2;
         link2.textContent = project.Link2;
 
-        console.log("Project Data:", project);
-
         if (project.video) {
             video.src = project.video;
             video.style.display = 'block';
             image.style.display = 'none';
-            console.log("Displaying video:", project.video);
-            video.oncanplay = () => console.log("Video can play:", project.video);
+            video.load(); // Ensures video is loaded properly
             video.onerror = () => console.error("Video error:", project.video);
         } else if (project.image) {
             image.src = project.image;
             image.style.display = 'block';
             video.style.display = 'none';
-            console.log("Displaying image:", project.image);
             image.onerror = () => console.error("Image error:", project.image);
         } else {
             video.style.display = 'none';
             image.style.display = 'none';
-            console.log("No media to display");
         }
     }
 
@@ -56,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
         projectLinks.forEach(link => {
             link.addEventListener('click', (event) => {
                 event.preventDefault();
-                const projectName = event.target.textContent;
+                const projectName = event.target.textContent.trim();
                 const selectedProject = projects.find(project => project.Name.includes(projectName));
                 if (selectedProject) {
                     updateContent(selectedProject);
@@ -68,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
     fetchData().then(projects => {
         if (projects) {
             initializeEventListeners(projects);
-            updateContent(projects[0]);
+            updateContent(projects[0]); // Display the first project by default
         }
     });
 });
