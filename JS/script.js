@@ -89,3 +89,21 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+// Hero Section
+document.addEventListener("DOMContentLoaded", function() {
+    const skills = ['HTML', 'CSS', 'JavaScript', 'Python', 'Java', 'DBMS','Bootstrap','Github']; // Add more skills as needed
+    let skillIndex = 0;
+    const skillTypeElement = document.getElementById('skillType');
+
+    function typeSkills() {
+        skillTypeElement.textContent = skills[skillIndex];
+        skillIndex = (skillIndex + 1) % skills.length;
+        skillType.style.color= "#BB86FC";
+        skillType.style.fontSize= "5VH";
+    }
+
+    // Initial call
+    typeSkills();
+    // Repeat every 2 seconds (adjust timing as needed)
+    setInterval(typeSkills, 2000);
+});

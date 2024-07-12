@@ -173,3 +173,53 @@ body {
 .social-buttons .card4:hover {
     background-color: #7289da;
 }
+/* Hero Section */
+
+.hero-section {
+    padding: 100px 0;
+}
+
+.hero-content {
+    font-size: 28px;
+    line-height: 1.5;
+}
+
+.hero-content h2 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    font-family: 'Pacifico', cursive;
+}
+
+.hero-content h2 span{
+    color: #BB86FC;
+}
+
+.hero-content p {
+    font-size: 24px;
+}
+
+.hero-content p  span{
+    color: #BB86FC;
+    font-size: 5vh;
+    animation: typing 6s steps(50, end) infinite;
+}
+
+.hero-image {
+    text-align: center;
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+    border-radius: 63% 37% 30% 70% / 58% 62% 38% 42%;
+    margin-top: 20px;
+}
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
