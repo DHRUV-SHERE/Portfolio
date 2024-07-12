@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +10,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../CSS/project.css">
 </head>
-
 <body>
     <div class="main">
         <header>
@@ -28,7 +26,7 @@
                                 <a class="nav-link" aria-current="page" href="../index.html">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="./experience.html">Experience</a>
+                                <a class="nav-link" href="./skill.html">Skills</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
@@ -43,8 +41,7 @@
                                     </li>
                                     <li><a class="dropdown-item" href="#" data-project="Spotify Clone">Spotify Clone</a>
                                     </li>
-                                    <li><a class="dropdown-item" href="#" data-project="Rejouice Clone">REJOUICE
-                                            Clone</a></li>
+                                    <li><a class="dropdown-item" href="#" data-project="Rejouice Clone">REJOUICE Clone</a></li>
                                     <li><a class="dropdown-item" href="#" data-project="Rate-It">Rate-IT</a></li>
                                 </ul>
                             </li>
@@ -59,38 +56,29 @@
                 </div>
             </nav>
         </header>
-
-    <div class="container-2" id="api-result">
-        <h3><i class="fa-solid fa-file-signature"></i> PROJECT : <div id="projectname"></div>
-        </h3>
-        <h4><i class="fa-solid fa-circle-info"></i> DESCRIPTION : <div id="description"></div>
-        </h4>
-        <h4><i class="fa-solid fa-language"></i> LANGUAGE : <div id="language"></div>
-        </h4>
-        <h4><i class="fa-solid fa-link"></i> LINK FOR VIEW : <a href="" id="link" target="_blank"></a></h4>
-        <h4><i class="fa-solid fa-link"></i> LINK OF GITHUB : <a href="" id="link2" target="_blank"></a></h4>
-        <hr>
-        <hr>
-        <video autoplay muted loop class="img-fluid" id="video" style="display: none;"></video>
-        <img id="image" class="img-fluid" style="display: none;">
+        <div class="container-2" id="api-result">
+            <div class="project-details">
+                <h3><i class="fa-solid fa-file-signature"></i> PROJECT : <span id="projectname"></span></h3>
+                <h4><i class="fa-solid fa-circle-info"></i> DESCRIPTION : <span id="description"></span></h4>
+                <h4><i class="fa-solid fa-language"></i> LANGUAGE : <span id="language"></span></h4>
+                <h4><i class="fa-solid fa-link"></i> LINK FOR VIEW : <a href="" id="link" target="_blank"></a></h4>
+                <h4><i class="fa-solid fa-link"></i> LINK OF GITHUB : <a href="" id="link2" target="_blank"></a></h4>
+                <hr>
+            </div>
+            <div class="project-media">
+                <div class="video-container">
+                    <video autoplay muted loop class="project-video" id="video" style="display: none;"></video>
+                    <img id="image" class="project-image" style="display: none;">
+                </div>
+            </div>
+        </div>
     </div>
-    </div>
-    </div>
-
     <!-- Scripts -->
     <script src="https://kit.fontawesome.com/cff80723f3.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
-        integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
-        integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="../JS/project.js"></script>
 </body>
-
 </html>

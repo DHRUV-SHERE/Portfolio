@@ -46,6 +46,15 @@ document.addEventListener("DOMContentLoaded", () => {
             video.style.display = 'none';
             image.style.display = 'none';
         }
+
+        // Trigger animation on media elements
+        const mediaElements = document.querySelectorAll('.project-video, .project-image');
+        mediaElements.forEach(element => {
+            element.style.opacity = '0'; // Initial opacity for animation
+            setTimeout(() => {
+                element.style.opacity = '1'; // Apply animation after a short delay
+            }, 100);
+        });
     }
 
     function initializeEventListeners(projects) {
@@ -70,3 +79,4 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+

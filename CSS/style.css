@@ -99,70 +99,77 @@ body {
     padding: 20px;
 }
 
-/* Social Media Button Styles */
-.social-media-container {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1000;
-}
+/* Social Media */
+/* Add your other CSS styles here */
 
-.social-media-button {
-    width: 50px;
-    height: 50px;
-    background-color: #BB86FC;
-    border-radius: 50%;
+.share-btn {
+    position: fixed;
     display: flex;
+    cursor: pointer;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s, transform 0.3s;
+    background: #7d7ef0;
+    border: 1px solid rgba(128, 128, 128, 0.705);
+    border-radius: 50%;
+    transition: 0.25s ease-in-out;
+    z-index: 10;
+    padding: 10px;
+    width: 50px;
+    height: 50px;
+    bottom: 20px;
+    right: 20px;
 }
 
-.social-media-button i {
-    color: #121212;
-    font-size: 24px;
+.share-btn:hover {
+    background: #f1f1f1;
+    transform: scale(0.9);
 }
 
-.social-media-button:hover {
-    background-color: #03DAC5;
-    transform: scale(1.1); /* Scale up slightly on hover */
-}
-
-.social-media-icons {
+.social-buttons {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    position: absolute;
-    bottom: 60px;
-    right: 0;
-    opacity: 0;
+    gap: 1em;
     visibility: hidden;
-    transition: all 0.3s;
+    z-index: 5;
 }
 
-.social-media-icons a {
-    margin: 10px 0;
-    font-size: 24px;
-    color: #ECECEC;
-    transition: color 0.3s;
-}
-
-.social-media-icons a:hover {
-    color: #BB86FC;
-}
-
-.social-media-container.open .social-media-icons {
-    opacity: 1;
+.social-buttons.active {
     visibility: visible;
 }
 
-.social-media-container.open .social-media-icons a {
-    transform: translateY(0);
+.social-buttons div {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #7d7ef0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: scale(0);
+    transition: transform 0.3s ease, background-color 0.3s ease, visibility 0.3s;
 }
 
-.social-media-icons a {
-    transform: translateY(20px);
-    transition: transform 0.3s, opacity 0.3s;
+.social-buttons a {
+    color: white;
+    text-decoration: none;
+    font-size: 24px;
+}
+
+.social-buttons .card1:hover {
+    background-color: #cc3934;
+}
+
+.social-buttons .card2:hover {
+    background-color: #1da1f2;
+}
+
+.social-buttons .card3:hover {
+    background-color: #333;
+}
+
+.social-buttons .card4:hover {
+    background-color: #7289da;
 }

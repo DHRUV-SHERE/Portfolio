@@ -68,10 +68,24 @@ tl.to(".load",{
 
 // Social Media
 document.addEventListener("DOMContentLoaded", () => {
-    const socialMediaContainer = document.querySelector(".social-media-container");
-    const socialMediaButton = document.querySelector(".social-media-button");
+    const shareBtn = document.querySelector(".share-btn");
+    const socialButtons = document.querySelector(".social-buttons");
 
-    socialMediaButton.addEventListener("click", () => {
-        socialMediaContainer.classList.toggle("open");
+    shareBtn.addEventListener("click", () => {
+        socialButtons.classList.toggle("active");
+        const cards = document.querySelectorAll(".social-buttons div");
+
+        cards.forEach((card, index) => {
+            if (socialButtons.classList.contains("active")) {
+                setTimeout(() => {
+                    card.style.transform = "scale(1)";
+                }, index * 100);
+            } else {
+                setTimeout(() => {
+                    card.style.transform = "scale(0)";
+                }, index * 100);
+            }
+        });
     });
 });
+

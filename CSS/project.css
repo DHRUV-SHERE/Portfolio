@@ -18,51 +18,79 @@ body {
     font-family: 'NBInternationalProBoo', sans-serif;
 }
 
-.main .container-2{
+.main {
+    padding: 20px;
+}
+
+.container-2 {
     margin: auto;
     padding: 2.5vw;
     display: flex;
+    flex-direction: column; /* Adjusted for responsiveness */
     width: 95%;
     margin-bottom: 3vw;
     border-radius: 20px;
     background-color: #1E1E1E; /* Slightly lighter than body background */
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    overflow: hidden; /* Ensure content does not overflow */
 }
 
-.container-2 h3, .container-2 h4 {
+.project-details, .project-media {
+    flex: 1;
+    padding: 20px;
+}
+
+.project-details {
+    border-bottom: 2px solid #BB86FC; /* Add border for separation */
+    margin-bottom: 20px;
+}
+
+.project-details h3, .project-details h4 {
     font-weight: 500;
     font-family: nb;
     margin: 0.5vw;
     margin-top: 2vw;
+    color: #BB86FC; /* Accent color */
 }
 
-#api-result {
+.project-media {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
 }
 
-#video, #image {
-    margin: auto;
-    width: 80vw;
-    height: auto;
-    border: 2px solid #BB86FC; /* Add border to media for emphasis */
+.project-media .video-container {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 Aspect Ratio (responsive video) */
+    overflow: hidden;
+    border: 2px solid #BB86FC; /* Add border for emphasis */
     border-radius: 10px;
 }
 
+.project-media .project-video, .project-media .project-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0; /* Initially hide media elements */
+    transition: opacity 0.5s ease; /* Smooth transition for opacity */
+}
+
 .neon-logo {
-    /* font-family: 'Pacifico', cursive; Updated font family */
     font-family: rejoy;
     font-size: 1.8rem;
     color: #BB86FC;
     text-shadow: 0 0 5px #BB86FC, 0 0 10px #BB86FC, 0 0 20px #BB86FC, 0 0 30px #BB86FC, 0 0 40px #BB86FC;
+    transition: text-shadow 0.3s ease; /* Smooth transition for text-shadow */
 }
 
-.neon-logo:hover{
+.neon-logo:hover {
     color: #BB86FC;
-    text-shadow: 0 0 5px #BB86FC, 0 0 10px #BB86FC, 0 0 20px #BB86FC, 0 0 30px #BB86FC, 0 0 40px #BB86FC;
+    text-shadow: 0 0 5px #BB86FC, 0 0 10px #BB86FC, 0 0 20px #BB86FC, 0 0 30px #BB86FC, 0 0 60px #BB86FC; /* Enhanced effect on hover */
 }
-
 
 .logo {
     width: 40px;
@@ -88,6 +116,7 @@ body {
     color: #ECECEC !important;
     font-family: 'NBInternationalProBoo', sans-serif;
     font-weight: 500;
+    transition: color 0.3s ease; /* Smooth transition for color */
 }
 
 .navbar-nav .nav-link.active {
@@ -104,6 +133,7 @@ body {
 
 .navbar-nav .dropdown-item {
     color: #ECECEC;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transitions for background-color and color */
 }
 
 .navbar-nav .dropdown-item:hover, .navbar-nav .dropdown-item:focus {
@@ -111,6 +141,17 @@ body {
     background-color: #2C2C2C;
 }
 
-.main {
-    padding: 20px;
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
+
+.project-media .project-video, .project-media .project-image {
+    animation: fadeIn 1s forwards; /* Apply fadeIn animation */
+}
+
