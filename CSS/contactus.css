@@ -77,6 +77,10 @@ body {
     background-color: #2C2C2C;
 }
 
+.main {
+    padding: 20px;
+}
+
 .contact-page {
     padding: 3rem 0;
 }

@@ -77,6 +77,12 @@ body {
     background-color: #2C2C2C;
 }
 
+
+.main {
+    padding: 20px;
+}
+
+
 .skills-section {
     padding: 80px 0;
 }
