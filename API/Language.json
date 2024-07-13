@@ -37,7 +37,7 @@
             "description": "MySQL is an open-source relational database management system."
         },
         "NoSql": {
-            "logo": "../IMG/nosql.jpg",
+            "logo": "../IMG/nosql.png",
             "founder": "Various",
             "launch_date": "2000s",
             "description": "NoSQL is a non-relational database design."

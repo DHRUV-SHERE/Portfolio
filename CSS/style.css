@@ -328,7 +328,8 @@ body {
 
 /* Popup card */
 .popup-card {
-    background-color: #BB86FC; /* Use your site's theme color */
+    background-color: #d3baf2; /* Use your site's theme color */
+    color: black;
     margin: 15% auto; /* Centered on screen */
     padding: 20px;
     border: 1px solid #888;
