@@ -194,8 +194,9 @@ body {
     align-items: center;
 }
 
-.hero-content p #Name{
+.hero-content #Name{
     border-right: 0;
+    color: #BB86FC;
 }
 
 .hero-content p span{
