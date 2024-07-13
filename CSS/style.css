@@ -298,8 +298,8 @@ body {
 }
 
 .skill-card img {
-    width: 3rem; /* Fixed width */
-    height: 3rem; /* Fixed height */
+    max-width: 100%;
+    height: auto;
     object-fit: contain; /* Maintain aspect ratio */
     margin-top: 10px; /* Adjust spacing as needed */
     position: fixed; /* Position image */
