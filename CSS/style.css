@@ -6,6 +6,11 @@
     font-family: rejoy;
     src: url(../Fonts/Rejouice-Headline.ttf);
 }
+@font-face {
+    font-family: 'Rejouice-Headline';
+    src: url('https://dhruv-shere.github.io/Portfolio/Fonts/Rejouice-Headline.ttf') format('truetype');
+}
+
 * {
     margin: 0;
     padding: 0;
