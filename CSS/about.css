@@ -157,3 +157,21 @@ body {
     z-index: -1; /* Ensure behind other content */
     mix-blend-mode: overlay; /* Blend mode for colorful effect */
 }
+
+
+/* Footer */
+.footer {
+    background-color: #121212;
+    color: #ECECEC;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    font-size: 0.9rem;
+    font-family: 'NBInternationalProBoo', sans-serif;
+}
+
+.footer p {
+    margin: 0;
+}

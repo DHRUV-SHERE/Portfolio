@@ -14,6 +14,12 @@
 
 <body>
     <div class="main">
+        <div class="load">
+            <h3>Welcome</h3>
+            <h3>To</h3>
+            <h3>Portfolio</h3>
+            <h3>Site</h3>
+        </div>
         <header>
             <nav class="navbar navbar-expand-lg">
                 <div class="container-fluid">
@@ -31,8 +37,8 @@
                                 <a class="nav-link" href="./HTML/skill.html">Skills</a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="./HTML/project.html" id="navbarDropdown" role="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle" href="./HTML/project.html" id="navbarDropdown"
+                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Projects
                                 </a>
                                 <ul class="dropdown-menu">
@@ -60,30 +66,77 @@
             </nav>
         </header>
 
-        <div class="hero-section">
+        <!-- Hero Section -->
+        <section class="hero-section">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-6">
                         <div class="hero-content">
-                            <h2>Hello, I'm <span>Dhruv Shere</span>.</h2>
-                            <hr>
-                            <p>I am a <span>Software Engineering</span> student.</p>
-                            <p>I Love <span>Coding</span></p>
-                            <p>I Have Some Skills Like <span id="skillType"></span></p>
+                            <h2>Welcome to My Portfolio</h2>
+                            <p>My Name is <span id="Name">Dhruv Shere</span></p>
+                            <p>I'm skilled in <span class="typed-text"></span><span class="cursor"></span></p>
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="hero-image">
-                            <img src="./IMG/Sun Logo.jpg" alt="Dhruv Shere" class="img-fluid rounded-ellipse">
-                        </div>
+                    <div class="col-lg-6 hero-image">
+                        <img src="./IMG/Sun Logo.jpg" alt="Your Photo" class="img-fluid">
                     </div>
+                </div>
+            </div>
+        </section>
+        <hr>
+
+        <!-- Skill Section -->
+        <div class="SkillSection">
+            <h2 id="SkillHead">Skills</h2>
+            <div class="skills-container">
+                <div class="skill-card" id="HTML" data-name="HTML">
+                    <h3>HTML</h3>
+                </div>
+                <div class="skill-card" id="CSS" data-name="CSS">
+                    <h3>CSS</h3>
+                </div>
+                <div class="skill-card" id="JavaScript" data-name="JavaScript">
+                    <h3>JavaScript</h3>
+                </div>
+                <div class="skill-card" id="Java" data-name="Java">
+                    <h3>Java</h3>
+                </div>
+                <div class="skill-card" id="Python" data-name="Python">
+                    <h3>Python</h3>
+                </div>
+                <div class="skill-card" id="MySql" data-name="MySql">
+                    <h3>MySql</h3>
+                </div>
+                <div class="skill-card" id="NoSql" data-name="NoSql">
+                    <h3>NoSql</h3>
+                </div>
+                <div class="skill-card" id="Github" data-name="Github">
+                    <h3>Github</h3>
+                </div>
+                <div class="skill-card" id="Git" data-name="Git">
+                    <h3>Git</h3>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="popup-container" id="popupContainer">
+            <div class="popup-card" id="popupCard">
+                <span class="close-button" id="closeButton">&times;</span>
+                <div class="popup-content">
+                    <h2 id="LanguageNamePopup"></h2>
+                    <img id="LanguageLogoPopup" src="" alt="Language Logo">
+                    <p id="LanguageFounderPopup"></p>
+                    <p id="LanguageLaunchDatePopup"></p>
+                    <p id="LanguageDescriptionPopup"></p>
                 </div>
             </div>
         </div>
 
 
-         <!-- Social Media Button -->
-         <div class="share-btn">
+        <!-- Social Media Button -->
+        <div class="share-btn">
             <i class="fas fa-share-alt"></i>
         </div>
         <div class="social-buttons">
@@ -100,8 +153,12 @@
                 <a href="https://discord.com/invite/yourprofile" target="_blank"><i class="fab fa-discord"></i></a>
             </div>
         </div>
-    
 
+
+        <!-- Footer -->
+        <footer class="text-center py-4">
+            <p>&copy; 2024 Portfolio. All rights reserved.</p>
+        </footer>
     </div>
 
 

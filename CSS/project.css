@@ -155,3 +155,35 @@ body {
     animation: fadeIn 1s forwards; /* Apply fadeIn animation */
 }
 
+/* Footer */
+.footer {
+    background-color: #121212;
+    color: #ECECEC;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    font-size: 0.9rem;
+    font-family: 'NBInternationalProBoo', sans-serif;
+}
+
+.footer p {
+    margin: 0;
+}
+
+/* Main Content */
+.project-details p{
+    font-size: 1.2rem;
+    font-family: nb;
+    color: #BB86FC;
+}
+
+.project-details p span,a{
+    color: white;
+}
+
+.project-details p a:hover{
+    color: #BB86FC;
+    font-size: 1.29rem;
+}

@@ -55,13 +55,13 @@ tl.to(".load h3",{
 tl.to(".load",{
     opacity:0,
 })
-tl.from(".container-1",{
-    y:100,
-    opacity:0,
-    stagger:0.1,
-    duration:0.5,
-    delay:-0.5
-})
+// tl.from(".container-1",{
+//     y:100,
+//     opacity:0,
+//     stagger:0.1,
+//     duration:0.5,
+//     delay:-0.5
+// })
 tl.to(".load",{
     display:"none"
 })
@@ -90,20 +90,133 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Hero Section
-document.addEventListener("DOMContentLoaded", function() {
-    const skills = ['HTML', 'CSS', 'JavaScript', 'Python', 'Java', 'DBMS','Bootstrap','Github']; // Add more skills as needed
-    let skillIndex = 0;
-    const skillTypeElement = document.getElementById('skillType');
 
-    function typeSkills() {
-        skillTypeElement.textContent = skills[skillIndex];
-        skillIndex = (skillIndex + 1) % skills.length;
-        skillType.style.color= "#BB86FC";
-        skillType.style.fontSize= "5VH";
+document.addEventListener("DOMContentLoaded", function() {
+    const skills = ['HTML', 'CSS', 'JavaScript', 'Python', 'Java', 'DBMS', 'Bootstrap', 'Github']; // Add more skills as needed
+    let skillIndex = 0;
+    const typedTextElement = document.querySelector('.typed-text');
+    const cursorElement = document.querySelector('.cursor');
+
+    function typeSkill(skill) {
+        typedTextElement.textContent = '';
+        let charIndex = 0;
+
+        function typeChar() {
+            if (charIndex < skill.length) {
+                typedTextElement.textContent += skill.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeChar, 150);
+            } else {
+                setTimeout(deleteSkill, 2000);
+            }
+        }
+        typeChar();
+    }
+
+    function deleteSkill() {
+        const currentText = typedTextElement.textContent;
+        let charIndex = currentText.length;
+
+        function deleteChar() {
+            if (charIndex > 0) {
+                typedTextElement.textContent = currentText.substring(0, charIndex - 1);
+                charIndex--;
+                setTimeout(deleteChar, 100);
+            } else {
+                skillIndex = (skillIndex + 1) % skills.length;
+                setTimeout(() => typeSkill(skills[skillIndex]), 500);
+            }
+        }
+
+        deleteChar();
     }
 
     // Initial call
-    typeSkills();
-    // Repeat every 2 seconds (adjust timing as needed)
-    setInterval(typeSkills, 2000);
+    if (typedTextElement && cursorElement) {
+        typeSkill(skills[skillIndex]);
+    } else {
+        console.error("Typed text or cursor element not found.");
+    }
+});
+
+
+// Skill
+document.addEventListener('DOMContentLoaded', () => {
+    const skillCards = document.querySelectorAll('.skill-card');
+    const popupContainer = document.getElementById('popupContainer');
+    const closeButton = document.getElementById('closeButton');
+    
+
+    // Function to generate a random color
+    function getRandomColor() {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
+    // Apply random color to each skill card
+    skillCards.forEach(card => {
+        const randomColor = getRandomColor();
+        card.style.backgroundColor = randomColor;
+    });
+
+    // Function to fetch data from API
+    async function fetchData() {
+        try {
+            const response = await fetch('./API/Language.json'); // Replace with your API endpoint
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = await response.json();
+            return data.languages;
+        } catch (error) {
+            console.error("Error fetching the data: ", error);
+        }
+    }
+    
+    // Function to show popup with language details
+    function showPopup(skillData) {
+        const LanguageNamePopup = document.getElementById('LanguageNamePopup');
+        const LanguageLogoPopup = document.getElementById('LanguageLogoPopup');
+        const LanguageFounderPopup = document.getElementById('LanguageFounderPopup');
+        const LanguageLaunchDatePopup = document.getElementById('LanguageLaunchDatePopup');
+        const LanguageDescriptionPopup = document.getElementById('LanguageDescriptionPopup');
+    
+        LanguageNamePopup.textContent = skillData.name;
+        LanguageLogoPopup.src = skillData.logo;
+        LanguageFounderPopup.textContent = `Founder: ${skillData.founder}`;
+        LanguageLaunchDatePopup.textContent = `Launch Date: ${skillData.launch_date}`;
+        LanguageDescriptionPopup.textContent = skillData.description;
+    
+        popupContainer.style.display = 'block';
+    }
+    
+    // Event listeners for skill cards
+    skillCards.forEach(card => {
+        card.addEventListener('click', async () => {
+            const languagesData = await fetchData();
+            const skillName = card.id; // Assuming card id matches skill name
+            if (skillName && languagesData.hasOwnProperty(skillName)) {
+                const skillData = languagesData[skillName];
+                showPopup(skillData);
+            } else {
+                console.error(`Skill data for ${skillName} not found.`);
+            }
+        });
+    });
+    
+    // Close the popup when the close button is clicked
+    closeButton.addEventListener('click', () => {
+        popupContainer.style.display = 'none';
+    });
+    
+    // Close the popup when clicking outside the popup content
+    window.onclick = function(event) {
+        if (event.target === popupContainer) {
+            popupContainer.style.display = 'none';
+        }
+    };
 });
