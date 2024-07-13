@@ -29,13 +29,13 @@ body {
     align-items: center;
     justify-content: center;
     color: #BB86FC; 
-    text-shadow: 0 0 5px #BB86FC, 0 0 10px #BB86FC, 0 0 20px #BB86FC, 0 0 30px #BB86FC, 0 0 40px #BB86FC;
+    /* text-shadow: 0 0 5px #BB86FC, 0 0 10px #BB86FC, 0 0 20px #BB86FC, 0 0 30px #BB86FC, 0 0 40px #BB86FC; */
     gap: 0.5vw; 
 }
 
 .load h3 {
     font-weight: 100;
-    font-size: 2vw;
+    font-size: 3vw;
     font-family: rejoy;
 }
 
