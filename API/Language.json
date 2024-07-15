@@ -1,61 +1,61 @@
 {
     "languages": {
         "HTML": {
-            "logo": "./IMG/HTML.png",
+            "logo": "../IMG/HTML.png",
             "founder": "Tim Berners-Lee",
             "launch_date": "1993",
             "description": "HTML is the standard markup language for creating web pages."
         },
         "CSS": {
-            "logo": "./IMG/CSS.png",
+            "logo": "../IMG/CSS.png",
             "founder": "Håkon Wium Lie",
             "launch_date": "1996",
             "description": "CSS is used to control the style and layout of web pages."
         },
         "JavaScript": {
-            "logo": "./IMG/JS.png",
+            "logo": "../IMG/JS.png",
             "founder": "Brendan Eich",
             "launch_date": "1995",
             "description": "JavaScript is a programming language commonly used in web development."
         },
         "Java": {
-            "logo": "./IMG/Java.png",
+            "logo": "../IMG/Java.png",
             "founder": "James Gosling",
             "launch_date": "1995",
             "description": "Java is a class-based, object-oriented programming language."
         },
         "Python": {
-            "logo": "./IMG/Python.png",
+            "logo": "../IMG/Python.png",
             "founder": "Guido van Rossum",
             "launch_date": "1991",
             "description": "Python is an interpreted, high-level programming language."
         },
         "MySql": {
-            "logo": "./IMG/Mysql.png",
+            "logo": "../IMG/Mysql.png",
             "founder": "Michael Widenius",
             "launch_date": "1995",
             "description": "MySQL is an open-source relational database management system."
         },
         "NoSql": {
-            "logo": "./IMG/nosql.png",
+            "logo": "../IMG/nosql.png",
             "founder": "Various",
             "launch_date": "2000s",
             "description": "NoSQL is a non-relational database design."
         },
         "Github": {
-            "logo": "./IMG/Github.png",
+            "logo": "../IMG/Github.png",
             "founder": "Tom Preston-Werner",
             "launch_date": "2008",
             "description": "GitHub is a web-based version control repository."
         },
         "ChatGpt": {
-            "logo": "./IMG/Chatgpt.png",
+            "logo": "../IMG/Chatgpt.png",
             "founder": "OpenAI",
             "launch_date": "2020",
             "description": "ChatGPT is a language model developed by OpenAI."
         },
         "Git": {
-            "logo": "./IMG/Git.png",
+            "logo": "../IMG/Git.png",
             "founder": "Linus Torvalds",
             "launch_date": "2005",
             "description": "Git is a distributed version control system."
