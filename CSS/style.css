@@ -221,10 +221,10 @@ body {
 }
 
 .img-fluid {
-    max-width: 100%;
+    max-width: 60%;
+    margin: auto;
     height: auto;
     border-radius: 63% 37% 30% 70% / 58% 62% 38% 42%;
-    margin-top: 20px;
 }
 
 @keyframes typing {
