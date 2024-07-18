@@ -49,3 +49,4 @@ document.addEventListener('DOMContentLoaded', () => {
     gsap.from(".contact-info", { duration: 1, opacity: 0, x: 50 });
     gsap.from(".form-group", { duration: 1, opacity: 0, y: 50, stagger: 0.3 });
 });
+
