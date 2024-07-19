@@ -7,7 +7,7 @@
             "description": "HTML is the standard markup language for creating web pages."
         },
         "CSS": {
-            "logo": "/IMG/CSS.png",
+            "logo": "https://github.com/DHRUV-SHERE/Portfolio/blob/main/IMG/CSS.png",
             "founder": "Håkon Wium Lie",
             "launch_date": "1996",
             "description": "CSS is used to control the style and layout of web pages."
