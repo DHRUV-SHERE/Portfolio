@@ -302,16 +302,15 @@ body {
 .skill-card:hover {
     transform: scale(1.05);
 }
-
+/* 
 .skill-card img {
     max-width: 100%;
     height: auto;
-    object-fit: contain; /* Maintain aspect ratio */
-    margin-top: 10px; /* Adjust spacing as needed */
-    position: fixed; /* Position image */
-    bottom: 10px; /* Adjust position */
-}
-
+    object-fit: contain; 
+    margin-top: 10px;
+    position: fixed; 
+    bottom: 10px; 
+} */
 .skill-card h3 {
     color: white;
     text-shadow: 0 0 5px #BB86FC, 0 0 10px #BB86FC, 0 0 20px #BB86FC, 0 0 30px #BB86FC, 0 0 40px #BB86FC;
