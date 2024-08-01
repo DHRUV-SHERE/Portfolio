@@ -6,7 +6,7 @@
             "Language": "HTML, CSS, BootStrap",
             "Link": "https://dhruv-shere.github.io/KnowBase/",
             "Link2":"https://github.com/DHRUV-SHERE/KnowBase",
-            "video": "../Videos/knowbase.mp4"
+            "video": "https://youtu.be/ko52QpFEQFE"
         },
         {
             "Name": "Oracle Clone",
@@ -14,7 +14,7 @@
             "Language": "HTML, CSS",
             "Link": "https://dhruv-shere.github.io/Oracle/",
             "Link2":"https://github.com/DHRUV-SHERE/Oracle",
-            "video": "../Videos/oracle.mp4"
+            "video": "https://youtu.be/zNb-s1lGXh8"
         },
         {
             "Name": "Amazon Clone",
@@ -22,7 +22,7 @@
             "Language": "HTML, CSS",
             "Link": "https://dhruv-shere.github.io/Amazon/",
             "Link2":"https://github.com/DHRUV-SHERE/Amazon",
-            "image": "../Videos/amazon.jpg"
+            "video": "https://youtu.be/EuflFu37zr4"
         },
         {
             "Name": "Spotify Clone",
@@ -30,7 +30,7 @@
             "Language": "HTML, CSS, JavaScript",
             "Link": "https://dhruv-shere.github.io/Spotify/",
             "Link2":"https://github.com/DHRUV-SHERE/Spotify",
-            "image": "../Videos/spotify.jpg"
+            "video": "https://youtu.be/lsenViKkKLw"
         },
         {
             "Name": "REJOUICE Clone",
@@ -38,7 +38,7 @@
             "Language": "HTML, CSS, Javascript, GSAP",
             "Link": "https://dhruv-shere.github.io/RejoiuceClone/",
             "Link2":"https://github.com/DHRUV-SHERE/RejoiuceClone",
-            "video": "../Videos/rejouice.mp4"
+            "video": "https://youtu.be/Qb3cTwqlJF4"
         },
         {
             "Name": "Rate-IT",
@@ -46,7 +46,7 @@
             "Language": "HTML, CSS, BootStrap, JavaScript, Java",
             "Link": "https://dhruv-shere.github.io/Login-Page/",
             "Link2":"https://github.com/DHRUV-SHERE/Login-Page",
-            "video": "../Videos/rateit.mp4"
+            "video": "https://youtu.be/plyEdZXkAvI"
         }
     ]
 }

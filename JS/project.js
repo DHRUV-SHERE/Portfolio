@@ -32,16 +32,13 @@ document.addEventListener("DOMContentLoaded", () => {
         link2.textContent = project.Link2;
 
         if (project.video) {
-            video.src = project.video;
+            video.src = project.video.includes('youtube') ? project.video : `https://www.youtube.com/embed/${project.video.split('/').pop()}`;
             video.style.display = 'block';
             image.style.display = 'none';
-            video.load(); // Ensures video is loaded properly
-            video.onerror = () => console.error("Video error:", project.video);
         } else if (project.image) {
             image.src = project.image;
             image.style.display = 'block';
             video.style.display = 'none';
-            image.onerror = () => console.error("Image error:", project.image);
         } else {
             video.style.display = 'none';
             image.style.display = 'none';
@@ -80,7 +77,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-
-document.addEventListener("contextmenu",function(i){
-    i.preventDefault()
-},false)
+document.addEventListener("contextmenu", function (i) {
+    i.preventDefault();
+}, false);
