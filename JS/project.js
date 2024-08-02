@@ -32,26 +32,20 @@ document.addEventListener("DOMContentLoaded", () => {
         link2.textContent = project.Link2;
 
         if (project.video) {
-            video.src = project.video.includes('youtube') ? project.video : `https://www.youtube.com/embed/${project.video.split('/').pop()}`;
+            video.src = project.video;
             video.style.display = 'block';
             image.style.display = 'none';
+            video.load(); // Ensures video is loaded properly
+            video.onerror = () => console.error("Video error:", project.video);
         } else if (project.image) {
             image.src = project.image;
             image.style.display = 'block';
             video.style.display = 'none';
+            image.onerror = () => console.error("Image error:", project.image);
         } else {
             video.style.display = 'none';
             image.style.display = 'none';
         }
-
-        // Trigger animation on media elements
-        const mediaElements = document.querySelectorAll('.project-video, .project-image');
-        mediaElements.forEach(element => {
-            element.style.opacity = '0'; // Initial opacity for animation
-            setTimeout(() => {
-                element.style.opacity = '1'; // Apply animation after a short delay
-            }, 100);
-        });
     }
 
     function initializeEventListeners(projects) {

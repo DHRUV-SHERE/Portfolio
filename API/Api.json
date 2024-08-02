@@ -6,7 +6,7 @@
             "Language": "HTML, CSS, BootStrap",
             "Link": "https://dhruv-shere.github.io/KnowBase/",
             "Link2":"https://github.com/DHRUV-SHERE/KnowBase",
-            "video": "https://youtu.be/ko52QpFEQFE"
+            "video": "../Videos/knowbase.mp4"
         },
         {
             "Name": "Oracle Clone",
@@ -14,7 +14,7 @@
             "Language": "HTML, CSS",
             "Link": "https://dhruv-shere.github.io/Oracle/",
             "Link2":"https://github.com/DHRUV-SHERE/Oracle",
-            "video": "https://youtu.be/zNb-s1lGXh8"
+            "video": "../Videos/oracle.mp4"
         },
         {
             "Name": "Amazon Clone",
@@ -22,7 +22,7 @@
             "Language": "HTML, CSS",
             "Link": "https://dhruv-shere.github.io/Amazon/",
             "Link2":"https://github.com/DHRUV-SHERE/Amazon",
-            "video": "https://youtu.be/EuflFu37zr4"
+            "video": "../Videos/amazon.mp4"
         },
         {
             "Name": "Spotify Clone",
@@ -30,7 +30,7 @@
             "Language": "HTML, CSS, JavaScript",
             "Link": "https://dhruv-shere.github.io/Spotify/",
             "Link2":"https://github.com/DHRUV-SHERE/Spotify",
-            "video": "https://youtu.be/lsenViKkKLw"
+            "video": "../Videos/spotify.mp4"
         },
         {
             "Name": "REJOUICE Clone",
@@ -38,7 +38,7 @@
             "Language": "HTML, CSS, Javascript, GSAP",
             "Link": "https://dhruv-shere.github.io/RejoiuceClone/",
             "Link2":"https://github.com/DHRUV-SHERE/RejoiuceClone",
-            "video": "https://youtu.be/Qb3cTwqlJF4"
+            "video": "../Videos/rejouice.mp4"
         },
         {
             "Name": "Rate-IT",
@@ -46,7 +46,7 @@
             "Language": "HTML, CSS, BootStrap, JavaScript, Java",
             "Link": "https://dhruv-shere.github.io/Login-Page/",
             "Link2":"https://github.com/DHRUV-SHERE/Login-Page",
-            "video": "https://youtu.be/plyEdZXkAvI"
+            "video": "../Videos/rateit.mp4"
         }
     ]
 }
