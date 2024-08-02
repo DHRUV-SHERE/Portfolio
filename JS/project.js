@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
             video.src = project.video;
             video.style.display = 'block';
             image.style.display = 'none';
-            video.load(); // Ensures video is loaded properly
+            video.load(); 
             video.onerror = () => console.error("Video error:", project.video);
         } else if (project.image) {
             image.src = project.image;
