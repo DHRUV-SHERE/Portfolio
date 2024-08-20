@@ -289,14 +289,14 @@ body {
 .skill-card {
     width: 200px;
     height: 150px;
-    background-color: #BB86FC; /* Example color */
+    background-color: #BB86FC; 
     border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
     transition: transform 0.2s ease;
-    position: relative; /* Added for overlay */
+    position: relative; 
     box-shadow:  5px 5px;
 }
 
@@ -307,8 +307,8 @@ body {
 .skill-card h3 {
     color: white;
     text-shadow: 0 0 5px #BB86FC, 0 0 10px #BB86FC, 0 0 20px #BB86FC, 0 0 30px #BB86FC, 0 0 40px #BB86FC;
-    z-index: 1; /* Ensure text is above image */
-    position: relative; /* Position text */
+    z-index: 1; 
+    position: relative;
 }
 
 /* Popup container */
