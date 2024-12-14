@@ -21,25 +21,37 @@ document.addEventListener("contextmenu",function(i){
 import emailjs from "https://cdn.jsdelivr.net/npm/emailjs-com@3.2.0/dist/email.min.js";
 
 // Initialize EmailJS
-emailjs.init("G3P48wd0AD6_lUVxK"); // Replace with your actual Public Key
+emailjs.init("G3P48wd0AD6_lUVxK");  // Replace with your actual Public Key
 
-document.getElementById("contactForm").addEventListener("submit", function (event) {
-    event.preventDefault();
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById("contactForm");
 
-    const formData = {
-        name: document.getElementById("name").value,
-        mobile: document.getElementById("mobile").value,
-        email: document.getElementById("email").value,
-        message: document.getElementById("message").value,
-    };
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
 
-    emailjs.send("service_mvmzvlq", "template_ofep908", formData)
-        .then(() => {
-            alert("Message Sent Successfully!");
-            document.getElementById("contactForm").reset();
-        })
-        .catch((error) => {
-            console.error("Error:", error);
-            alert("Failed to send the message. Please try again.");
-        });
+        const formData = {
+            name: document.getElementById("name").value,
+            mobile: document.getElementById("mobile").value,
+            email: document.getElementById("email").value,
+            message: document.getElementById("message").value,
+        };
+
+        emailjs.send("service_mvmzvlq", "template_ofep908", formData)
+            .then(() => {
+                alert("Message Sent Successfully!");
+                form.reset();
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+                alert("Failed to send the message. Please try again.");
+            });
+    });
+
+    // Animation using GSAP
+    gsap.from(".contact-page", { duration: 1, opacity: 0, y: -50 });
+    gsap.from(".container", { duration: 1, opacity: 0, scale: 0.9, delay: 0.5 });
+    gsap.from("h1, p, .contact-info, form", { duration: 1, opacity: 0, y: 20, stagger: 0.2, delay: 1 });
+
+    // Disable Right-Click
+    document.addEventListener("contextmenu", (event) => event.preventDefault(), false);
 });
