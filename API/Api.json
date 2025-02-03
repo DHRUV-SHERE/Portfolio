@@ -47,6 +47,22 @@
             "Link": "https://dhruv-shere.github.io/Login-Page/",
             "Link2":"https://github.com/DHRUV-SHERE/Login-Page",
             "video": "../Videos/rateit.mp4"
+        },
+        {
+            "Name": "Hindu Vidyapith",
+            "Description": "This Project is created to represent the Hindu culture and it's spiritual tradition where different different mythologies and how sanatan dharma is grater than other religions is defined. where i have contributed in creating the webpages and suggesting unique ideas",
+            "Language": "React, NodeJS, Tailwind CSS and in Database : Postgreed",
+            "Link": "https://github.com/SwastikSadhna/hinduism_updated",
+            "Link2":"https://github.com/SwastikSadhna/hinduism_updated",
+            "video": "No Data Avilible"
+        },
+        {
+            "Name": "Agrosence",
+            "Description": "This is an Agriculture innovation where there are multiple features are availible like Direct Market Access to Farmers, AI Chatbot, Crop Detection, Government Scheme Portal, Resource for Farming, Teaching new techniques to Farmere with new upcoming technologies etc.",
+            "Language": "React, NodeJS, Bootstrap and in Database : Mongodb Atlas",
+            "Link": "https://github.com/AgroSence",
+            "Link2":"https://github.com/AgroSence",
+            "video": "No Data Avilible"
         }
     ]
 }

@@ -222,10 +222,13 @@ body {
 }
 
 .img-fluid {
-    max-width: 60%;
+    background-color: #BB86FC;
+    max-width: 70%;
     margin: auto;
+    /* border-radius: 50%; */
     height: auto;
-    border-radius: 63% 37% 30% 70% / 58% 62% 38% 42%;
+    border-radius: 60% 40% 20% 70% / 60% 60% 40% 40%;
+    z-index: 4;
 }
 
 @keyframes typing {
