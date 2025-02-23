@@ -374,3 +374,23 @@ body {
         width: 80%;
     }
 }
+
+
+.resume-btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #BB86FC;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.resume-btn:hover {
+    background-color: #9b67f6;
+    transform: scale(1.05);
+}
