@@ -18,6 +18,22 @@ body {
     font-family: 'NBInternationalProBoo', sans-serif;
 }
 
+.card {
+    border-radius: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-title {
+    /* font-family: 'Pacifico', cursive; */
+    font-family: rejoy;
+    font-size: 2rem;
+    color: #BB86FC; /* Accent color */
+}
+
 .main {
     padding: 20px;
 }

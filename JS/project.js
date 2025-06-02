@@ -1,76 +1,67 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const apiUrl = '../API/Api.json';
+    const GITHUB_USERNAME = "DHRUV-SHERE";
+    const selectedRepos = [
+        "AgroSence",
+        "knowBase",
+        "Spotify",
+        "Oracle",
+        "Amazon",
+        "RejoiuceClone",
+        "Online_Learning_Management_System",
+        "React_Text_Site"
+    ];
+    const selectedReposLower = selectedRepos.map(name => name.toLowerCase());
 
     async function fetchData() {
         try {
-            const response = await fetch(apiUrl);
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
+            const response = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos`);
+            if (!response.ok) throw new Error(`GitHub API error! Status: ${response.status}`);
+
             const data = await response.json();
-            return data.results;
+            const filteredRepos = data.filter(repo =>
+                selectedReposLower.includes(repo.name.toLowerCase())
+            );
+
+            return filteredRepos.map(repo => ({
+                Name: repo.name,
+                Description: repo.description || "No description provided.",
+                Language: repo.language || "N/A",
+                Link: repo.homepage || repo.html_url,
+                GitHub: repo.html_url
+            }));
         } catch (error) {
-            console.error("Error fetching the data: ", error);
+            console.error("Error fetching GitHub data: ", error);
         }
     }
 
-    function updateContent(project) {
-        const projectName = document.getElementById('projectname');
-        const description = document.getElementById('description');
-        const language = document.getElementById('language');
-        const link = document.getElementById('link');
-        const link2 = document.getElementById('link2');
-        const video = document.getElementById('video');
-        const image = document.getElementById('image');
-
-        projectName.textContent = project.Name;
-        description.textContent = project.Description;
-        language.textContent = project.Language;
-        link.href = project.Link;
-        link.textContent = project.Link;
-        link2.href = project.Link2;
-        link2.textContent = project.Link2;
-
-        if (project.video) {
-            video.src = project.video;
-            video.style.display = 'block';
-            image.style.display = 'none';
-            video.load(); 
-            video.onerror = () => console.error("Video error:", project.video);
-        } else if (project.image) {
-            image.src = project.image;
-            image.style.display = 'block';
-            video.style.display = 'none';
-            image.onerror = () => console.error("Image error:", project.image);
-        } else {
-            video.style.display = 'none';
-            image.style.display = 'none';
-        }
+    function createProjectCard(project) {
+        return `
+            <div class="col-md-6 col-lg-4 mb-4">
+              <div class="card h-100 shadow-sm border-0" >
+                <div class="card-body" style="background-color:rgb(71, 71, 71); color: #E0E0E0;">
+                  <h5 class="card-title">${project.Name}</h5>
+                  <p class="card-text">${project.Description}</p>
+                  <p><strong>Language:</strong> ${project.Language}</p>
+                  <a href="${project.GitHub}" class="btn btn-sm text-light ms-2" target="_blank" style="background-color: #BB86FC;">GitHub</a>
+                </div>
+              </div>
+            </div>
+          `;
     }
 
-    function initializeEventListeners(projects) {
-        const projectLinks = document.querySelectorAll('.dropdown-item');
-
-        projectLinks.forEach(link => {
-            link.addEventListener('click', (event) => {
-                event.preventDefault();
-                const projectName = event.target.textContent.trim();
-                const selectedProject = projects.find(project => project.Name.includes(projectName));
-                if (selectedProject) {
-                    updateContent(selectedProject);
-                }
-            });
-        });
+    function displayProjects(projects) {
+        const container = document.getElementById("projects-container");
+        container.innerHTML = projects.map(createProjectCard).join("");
     }
 
     fetchData().then(projects => {
         if (projects) {
-            initializeEventListeners(projects);
-            updateContent(projects[0]); // Display the first project by default
+            displayProjects(projects);
         }
     });
 });
 
-document.addEventListener("contextmenu", function (i) {
-    i.preventDefault();
+// Disable right-click
+document.addEventListener("contextmenu", function (e) {
+    e.preventDefault();
 }, false);
