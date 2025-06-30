@@ -2,165 +2,68 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="./Image/Sun Logo.png" type="image/x-icon" />
-    <title>Portfolio® | Home</title>
+    <title>Portfolio</title>
     <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Rejouice&display=swap"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
-    <link
-      rel="stylesheet"
-      href="https://dhruv-shere.github.io/Portfolio/Fonts/Rejouice-Headline.ttf"
-    />
-    <link rel="stylesheet" href="./CSS/style.css" />
+    <style>
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, sans-serif;
+        transition: all 0.3s ease;
+      }
+
+      .min-vh-100 {
+        min-height: 100vh;
+      }
+
+      .navbar {
+        transition: all 0.3s ease;
+      }
+
+      .btn {
+        transition: all 0.3s ease;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .dark-theme {
+        background-color: #1a1a1a;
+        color: #ffffff;
+      }
+
+      .light-theme {
+        background-color: #ffffff;
+        color: #000000;
+      }
+
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 4px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+      }
+    </style>
   </head>
-
   <body>
-    <div class="main">
-      <div class="load">
-        <h3>Welcome</h3>
-        <h3>To</h3>
-        <h3>Portfolio</h3>
-        <h3>Site</h3>
-      </div>
-      <header>
-        <nav class="navbar navbar-expand-lg">
-          <div class="container-fluid">
-            <a class="navbar-brand neon-logo" href="./index.html">Portfolio</a>
-            <button
-              class="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarNav"
-              aria-controls="navbarNav"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                  <a class="nav-link" aria-current="page" href="./index.html"
-                    >Home</a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="./HTML/skill.html">Skills</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="./HTML/project.html">Projects</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href=".//HTML/about.html">About Me</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="./HTML/contactus.html"
-                    >Contact Me</a
-                  >
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-        <hr />
-      </header>
-      <!-- Hero Section -->
-      <section class="hero-section">
-        <div class="container">
-          <div class="row align-items-center">
-            <div class="col-lg-6">
-              <div class="hero-content">
-                <h2>Welcome to My <span id="Name">Portfolio</span></h2>
-                <p>I am <span id="Name">Dhruv Shere</span></p>
-                <p>
-                  I'm skilled in <span class="typed-text"></span
-                  ><span class="cursor"></span>
-                </p>
-                <a href="./doc//RESUME_DHRUV_SHERE.pdf" download="Dhruv_Shere_Resume.pdf" class="btn btn-primary resume-btn">
-                  Download Resume <i class="fas fa-download"></i>
-                </a>                
-              </div>
-            </div>
-            <div class="col-lg-6 hero-image">
-              <img
-                src="./Image/Sun Logo.png"
-                alt="Your Photo"
-                class="img-fluid"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-      <hr />
-
-      <!-- Social Media Button -->
-      <div class="share-btn">
-        <i class="fas fa-share-alt"></i>
-      </div>
-      <div class="social-buttons">
-        <div class="card1">
-          <a href="https://www.instagram.com/sheredhruv"
-            ><i class="fab fa-instagram"></i
-          ></a>
-        </div>
-        <div class="card2">
-          <a href="https://linkedin.com/in/dhruv-shere"
-            ><i class="fab fa-linkedin"></i
-          ></a>
-        </div>
-        <div class="card3">
-          <a href="https://github.com/DHRUV-SHERE"
-            ><i class="fab fa-github"></i
-          ></a>
-        </div>
-        <div class="card4">
-          <a href="https://discord.com/invite/yourprofile"
-            ><i class="fab fa-discord"></i
-          ></a>
-        </div>
-      </div>
-      <hr />
-      <!-- Footer -->
-      <footer class="text-center py-4">
-        <p>&copy; Portfolio®️ 2024. All rights reserved by DHRUV SHERE.</p>
-      </footer>
-    </div>
-    <!-- Scripts -->
-    <script
-      src="https://kit.fontawesome.com/cff80723f3.js"
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/ScrollTrigger.min.js"></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
-      integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
-      integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="./JS/script.js"></script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
