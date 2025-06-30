@@ -150,6 +150,24 @@ const AboutSection = ({ darkMode }) => {
                 applications.
               </motion.p>
             </motion.div>
+            <motion.a
+              href="/resume.pdf"
+              download="Dhruv_Shree_Resume.pdf"
+              className="btn btn-primary mt-3"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              style={{
+                background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                border: "none",
+                padding: "12px 24px",
+                borderRadius: "12px",
+                fontWeight: "bold",
+                color: "#fff",
+                display: "inline-block",
+              }}
+            >
+              📄 Download Resume
+            </motion.a>
           </div>
 
           {/* Right Side - Stats */}
