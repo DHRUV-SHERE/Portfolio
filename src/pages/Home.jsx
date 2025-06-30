@@ -10,7 +10,7 @@ const HeroSection = ({ darkMode }) => {
       className={`min-vh-100 d-flex align-items-center position-relative ${
         darkMode ? "bg-dark text-light" : "bg-light text-dark"
       }`}
-      style={{ paddingTop: "80px", overflow: "hidden" }}
+      style={{ paddingTop: "60px", overflow: "hidden" }}
     >
       <div className="container">
         <div className="row align-items-center">
@@ -73,7 +73,7 @@ const HeroSection = ({ darkMode }) => {
               >
                 <motion.a
                   href="#projects"
-                  className="btn btn-dark btn-lg px-4 py-3 rounded-pill d-flex align-items-center justify-content-center"
+                  className="btn btn-dark btn-lg px-4 py-3 border-light rounded-pill d-flex align-items-center justify-content-center"
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
                 >

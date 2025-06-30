@@ -303,7 +303,7 @@ const AboutSection = ({ darkMode }) => {
                   </h4>
                   <p
                     className={`mb-0 ${
-                      darkMode ? "text-secondary" : "text-muted"
+                      darkMode ? "text-light" : "text-muted"
                     }`}
                   >
                     {value.description}
