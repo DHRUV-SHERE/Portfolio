@@ -7,6 +7,7 @@ import AboutSection from "./pages/About"
 import HeroSection from "./pages/Home"
 import SkillsSection from "./pages/Skills"
 import Project from "./pages/Project"
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import ContactSection from "./pages/Contact"
 
 const App = () => {

@@ -66,3 +66,11 @@ body{
     height: 50px !important;
   }
 }
+
+@media (max-width: 576px) {
+  button.btn-lg {
+    font-size: 1rem;
+    padding: 10px 14px;
+  }
+}
+

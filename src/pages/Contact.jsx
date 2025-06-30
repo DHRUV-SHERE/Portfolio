@@ -89,10 +89,10 @@ const ContactSection = ({ darkMode }) => {
     <section
       id="contact"
       className={`py-5 ${darkMode ? "bg-secondary text-light" : "bg-white text-dark"}`}
-      style={{ minHeight: "100vh", minWidth: "100vw", paddingTop: "100px" }}
+      style={{ minHeight: "100vh", Width: "100%", paddingTop: "100px" }}
     >
       <hr />
-      <div className="container">
+      <div className="container-fluid">
         {/* Header */}
         <motion.div
           className="text-center mb-5"
@@ -118,9 +118,9 @@ const ContactSection = ({ darkMode }) => {
           </p>
         </motion.div>
 
-        <div className="row g-5">
+        <div className="row g-5 flex-column-reverse flex-lg-row">
           {/* Contact Info (Left Side) */}
-          <div className="col-lg-6">
+          <div className="col-12 col-lg-6">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -179,7 +179,7 @@ const ContactSection = ({ darkMode }) => {
                 viewport={{ once: true }}
               >
                 <h4 className={`fw-bold mb-3 ${darkMode ? "text-light" : "text-dark"}`}>Find me online</h4>
-                <div className="d-flex gap-3">
+                <div className="d-flex flex-wrap gap-3">
                   {socialLinks.map((social, index) => (
                     <motion.a
                       key={index}
@@ -200,7 +200,7 @@ const ContactSection = ({ darkMode }) => {
           </div>
 
           {/* Contact Form (Right Side) */}
-          <div className="col-lg-6">
+          <div className="col-12 col-lg-6">
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}

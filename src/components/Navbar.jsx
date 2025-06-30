@@ -16,7 +16,7 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
       className={`navbar navbar-expand-lg fixed-top shadow-sm ${
         darkMode ? "navbar-dark" : "navbar-light"
       }`}
-      style={{ minWidth: "100vw",
+      style={{ Width: "100%",
         backgroundColor: darkMode
           ? "rgba(0,0,0,0.9)"
           : "rgba(255,255,255,0.95)",

@@ -116,7 +116,7 @@ const ProjectsSection = ({ darkMode }) => {
         className={`py-5 ${
           darkMode ? "bg-dark text-light" : "bg-light text-dark"
         }`}
-        style={{ minHeight: "100vh", minWidth: "100vw", paddingTop: "100px" }}
+        style={{ minHeight: "100vh", Width: "100%", paddingTop: "100px" }}
       >
         <div className="container text-center">
           <div className="spinner-border text-primary" role="status">
