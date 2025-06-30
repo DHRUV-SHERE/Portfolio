@@ -20,3 +20,15 @@ body{
   --bs-primary: #36d1dc;
   --bs-secondary: #a0a0a0;
 }
+@media (min-width: 992px) {
+  #home .position-relative.overflow-hidden {
+    width: 380px !important;
+    height: 380px !important;
+  }
+
+  #home .rounded-circle.bg-primary {
+    width: 320px !important;
+    height: 320px !important;
+  }
+}
+

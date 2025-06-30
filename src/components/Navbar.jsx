@@ -13,17 +13,19 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
 
   return (
     <motion.nav
-      className={`navbar navbar-expand-lg fixed-top ${darkMode ? "navbar-dark" : "navbar-light"}`}
+      className={`navbar navbar-expand-lg fixed-top shadow-sm ${darkMode ? "navbar-dark" : "navbar-light"}`}
       style={{
         backgroundColor: darkMode ? "rgba(0,0,0,0.9)" : "rgba(255,255,255,0.95)",
         backdropFilter: "blur(10px)",
         borderBottom: `1px solid ${darkMode ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"}`,
+        zIndex: 1000,
       }}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6 }}
     >
       <div className="container">
+        {/* Brand */}
         <motion.a
           className="navbar-brand fw-bold fs-4"
           href="#"
@@ -38,26 +40,40 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
           Dhruv
         </motion.a>
 
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        {/* Toggler */}
+        <button
+          className="navbar-toggler border-0"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
           <span className="navbar-toggler-icon"></span>
         </button>
 
+        {/* Links */}
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav ms-auto align-items-center">
+          <ul className="navbar-nav ms-auto align-items-lg-center gap-2 gap-lg-0">
             {navItems.map((item, index) => (
               <motion.li
                 key={item.name}
-                className="nav-item mx-2"
+                className="nav-item text-center text-lg-start"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 + 0.3 }}
               >
                 <a
-                  className={`nav-link d-flex align-items-center px-3 py-2 rounded-pill ${darkMode ? "text-light" : "text-dark"}`}
+                  className={`nav-link d-flex align-items-center justify-content-center px-3 py-2 rounded-pill ${
+                    darkMode ? "text-light" : "text-dark"
+                  }`}
                   href={item.href}
                   style={{ transition: "all 0.3s ease" }}
                   onMouseEnter={(e) => {
-                    e.target.style.backgroundColor = darkMode ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"
+                    e.target.style.backgroundColor = darkMode
+                      ? "rgba(255,255,255,0.1)"
+                      : "rgba(0,0,0,0.1)"
                   }}
                   onMouseLeave={(e) => {
                     e.target.style.backgroundColor = "transparent"
@@ -68,7 +84,9 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
                 </a>
               </motion.li>
             ))}
-            <li className="nav-item ms-3">
+
+            {/* Dark/Light Toggle */}
+            <li className="nav-item ms-lg-3 text-center mt-2 mt-lg-0">
               <motion.button
                 className={`btn btn-outline-${darkMode ? "light" : "dark"} rounded-circle p-2`}
                 onClick={toggleDarkMode}
