@@ -12,11 +12,12 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
   ];
 
   return (
-    <motion.nav
+    <nav
       className={`navbar navbar-expand-lg fixed-top shadow-sm ${
         darkMode ? "navbar-dark" : "navbar-light"
       }`}
-      style={{ Width: "100%",
+      style={{
+        width: "100%",
         backgroundColor: darkMode
           ? "rgba(0,0,0,0.9)"
           : "rgba(255,255,255,0.95)",
@@ -26,9 +27,6 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
         }`,
         zIndex: 1000,
       }}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6 }}
     >
       <div className="container">
         {/* Brand */}
@@ -60,7 +58,6 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
         </button>
 
         <div className="collapse navbar-collapse" id="navbarNav">
-          {/* nav items */}
           <ul className="navbar-nav ms-auto d-flex flex-column flex-lg-row align-items-center gap-2 gap-lg-0">
             {navItems.map((item, index) => (
               <motion.li
@@ -75,6 +72,8 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
                     darkMode ? "text-light" : "text-dark"
                   }`}
                   href={item.href}
+                  data-bs-toggle="collapse"
+                  data-bs-target="#navbarNav"
                   style={{ transition: "all 0.3s ease" }}
                   onMouseEnter={(e) => {
                     e.target.style.backgroundColor = darkMode
@@ -107,7 +106,7 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
           </ul>
         </div>
       </div>
-    </motion.nav>
+    </nav>
   );
 };
 
