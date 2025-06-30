@@ -1,6 +1,6 @@
-"use client"
-import { motion } from "framer-motion"
-import { Home, User, Award, Briefcase, Mail, Moon, Sun } from "lucide-react"
+"use client";
+import { motion } from "framer-motion";
+import { Home, User, Award, Briefcase, Mail, Moon, Sun } from "lucide-react";
 
 const Navbar = ({ darkMode, toggleDarkMode }) => {
   const navItems = [
@@ -9,15 +9,21 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
     { name: "Skills", icon: Award, href: "#skills" },
     { name: "Projects", icon: Briefcase, href: "#projects" },
     { name: "Contact", icon: Mail, href: "#contact" },
-  ]
+  ];
 
   return (
     <motion.nav
-      className={`navbar navbar-expand-lg fixed-top shadow-sm ${darkMode ? "navbar-dark" : "navbar-light"}`}
+      className={`navbar navbar-expand-lg fixed-top shadow-sm ${
+        darkMode ? "navbar-dark" : "navbar-light"
+      }`}
       style={{
-        backgroundColor: darkMode ? "rgba(0,0,0,0.9)" : "rgba(255,255,255,0.95)",
+        backgroundColor: darkMode
+          ? "rgba(0,0,0,0.9)"
+          : "rgba(255,255,255,0.95)",
         backdropFilter: "blur(10px)",
-        borderBottom: `1px solid ${darkMode ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"}`,
+        borderBottom: `1px solid ${
+          darkMode ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"
+        }`,
         zIndex: 1000,
       }}
       initial={{ y: -100 }}
@@ -53,8 +59,8 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        {/* Nav Links */}
         <div className="collapse navbar-collapse" id="navbarNav">
+          {/* nav items */}
           <ul className="navbar-nav ms-auto d-flex flex-column flex-lg-row align-items-center gap-2 gap-lg-0">
             {navItems.map((item, index) => (
               <motion.li
@@ -73,10 +79,10 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
                   onMouseEnter={(e) => {
                     e.target.style.backgroundColor = darkMode
                       ? "rgba(255,255,255,0.1)"
-                      : "rgba(0,0,0,0.1)"
+                      : "rgba(0,0,0,0.1)";
                   }}
                   onMouseLeave={(e) => {
-                    e.target.style.backgroundColor = "transparent"
+                    e.target.style.backgroundColor = "transparent";
                   }}
                 >
                   <item.icon size={16} className="me-2" />
@@ -88,7 +94,9 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
             {/* Theme Toggle */}
             <li className="nav-item text-center mt-2 mt-lg-0 ms-lg-3">
               <motion.button
-                className={`btn btn-outline-${darkMode ? "light" : "dark"} rounded-circle p-2`}
+                className={`btn btn-outline-${
+                  darkMode ? "light" : "dark"
+                } rounded-circle p-2`}
                 onClick={toggleDarkMode}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
@@ -100,7 +108,7 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
         </div>
       </div>
     </motion.nav>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
