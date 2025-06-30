@@ -40,7 +40,7 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
           Dhruv
         </motion.a>
 
-        {/* Toggler */}
+        {/* Toggle Button */}
         <button
           className="navbar-toggler border-0"
           type="button"
@@ -53,13 +53,13 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        {/* Links */}
+        {/* Nav Links */}
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav ms-auto align-items-lg-center gap-2 gap-lg-0">
+          <ul className="navbar-nav ms-auto d-flex flex-column flex-lg-row align-items-center gap-2 gap-lg-0">
             {navItems.map((item, index) => (
               <motion.li
                 key={item.name}
-                className="nav-item text-center text-lg-start"
+                className="nav-item text-center"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 + 0.3 }}
@@ -85,8 +85,8 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
               </motion.li>
             ))}
 
-            {/* Dark/Light Toggle */}
-            <li className="nav-item ms-lg-3 text-center mt-2 mt-lg-0">
+            {/* Theme Toggle */}
+            <li className="nav-item text-center mt-2 mt-lg-0 ms-lg-3">
               <motion.button
                 className={`btn btn-outline-${darkMode ? "light" : "dark"} rounded-circle p-2`}
                 onClick={toggleDarkMode}

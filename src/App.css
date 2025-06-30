@@ -32,3 +32,37 @@ body{
   }
 }
 
+@media (max-width: 768px) {
+  #contact h1.display-3 {
+    font-size: 2rem;
+  }
+
+  #contact h2.h3,
+  #contact h3.h4 {
+    font-size: 1.25rem;
+  }
+
+  #contact .form-control {
+    font-size: 0.9rem;
+  }
+
+  #contact .btn {
+    font-size: 0.9rem;
+    padding: 12px;
+  }
+
+  #contact .p-4.rounded-4 {
+    padding: 1.5rem !important;
+  }
+
+  #contact .d-flex.gap-3 {
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  #contact .btn[style*="width: 60px"] {
+    width: 50px !important;
+    height: 50px !important;
+  }
+}
