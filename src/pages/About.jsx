@@ -69,7 +69,7 @@ const AboutSection = ({ darkMode }) => {
       className={`py-5 ${
         darkMode ? "bg-dark text-light" : "bg-light text-dark"
       }`}
-      style={{ minHeight: "100vh", paddingTop: "100px" }}
+      style={{ minHeight: "100vh", minWidth: "100vw", paddingTop: "100px" }}
     >
       <hr />
       <div className="container">

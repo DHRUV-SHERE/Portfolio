@@ -10,7 +10,7 @@ const HeroSection = ({ darkMode }) => {
       className={`min-vh-100 d-flex align-items-center position-relative ${
         darkMode ? "bg-dark text-light" : "bg-light text-dark"
       }`}
-      style={{ paddingTop: "60px", overflow: "hidden" }}
+      style={{  minWidth: "100vw", paddingTop: "60px", overflow: "hidden" }}
     >
       <div className="container">
         <div className="row align-items-center">

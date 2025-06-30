@@ -89,7 +89,7 @@ const ContactSection = ({ darkMode }) => {
     <section
       id="contact"
       className={`py-5 ${darkMode ? "bg-secondary text-light" : "bg-white text-dark"}`}
-      style={{ minHeight: "100vh", paddingTop: "100px" }}
+      style={{ minHeight: "100vh", minWidth: "100vw", paddingTop: "100px" }}
     >
       <hr />
       <div className="container">
