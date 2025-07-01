@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { Home, User, Award, Briefcase, Mail, Moon, Sun } from "lucide-react";
+import { useEffect } from "react";
 
 const Navbar = ({ darkMode, toggleDarkMode }) => {
   const navItems = [
@@ -10,6 +11,17 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
     { name: "Projects", icon: Briefcase, href: "#projects" },
     { name: "Contact", icon: Mail, href: "#contact" },
   ];
+
+  // Close navbar when clicking on a nav item
+  const closeNavbar = () => {
+    const navbarCollapse = document.getElementById("navbarNav");
+    if (navbarCollapse.classList.contains("show")) {
+      const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+        toggle: false,
+      });
+      bsCollapse.hide();
+    }
+  };
 
   return (
     <nav
@@ -72,8 +84,7 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
                     darkMode ? "text-light" : "text-dark"
                   }`}
                   href={item.href}
-                  data-bs-toggle="collapse"
-                  data-bs-target="#navbarNav"
+                  onClick={closeNavbar}
                   style={{ transition: "all 0.3s ease" }}
                   onMouseEnter={(e) => {
                     e.target.style.backgroundColor = darkMode

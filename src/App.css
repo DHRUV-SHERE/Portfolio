@@ -3,23 +3,24 @@
     padding: 0;
     box-sizing: border-box;
 }
+
 body{
     height: 100vh;
     width: 100vw;
 }
-:root {
-  --bs-body-bg: #ffffff;
-  --bs-body-color: #212529;
-  --bs-primary: #0d6efd;
-  --bs-secondary: #6c757d;
+
+html {
+  scroll-behavior: smooth;
 }
 
-.dark {
-  --bs-body-bg: #0e0e0e;
-  --bs-body-color: #f1f1f1;
-  --bs-primary: #36d1dc;
-  --bs-secondary: #a0a0a0;
+body {
+  touch-action: manipulation;
 }
+
+button, a.btn {
+  min-height: 44px; /* Recommended minimum touch target size */
+}
+
 @media (min-width: 992px) {
   #home .position-relative.overflow-hidden {
     width: 380px !important;
@@ -73,4 +74,61 @@ body{
     padding: 10px 14px;
   }
 }
+@media (max-width: 992px) {
+  .navbar-collapse .nav-link {
+    padding: 10px 15px !important;
+    margin: 5px 0;
+  }
+}
 
+@media (max-width: 768px) {
+  #about .col-lg-5 {
+    margin-bottom: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  #projects .col-lg-4 {
+    margin-bottom: 30px;
+  }
+}
+@media (max-width: 768px) {
+  #contact .form-control {
+    font-size: 16px; 
+    padding: 12px;
+  }
+}
+
+@media (max-width: 992px) {
+  h1.display-3 {
+    font-size: 2.5rem;
+  }
+  
+  h2.display-5 {
+    font-size: 2rem;
+  }
+  
+  .lead {
+    font-size: 1.1rem;
+  }
+}
+
+/* For mobile phones */
+@media (max-width: 576px) {
+  h1.display-3 {
+    font-size: 2rem;
+  }
+  
+  h2.display-5 {
+    font-size: 1.5rem;
+  }
+  
+  .lead {
+    font-size: 1rem;
+  }
+  
+  /* Make buttons full width on mobile */
+  .btn-lg {
+    width: 100%;
+  }
+}

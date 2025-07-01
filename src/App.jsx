@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import "bootstrap/dist/js/bootstrap.bundle.min.js"
 import Navbar from "./components/Navbar"
 import AboutSection from "./pages/About"
 import HeroSection from "./pages/Home"
