@@ -92,7 +92,7 @@ const ContactSection = ({ darkMode }) => {
       style={{ minHeight: "100vh", Width: "100%", paddingTop: "100px" }}
     >
       <hr />
-      <div className="container-fluid">
+      <div className="container w-full">
         {/* Header */}
         <motion.div
           className="text-center mb-5"
