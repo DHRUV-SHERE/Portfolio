@@ -1,13 +1,22 @@
-"use client"
-import { motion } from "framer-motion"
-import { useState } from "react"
-import emailjs from "@emailjs/browser"
-import { Mail, MapPin, Clock, Send, Github, Linkedin, Twitter, ExternalLink } from "lucide-react"
+"use client";
+import { motion } from "framer-motion";
+import { useState } from "react";
+import emailjs from "@emailjs/browser";
+import {
+  Mail,
+  MapPin,
+  Clock,
+  Send,
+  Github,
+  Linkedin,
+  Twitter,
+  ExternalLink,
+} from "lucide-react";
 
 // EmailJS config
-const SERVICE_ID = "service_mvmzvlq"
-const TEMPLATE_ID = "template_ofep908"
-const PUBLIC_KEY = "G3P48wd0AD6_lUVxK"
+const SERVICE_ID = "service_mvmzvlq";
+const TEMPLATE_ID = "template_ofep908";
+const PUBLIC_KEY = "G3P48wd0AD6_lUVxK";
 
 const ContactSection = ({ darkMode }) => {
   const [formData, setFormData] = useState({
@@ -15,35 +24,36 @@ const ContactSection = ({ darkMode }) => {
     email: "",
     subject: "",
     message: "",
-  })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState(null)
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
       [name]: value,
-    }))
-  }
+    }));
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setIsSubmitting(true)
+    e.preventDefault();
+    setIsSubmitting(true);
 
-    emailjs.send(SERVICE_ID, TEMPLATE_ID, formData, PUBLIC_KEY)
+    emailjs
+      .send(SERVICE_ID, TEMPLATE_ID, formData, PUBLIC_KEY)
       .then(() => {
-        setSubmitStatus("success")
-        setFormData({ name: "", email: "", subject: "", message: "" })
+        setSubmitStatus("success");
+        setFormData({ name: "", email: "", subject: "", message: "" });
       })
       .catch(() => {
-        setSubmitStatus("error")
+        setSubmitStatus("error");
       })
       .finally(() => {
-        setIsSubmitting(false)
-        setTimeout(() => setSubmitStatus(null), 5000)
-      })
-  }
+        setIsSubmitting(false);
+        setTimeout(() => setSubmitStatus(null), 5000);
+      });
+  };
 
   const contactInfo = [
     {
@@ -62,7 +72,7 @@ const ContactSection = ({ darkMode }) => {
       label: "Response Time",
       value: "Within 24 hours",
     },
-  ]
+  ];
 
   const socialLinks = [
     {
@@ -83,16 +93,23 @@ const ContactSection = ({ darkMode }) => {
       href: "#",
       color: "#667eea",
     },
-  ]
+  ];
 
   return (
     <section
       id="contact"
-      className={`py-5 ${darkMode ? "bg-secondary text-light" : "bg-white text-dark"}`}
-      style={{ minHeight: "100vh", Width: "100%", paddingTop: "100px" }}
+      className={`py-5 ${
+        darkMode ? "bg-secondary text-light" : "bg-white text-dark"
+      }`}
+      style={{
+        minHeight: "100vh",
+        width: "100%", // fixed: lowercase 'width'
+        paddingTop: "100px",
+        overflowX: "hidden", // prevent sideways scroll
+      }}
     >
       <hr />
-      <div className="container w-full">
+      <div className="container-fluid px-3 px-md-5">
         {/* Header */}
         <motion.div
           className="text-center mb-5"
@@ -118,7 +135,7 @@ const ContactSection = ({ darkMode }) => {
           </p>
         </motion.div>
 
-        <div className="row g-5 flex-column-reverse flex-lg-row">
+        <div className="row g-4 g-lg-5 flex-column-reverse flex-lg-row">
           {/* Contact Info (Left Side) */}
           <div className="col-12 col-lg-6">
             <motion.div
@@ -127,10 +144,20 @@ const ContactSection = ({ darkMode }) => {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <h2 className={`h3 fw-bold mb-4 ${darkMode ? "text-light" : "text-dark"}`}>Let's work together</h2>
-              <p className={`mb-5 ${darkMode ? "text-light" : "text-muted"}`} style={{ lineHeight: "1.7" }}>
-                I'm always interested in new opportunities, whether it's a full-time position, freelance project, or
-                just a conversation about technology. Feel free to reach out!
+              <h2
+                className={`h3 fw-bold mb-4 ${
+                  darkMode ? "text-light" : "text-dark"
+                }`}
+              >
+                Let's work together
+              </h2>
+              <p
+                className={`mb-5 ${darkMode ? "text-light" : "text-muted"}`}
+                style={{ lineHeight: "1.7" }}
+              >
+                I'm always interested in new opportunities, whether it's a
+                full-time position, freelance project, or just a conversation
+                about technology. Feel free to reach out!
               </p>
 
               {contactInfo.map((info, index) => (
@@ -145,7 +172,8 @@ const ContactSection = ({ darkMode }) => {
                   <div
                     className="rounded-3 p-3 me-3"
                     style={{
-                      background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                      background:
+                        "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
                       minWidth: "50px",
                       height: "50px",
                       display: "flex",
@@ -156,17 +184,31 @@ const ContactSection = ({ darkMode }) => {
                     <info.icon size={20} className="text-white" />
                   </div>
                   <div>
-                    <h5 className={`mb-1 fw-bold ${darkMode ? "text-light" : "text-dark"}`}>{info.label}</h5>
+                    <h5
+                      className={`mb-1 fw-bold ${
+                        darkMode ? "text-light" : "text-dark"
+                      }`}
+                    >
+                      {info.label}
+                    </h5>
                     {info.href ? (
                       <a
                         href={info.href}
-                        className={`text-decoration-none ${darkMode ? "text-light" : "text-muted"}`}
+                        className={`text-decoration-none ${
+                          darkMode ? "text-light" : "text-muted"
+                        }`}
                         style={{ transition: "color 0.3s ease" }}
                       >
                         {info.value}
                       </a>
                     ) : (
-                      <p className={`mb-0 ${darkMode ? "text-light" : "text-muted"}`}>{info.value}</p>
+                      <p
+                        className={`mb-0 ${
+                          darkMode ? "text-light" : "text-muted"
+                        }`}
+                      >
+                        {info.value}
+                      </p>
                     )}
                   </div>
                 </motion.div>
@@ -178,7 +220,13 @@ const ContactSection = ({ darkMode }) => {
                 transition={{ delay: 0.4, duration: 0.6 }}
                 viewport={{ once: true }}
               >
-                <h4 className={`fw-bold mb-3 ${darkMode ? "text-light" : "text-dark"}`}>Find me online</h4>
+                <h4
+                  className={`fw-bold mb-3 ${
+                    darkMode ? "text-light" : "text-dark"
+                  }`}
+                >
+                  Find me online
+                </h4>
                 <div className="d-flex flex-wrap gap-3">
                   {socialLinks.map((social, index) => (
                     <motion.a
@@ -186,12 +234,30 @@ const ContactSection = ({ darkMode }) => {
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`btn rounded-3 p-3 ${darkMode ? "bg-dark border border-secondary" : "bg-light border-light shadow-sm"}`}
-                      style={{ width: "60px", height: "60px", display: "flex", alignItems: "center", justifyContent: "center" }}
-                      whileHover={{ scale: 1.1, y: -5, backgroundColor: social.color, borderColor: social.color }}
+                      className={`btn rounded-3 p-3 ${
+                        darkMode
+                          ? "bg-dark border border-secondary"
+                          : "bg-light border-light shadow-sm"
+                      }`}
+                      style={{
+                        width: "60px",
+                        height: "60px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                      whileHover={{
+                        scale: 1.1,
+                        y: -5,
+                        backgroundColor: social.color,
+                        borderColor: social.color,
+                      }}
                       whileTap={{ scale: 0.95 }}
                     >
-                      <social.icon size={24} className={darkMode ? "text-light" : "text-dark"} />
+                      <social.icon
+                        size={24}
+                        className={darkMode ? "text-light" : "text-dark"}
+                      />
                     </motion.a>
                   ))}
                 </div>
@@ -207,18 +273,41 @@ const ContactSection = ({ darkMode }) => {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <div className={`p-4 rounded-4 ${darkMode ? "bg-dark border border-secondary" : "bg-light border-light shadow-sm"}`}>
-                <h3 className={`h4 fw-bold mb-4 ${darkMode ? "text-light" : "text-dark"}`}>Send me a message</h3>
+              <div
+                className={`p-4 rounded-4 ${
+                  darkMode
+                    ? "bg-dark border border-secondary"
+                    : "bg-light border-light shadow-sm"
+                }`}
+              >
+                <h3
+                  className={`h4 fw-bold mb-4 ${
+                    darkMode ? "text-light" : "text-dark"
+                  }`}
+                >
+                  Send me a message
+                </h3>
 
                 <form onSubmit={handleSubmit}>
                   <div className="row g-3 mb-3">
                     <div className="col-md-6">
-                      <label htmlFor="name" className={`form-label ${darkMode ? "text-light" : "text-dark"}`}>Name</label>
+                      <label
+                        htmlFor="name"
+                        className={`form-label ${
+                          darkMode ? "text-light" : "text-dark"
+                        }`}
+                      >
+                        Name
+                      </label>
                       <input
                         type="text"
                         name="name"
                         id="name"
-                        className={`form-control ${darkMode ? "bg-secondary border-secondary text-light" : "bg-white border-light"}`}
+                        className={`form-control ${
+                          darkMode
+                            ? "bg-secondary border-secondary text-light"
+                            : "bg-white border-light"
+                        }`}
                         placeholder="Your name"
                         value={formData.name}
                         onChange={handleInputChange}
@@ -226,12 +315,23 @@ const ContactSection = ({ darkMode }) => {
                       />
                     </div>
                     <div className="col-md-6">
-                      <label htmlFor="email" className={`form-label ${darkMode ? "text-light" : "text-dark"}`}>Email</label>
+                      <label
+                        htmlFor="email"
+                        className={`form-label ${
+                          darkMode ? "text-light" : "text-dark"
+                        }`}
+                      >
+                        Email
+                      </label>
                       <input
                         type="email"
                         name="email"
                         id="email"
-                        className={`form-control ${darkMode ? "bg-secondary border-secondary text-light" : "bg-white border-light"}`}
+                        className={`form-control ${
+                          darkMode
+                            ? "bg-secondary border-secondary text-light"
+                            : "bg-white border-light"
+                        }`}
                         placeholder="your@email.com"
                         value={formData.email}
                         onChange={handleInputChange}
@@ -241,12 +341,23 @@ const ContactSection = ({ darkMode }) => {
                   </div>
 
                   <div className="mb-3">
-                    <label htmlFor="subject" className={`form-label ${darkMode ? "text-light" : "text-dark"}`}>Subject</label>
+                    <label
+                      htmlFor="subject"
+                      className={`form-label ${
+                        darkMode ? "text-light" : "text-dark"
+                      }`}
+                    >
+                      Subject
+                    </label>
                     <input
                       type="text"
                       name="subject"
                       id="subject"
-                      className={`form-control ${darkMode ? "bg-secondary border-secondary text-light" : "bg-white border-light"}`}
+                      className={`form-control ${
+                        darkMode
+                          ? "bg-secondary border-secondary text-light"
+                          : "bg-white border-light"
+                      }`}
                       placeholder="What's this about?"
                       value={formData.subject}
                       onChange={handleInputChange}
@@ -255,12 +366,23 @@ const ContactSection = ({ darkMode }) => {
                   </div>
 
                   <div className="mb-4">
-                    <label htmlFor="message" className={`form-label ${darkMode ? "text-light" : "text-dark"}`}>Message</label>
+                    <label
+                      htmlFor="message"
+                      className={`form-label ${
+                        darkMode ? "text-light" : "text-dark"
+                      }`}
+                    >
+                      Message
+                    </label>
                     <textarea
                       name="message"
                       id="message"
                       rows="5"
-                      className={`form-control ${darkMode ? "bg-secondary border-secondary text-light" : "bg-white border-light"}`}
+                      className={`form-control ${
+                        darkMode
+                          ? "bg-secondary border-secondary text-light"
+                          : "bg-white border-light"
+                      }`}
                       placeholder="Tell me about your project..."
                       value={formData.message}
                       onChange={handleInputChange}
@@ -272,7 +394,8 @@ const ContactSection = ({ darkMode }) => {
                     type="submit"
                     className="btn btn-dark btn-lg w-100 d-flex align-items-center justify-content-center gap-2"
                     style={{
-                      background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                      background:
+                        "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
                       border: "none",
                       borderRadius: "12px",
                       padding: "16px",
@@ -283,7 +406,10 @@ const ContactSection = ({ darkMode }) => {
                   >
                     {isSubmitting ? (
                       <>
-                        <div className="spinner-border spinner-border-sm" role="status">
+                        <div
+                          className="spinner-border spinner-border-sm"
+                          role="status"
+                        >
                           <span className="visually-hidden">Loading...</span>
                         </div>
                         Sending...
@@ -323,7 +449,7 @@ const ContactSection = ({ darkMode }) => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default ContactSection
+export default ContactSection;

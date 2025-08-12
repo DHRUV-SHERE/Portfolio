@@ -25,16 +25,21 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
 
   return (
     <nav
-      className={`navbar navbar-expand-lg fixed-top shadow-sm ${
+      className={`navbar navbar-expand-lg shadow-sm ${
         darkMode ? "navbar-dark" : "navbar-light"
-      }`}
+      } mt-4`}
       style={{
-        width: "100%",
+        position: "fixed",
+        top: 0,
+        left: "50%",
+        transform: "translateX(-50%)",
+        width: "90vw",
+        borderRadius: "50px",
         backgroundColor: darkMode
           ? "rgba(0,0,0,0.9)"
           : "rgba(255,255,255,0.95)",
         backdropFilter: "blur(10px)",
-        borderBottom: `1px solid ${
+        border: `1px solid ${
           darkMode ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"
         }`,
         zIndex: 1000,

@@ -116,7 +116,7 @@ const ProjectsSection = ({ darkMode }) => {
         className={`py-5 ${
           darkMode ? "bg-dark text-light" : "bg-light text-dark"
         }`}
-        style={{ minHeight: "100vh", Width: "100%", paddingTop: "100px" }}
+        style={{ minHeight: "100vh", width: "100%", paddingTop: "100px", overflowX: "hidden" }}
       >
         <div className="container text-center">
           <div className="spinner-border text-primary" role="status">
@@ -134,7 +134,7 @@ const ProjectsSection = ({ darkMode }) => {
       className={`py-5 ${
         darkMode ? "bg-dark text-light" : "bg-light text-dark"
       }`}
-      style={{ minHeight: "100vh", paddingTop: "100px" }}
+     style={{ minHeight: "100vh", width: "100%", paddingTop: "100px", overflowX: "hidden" }}
     >
       <div className="container">
         {/* Header */}
@@ -165,7 +165,7 @@ const ProjectsSection = ({ darkMode }) => {
 
         {/* Projects Grid */}
         <motion.div
-          className="row g-4 mb-5"
+          className="row g-3 g-md-4 mb-5"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"

@@ -11,7 +11,7 @@ const HeroSection = ({ darkMode }) => {
         darkMode ? "bg-dark text-light" : "bg-light text-dark"
       }`}
       style={{
-        width: "100%",
+        width: "100vw",
         paddingTop: "80px", // Reduced from 60px
         paddingBottom: "60px", // Added bottom padding
         overflow: "hidden",

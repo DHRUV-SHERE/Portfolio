@@ -69,10 +69,10 @@ const AboutSection = ({ darkMode }) => {
       className={`py-5 ${
         darkMode ? "bg-dark text-light" : "bg-light text-dark"
       }`}
-      style={{ minHeight: "100vh", Width: "100%", paddingTop: "100px" }}
+      style={{ minHeight: "100vh", width: "100%", paddingTop: "100px", overflowX: "hidden" }}
     >
       <hr />
-      <div className="container">
+      <div className="w-75 mx-auto">
         {/* Header */}
         <motion.div
           className="text-center mb-5"
@@ -182,7 +182,7 @@ const AboutSection = ({ darkMode }) => {
               {stats.map((stat, index) => (
                 <motion.div
                   key={index}
-                  className="col-12"
+                  className="p-3 p-md-4 rounded-4 h-100"
                   variants={itemVariants}
                 >
                   <motion.div
