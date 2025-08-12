@@ -37,6 +37,14 @@ button, a.btn {
   min-height: 44px; /* Recommended minimum touch target size */
 }
 
+#about .row {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+#about {
+  overflow-x: hidden;
+}
 
 @media (max-width: 576px) {
   #about p {
