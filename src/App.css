@@ -11,7 +11,7 @@
 
 /* Ensure scroll still works */
 body {
-  overflow-y: scroll; /* or auto */
+  overflow-y: auto; /* or auto */
   height: 100vh;
   width: 100vw;
   touch-action: manipulation;
@@ -19,7 +19,6 @@ body {
 
 html {
   scrollbar-width: none; /* hide scrollbar */
-  scroll-behavior: smooth;
 }
 
 
@@ -27,17 +26,6 @@ button, a.btn {
   min-height: 44px; /* Recommended minimum touch target size */
 }
 
-@media (min-width: 992px) {
-  #home .position-relative.overflow-hidden {
-    width: 380px !important;
-    height: 380px !important;
-  }
-
-  #home .rounded-circle.bg-primary {
-    width: 320px !important;
-    height: 320px !important;
-  }
-}
 
 @media (max-width: 576px) {
   #about p {
