@@ -4,24 +4,29 @@
     box-sizing: border-box;
     overflow-x: hidden;
 }
+/* For Chrome, Safari, Edge */
+::-webkit-scrollbar {
+  display: none;
+}
 
-body{
-    height: 100vh;
-    width: 100vw;
+/* Ensure scroll still works */
+body {
+  overflow-y: scroll; /* or auto */
+  height: 100vh;
+  width: 100vw;
+  touch-action: manipulation;
 }
 
 html {
+  scrollbar-width: none; /* hide scrollbar */
   scroll-behavior: smooth;
 }
 
-body {
-  touch-action: manipulation;
-}
 
 button, a.btn {
   min-height: 44px; /* Recommended minimum touch target size */
 }
-/* 
+
 @media (min-width: 992px) {
   #home .position-relative.overflow-hidden {
     width: 380px !important;
@@ -32,7 +37,7 @@ button, a.btn {
     width: 320px !important;
     height: 320px !important;
   }
-} */
+}
 
 @media (max-width: 576px) {
   #about p {
