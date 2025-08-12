@@ -9,6 +9,17 @@
   display: none;
 }
 
+/* In your global CSS */
+.container,
+.container-fluid {
+  overflow-x: hidden;
+}
+
+.row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
 /* Ensure scroll still works */
 body {
   overflow-y: auto; /* or auto */
