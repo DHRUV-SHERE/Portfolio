@@ -12,11 +12,12 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
     { name: "Contact", icon: Mail, href: "#contact" },
   ];
 
-  // Close navbar when clicking on a nav item
+  // Close navbar on mobile
   const closeNavbar = () => {
     const navbarCollapse = document.getElementById("navbarNav");
     if (navbarCollapse.classList.contains("show")) {
-      const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+      // Bootstrap collapse
+      const bsCollapse = new window.bootstrap.Collapse(navbarCollapse, {
         toggle: false,
       });
       bsCollapse.hide();
@@ -27,23 +28,7 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
     <nav
       className={`navbar navbar-expand-lg shadow-sm ${
         darkMode ? "navbar-dark" : "navbar-light"
-      } mt-4`}
-      style={{
-        position: "fixed",
-        top: 0,
-        left: "50%",
-        transform: "translateX(-50%)",
-        width: "90vw",
-        borderRadius: "50px",
-        backgroundColor: darkMode
-          ? "rgba(0,0,0,0.9)"
-          : "rgba(255,255,255,0.95)",
-        backdropFilter: "blur(10px)",
-        border: `1px solid ${
-          darkMode ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"
-        }`,
-        zIndex: 1000,
-      }}
+      } custom-navbar`}
     >
       <div className="container">
         {/* Brand */}
@@ -74,6 +59,7 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
           <span className="navbar-toggler-icon"></span>
         </button>
 
+        {/* Nav Items */}
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto d-flex flex-column flex-lg-row align-items-center gap-2 gap-lg-0">
             {navItems.map((item, index) => (
@@ -122,6 +108,39 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
           </ul>
         </div>
       </div>
+
+      <style jsx>{`
+        /* Desktop styles */
+        .custom-navbar {
+          position: fixed;
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 90vw;
+          margin-top: 1rem;
+          border-radius: 50px;
+          backdrop-filter: blur(10px);
+          border: 1px solid
+            ${darkMode
+              ? "rgba(255,255,255,0.1)"
+              : "rgba(0,0,0,0.1)"};
+          z-index: 1000;
+          background-color: ${darkMode
+            ? "rgba(0,0,0,0.9)"
+            : "rgba(255,255,255,0.95)"};
+        }
+
+        /* Mobile styles */
+        @media (max-width: 991px) {
+          .custom-navbar {
+            width: 100%;
+            left: 0;
+            transform: none;
+            margin-top: 0;
+            border-radius: 0;
+          }
+        }
+      `}</style>
     </nav>
   );
 };
