@@ -74,7 +74,7 @@ const SkillsSection = ({ darkMode }) => {
       id="skills"
       ref={ref}
       className={`py-5 ${darkMode ? "bg-dark text-light" : "bg-white text-dark"}`}
-      style={{ minHeight: "100vh", Width: "100%", paddingTop: "100px" }}
+      style={{ minHeight: "100vh", Width: "100%", paddingTop: "100px", overflow: "hidden" }}
     >
       <hr />
       <div className="container">
