@@ -19,6 +19,7 @@ const ProjectsSection = ({ darkMode }) => {
     "RejoiuceClone",
     "Online_Learning_Management_System",
     "React_Text_Site",
+    "ToDoList"
   ];
   const selectedReposLower = selectedRepos.map((name) => name.toLowerCase());
 
