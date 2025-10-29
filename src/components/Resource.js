@@ -1,5 +1,5 @@
 import AgroSence from "../assets/Home page.png"
-import knowBase from "../assets/KnowBase.png"
+import KnowBase from "../assets/KnowBase.png"
 import Spotify from "../assets/Spotify.png"
 import Oracle from "../assets/Oracle.png"
 import Amazon from "../assets/Amazon.png"
@@ -10,8 +10,8 @@ import ToDoList from "../assets/ToDoList.png"
 
 export const Resource = {
   AgroSence,
-  knowBase,
   Spotify,
+  KnowBase,
   Oracle,
   Amazon,
   RejoiuceClone,

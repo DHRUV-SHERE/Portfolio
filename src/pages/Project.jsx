@@ -12,8 +12,8 @@ const ProjectsSection = ({ darkMode }) => {
   const githubUsername = "DHRUV-SHERE";
   const selectedRepos = [
     "AgroSence",
-    "knowBase",
     "Spotify",
+    "knowBase",
     "Oracle",
     "Amazon",
     "RejoiuceClone",
