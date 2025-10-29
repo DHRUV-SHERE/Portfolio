@@ -6,6 +6,7 @@ import Amazon from "../assets/Amazon.png"
 import RejoiuceClone from "../assets/Rejouice.png"
 import Online_Learning_Management_System from "../assets/Online_Learning_Management_System.png"
 import React_Text_Site from "../assets/React-Text-Site.png"
+import ToDoList from "../assets/ToDoList.png"
 
 export const Resource = {
   AgroSence,
@@ -16,4 +17,5 @@ export const Resource = {
   RejoiuceClone,
   Online_Learning_Management_System,
   React_Text_Site,
+  ToDoList
 }
