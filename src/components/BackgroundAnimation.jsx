@@ -1,28 +1,42 @@
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
-import { useRef } from "react";
+import { useRef, useMemo } from "react";
 
 function NeuronParticles() {
   const pointsRef = useRef();
   const lineRef = useRef();
 
-  const COUNT = 800;
-  const RANGE = 50;
+  const isMobile = window.innerWidth < 768;
 
-  const positions = new Float32Array(COUNT * 3);
-  const velocities = new Float32Array(COUNT * 3);
+  // ⚡ Auto–optimized values
+  const COUNT = isMobile ? 120 : 800;
+  const RANGE = isMobile ? 25 : 50;
+  const SPEED = isMobile ? 0.004 : 0.01;
 
-  for (let i = 0; i < COUNT * 3; i++) {
-    positions[i] = (Math.random() - 0.5) * RANGE;
-    velocities[i] = (Math.random() - 0.5) * 0.01;
-  }
+  // Particles
+  const { positions, velocities } = useMemo(() => {
+    const pos = new Float32Array(COUNT * 3);
+    const vel = new Float32Array(COUNT * 3);
 
-  const linePositions = new Float32Array(COUNT * COUNT * 3);
+    for (let i = 0; i < COUNT * 3; i++) {
+      pos[i] = (Math.random() - 0.5) * RANGE;
+      vel[i] = (Math.random() - 0.5) * SPEED;
+    }
+
+    return { positions: pos, velocities: vel };
+  }, [COUNT]);
+
+  // Lines (desktop only)
+  const linePositions = useMemo(() => {
+    return new Float32Array(isMobile ? 0 : COUNT * COUNT * 3);
+  }, [COUNT, isMobile]);
+
   let lineCount = 0;
 
   useFrame(() => {
     const pos = pointsRef.current.geometry.attributes.position.array;
 
+    // move particles
     for (let i = 0; i < COUNT * 3; i++) {
       pos[i] += velocities[i];
 
@@ -33,6 +47,10 @@ function NeuronParticles() {
 
     pointsRef.current.geometry.attributes.position.needsUpdate = true;
 
+    // skip lines on mobile (performance boost)
+    if (isMobile) return;
+
+    // desktop line connections
     lineCount = 0;
     for (let i = 0; i < COUNT; i++) {
       for (let j = i + 1; j < i + 30 && j < COUNT; j++) {
@@ -54,12 +72,15 @@ function NeuronParticles() {
       }
     }
 
-    lineRef.current.geometry.setDrawRange(0, lineCount / 3);
-    lineRef.current.geometry.attributes.position.needsUpdate = true;
+    if (lineRef.current) {
+      lineRef.current.geometry.setDrawRange(0, lineCount / 3);
+      lineRef.current.geometry.attributes.position.needsUpdate = true;
+    }
   });
 
   return (
     <>
+      {/* Particles */}
       <points ref={pointsRef}>
         <bufferGeometry>
           <bufferAttribute
@@ -70,7 +91,7 @@ function NeuronParticles() {
           />
         </bufferGeometry>
         <pointsMaterial
-          size={0.08}
+          size={isMobile ? 0.07 : 0.08}
           color="#00eaff"
           sizeAttenuation
           transparent
@@ -78,25 +99,25 @@ function NeuronParticles() {
         />
       </points>
 
-      <lineSegments ref={lineRef}>
-        <bufferGeometry>
-          <bufferAttribute
-            attach="attributes-position"
-            array={linePositions}
-            count={COUNT * COUNT}
-            itemSize={3}
-          />
-        </bufferGeometry>
-        <lineBasicMaterial color="#00eaff" transparent opacity={0.2} />
-      </lineSegments>
+      {/* Desktop Only Lines */}
+      {!isMobile && (
+        <lineSegments ref={lineRef}>
+          <bufferGeometry>
+            <bufferAttribute
+              attach="attributes-position"
+              array={linePositions}
+              count={COUNT * COUNT}
+              itemSize={3}
+            />
+          </bufferGeometry>
+          <lineBasicMaterial color="#00eaff" transparent opacity={0.2} />
+        </lineSegments>
+      )}
     </>
   );
 }
 
 export default function NeuralBackground() {
-  // Disable on mobile
-  if (window.innerWidth < 768) return null;
-
   return (
     <div
       style={{
@@ -104,7 +125,7 @@ export default function NeuralBackground() {
         inset: 0,
         width: "100%",
         height: "100%",
-        zIndex: -1,          // background
+        zIndex: -1,
         pointerEvents: "none",
       }}
     >
