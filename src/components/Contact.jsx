@@ -120,7 +120,7 @@ const Contact = () => {
   };
 
   const Button = ({ children, onClick, className = '', variant = 'default', size = 'default', disabled = false, type = 'button' }) => {
-    const baseStyles = 'px-6 py-3 rounded-xl font-medium transition-all duration-300 hover-lift font-["Orbitron"] flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed';
+    const baseStyles = 'px-4 md:px-6 py-2 md:py-3 rounded-xl font-medium transition-all duration-300 hover-lift font-["Orbitron"] flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed';
     
     const variants = {
       default: 'bg-gradient-to-r from-primary to-secondary text-primary-foreground hover-glow',
@@ -128,9 +128,9 @@ const Contact = () => {
     };
 
     const sizes = {
-      default: 'text-base',
-      sm: 'text-sm px-4 py-2',
-      lg: 'text-lg px-8 py-4'
+      default: 'text-sm md:text-base',
+      sm: 'text-sm px-3 md:px-4 py-2',
+      lg: 'text-base md:text-lg px-6 md:px-8 py-3 md:py-4'
     };
 
     return (
@@ -147,65 +147,65 @@ const Contact = () => {
 
   const Input = ({ className = '', ...props }) => (
     <input
-      className={`w-full px-4 py-3 bg-muted/50 border-2 border-primary/30 rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary focus:glow-blue transition-all duration-300 font-["Inter"] ${className}`}
+      className={`w-full px-3 md:px-4 py-2 md:py-3 bg-muted/50 border-2 border-primary/30 rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary focus:glow-blue transition-all duration-300 font-["Inter"] text-sm md:text-base ${className}`}
       {...props}
     />
   );
 
   const Textarea = ({ className = '', ...props }) => (
     <textarea
-      className={`w-full px-4 py-3 bg-muted/50 border-2 border-primary/30 rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary focus:glow-blue transition-all duration-300 font-["Inter"] min-h-[150px] resize-vertical ${className}`}
+      className={`w-full px-3 md:px-4 py-2 md:py-3 bg-muted/50 border-2 border-primary/30 rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary focus:glow-blue transition-all duration-300 font-["Inter"] min-h-[120px] md:min-h-[150px] resize-vertical text-sm md:text-base ${className}`}
       {...props}
     />
   );
 
   return (
-    <section id="contact" className="py-20 relative w-full bg-gradient-to-b from-background to-primary/5">
+    <section id="contact" className="py-16 md:py-20 relative w-full bg-gradient-to-b from-background to-primary/5">
       {/* Background Elements */}
-      <div className="absolute top-0 left-0 w-72 h-72 bg-primary/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
+      <div className="absolute top-0 left-0 w-48 h-48 md:w-72 md:h-72 bg-primary/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+      <div className="absolute bottom-0 right-0 w-64 h-64 md:w-96 md:h-96 bg-secondary/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
       
       <div className="container mx-auto px-4 relative z-10 w-full">
-        <div className="text-center mb-16 animate-slide-up w-full">
-          <h2 className="text-4xl md:text-6xl font-bold mb-6 font-['Orbitron']">
+        <div className="text-center mb-12 md:mb-16 animate-slide-up w-full">
+          <h2 className="text-3xl md:text-4xl lg:text-6xl font-bold mb-4 md:mb-6 font-['Orbitron'] text-responsive-2xl">
             Get In <span className="name-gradient">Touch</span>
           </h2>
-          <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto font-['Inter'] leading-relaxed">
+          <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto font-['Inter'] leading-relaxed text-responsive">
             Let's discuss your next project or just say hello
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 w-full max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 w-full max-w-7xl mx-auto">
           {/* Contact Info */}
-          <div className="space-y-8 animate-slide-up">
-            <div className="glass-card p-8">
-              <h3 className="text-3xl font-bold mb-6 font-['Orbitron'] text-foreground">
+          <div className="space-y-6 md:space-y-8 animate-slide-up">
+            <div className="glass-card p-6 md:p-8">
+              <h3 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6 font-['Orbitron'] text-foreground text-responsive-lg">
                 Let's work together
               </h3>
-              <p className="text-muted-foreground mb-8 leading-relaxed font-['Inter'] text-lg">
+              <p className="text-muted-foreground mb-6 md:mb-8 leading-relaxed font-['Inter'] text-sm md:text-base lg:text-lg">
                 I'm always interested in new opportunities, whether it's a full-time position, 
                 freelance project, or just a conversation about technology. Feel free to reach out!
               </p>
 
-              <div className="space-y-6">
+              <div className="space-y-4 md:space-y-6">
                 {contactInfo.map((info, index) => {
                   const Icon = info.icon;
                   return (
-                    <div key={index} className="flex items-start gap-4 group">
-                      <div className={`p-4 rounded-xl ${getBackgroundClass(info.color)} ${getGlowClass(info.color)} group-hover:scale-110 transition-transform duration-300`}>
-                        <Icon className={getTextColorClass(info.color)} size={28} />
+                    <div key={index} className="flex items-start gap-3 md:gap-4 group">
+                      <div className={`p-3 md:p-4 rounded-xl ${getBackgroundClass(info.color)} ${getGlowClass(info.color)} group-hover:scale-110 transition-transform duration-300`}>
+                        <Icon className={getTextColorClass(info.color)} size={24} />
                       </div>
                       <div className="flex-1">
-                        <p className="text-muted-foreground text-sm font-['Inter'] mb-1">{info.label}</p>
+                        <p className="text-muted-foreground text-xs md:text-sm font-['Inter'] mb-1">{info.label}</p>
                         {info.href ? (
                           <a 
                             href={info.href}
-                            className="text-foreground font-medium hover:text-primary transition-colors font-['Inter'] text-lg"
+                            className="text-foreground font-medium hover:text-primary transition-colors font-['Inter'] text-sm md:text-base lg:text-lg"
                           >
                             {info.value}
                           </a>
                         ) : (
-                          <p className="text-foreground font-medium font-['Inter'] text-lg">{info.value}</p>
+                          <p className="text-foreground font-medium font-['Inter'] text-sm md:text-base lg:text-lg">{info.value}</p>
                         )}
                       </div>
                     </div>
@@ -215,11 +215,11 @@ const Contact = () => {
             </div>
 
             {/* Social Links */}
-            <div className="glass-card p-8">
-              <h3 className="text-3xl font-bold mb-6 font-['Orbitron'] text-foreground">
+            <div className="glass-card p-6 md:p-8">
+              <h3 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6 font-['Orbitron'] text-foreground text-responsive-lg">
                 Find me online
               </h3>
-              <div className="flex gap-4">
+              <div className="flex gap-3 md:gap-4">
                 {socialLinks.map((social, index) => {
                   const Icon = social.icon;
                   return (
@@ -228,9 +228,9 @@ const Contact = () => {
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`p-4 rounded-xl ${getBackgroundClass(social.color)} ${getGlowClass(social.color)} hover-lift hover-glow transition-all duration-300 group`}
+                      className={`p-3 md:p-4 rounded-xl ${getBackgroundClass(social.color)} ${getGlowClass(social.color)} hover-lift hover-glow transition-all duration-300 group`}
                     >
-                      <Icon className={`${getTextColorClass(social.color)} group-hover:scale-110 transition-transform duration-300`} size={28} />
+                      <Icon className={`${getTextColorClass(social.color)} group-hover:scale-110 transition-transform duration-300`} size={24} />
                     </a>
                   );
                 })}
@@ -239,14 +239,14 @@ const Contact = () => {
           </div>
 
           {/* Contact Form */}
-          <div className="glass-card p-8 animate-slide-up" style={{ animationDelay: '0.2s' }}>
-            <h3 className="text-3xl font-bold mb-6 font-['Orbitron'] text-foreground">
+          <div className="glass-card p-6 md:p-8 animate-slide-up" style={{ animationDelay: '0.2s' }}>
+            <h3 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6 font-['Orbitron'] text-foreground text-responsive-lg">
               Send me a message
             </h3>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                 <div>
-                  <label className="text-lg text-muted-foreground mb-3 block font-['Inter'] font-medium">
+                  <label className="text-sm md:text-base lg:text-lg text-muted-foreground mb-2 block font-['Inter'] font-medium">
                     Name
                   </label>
                   <Input
@@ -256,11 +256,10 @@ const Contact = () => {
                     onChange={handleInputChange}
                     placeholder="Your name"
                     required
-                    className="text-lg py-4"
                   />
                 </div>
                 <div>
-                  <label className="text-lg text-muted-foreground mb-3 block font-['Inter'] font-medium">
+                  <label className="text-sm md:text-base lg:text-lg text-muted-foreground mb-2 block font-['Inter'] font-medium">
                     Email
                   </label>
                   <Input
@@ -270,13 +269,12 @@ const Contact = () => {
                     onChange={handleInputChange}
                     placeholder="your@email.com"
                     required
-                    className="text-lg py-4"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="text-lg text-muted-foreground mb-3 block font-['Inter'] font-medium">
+                <label className="text-sm md:text-base lg:text-lg text-muted-foreground mb-2 block font-['Inter'] font-medium">
                   Subject
                 </label>
                 <Input
@@ -286,12 +284,11 @@ const Contact = () => {
                   onChange={handleInputChange}
                   placeholder="What's this about?"
                   required
-                  className="text-lg py-4"
                 />
               </div>
 
               <div>
-                <label className="text-lg text-muted-foreground mb-3 block font-['Inter'] font-medium">
+                <label className="text-sm md:text-base lg:text-lg text-muted-foreground mb-2 block font-['Inter'] font-medium">
                   Message
                 </label>
                 <Textarea
@@ -300,7 +297,6 @@ const Contact = () => {
                   onChange={handleInputChange}
                   placeholder="Tell me about your project..."
                   required
-                  className="text-lg py-4"
                 />
               </div>
 
@@ -308,30 +304,30 @@ const Contact = () => {
                 type="submit"
                 size="lg"
                 disabled={isSubmitting}
-                className="w-full text-lg py-4"
+                className="w-full"
               >
                 {isSubmitting ? (
                   <>
-                    <div className="w-6 h-6 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin" />
+                    <div className="w-5 h-5 md:w-6 md:h-6 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin" />
                     Sending...
                   </>
                 ) : (
                   <>
                     Send Message
-                    <Send size={24} />
+                    <Send size={20} />
                   </>
                 )}
               </Button>
 
               {/* Success & Error Messages */}
               {submitStatus === "success" && (
-                <div className="p-4 rounded-xl bg-green-500/10 border border-green-500 text-green-400 font-['Inter'] text-lg animate-fade-in">
+                <div className="p-3 md:p-4 rounded-xl bg-green-500/10 border border-green-500 text-green-400 font-['Inter'] text-sm md:text-base animate-fade-in">
                   ✅ Your message has been successfully delivered!
                 </div>
               )}
 
               {submitStatus === "error" && (
-                <div className="p-4 rounded-xl bg-red-500/10 border border-red-500 text-red-400 font-['Inter'] text-lg animate-fade-in">
+                <div className="p-3 md:p-4 rounded-xl bg-red-500/10 border border-red-500 text-red-400 font-['Inter'] text-sm md:text-base animate-fade-in">
                   ❌ Something went wrong. Please try again.
                 </div>
               )}

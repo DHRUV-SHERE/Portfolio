@@ -265,3 +265,22 @@
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(135deg, hsl(187 100% 55%), hsl(270 100% 60%));
 }
+
+/* Responsive text sizes */
+@media (max-width: 768px) {
+  .text-responsive {
+    font-size: clamp(1rem, 4vw, 1.5rem);
+  }
+  
+  .text-responsive-lg {
+    font-size: clamp(1.5rem, 6vw, 2.5rem);
+  }
+  
+  .text-responsive-xl {
+    font-size: clamp(2rem, 8vw, 3.5rem);
+  }
+  
+  .text-responsive-2xl {
+    font-size: clamp(2.5rem, 10vw, 4rem);
+  }
+}

@@ -19,7 +19,6 @@ class Hero extends Component {
   };
 
   downloadResume = () => {
-    // Replace with your actual resume file path or URL
     const resumeUrl = Resume;
     const link = document.createElement('a');
     link.href = resumeUrl;
@@ -30,7 +29,7 @@ class Hero extends Component {
   };
 
   Button = ({ children, onClick, className = '', variant = 'default', size = 'default', icon: Icon }) => {
-    const baseStyles = 'inline-flex items-center justify-center px-6 py-3 rounded-xl font-medium transition-all duration-300 hover-lift font-["Orbitron"] relative overflow-hidden group';
+    const baseStyles = 'inline-flex items-center justify-center px-4 md:px-6 py-3 rounded-xl font-medium transition-all duration-300 hover-lift font-["Orbitron"] relative overflow-hidden group';
     
     const variants = {
       default: 'bg-gradient-to-r from-primary to-secondary text-primary-foreground hover-glow shadow-lg hover:shadow-xl',
@@ -39,8 +38,8 @@ class Hero extends Component {
     };
 
     const sizes = {
-      default: 'text-base px-6 py-3',
-      lg: 'text-lg px-8 py-4'
+      default: 'text-sm md:text-base px-4 py-3',
+      lg: 'text-base md:text-lg px-6 md:px-8 py-4'
     };
 
     return (
@@ -51,14 +50,13 @@ class Hero extends Component {
         {/* Animated background effect */}
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
         
-        {Icon && <Icon className="mr-3" size={20} />}
-        <span className="relative z-10">{children}</span>
+        {Icon && <Icon className="mr-2 md:mr-3" size={18} />}
+        <span className="relative z-10 whitespace-nowrap">{children}</span>
       </button>
     );
   };
 
   componentDidMount() {
-    // Add orbit animation to CSS
     const style = document.createElement('style');
     style.textContent = `
       @keyframes orbit {
@@ -120,19 +118,19 @@ class Hero extends Component {
     const Button = this.Button;
 
     return (
-      <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20 bg-gradient-to-br from-background via-background to-primary/5">
+      <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-16 md:pt-20 bg-gradient-to-br from-background via-background to-primary/5">
         {/* Enhanced Animated Background */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="relative w-[800px] h-[800px]">
-            {[...Array(5)].map((_, i) => (
+          <div className="relative w-full max-w-[800px] h-[400px] md:h-[800px]">
+            {[...Array(3)].map((_, i) => (
               <div
                 key={i}
                 className="absolute border border-primary/15 rounded-full"
                 style={{
-                  width: `${100 - i * 15}%`,
-                  height: `${100 - i * 15}%`,
-                  top: `${i * 7.5}%`,
-                  left: `${i * 7.5}%`,
+                  width: `${100 - i * 20}%`,
+                  height: `${100 - i * 20}%`,
+                  top: `${i * 10}%`,
+                  left: `${i * 10}%`,
                   animation: `orbit ${25 + i * 8}s linear infinite`,
                   borderStyle: i % 2 === 0 ? 'solid' : 'dashed',
                 }}
@@ -140,10 +138,10 @@ class Hero extends Component {
             ))}
             
             {/* Floating particles */}
-            {[...Array(12)].map((_, i) => (
+            {[...Array(8)].map((_, i) => (
               <div
                 key={`particle-${i}`}
-                className="absolute w-2 h-2 bg-primary/30 rounded-full"
+                className="absolute w-1 h-1 md:w-2 md:h-2 bg-primary/30 rounded-full"
                 style={{
                   top: `${Math.random() * 100}%`,
                   left: `${Math.random() * 100}%`,
@@ -152,33 +150,18 @@ class Hero extends Component {
                 }}
               />
             ))}
-            
-            {/* Sparkle effects */}
-            {[...Array(8)].map((_, i) => (
-              <div
-                key={`sparkle-${i}`}
-                className="absolute text-primary/40"
-                style={{
-                  top: `${20 + Math.random() * 60}%`,
-                  left: `${20 + Math.random() * 60}%`,
-                  animation: `sparkle ${3 + Math.random() * 4}s infinite`,
-                }}
-              >
-                <Star size={16} fill="currentColor" />
-              </div>
-            ))}
           </div>
         </div>
 
         {/* Gradient Orbs */}
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl animate-pulse delay-1000" />
+        <div className="absolute top-1/4 left-1/4 w-32 h-32 md:w-64 md:h-64 bg-primary/10 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 w-48 h-48 md:w-96 md:h-96 bg-secondary/10 rounded-full blur-3xl animate-pulse delay-1000" />
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="flex flex-col items-center text-center">
             {/* Enhanced Profile Image */}
-            <div className="relative mb-12 group">
-              <div className="relative w-56 h-56 rounded-full border-4 border-neon glow-blue overflow-hidden transform transition-all duration-500 group-hover:scale-105 group-hover:glow-intense">
+            <div className="relative mb-8 md:mb-12 group">
+              <div className="relative w-40 h-40 md:w-56 md:h-56 rounded-full border-4 border-neon glow-blue overflow-hidden transform transition-all duration-500 group-hover:scale-105 group-hover:glow-intense">
                 <img
                   src={heroProfile}
                   alt="Dhruv Shere"
@@ -187,33 +170,29 @@ class Hero extends Component {
                 <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-primary/30 to-secondary/30 animate-pulse-glow" />
               </div>
               
-              {/* Animated rings around profile */}
-              <div className="absolute inset-0 rounded-full border-2 border-primary/20 animate-ping" style={{ animationDelay: '1s' }} />
-              <div className="absolute inset-0 rounded-full border-2 border-secondary/20 animate-ping" style={{ animationDelay: '2s' }} />
-              
               {/* Status indicator */}
-              <div className="absolute bottom-4 right-4 w-6 h-6 bg-green-500 rounded-full border-2 border-background glow-green" />
+              <div className="absolute bottom-2 right-2 md:bottom-4 md:right-4 w-4 h-4 md:w-6 md:h-6 bg-green-500 rounded-full border-2 border-background glow-green" />
             </div>
 
-            {/* Enhanced Hero Text - FIXED NAME VISIBILITY */}
-            <div className="space-y-6 mb-12 max-w-4xl">
+            {/* Enhanced Hero Text */}
+            <div className="space-y-4 md:space-y-6 mb-8 md:mb-12 max-w-4xl">
               <div className="animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-                <h1 className="text-6xl md:text-8xl font-bold mb-6 font-['Orbitron'] tracking-tight">
+                <h1 className="text-4xl md:text-6xl lg:text-8xl font-bold mb-4 md:mb-6 font-['Orbitron'] tracking-tight text-responsive-2xl">
                   Hi, I'm <span className="name-gradient">Dhruv</span>
                 </h1>
               </div>
               
               <div className="animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
-                <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm mb-4">
-                  <Zap className="text-primary" size={20} />
-                  <p className="text-2xl md:text-4xl text-foreground font-['Inter'] font-semibold">
+                <div className="inline-flex items-center gap-2 md:gap-3 px-4 md:px-6 py-2 md:py-3 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm mb-4">
+                  <Zap className="text-primary" size={18} />
+                  <p className="text-lg md:text-2xl lg:text-4xl text-foreground font-['Inter'] font-semibold text-responsive-lg">
                     Full Stack Web Developer
                   </p>
                 </div>
               </div>
               
               <div className="animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
-                <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl leading-relaxed font-['Inter'] bg-background/50 backdrop-blur-sm rounded-2xl p-6 border border-primary/10">
+                <p className="text-base md:text-xl lg:text-2xl text-muted-foreground max-w-3xl leading-relaxed font-['Inter'] bg-background/50 backdrop-blur-sm rounded-2xl p-4 md:p-6 border border-primary/10 text-responsive">
                   Passionate about <span className="text-primary font-semibold">modern UI/UX</span>, building 
                   <span className="text-secondary font-semibold"> scalable web applications</span>, and making an 
                   impact through <span className="text-primary font-semibold">clean, efficient code</span>.
@@ -222,13 +201,13 @@ class Hero extends Component {
             </div>
 
             {/* Enhanced CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-6 mb-16 animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-6 mb-12 md:mb-16 animate-fade-in-up w-full max-w-md mx-auto" style={{ animationDelay: '0.8s' }}>
               <Button
                 onClick={() => this.scrollToSection('projects')}
                 size="lg"
                 variant="default"
                 icon={Eye}
-                className="transform hover:scale-105 transition-transform duration-300"
+                className="flex-1 justify-center transform hover:scale-105 transition-transform duration-300"
               >
                 View My Work
               </Button>
@@ -236,16 +215,19 @@ class Hero extends Component {
                 onClick={() => this.scrollToSection('about')}
                 size="lg"
                 variant="outline"
-                className="transform hover:scale-105 transition-transform duration-300"
+                className="flex-1 justify-center transform hover:scale-105 transition-transform duration-300"
               >
                 About Me
               </Button>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-6 mb-12 md:mb-16 animate-fade-in-up w-full max-w-md mx-auto" style={{ animationDelay: '0.9s' }}>
               <Button
                 onClick={this.downloadResume}
                 size="lg"
                 variant="outlinePurple"
                 icon={Download}
-                className="transform hover:scale-105 transition-transform duration-300"
+                className="flex-1 justify-center transform hover:scale-105 transition-transform duration-300"
               >
                 Download Resume
               </Button>
@@ -257,14 +239,14 @@ class Hero extends Component {
                 onClick={() => this.scrollToSection('about')}
                 className="group flex flex-col items-center gap-2 text-primary hover:text-secondary transition-colors duration-300"
               >
-                <span className="text-sm font-['Inter'] font-medium tracking-wider uppercase opacity-80 group-hover:opacity-100">
+                <span className="text-xs md:text-sm font-['Inter'] font-medium tracking-wider uppercase opacity-80 group-hover:opacity-100">
                   Scroll to Explore
                 </span>
                 <div className="relative">
-                  <div className="w-12 h-12 border-2 border-primary/30 rounded-full flex items-center justify-center group-hover:border-secondary/50 transition-colors duration-300">
+                  <div className="w-10 h-10 md:w-12 md:h-12 border-2 border-primary/30 rounded-full flex items-center justify-center group-hover:border-secondary/50 transition-colors duration-300">
                     <ArrowDown 
                       className="animate-bounce group-hover:animate-pulse" 
-                      size={20} 
+                      size={18} 
                     />
                   </div>
                   <div className="absolute inset-0 border-2 border-primary/10 rounded-full animate-ping" />
