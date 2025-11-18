@@ -1,7 +1,5 @@
-// tailwind.config.ts
-import type { Config } from 'tailwindcss'
-
-export default {
+/** @type {import('tailwindcss').Config} */
+module.exports = {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -13,9 +11,14 @@ export default {
         foreground: 'hsl(var(--foreground))',
         primary: 'hsl(var(--primary))',
         secondary: 'hsl(var(--secondary))',
-        // Add all your custom colors
+        muted: 'hsl(var(--muted))',
+        accent: 'hsl(var(--accent))',
+        destructive: 'hsl(var(--destructive))',
+        border: 'hsl(var(--border))',
+        input: 'hsl(var(--input))',
+        ring: 'hsl(var(--ring))',
       },
     },
   },
   plugins: [],
-} satisfies Config
+}
