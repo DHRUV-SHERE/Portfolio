@@ -32,7 +32,7 @@ const Navigation = () => {
   const Button = ({ children, onClick, className = '' }) => (
     <button
       onClick={onClick}
-      className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 hover-lift ${className}`}
+      className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 hover-lift font-['Orbitron'] ${className}`}
     >
       {children}
     </button>
@@ -59,7 +59,7 @@ const Navigation = () => {
               <button
                 key={link.id}
                 onClick={() => scrollToSection(link.id)}
-                className="text-foreground hover:text-primary transition-colors relative group font-medium"
+                className="text-foreground hover:text-primary transition-colors relative group font-medium font-['Inter'] text-lg"
               >
                 {link.label}
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary group-hover:w-full transition-all duration-300" />
@@ -67,7 +67,7 @@ const Navigation = () => {
             ))}
             <Button
               onClick={() => scrollToSection('contact')}
-              className="bg-gradient-to-r from-primary to-secondary hover-glow text-primary-foreground font-['Orbitron']"
+              className="bg-gradient-to-r from-primary to-secondary hover-glow text-primary-foreground"
             >
               Get In Touch
             </Button>
@@ -76,34 +76,36 @@ const Navigation = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden text-primary hover-lift p-2 rounded-lg"
+            className="md:hidden text-primary hover-lift p-2 rounded-lg bg-primary/10 hover:bg-primary/20 transition-colors"
           >
-            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
         {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden mt-4 glass rounded-2xl p-6 animate-slide-up border-neon">
-            <div className="flex flex-col gap-4">
+        <div className={`md:hidden transition-all duration-300 overflow-hidden ${
+          isMobileMenuOpen ? 'max-h-96 opacity-100 mt-4' : 'max-h-0 opacity-0'
+        }`}>
+          <div className="glass rounded-2xl p-6 border border-primary/20">
+            <div className="flex flex-col gap-3">
               {navLinks.map((link) => (
                 <button
                   key={link.id}
                   onClick={() => scrollToSection(link.id)}
-                  className="text-foreground hover:text-primary transition-colors text-left py-3 px-4 rounded-lg hover:bg-muted/50 font-medium"
+                  className="text-foreground hover:text-primary transition-colors text-left py-3 px-4 rounded-lg hover:bg-primary/10 font-medium font-['Inter'] text-lg"
                 >
                   {link.label}
                 </button>
               ))}
               <Button
                 onClick={() => scrollToSection('contact')}
-                className="bg-gradient-to-r from-primary to-secondary w-full text-primary-foreground font-['Orbitron'] mt-2"
+                className="bg-gradient-to-r from-primary to-secondary w-full text-primary-foreground mt-2"
               >
                 Get In Touch
               </Button>
             </div>
           </div>
-        )}
+        </div>
       </div>
     </nav>
   );
