@@ -118,7 +118,7 @@ class Hero extends Component {
     const Button = this.Button;
 
     return (
-      <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-16 md:pt-20 bg-gradient-to-br from-background via-background to-primary/5">
+      <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-16 md:pt-20 ">
         {/* Enhanced Animated Background */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div className="relative w-full max-w-[800px] h-[400px] md:h-[800px]">

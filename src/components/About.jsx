@@ -162,7 +162,7 @@ class About extends Component {
 
   render() {
     return (
-      <section id="about" className="py-20 relative bg-gradient-to-b from-background to-primary/5 overflow-hidden w-full">
+      <section id="about" className="py-20 relative  overflow-hidden w-full">
         {/* Background Elements */}
         <div className="absolute top-0 left-0 w-72 h-72 bg-primary/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />

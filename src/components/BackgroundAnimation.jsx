@@ -1,91 +1,117 @@
-import { useEffect, useRef } from 'react';
+import { Canvas, useFrame } from "@react-three/fiber";
+import * as THREE from "three";
+import { useRef } from "react";
 
-const BackgroundAnimation = () => {
-  const canvasRef = useRef(null);
+function NeuronParticles() {
+  const pointsRef = useRef();
+  const lineRef = useRef();
 
-  useEffect(() => {
-    // ❌ Skip animation on mobile screens
-    if (window.innerWidth < 768) return;
+  const COUNT = 800;
+  const RANGE = 50;
 
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+  const positions = new Float32Array(COUNT * 3);
+  const velocities = new Float32Array(COUNT * 3);
 
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
+  for (let i = 0; i < COUNT * 3; i++) {
+    positions[i] = (Math.random() - 0.5) * RANGE;
+    velocities[i] = (Math.random() - 0.5) * 0.01;
+  }
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+  const linePositions = new Float32Array(COUNT * COUNT * 3);
+  let lineCount = 0;
 
-    const particles = [];
-    const particleCount = 80;
-    const colors = ["#00E5FF", "#7A00FF", "#00FFF0"];
+  useFrame(() => {
+    const pos = pointsRef.current.geometry.attributes.position.array;
 
-    for (let i = 0; i < particleCount; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
-        radius: Math.random() * 2 + 1,
-        color: colors[Math.floor(Math.random() * colors.length)],
-      });
+    for (let i = 0; i < COUNT * 3; i++) {
+      pos[i] += velocities[i];
+
+      if (pos[i] > RANGE / 2 || pos[i] < -RANGE / 2) {
+        velocities[i] *= -1;
+      }
     }
 
-    const drawParticles = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    pointsRef.current.geometry.attributes.position.needsUpdate = true;
 
-      particles.forEach((particle, i) => {
-        particle.x += particle.vx;
-        particle.y += particle.vy;
+    lineCount = 0;
+    for (let i = 0; i < COUNT; i++) {
+      for (let j = i + 1; j < i + 30 && j < COUNT; j++) {
+        const dx = pos[i * 3] - pos[j * 3];
+        const dy = pos[i * 3 + 1] - pos[j * 3 + 1];
+        const dz = pos[i * 3 + 2] - pos[j * 3 + 2];
 
-        if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
-        if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
+        const dist = dx * dx + dy * dy + dz * dz;
 
-        ctx.beginPath();
-        ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
-        ctx.fillStyle = particle.color;
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = particle.color;
-        ctx.fill();
+        if (dist < 4) {
+          linePositions[lineCount++] = pos[i * 3];
+          linePositions[lineCount++] = pos[i * 3 + 1];
+          linePositions[lineCount++] = pos[i * 3 + 2];
 
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[j].x - particle.x;
-          const dy = particles[j].y - particle.y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-
-          if (distance < 150) {
-            ctx.beginPath();
-            ctx.strokeStyle = `${particle.color}33`;
-            ctx.lineWidth = 0.5;
-            ctx.moveTo(particle.x, particle.y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.stroke();
-          }
+          linePositions[lineCount++] = pos[j * 3];
+          linePositions[lineCount++] = pos[j * 3 + 1];
+          linePositions[lineCount++] = pos[j * 3 + 2];
         }
-      });
+      }
+    }
 
-      requestAnimationFrame(drawParticles);
-    };
-
-    drawParticles();
-
-    const handleResize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+    lineRef.current.geometry.setDrawRange(0, lineCount / 3);
+    lineRef.current.geometry.attributes.position.needsUpdate = true;
+  });
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0"
-      style={{ opacity: 0.3 }}
-    />
-  );
-};
+    <>
+      <points ref={pointsRef}>
+        <bufferGeometry>
+          <bufferAttribute
+            attach="attributes-position"
+            array={positions}
+            count={COUNT}
+            itemSize={3}
+          />
+        </bufferGeometry>
+        <pointsMaterial
+          size={0.08}
+          color="#00eaff"
+          sizeAttenuation
+          transparent
+          opacity={0.8}
+        />
+      </points>
 
-export default BackgroundAnimation;
+      <lineSegments ref={lineRef}>
+        <bufferGeometry>
+          <bufferAttribute
+            attach="attributes-position"
+            array={linePositions}
+            count={COUNT * COUNT}
+            itemSize={3}
+          />
+        </bufferGeometry>
+        <lineBasicMaterial color="#00eaff" transparent opacity={0.2} />
+      </lineSegments>
+    </>
+  );
+}
+
+export default function NeuralBackground() {
+  // Disable on mobile
+  if (window.innerWidth < 768) return null;
+
+  return (
+    <div
+      style={{
+        position: "fixed",
+        inset: 0,
+        width: "100%",
+        height: "100%",
+        zIndex: -1,          // background
+        pointerEvents: "none",
+      }}
+    >
+      <Canvas camera={{ position: [0, 0, 18], fov: 60 }}>
+        <color attach="background" args={["#01010f"]} />
+        <NeuronParticles />
+      </Canvas>
+    </div>
+  );
+}
