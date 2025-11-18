@@ -11,7 +11,7 @@ import Contact from '../components/Contact';
 
 const Index = () => {
   return (
-    <div className="relative min-h-screen">
+    <div className="relative min-w-[100vw] min-h-screen">
       <BackgroundAnimation />
       <Navigation />
       <main className="relative z-10">

@@ -40,11 +40,12 @@ const Navigation = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`w-[100vw] fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled ? 'glass py-3 md:py-4' : 'py-4 md:py-6'
       }`}
     >
-      <div className="container mx-auto px-4">
+      {/* Use the same container width as other components */}
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           <button
             onClick={() => scrollToSection('hero')}
@@ -82,7 +83,7 @@ const Navigation = () => {
           </button>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu - Full width but content aligned with container */}
         <div className={`md:hidden transition-all duration-300 overflow-hidden ${
           isMobileMenuOpen ? 'max-h-96 opacity-100 mt-4' : 'max-h-0 opacity-0'
         }`}>
