@@ -1,28 +1,20 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 const BackgroundAnimation = () => {
   const canvasRef = useRef(null);
-  const [isMobile, setIsMobile] = useState(false);
+  const animationFrameId = useRef(null);
 
   useEffect(() => {
     // Check if device is mobile
     const checkMobile = () => {
-      return window.innerWidth < 768; // 768px is typical md breakpoint
+      return window.innerWidth < 768;
     };
 
-    setIsMobile(checkMobile());
-
-    const handleResize = () => {
-      setIsMobile(checkMobile());
-    };
-
-    window.addEventListener('resize', handleResize);
+    const isMobile = checkMobile();
 
     // If mobile, don't initialize the animation
     if (isMobile) {
-      return () => {
-        window.removeEventListener('resize', handleResize);
-      };
+      return;
     }
 
     const canvas = canvasRef.current;
@@ -48,19 +40,17 @@ const BackgroundAnimation = () => {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.3, // Slower movement
+        vx: (Math.random() - 0.5) * 0.3,
         vy: (Math.random() - 0.5) * 0.3,
-        radius: Math.random() * 1.5 + 0.5, // Smaller particles
+        radius: Math.random() * 1.5 + 0.5,
         color: colors[Math.floor(Math.random() * colors.length)],
       });
     }
 
-    let animationFrameId;
-
     const drawParticles = () => {
       // Check again if mobile during animation
-      if (isMobile) {
-        cancelAnimationFrame(animationFrameId);
+      if (checkMobile()) {
+        cancelAnimationFrame(animationFrameId.current);
         return;
       }
 
@@ -90,7 +80,7 @@ const BackgroundAnimation = () => {
 
           if (distance < 120) {
             ctx.beginPath();
-            ctx.strokeStyle = `${particle.color}22`; // More transparent
+            ctx.strokeStyle = `${particle.color}22`;
             ctx.lineWidth = 0.3;
             ctx.moveTo(particle.x, particle.y);
             ctx.lineTo(particles[j].x, particles[j].y);
@@ -99,46 +89,42 @@ const BackgroundAnimation = () => {
         }
       });
 
-      animationFrameId = requestAnimationFrame(drawParticles);
+      animationFrameId.current = requestAnimationFrame(drawParticles);
     };
 
-    // Start animation only if not mobile
-    if (!isMobile) {
-      drawParticles();
-    }
+    // Start animation
+    drawParticles();
 
-    const handleResizeComplete = () => {
+    const handleResize = () => {
       const mobile = checkMobile();
-      setIsMobile(mobile);
       
-      if (!mobile) {
-        setCanvasSize();
-        // Restart animation if resized to desktop
-        if (!animationFrameId) {
-          drawParticles();
+      if (mobile) {
+        // Stop animation if resized to mobile
+        if (animationFrameId.current) {
+          cancelAnimationFrame(animationFrameId.current);
+          animationFrameId.current = null;
         }
       } else {
-        // Stop animation if resized to mobile
-        if (animationFrameId) {
-          cancelAnimationFrame(animationFrameId);
-          animationFrameId = null;
+        // Continue animation on desktop, update canvas size
+        setCanvasSize();
+        if (!animationFrameId.current) {
+          drawParticles();
         }
       }
     };
 
-    window.addEventListener('resize', handleResizeComplete);
+    window.addEventListener('resize', handleResize);
 
     return () => {
-      window.removeEventListener('resize', handleResizeComplete);
       window.removeEventListener('resize', handleResize);
-      if (animationFrameId) {
-        cancelAnimationFrame(animationFrameId);
+      if (animationFrameId.current) {
+        cancelAnimationFrame(animationFrameId.current);
       }
     };
-  }, [isMobile]);
+  }, []); // Empty dependency array
 
-  // Don't render canvas on mobile at all
-  if (isMobile) {
+  // Check if mobile on initial render
+  if (typeof window !== 'undefined' && window.innerWidth < 768) {
     return null;
   }
 
@@ -146,7 +132,7 @@ const BackgroundAnimation = () => {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none z-0"
-      style={{ opacity: 0.25 }} // Slightly reduced opacity
+      style={{ opacity: 0.25 }}
     />
   );
 };
