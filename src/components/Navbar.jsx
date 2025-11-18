@@ -1,148 +1,112 @@
-"use client";
-import { motion } from "framer-motion";
-import { Home, User, Award, Briefcase, Mail, Moon, Sun } from "lucide-react";
-import { useEffect } from "react";
+import { useState, useEffect } from 'react';
+import { Menu, X } from 'lucide-react';
 
-const Navbar = ({ darkMode, toggleDarkMode }) => {
-  const navItems = [
-    { name: "Home", icon: Home, href: "#home" },
-    { name: "About", icon: User, href: "#about" },
-    { name: "Skills", icon: Award, href: "#skills" },
-    { name: "Projects", icon: Briefcase, href: "#projects" },
-    { name: "Contact", icon: Mail, href: "#contact" },
-  ];
+const Navigation = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Close navbar on mobile
-  const closeNavbar = () => {
-    const navbarCollapse = document.getElementById("navbarNav");
-    if (navbarCollapse.classList.contains("show")) {
-      // Bootstrap collapse
-      const bsCollapse = new window.bootstrap.Collapse(navbarCollapse, {
-        toggle: false,
-      });
-      bsCollapse.hide();
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      setIsMobileMenuOpen(false);
     }
   };
 
+  const navLinks = [
+    { id: 'hero', label: 'Home' },
+    { id: 'about', label: 'About' },
+    { id: 'skills', label: 'Skills' },
+    { id: 'projects', label: 'Projects' },
+  ];
+
+  const Button = ({ children, onClick, className = '' }) => (
+    <button
+      onClick={onClick}
+      className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 hover-lift ${className}`}
+    >
+      {children}
+    </button>
+  );
+
   return (
     <nav
-      className={`navbar navbar-expand-lg shadow-sm ${
-        darkMode ? "navbar-dark" : "navbar-light"
-      } custom-navbar`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled ? 'glass py-4' : 'py-6'
+      }`}
     >
-      <div className="container">
-        {/* Brand */}
-        <motion.a
-          className="navbar-brand fw-bold fs-4"
-          href="#"
-          style={{
-            background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            backgroundClip: "text",
-          }}
-          whileHover={{ scale: 1.05 }}
-        >
-          Dhruv
-        </motion.a>
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between">
+          <button
+            onClick={() => scrollToSection('hero')}
+            className="text-2xl font-bold gradient-text hover:scale-105 transition-transform font-['Orbitron']"
+          >
+            DS
+          </button>
 
-        {/* Toggle Button */}
-        <button
-          className="navbar-toggler border-0"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-
-        {/* Nav Items */}
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav ms-auto d-flex flex-column flex-lg-row align-items-center gap-2 gap-lg-0">
-            {navItems.map((item, index) => (
-              <motion.li
-                key={item.name}
-                className="nav-item text-center"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 + 0.3 }}
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <button
+                key={link.id}
+                onClick={() => scrollToSection(link.id)}
+                className="text-foreground hover:text-primary transition-colors relative group font-medium"
               >
-                <a
-                  className={`nav-link d-flex align-items-center justify-content-center px-3 py-2 rounded-pill ${
-                    darkMode ? "text-light" : "text-dark"
-                  }`}
-                  href={item.href}
-                  onClick={closeNavbar}
-                  style={{ transition: "all 0.3s ease" }}
-                  onMouseEnter={(e) => {
-                    e.target.style.backgroundColor = darkMode
-                      ? "rgba(255,255,255,0.1)"
-                      : "rgba(0,0,0,0.1)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.target.style.backgroundColor = "transparent";
-                  }}
-                >
-                  <item.icon size={16} className="me-2" />
-                  {item.name}
-                </a>
-              </motion.li>
+                {link.label}
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary group-hover:w-full transition-all duration-300" />
+              </button>
             ))}
+            <Button
+              onClick={() => scrollToSection('contact')}
+              className="bg-gradient-to-r from-primary to-secondary hover-glow text-primary-foreground font-['Orbitron']"
+            >
+              Get In Touch
+            </Button>
+          </div>
 
-            {/* Theme Toggle */}
-            <li className="nav-item text-center mt-2 mt-lg-0 ms-lg-3">
-              <motion.button
-                className={`btn btn-outline-${
-                  darkMode ? "light" : "dark"
-                } rounded-circle p-2`}
-                onClick={toggleDarkMode}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                {darkMode ? <Sun size={18} /> : <Moon size={18} />}
-              </motion.button>
-            </li>
-          </ul>
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden text-primary hover-lift p-2 rounded-lg"
+          >
+            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
         </div>
+
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden mt-4 glass rounded-2xl p-6 animate-slide-up border-neon">
+            <div className="flex flex-col gap-4">
+              {navLinks.map((link) => (
+                <button
+                  key={link.id}
+                  onClick={() => scrollToSection(link.id)}
+                  className="text-foreground hover:text-primary transition-colors text-left py-3 px-4 rounded-lg hover:bg-muted/50 font-medium"
+                >
+                  {link.label}
+                </button>
+              ))}
+              <Button
+                onClick={() => scrollToSection('contact')}
+                className="bg-gradient-to-r from-primary to-secondary w-full text-primary-foreground font-['Orbitron'] mt-2"
+              >
+                Get In Touch
+              </Button>
+            </div>
+          </div>
+        )}
       </div>
-
-      <style jsx>{`
-        /* Desktop styles */
-        .custom-navbar {
-          position: fixed;
-          top: 0;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 90vw;
-          margin-top: 1rem;
-          border-radius: 50px;
-          backdrop-filter: blur(10px);
-          border: 1px solid
-            ${darkMode
-              ? "rgba(255,255,255,0.1)"
-              : "rgba(0,0,0,0.1)"};
-          z-index: 1000;
-          background-color: ${darkMode
-            ? "rgba(0,0,0,0.9)"
-            : "rgba(255,255,255,0.95)"};
-        }
-
-        /* Mobile styles */
-        @media (max-width: 991px) {
-          .custom-navbar {
-            width: 100%;
-            left: 0;
-            transform: none;
-            margin-top: 0;
-            border-radius: 0;
-          }
-        }
-      `}</style>
     </nav>
   );
 };
 
-export default Navbar;
+export default Navigation;

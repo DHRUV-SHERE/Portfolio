@@ -1,154 +1,239 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap');
+
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    /* Neon Color Palette - All HSL */
+    --background: 222 65% 6%;
+    --foreground: 0 0% 95%;
+
+    --card: 222 50% 10%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 222 50% 10%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 187 100% 45%;
+    --primary-foreground: 222 65% 6%;
+
+    --secondary: 270 100% 50%;
+    --secondary-foreground: 0 0% 95%;
+
+    --muted: 222 30% 20%;
+    --muted-foreground: 0 0% 65%;
+
+    --accent: 180 100% 50%;
+    --accent-foreground: 222 65% 6%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 95%;
+
+    --border: 222 40% 20%;
+    --input: 222 40% 15%;
+    --ring: 187 100% 45%;
+
+    --radius: 0.75rem;
+
+    /* Neon Glow Colors */
+    --neon-blue: 187 100% 45%;
+    --neon-purple: 270 100% 50%;
+    --neon-cyan: 180 100% 50%;
+    --tech-dark: 222 65% 6%;
+    
+    /* Gradients */
+    --gradient-neon: linear-gradient(135deg, hsl(187 100% 45%), hsl(270 100% 50%));
+    --gradient-hologram: linear-gradient(135deg, hsl(187 100% 45% / 0.1), hsl(270 100% 50% / 0.1), hsl(180 100% 50% / 0.1));
+    --gradient-glass: linear-gradient(135deg, hsl(222 50% 15% / 0.8), hsl(222 50% 10% / 0.6));
+    
+    /* Shadows & Glows */
+    --glow-neon-blue: 0 0 20px hsl(187 100% 45% / 0.5), 0 0 40px hsl(187 100% 45% / 0.3);
+    --glow-neon-purple: 0 0 20px hsl(270 100% 50% / 0.5), 0 0 40px hsl(270 100% 50% / 0.3);
+    --glow-neon-cyan: 0 0 20px hsl(180 100% 50% / 0.5), 0 0 40px hsl(180 100% 50% / 0.3);
+    --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    
+    /* Animations */
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+}
+
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  body {
+    background: linear-gradient(135deg, hsl(222 65% 6%), hsl(222 50% 8%));
+    color: hsl(var(--foreground));
+    font-family: 'Inter', sans-serif;
     overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+    letter-spacing: -0.025em;
+  }
 }
-/* For Chrome, Safari, Edge */
+
+@layer utilities {
+  /* Glassmorphism */
+  .glass {
+    background: linear-gradient(135deg, hsl(222 50% 15% / 0.8), hsl(222 50% 10% / 0.6));
+    backdrop-filter: blur(10px);
+    border: 1px solid hsl(222 40% 25% / 0.5);
+    box-shadow: var(--shadow-glass);
+  }
+
+  .glass-card {
+    background: linear-gradient(135deg, hsl(222 50% 15% / 0.8), hsl(222 50% 10% / 0.6));
+    backdrop-filter: blur(10px);
+    border: 1px solid hsl(222 40% 25% / 0.5);
+    box-shadow: var(--shadow-glass);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    transition: all 0.3s;
+  }
+
+  /* Neon Glow Effects */
+  .glow-blue {
+    box-shadow: var(--glow-neon-blue);
+  }
+
+  .glow-purple {
+    box-shadow: var(--glow-neon-purple);
+  }
+
+  .glow-cyan {
+    box-shadow: var(--glow-neon-cyan);
+  }
+
+  .text-glow-blue {
+    text-shadow: 0 0 10px hsl(187 100% 45% / 0.5), 0 0 20px hsl(187 100% 45% / 0.3);
+  }
+
+  .text-glow-purple {
+    text-shadow: 0 0 10px hsl(270 100% 50% / 0.5), 0 0 20px hsl(270 100% 50% / 0.3);
+  }
+
+  .text-glow-cyan {
+    text-shadow: 0 0 10px hsl(180 100% 50% / 0.5), 0 0 20px hsl(180 100% 50% / 0.3);
+  }
+
+  /* Neon Border */
+  .border-neon {
+    border: 2px solid hsl(187 100% 45%);
+    box-shadow: 0 0 10px hsl(187 100% 45% / 0.5), inset 0 0 10px hsl(187 100% 45% / 0.2);
+  }
+
+  .border-neon-purple {
+    border: 2px solid hsl(270 100% 50%);
+    box-shadow: 0 0 10px hsl(270 100% 50% / 0.5), inset 0 0 10px hsl(270 100% 50% / 0.2);
+  }
+
+  /* Hover Effects */
+  .hover-lift {
+    transition: all 0.3s;
+  }
+  .hover-lift:hover {
+    transform: translateY(-0.5rem) scale(1.05);
+  }
+
+  .hover-glow {
+    transition: all 0.3s;
+  }
+
+  .hover-glow:hover {
+    box-shadow: 0 0 30px hsl(187 100% 45% / 0.6), 0 0 60px hsl(187 100% 45% / 0.4);
+  }
+
+  /* Animations */
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.6s ease-out;
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.8s ease-out;
+  }
+
+  /* Gradient Text */
+  .gradient-text {
+    background: linear-gradient(135deg, hsl(187 100% 45%), hsl(270 100% 50%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-text-cyan {
+    background: linear-gradient(135deg, hsl(180 100% 50%), hsl(187 100% 45%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px hsl(187 100% 45% / 0.5), 0 0 40px hsl(187 100% 45% / 0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px hsl(187 100% 45% / 0.8), 0 0 60px hsl(187 100% 45% / 0.5);
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Scrollbar Styling */
 ::-webkit-scrollbar {
-  display: none;
+  width: 10px;
 }
 
-/* In your global CSS */
-.container,
-.container-fluid {
-  overflow-x: hidden;
+::-webkit-scrollbar-track {
+  background: hsl(222 65% 6%);
 }
 
-.row {
-  margin-left: 0;
-  margin-right: 0;
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, hsl(187 100% 45%), hsl(270 100% 50%));
+  border-radius: 5px;
 }
 
-/* Ensure scroll still works */
-body {
-  overflow-y: auto; /* or auto */
-  height: 100vh;
-  width: 100vw;
-  touch-action: manipulation;
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, hsl(187 100% 55%), hsl(270 100% 60%));
 }
 
-html {
-  scrollbar-width: none; /* hide scrollbar */
-}
-
-
-button, a.btn {
-  min-height: 44px; /* Recommended minimum touch target size */
-}
-
-#about .row {
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-}
-
-#about {
-  overflow-x: hidden;
-}
-
-@media (max-width: 576px) {
-  #about p {
-    font-size: 1rem;
-    line-height: 1.6;
-  }
-}
-
-@media (max-width: 768px) {
-  #contact h1.display-3 {
-    font-size: 2rem;
-  }
-
-  #contact h2.h3,
-  #contact h3.h4 {
-    font-size: 1.25rem;
-  }
-
-  #contact .form-control {
-    font-size: 0.9rem;
-  }
-
-  #contact .btn {
-    font-size: 0.9rem;
-    padding: 12px;
-  }
-
-  #contact .p-4.rounded-4 {
-    padding: 1.5rem !important;
-  }
-
-  #contact .d-flex.gap-3 {
-    flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: center;
-  }
-
-  #contact .btn[style*="width: 60px"] {
-    width: 50px !important;
-    height: 50px !important;
-  }
-}
-
-@media (max-width: 576px) {
-  button.btn-lg {
-    font-size: 1rem;
-    padding: 10px 14px;
-  }
-}
-@media (max-width: 992px) {
-  .navbar-collapse .nav-link {
-    padding: 10px 15px !important;
-    margin: 5px 0;
-  }
-}
-
-@media (max-width: 768px) {
-  #about .col-lg-5 {
-    margin-bottom: 30px;
-  }
-}
-
-@media (max-width: 768px) {
-  #projects .col-lg-4 {
-    margin-bottom: 30px;
-  }
-}
-@media (max-width: 768px) {
-  #contact .form-control {
-    font-size: 16px; 
-    padding: 12px;
-  }
-}
-
-@media (max-width: 992px) {
-  h1.display-3 {
-    font-size: 2.5rem;
-  }
-  
-  h2.display-5 {
-    font-size: 2rem;
-  }
-  
-  .lead {
-    font-size: 1.1rem;
-  }
-}
-
-/* For mobile phones */
-@media (max-width: 576px) {
-  h1.display-3 {
-    font-size: 2rem;
-  }
-  
-  h2.display-5 {
-    font-size: 1.5rem;
-  }
-  
-  .lead {
-    font-size: 1rem;
-  }
-  
-  /* Make buttons full width on mobile */
-  .btn-lg {
-    width: 100%;
-  }
-}
