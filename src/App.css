@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap');
 
-@import "tailwindcss";
+/* REMOVE THIS LINE: @import "tailwindcss"; */
 
 @layer base {
   :root {
@@ -236,4 +236,3 @@
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(135deg, hsl(187 100% 55%), hsl(270 100% 60%));
 }
-
