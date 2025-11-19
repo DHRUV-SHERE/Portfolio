@@ -132,7 +132,7 @@ class UpcomingProjects extends Component {
 
   render() {
     return (
-      <section id="upcoming-projects" className="py-20 relative w-full bg-gradient-to-b from-background to-primary/5 overflow-hidden">
+      <section id="upcoming-projects" className="py-20 relative w-full overflow-hidden">
         {/* Background Elements */}
         <div className="absolute top-0 left-0 w-72 h-72 bg-primary/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
