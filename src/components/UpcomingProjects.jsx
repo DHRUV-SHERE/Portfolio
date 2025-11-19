@@ -1,5 +1,13 @@
-import { Component } from 'react';
-import { Calendar, Users, Rocket, Code, Database, Lightbulb, Target } from 'lucide-react';
+import { Component } from "react";
+import {
+  Calendar,
+  Users,
+  Rocket,
+  Code,
+  Database,
+  Lightbulb,
+  Target,
+} from "lucide-react";
 
 class UpcomingProjects extends Component {
   constructor(props) {
@@ -12,118 +20,167 @@ class UpcomingProjects extends Component {
   upcomingProjects = [
     {
       id: 1,
-      name: "Pashumitra",
+      name: "PashuMitra",
       status: "completed",
-      description: "A comprehensive livestock management platform for farmers to track animal health, breeding, and business operations. Built as a group project with 3 team members where I served as the project lead.",
-      techStack: ["React", "Node.js", "MongoDB", "Express", "Tailwind CSS"],
+      description:
+        "PashuMitra is an intelligent livestock management and veterinary support platform designed to empower farmers with digital tools for animal care, disease prevention, breeding optimization, and supply chain management. As the project lead, I supervised architecture planning, development workflows, and deployment strategies throughout the project.",
+      techStack: [
+        "React",
+        "Node.js",
+        "MongoDB",
+        "Express",
+        "Tailwind CSS",
+        "JWT Auth",
+        "Mongoose",
+      ],
       teamSize: 3,
-      myRole: "Project Lead & Full Stack Developer",
+      myRole: "Project Lead • Full Stack Developer",
       progress: 100,
       features: [
-        "Animal Health Tracking",
-        "Breeding Management", 
-        "Financial Analytics",
-        "Veterinary Support",
-        "Marketplace Integration"
+        "Livestock Health Monitoring with Alerts",
+        "Breeding Cycle & Genetic Lineage Tracking",
+        "Digital Medical Records & Prescription Logs",
+        "Farmer–Veterinarian Consultation System",
+        "Medicine Ordering & Supply Chain Module",
+        "Transport Request Management",
+        "Awareness Portal for Farmers",
+        "Finance Tracking & Analytics Dashboard",
+        "Role-based Access for Farmers, Doctors & Stores",
       ],
       contributions: [
-        "Led team of 3 developers and coordinated project timeline",
-        "Developed core authentication and user management system",
-        "Implemented animal health monitoring module",
-        "Assisted team members with their module implementations",
-        "Integrated payment gateway and reporting features"
+        "Designed system architecture and led a team of 3 developers",
+        "Developed secure authentication and role-based authorization using JWT",
+        "Built complete Health Monitoring and Breeding Management modules",
+        "Implemented Medicine Ordering & Transportation workflow",
+        "Created admin dashboards with analytics and reporting tools",
+        "Integrated geolocation to help users find nearby medical stores",
+        "Conducted code reviews, optimized backend APIs, and improved overall UX",
+        "Managed Git workflow and ensured consistent code quality across modules",
       ],
       launchDate: "Q1 2024",
-      challenges: "Coordinating between team members with different coding styles and ensuring consistent code quality across all modules.",
-      icon: Target
+      challenges:
+        "Ensuring synchronization between multiple modules such as medicine ordering, transport requests, and veterinary consultations while maintaining consistent data flow across all micro-features. Coordinating development with varied coding approaches within the team was also a challenge.",
+      icon: Target,
     },
     {
       id: 2,
       name: "Connect Vista",
-      status: "development",
-      description: "A modern social networking platform focused on professional connections and community building with advanced filtering and recommendation systems.",
-      techStack: ["React", "Firebase", "Node.js", "Socket.io", "Tailwind CSS"],
+      status: "in-progress",
+      description:
+        "A modern professional networking and community-building platform designed to help users connect, collaborate, and grow. Connect Vista features a real-time chat system, intelligent content recommendations, and event-based networking, making it a powerful alternative to traditional platforms.",
+      techStack: [
+        "React.js",
+        "Node.js",
+        "Express.js",
+        "MongoDB",
+        "Cloudinary",
+        "Tailwind CSS",
+        "Socket.io",
+        "JWT Auth",
+      ],
       teamSize: 1,
       myRole: "Solo Full Stack Developer",
       progress: 70,
       features: [
-        "Real-time Messaging",
-        "Advanced User Profiles",
-        "Content Feed Algorithm",
-        "Event Management",
-        "Professional Networking"
+        "Real-Time One-to-One & Group Messaging",
+        "Advanced User Profiles with Skills & Portfolios",
+        "Smart Content Feed Algorithm",
+        "Event Creation & Joining System",
+        "Search & Advanced Filtering for Professionals",
+        "Media Uploads Using Cloudinary",
+        "Notifications System (Real-time + In-app)",
+        "Friend Request / Follow System",
       ],
       contributions: [
-        "Designed and implemented complete UI/UX",
-        "Built real-time chat functionality with Socket.io",
-        "Created responsive design for all devices",
-        "Implemented user authentication and authorization",
-        "Developed content recommendation engine"
+        "Designed and developed complete UI/UX using Tailwind CSS",
+        "Built scalable real-time chat system using Socket.io",
+        "Implemented secure authentication and role-based authorization",
+        "Developed feed algorithm based on user interests & activity",
+        "Created event management module with join requests",
+        "Integrated Cloudinary for image & media uploads",
+        "Optimized MongoDB queries for faster feed and messaging operations",
+        "Built reusable components and clean project architecture",
       ],
-      launchDate: "Q2 2024",
-      challenges: "Building scalable real-time features and optimizing database queries for large user bases.",
-      icon: Users
+      launchDate: "Q2 2025",
+      challenges:
+        "Optimizing real-time communication for large audiences, improving feed relevance with algorithm tuning, and maintaining scalable backend architecture.",
+      icon: Users,
     },
     {
       id: 3,
-      name: "Aryapath",
-      status: "development", 
-      description: "An educational platform providing personalized learning paths and career guidance for students with AI-powered recommendations and progress tracking.",
-      techStack: ["Next.js", "Python", "PostgreSQL", "FastAPI", "Machine Learning"],
+      name: "AryaPath",
+      status: "development",
+      description:
+        "A smart tourism platform designed to enhance travel experiences across India by connecting tourists with verified guides, personalized travel routes, cultural insights, and real-time assistance. AryaPath focuses on making Indian tourism more accessible, safe, and interactive.",
+      techStack: [
+        "React.js",
+        "Node.js",
+        "Express.js",
+        "MongoDB",
+        "Cloudinary",
+        "Tailwind CSS",
+        "Map APIs",
+        "JWT Auth",
+      ],
       teamSize: 1,
       myRole: "Solo Full Stack Developer",
       progress: 65,
       features: [
-        "AI Learning Paths",
-        "Progress Analytics",
-        "Skill Assessment",
-        "Career Guidance",
-        "Interactive Content"
+        "Smart Tourist Dashboard",
+        "Guide Verification System",
+        "Tour Booking & Scheduling",
+        "Personalized Travel Routes",
+        "Cultural & Historical Insights",
+        "Real-Time Chat with Guides",
+        "Multi-role Modules for Users & Guides",
+        "State-wise Tourism Data",
       ],
       contributions: [
-        "Architected complete system design and database schema",
-        "Implemented AI-based recommendation system",
-        "Built responsive frontend with Next.js",
-        "Created RESTful APIs with FastAPI",
-        "Integrated machine learning models for personalized learning"
+        "Designed complete 3-module architecture: Common, User, and Guide",
+        "Built secure authentication with role-based access controls",
+        "Implemented interactive UI with animations and responsive layout",
+        "Created dynamic tourism content management system",
+        "Developed REST APIs for booking, guide management, and tourism data",
+        "Integrated geolocation-based search and smart filtering for guides",
       ],
-      launchDate: "Q3 2024",
-      challenges: "Implementing accurate AI recommendations and handling complex user progress tracking algorithms.",
-      icon: Lightbulb
-    }
+      launchDate: "Q2 2025",
+      challenges:
+        "Building a seamless multi-role experience while managing location-based guide discovery, real-time communication, and large tourism datasets.",
+      icon: Lightbulb,
+    },
   ];
 
   getStatusColor = (status) => {
     switch (status) {
-      case 'completed':
-        return 'from-green-500 to-emerald-600';
-      case 'development':
-        return 'from-blue-500 to-cyan-600';
-      case 'planning':
-        return 'from-purple-500 to-pink-600';
+      case "completed":
+        return "from-green-500 to-emerald-600";
+      case "development":
+        return "from-blue-500 to-cyan-600";
+      case "planning":
+        return "from-purple-500 to-pink-600";
       default:
-        return 'from-gray-500 to-gray-600';
+        return "from-gray-500 to-gray-600";
     }
   };
 
   getStatusText = (status) => {
     switch (status) {
-      case 'completed':
-        return 'Ready for Launch';
-      case 'development':
-        return 'In Development';
-      case 'planning':
-        return 'Planning Phase';
+      case "completed":
+        return "Ready for Launch";
+      case "development":
+        return "In Development";
+      case "planning":
+        return "Planning Phase";
       default:
-        return 'Coming Soon';
+        return "Coming Soon";
     }
   };
 
   getProgressColor = (progress) => {
-    if (progress >= 80) return 'bg-green-500';
-    if (progress >= 60) return 'bg-blue-500';
-    if (progress >= 40) return 'bg-yellow-500';
-    return 'bg-red-500';
+    if (progress >= 80) return "bg-green-500";
+    if (progress >= 60) return "bg-blue-500";
+    if (progress >= 40) return "bg-yellow-500";
+    return "bg-red-500";
   };
 
   componentDidMount() {
@@ -132,11 +189,14 @@ class UpcomingProjects extends Component {
 
   render() {
     return (
-      <section id="upcoming-projects" className="py-20 relative w-full overflow-hidden">
+      <section
+        id="upcoming-projects"
+        className="py-20 relative w-full overflow-hidden"
+      >
         {/* Background Elements */}
         <div className="absolute top-0 left-0 w-72 h-72 bg-primary/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
-        
+
         <div className="container mx-auto px-4 relative z-10">
           {/* Header Section */}
           <div className="text-center mb-16">
@@ -162,12 +222,16 @@ class UpcomingProjects extends Component {
                   className="group relative bg-gradient-to-br from-gray-900/50 to-gray-800/30 backdrop-blur-sm border border-primary/20 rounded-2xl overflow-hidden hover:border-primary/40 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-primary/20"
                   style={{
                     animation: `slideUp 0.6s ease-out ${index * 0.2}s forwards`,
-                    opacity: 0
+                    opacity: 0,
                   }}
                 >
                   {/* Status Badge */}
                   <div className="absolute top-4 right-4 z-10">
-                    <span className={`px-3 py-1 rounded-full text-xs font-medium text-white bg-gradient-to-r ${this.getStatusColor(project.status)} backdrop-blur-sm border border-white/20`}>
+                    <span
+                      className={`px-3 py-1 rounded-full text-xs font-medium text-white bg-gradient-to-r ${this.getStatusColor(
+                        project.status
+                      )} backdrop-blur-sm border border-white/20`}
+                    >
                       {this.getStatusText(project.status)}
                     </span>
                   </div>
@@ -185,7 +249,10 @@ class UpcomingProjects extends Component {
                         </h3>
                         <div className="flex items-center gap-2 text-sm text-muted-foreground mt-1">
                           <Users size={14} />
-                          <span>{project.teamSize} {project.teamSize === 1 ? 'Person' : 'People'}</span>
+                          <span>
+                            {project.teamSize}{" "}
+                            {project.teamSize === 1 ? "Person" : "People"}
+                          </span>
                           <Calendar size={14} />
                           <span>{project.launchDate}</span>
                         </div>
@@ -200,12 +267,18 @@ class UpcomingProjects extends Component {
                     {/* Progress Bar */}
                     <div className="mb-4">
                       <div className="flex justify-between items-center mb-2">
-                        <span className="text-sm text-foreground font-medium">Development Progress</span>
-                        <span className="text-sm font-bold text-primary">{project.progress}%</span>
+                        <span className="text-sm text-foreground font-medium">
+                          Development Progress
+                        </span>
+                        <span className="text-sm font-bold text-primary">
+                          {project.progress}%
+                        </span>
                       </div>
                       <div className="h-2 bg-muted/30 rounded-full overflow-hidden">
-                        <div 
-                          className={`h-full rounded-full transition-all duration-1000 ${this.getProgressColor(project.progress)}`}
+                        <div
+                          className={`h-full rounded-full transition-all duration-1000 ${this.getProgressColor(
+                            project.progress
+                          )}`}
                           style={{ width: `${project.progress}%` }}
                         />
                       </div>
@@ -219,7 +292,7 @@ class UpcomingProjects extends Component {
                       </h4>
                       <div className="flex flex-wrap gap-2">
                         {project.techStack.map((tech, techIndex) => (
-                          <span 
+                          <span
                             key={techIndex}
                             className="px-2 py-1 bg-primary/10 text-primary rounded-lg text-xs font-medium border border-primary/20"
                           >
@@ -231,20 +304,31 @@ class UpcomingProjects extends Component {
 
                     {/* My Role */}
                     <div className="mb-4">
-                      <h4 className="text-sm font-semibold text-foreground mb-2">My Role</h4>
-                      <p className="text-sm text-muted-foreground">{project.myRole}</p>
+                      <h4 className="text-sm font-semibold text-foreground mb-2">
+                        My Role
+                      </h4>
+                      <p className="text-sm text-muted-foreground">
+                        {project.myRole}
+                      </p>
                     </div>
 
                     {/* Key Features */}
                     <div className="mb-4">
-                      <h4 className="text-sm font-semibold text-foreground mb-2">Key Features</h4>
+                      <h4 className="text-sm font-semibold text-foreground mb-2">
+                        Key Features
+                      </h4>
                       <ul className="text-sm text-muted-foreground space-y-1">
-                        {project.features.slice(0, 3).map((feature, featureIndex) => (
-                          <li key={featureIndex} className="flex items-center gap-2">
-                            <div className="w-1 h-1 bg-primary rounded-full" />
-                            {feature}
-                          </li>
-                        ))}
+                        {project.features
+                          .slice(0, 3)
+                          .map((feature, featureIndex) => (
+                            <li
+                              key={featureIndex}
+                              className="flex items-center gap-2"
+                            >
+                              <div className="w-1 h-1 bg-primary rounded-full" />
+                              {feature}
+                            </li>
+                          ))}
                         {project.features.length > 3 && (
                           <li className="text-primary text-xs font-medium">
                             +{project.features.length - 3} more features
@@ -256,8 +340,12 @@ class UpcomingProjects extends Component {
                     {/* Current Challenge */}
                     {project.challenges && (
                       <div className="mt-4 pt-4 border-t border-primary/20">
-                        <h4 className="text-sm font-semibold text-foreground mb-2">Current Focus</h4>
-                        <p className="text-xs text-muted-foreground italic">{project.challenges}</p>
+                        <h4 className="text-sm font-semibold text-foreground mb-2">
+                          Current Focus
+                        </h4>
+                        <p className="text-xs text-muted-foreground italic">
+                          {project.challenges}
+                        </p>
                       </div>
                     )}
                   </div>
@@ -276,10 +364,15 @@ class UpcomingProjects extends Component {
                 Interested in Collaboration?
               </h3>
               <p className="text-muted-foreground mb-6 font-['Inter']">
-                I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+                I'm always open to discussing new projects, creative ideas, or
+                opportunities to be part of your vision.
               </p>
               <button
-                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() =>
+                  document
+                    .getElementById("contact")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
                 className="px-8 py-3 bg-gradient-to-r from-primary to-secondary text-primary-foreground rounded-xl font-medium font-['Orbitron'] hover:scale-105 transition-transform duration-300 hover-glow"
               >
                 Let's Build Together
