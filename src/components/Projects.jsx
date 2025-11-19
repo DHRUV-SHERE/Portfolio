@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { ExternalLink, Github, Calendar, Star, GitFork } from 'lucide-react';
+import { ExternalLink, Github, Calendar, Star, GitFork, Sparkles } from 'lucide-react';
 import { Resource } from '../resources';
 
 class Projects extends Component {
@@ -24,12 +24,12 @@ class Projects extends Component {
     "React_Text_Site",
     "ToDoList"
   ];
-  selectedReposLower = this.selectedRepos.map((name) => name.toLowerCase());
 
+  // Fixed project images mapping - using exact property names
   projectImages = {
     agrosence: Resource.AgroSence,
     spotify: Resource.Spotify,
-    knowbase: Resource.KnowBase,
+    knowbase: Resource.KnowBase, // Fixed: KnowBase instead of knowBase
     oracle: Resource.Oracle,
     amazon: Resource.Amazon,
     rejoiuceclone: Resource.RejoiuceClone,
@@ -40,91 +40,7 @@ class Projects extends Component {
 
   componentDidMount() {
     this.fetchProjects();
-    this.addCSSAnimations();
   }
-
-  addCSSAnimations = () => {
-    const style = document.createElement('style');
-    style.textContent = `
-      @keyframes slideUp {
-        from {
-          opacity: 0;
-          transform: translateY(30px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-      
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
-      }
-      
-      .animate-slide-up {
-        animation: slideUp 0.8s ease-out forwards;
-      }
-      
-      .animate-fade-in {
-        animation: fadeIn 1s ease-out forwards;
-      }
-      
-      .project-image {
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-      
-      .project-card:hover .project-image {
-        transform: scale(1.08);
-      }
-      
-      .name-gradient {
-        background: linear-gradient(135deg, hsl(187 100% 45%), hsl(270 100% 50%));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-      }
-      
-      .project-card {
-        transition: all 0.3s ease;
-      }
-      
-      .project-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-      }
-
-      .glass-card-enhanced {
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
-        backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 16px;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .glass-card-enhanced::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-        transition: left 0.6s;
-      }
-
-      .glass-card-enhanced:hover::before {
-        left: 100%;
-      }
-    `;
-    document.head.appendChild(style);
-    this.animationStyle = style;
-  };
 
   fetchProjects = async () => {
     try {
@@ -137,8 +53,12 @@ class Projects extends Component {
         throw new Error(`GitHub API error! Status: ${response.status}`);
 
       const data = await response.json();
+      
+      // Case-insensitive filtering
       const filtered = data.filter((repo) =>
-        this.selectedReposLower.includes(repo.name.toLowerCase())
+        this.selectedRepos.some(selected => 
+          selected.toLowerCase() === repo.name.toLowerCase()
+        )
       );
 
       const formatted = filtered.map((repo) => ({
@@ -146,7 +66,7 @@ class Projects extends Component {
         name: repo.name,
         description: repo.description || "No description provided.",
         html_url: repo.html_url,
-        homepage: repo.homepage || repo.html_url,
+        homepage: repo.homepage,
         language: repo.language || "N/A",
         updated_at: repo.updated_at,
         stargazers_count: repo.stargazers_count || 0,
@@ -164,8 +84,14 @@ class Projects extends Component {
   };
 
   getProjectImage = (repoName) => {
-    const normalizedName = repoName.toLowerCase().replace(/[-_]/g, '');
-    return this.projectImages[normalizedName] || null;
+    const normalizedName = repoName.toLowerCase().replace(/-/g, '_');
+    console.log('Looking for image:', normalizedName, 'Available:', Object.keys(this.projectImages));
+    return this.projectImages[normalizedName] || this.getFallbackImage();
+  };
+
+  getFallbackImage = () => {
+    // Return a default image or the first available image
+    return Resource.AgroSence; // Fallback to first image
   };
 
   getLanguageColor = (language) => {
@@ -174,9 +100,9 @@ class Projects extends Component {
       TypeScript: "#2b7489",
       Python: "#3572A5",
       Java: "#b07219",
-      React: "#61dafb",
       HTML: "#e34c26",
       CSS: "#1572b6",
+      PHP: "#4F5D95",
     };
     return colors[language] || "#8b949e";
   };
@@ -200,8 +126,8 @@ class Projects extends Component {
     const baseStyles = 'px-4 py-2 rounded-xl font-medium transition-all duration-300 font-["Orbitron"] flex items-center gap-2';
     
     const variants = {
-      default: 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white hover:shadow-lg hover:shadow-cyan-500/25',
-      outline: 'border-2 border-cyan-400 text-cyan-400 hover:bg-cyan-400/10 hover:shadow-lg hover:shadow-cyan-400/25',
+      default: 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white hover:shadow-lg hover:shadow-cyan-500/25 hover:scale-105',
+      outline: 'border-2 border-cyan-400 text-cyan-400 hover:bg-cyan-400/10 hover:shadow-lg hover:shadow-cyan-400/25 hover:scale-105',
     };
 
     const sizes = {
@@ -220,12 +146,6 @@ class Projects extends Component {
     );
   };
 
-  componentWillUnmount() {
-    if (this.animationStyle) {
-      document.head.removeChild(this.animationStyle);
-    }
-  }
-
   render() {
     const { projects, loading, error } = this.state;
     const Button = this.Button;
@@ -235,10 +155,10 @@ class Projects extends Component {
         <section id="projects" className="py-20 relative w-full">
           <div className="container mx-auto px-4 w-full">
             <div className="text-center">
-              <div className="inline-block p-4 rounded-full bg-cyan-500/20 animate-pulse">
+              <div className="inline-flex items-center gap-3 p-6 rounded-2xl bg-cyan-500/10 animate-pulse">
                 <div className="w-8 h-8 bg-cyan-500 rounded-full animate-spin border-2 border-cyan-300 border-t-transparent"></div>
+                <p className="text-gray-400 font-['Inter']">Loading projects...</p>
               </div>
-              <p className="text-gray-400 mt-4 font-['Inter']">Loading projects...</p>
             </div>
           </div>
         </section>
@@ -250,7 +170,9 @@ class Projects extends Component {
         <section id="projects" className="py-20 relative w-full">
           <div className="container mx-auto px-4 w-full">
             <div className="text-center">
-              <p className="text-red-400 font-['Inter']">Error loading projects: {error}</p>
+              <div className="inline-flex items-center gap-2 p-4 rounded-xl bg-red-500/10 border border-red-500/20">
+                <p className="text-red-400 font-['Inter']">Error loading projects: {error}</p>
+              </div>
             </div>
           </div>
         </section>
@@ -258,54 +180,83 @@ class Projects extends Component {
     }
 
     return (
-      <section id="projects" className="py-20 relative w-full ">
+      <section id="projects" className="py-20 relative w-full overflow-hidden">
         {/* Background Elements */}
-        <div className="absolute top-0 left-0 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+        <div className="absolute top-0 left-0 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 animate-pulse" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2 animate-pulse delay-1000" />
+        
         <div className="container mx-auto px-4 relative z-10 w-full">
           {/* Header Section */}
-          <div className="text-center mb-16 animate-slide-up w-full">
-            <h2 className="text-4xl md:text-6xl font-bold mb-6 font-['Orbitron'] bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-              My Projects
-            </h2>
+          <div className="text-center mb-16 w-full">
+            <div className="inline-flex items-center gap-3 mb-4">
+              <Sparkles className="text-cyan-400" size={32} />
+              <h2 className="text-4xl md:text-6xl font-bold font-['Orbitron'] bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                My Projects
+              </h2>
+              <Sparkles className="text-blue-400" size={32} />
+            </div>
             <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto font-['Inter'] leading-relaxed">
               A collection of my latest work and innovative solutions
             </p>
           </div>
 
-          {/* Projects Grid - Full Width */}
+          {/* Projects Grid */}
           <div className="w-full max-w-none">
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 w-full">
               {projects.map((project, index) => (
                 <div
                   key={project.id}
-                  className="glass-card-enhanced project-card group animate-slide-up"
+                  className="group relative bg-gradient-to-br from-gray-900/50 to-gray-800/30 backdrop-blur-sm border border-cyan-500/20 rounded-2xl overflow-hidden hover:border-cyan-400/40 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/20"
                   style={{
-                    animationDelay: `${index * 0.1}s`,
-                    opacity: 0,
-                    animationFillMode: 'forwards'
+                    animation: `slideUp 0.6s ease-out ${index * 0.1}s forwards`,
+                    opacity: 0
                   }}
                 >
                   {/* Project Image */}
-                  {project.image && (
-                    <div className="relative h-48 overflow-hidden rounded-t-2xl">
+                  <div className="relative h-48 overflow-hidden">
+                    {project.image ? (
                       <img
                         src={project.image}
                         alt={project.name}
-                        className="w-full h-full object-cover project-image"
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        onError={(e) => {
+                          e.target.src = this.getFallbackImage();
+                        }}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60" />
-                      <div className="absolute top-4 right-4 flex gap-2">
-                        <span className="bg-black/60 text-white px-2 py-1 rounded-full text-xs font-medium backdrop-blur-sm">
-                          {project.language}
-                        </span>
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-br from-cyan-500/20 to-blue-500/20 flex items-center justify-center">
+                        <Github size={48} className="text-gray-400" />
+                      </div>
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                    
+                    {/* Language Badge */}
+                    <div className="absolute top-4 right-4">
+                      <span 
+                        className="px-3 py-1 rounded-full text-xs font-medium backdrop-blur-sm border border-white/20 text-white"
+                        style={{ backgroundColor: `${this.getLanguageColor(project.language)}20` }}
+                      >
+                        {project.language}
+                      </span>
+                    </div>
+
+                    {/* Stats Overlay */}
+                    <div className="absolute bottom-4 left-4 flex items-center gap-4 text-white/80">
+                      <div className="flex items-center gap-1 text-sm">
+                        <Star size={14} className="text-yellow-400" />
+                        <span>{project.stargazers_count}</span>
+                      </div>
+                      <div className="flex items-center gap-1 text-sm">
+                        <GitFork size={14} className="text-gray-300" />
+                        <span>{project.forks_count}</span>
                       </div>
                     </div>
-                  )}
+                  </div>
                   
+                  {/* Content */}
                   <div className="p-6">
-                    {/* Project Header */}
                     <div className="flex items-start justify-between mb-3">
-                      <h3 className="text-xl font-bold text-white font-['Orbitron'] group-hover:text-cyan-400 transition-colors">
+                      <h3 className="text-xl font-bold text-white font-['Orbitron'] group-hover:text-cyan-400 transition-colors duration-300">
                         {this.formatProjectName(project.name)}
                       </h3>
                       <div className="flex items-center gap-1 text-xs text-gray-400">
@@ -314,24 +265,10 @@ class Projects extends Component {
                       </div>
                     </div>
 
-                    <p className="text-gray-300 mb-4 leading-relaxed font-['Inter'] text-sm line-clamp-2">
+                    <p className="text-gray-300 mb-6 leading-relaxed font-['Inter'] text-sm line-clamp-3">
                       {project.description}
                     </p>
                     
-                    {/* Stats */}
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="flex items-center gap-4 text-sm text-gray-400">
-                        <div className="flex items-center gap-1">
-                          <Star size={14} className="text-yellow-400" />
-                          <span>{project.stargazers_count}</span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <GitFork size={14} className="text-gray-400" />
-                          <span>{project.forks_count}</span>
-                        </div>
-                      </div>
-                    </div>
-
                     {/* Action Buttons */}
                     <div className="flex gap-3">
                       {project.homepage && project.homepage !== project.html_url && (
@@ -343,10 +280,10 @@ class Projects extends Component {
                         >
                           <Button
                             size="sm"
-                            className="w-full justify-center text-sm"
+                            className="w-full justify-center text-sm bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700"
                           >
                             <ExternalLink size={16} />
-                            Demo
+                            Live Demo
                           </Button>
                         </a>
                       )}
@@ -359,35 +296,35 @@ class Projects extends Component {
                         <Button
                           size="sm"
                           variant={project.homepage && project.homepage !== project.html_url ? "outline" : "default"}
-                          className={`w-full justify-center text-sm ${
-                            project.homepage && project.homepage !== project.html_url 
-                              ? '' 
-                              : 'bg-gradient-to-r from-cyan-500 to-blue-600'
-                          }`}
+                          className="w-full justify-center text-sm"
                         >
                           <Github size={16} />
-                          Code
+                          Source Code
                         </Button>
                       </a>
                     </div>
                   </div>
+
+                  {/* Hover Glow Effect */}
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-cyan-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                 </div>
               ))}
             </div>
           </div>
 
           {/* Call to Action */}
-          <div className="text-center mt-16 animate-fade-in w-full">
-            <div className="glass-card-enhanced p-8 max-w-2xl mx-auto border border-cyan-500/20">
+          <div className="text-center mt-16 w-full">
+            <div className="bg-gradient-to-br from-cyan-500/10 to-blue-500/10 backdrop-blur-sm border border-cyan-500/20 rounded-2xl p-8 max-w-2xl mx-auto hover:border-cyan-400/40 transition-all duration-500">
               <p className="text-xl text-gray-300 mb-6 font-['Inter']">
-                Want to see more of my work?
+                Want to explore more of my work?
               </p>
               <a
                 href={`https://github.com/${this.githubUsername}`}
                 target="_blank"
                 rel="noopener noreferrer"
+                className="inline-block"
               >
-                <Button size="lg" className="mx-auto bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700">
+                <Button size="lg" className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 hover:scale-105 transition-transform">
                   <Github size={20} />
                   Explore My GitHub
                 </Button>
@@ -395,6 +332,20 @@ class Projects extends Component {
             </div>
           </div>
         </div>
+
+        {/* Add CSS animations */}
+        <style jsx>{`
+          @keyframes slideUp {
+            from {
+              opacity: 0;
+              transform: translateY(30px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+        `}</style>
       </section>
     );
   }
