@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import { Resource } from '../resources';
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -49,9 +50,22 @@ const Navigation = () => {
         <div className="flex items-center justify-between">
           <button
             onClick={() => scrollToSection('hero')}
-            className="text-xl md:text-2xl font-bold gradient-text hover:scale-105 transition-transform font-['Orbitron']"
+            className="flex items-center justify-center hover:scale-105 transition-transform duration-300 group"
           >
-            DS
+            {/* Logo with round glow effect */}
+            <div className="relative">
+              {/* Glow effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary rounded-full blur-md group-hover:blur-lg transition-all duration-300 opacity-70 group-hover:opacity-100 scale-110"></div>
+              
+              {/* Logo container */}
+              <div className="relative bg-background/80 backdrop-blur-sm rounded-full p-2 border border-primary/20 group-hover:border-primary/40 transition-colors">
+                <img 
+                  src={Resource.logo} 
+                  alt="DS Logo" 
+                  className="h-8 w-8 md:h-10 md:w-10 object-contain" 
+                />
+              </div>
+            </div>
           </button>
 
           {/* Desktop Navigation */}
