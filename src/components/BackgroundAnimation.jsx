@@ -9,9 +9,9 @@ function NeuronParticles() {
   const isMobile = window.innerWidth < 768;
 
   // ⚡ Auto–optimized values
-  const COUNT = isMobile ? 120 : 800;
+  const COUNT = isMobile ? 120 : 500;
   const RANGE = isMobile ? 25 : 50;
-  const SPEED = isMobile ? 0.004 : 0.01;
+  const SPEED = isMobile ? 0.004 : 0.04;
 
   // Particles
   const { positions, velocities } = useMemo(() => {
