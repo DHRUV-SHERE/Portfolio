@@ -193,8 +193,8 @@ class Hero extends Component {
               
               <div className="animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
                 <p className="text-base md:text-xl lg:text-2xl text-muted-foreground max-w-3xl leading-relaxed font-['Inter'] bg-background/50 backdrop-blur-sm rounded-2xl p-4 md:p-6 border border-primary/10 text-responsive">
-                  Passionate about <span className="text-primary font-semibold">modern UI/UX</span>, building 
-                  <span className="text-secondary font-semibold"> scalable web applications</span>, and making an 
+                  Passionate about <span className="text-primary font-semibold">modern Web Development</span>, building 
+                  <span className="text-secondary font-semibold"> scalable Websites in MERN Stack</span>, and making an 
                   impact through <span className="text-primary font-semibold">clean, efficient code</span>.
                 </p>
               </div>
