@@ -8,6 +8,8 @@ import {
   Lightbulb,
   Target,
   ChevronRight,
+  Github,
+  ExternalLink,
 } from "lucide-react";
 
 class UpcomingProjects extends Component {
@@ -24,7 +26,7 @@ class UpcomingProjects extends Component {
       name: "PashuMitra",
       status: "completed",
       description:
-        "PashuMitra is an intelligent livestock management and veterinary support platform designed to empower farmers with digital tools for animal care, disease prevention, breeding optimization, and supply chain management. As the project lead, I supervised architecture planning, development workflows, and deployment strategies throughout the project.",
+        "An intelligent livestock management and veterinary support platform empowering farmers with digital tools for animal care, disease prevention, and supply chain management.",
       techStack: [
         "React",
         "Node.js",
@@ -32,35 +34,19 @@ class UpcomingProjects extends Component {
         "Express",
         "Tailwind CSS",
         "JWT Auth",
-        "Mongoose",
       ],
       teamSize: 3,
       myRole: "Project Lead • Full Stack Developer",
       progress: 100,
       features: [
-        "Livestock Health Monitoring with Alerts",
-        "Breeding Cycle & Genetic Lineage Tracking",
-        "Digital Medical Records & Prescription Logs",
-        "Farmer–Veterinarian Consultation System",
-        "Medicine Ordering & Supply Chain Module",
-        "Transport Request Management",
-        "Awareness Portal for Farmers",
-        "Finance Tracking & Analytics Dashboard",
-        "Role-based Access for Farmers, Doctors & Stores",
+        "Livestock Health Monitoring",
+        "Veterinarian Consultation System",
+        "Medicine Ordering & Supply Chain",
+        "Finance Tracking & Analytics",
+        "Role-based Access Control",
       ],
-      contributions: [
-        "Designed system architecture and led a team of 3 developers",
-        "Developed secure authentication and role-based authorization using JWT",
-        "Built complete Health Monitoring and Breeding Management modules",
-        "Implemented Medicine Ordering & Transportation workflow",
-        "Created admin dashboards with analytics and reporting tools",
-        "Integrated geolocation to help users find nearby medical stores",
-        "Conducted code reviews, optimized backend APIs, and improved overall UX",
-        "Managed Git workflow and ensured consistent code quality across modules",
-      ],
+      githubUrl: "https://github.com/ProjectSGH/PashuMitra",
       launchDate: "Q1 2024",
-      challenges:
-        "Ensuring synchronization between multiple modules such as medicine ordering, transport requests, and veterinary consultations while maintaining consistent data flow across all micro-features. Coordinating development with varied coding approaches within the team was also a challenge.",
       icon: Target,
     },
     {
@@ -68,43 +54,27 @@ class UpcomingProjects extends Component {
       name: "Connect Vista",
       status: "in-progress",
       description:
-        "A modern professional networking and community-building platform designed to help users connect, collaborate, and grow. Connect Vista features a real-time chat system, intelligent content recommendations, and event-based networking, making it a powerful alternative to traditional platforms.",
+        "A modern professional networking platform featuring real-time chat, intelligent content recommendations, and event-based networking.",
       techStack: [
         "React.js",
         "Node.js",
-        "Express.js",
+        "Socket.io",
         "MongoDB",
         "Cloudinary",
         "Tailwind CSS",
-        "Socket.io",
-        "JWT Auth",
       ],
       teamSize: 1,
       myRole: "Solo Full Stack Developer",
       progress: 70,
       features: [
-        "Real-Time One-to-One & Group Messaging",
-        "Advanced User Profiles with Skills & Portfolios",
-        "Smart Content Feed Algorithm",
-        "Event Creation & Joining System",
-        "Search & Advanced Filtering for Professionals",
-        "Media Uploads Using Cloudinary",
-        "Notifications System (Real-time + In-app)",
-        "Friend Request / Follow System",
+        "Real-Time Messaging",
+        "Advanced User Profiles",
+        "Smart Content Feed",
+        "Event Management",
+        "Media Upload System",
       ],
-      contributions: [
-        "Designed and developed complete UI/UX using Tailwind CSS",
-        "Built scalable real-time chat system using Socket.io",
-        "Implemented secure authentication and role-based authorization",
-        "Developed feed algorithm based on user interests & activity",
-        "Created event management module with join requests",
-        "Integrated Cloudinary for image & media uploads",
-        "Optimized MongoDB queries for faster feed and messaging operations",
-        "Built reusable components and clean project architecture",
-      ],
+      githubUrl: "https://github.com/ProjectConnectVista2025/ConnectVista",
       launchDate: "Q2 2025",
-      challenges:
-        "Optimizing real-time communication for large audiences, improving feed relevance with algorithm tuning, and maintaining scalable backend architecture.",
       icon: Users,
     },
     {
@@ -112,41 +82,27 @@ class UpcomingProjects extends Component {
       name: "AryaPath",
       status: "development",
       description:
-        "A smart tourism platform designed to enhance travel experiences across India by connecting tourists with verified guides, personalized travel routes, cultural insights, and real-time assistance. AryaPath focuses on making Indian tourism more accessible, safe, and interactive.",
+        "A smart tourism platform connecting tourists with verified guides, personalized travel routes, and cultural insights across India.",
       techStack: [
         "React.js",
         "Node.js",
-        "Express.js",
         "MongoDB",
+        "Map APIs",
         "Cloudinary",
         "Tailwind CSS",
-        "Map APIs",
-        "JWT Auth",
       ],
       teamSize: 1,
       myRole: "Solo Full Stack Developer",
       progress: 65,
       features: [
-        "Smart Tourist Dashboard",
         "Guide Verification System",
         "Tour Booking & Scheduling",
         "Personalized Travel Routes",
-        "Cultural & Historical Insights",
-        "Real-Time Chat with Guides",
-        "Multi-role Modules for Users & Guides",
-        "State-wise Tourism Data",
+        "Real-Time Chat",
+        "Multi-role Modules",
       ],
-      contributions: [
-        "Designed complete 3-module architecture: Common, User, and Guide",
-        "Built secure authentication with role-based access controls",
-        "Implemented interactive UI with animations and responsive layout",
-        "Created dynamic tourism content management system",
-        "Developed REST APIs for booking, guide management, and tourism data",
-        "Integrated geolocation-based search and smart filtering for guides",
-      ],
+      githubUrl: "https://github.com/Aryapath/Aryapath",
       launchDate: "Q2 2025",
-      challenges:
-        "Building a seamless multi-role experience while managing location-based guide discovery, real-time communication, and large tourism datasets.",
       icon: Lightbulb,
     },
   ];
@@ -318,41 +274,36 @@ class UpcomingProjects extends Component {
                     </div>
 
                     {/* Key Features */}
-                    <div className="mb-4">
+                    <div className="mb-6">
                       <h4 className="text-lg font-semibold text-foreground mb-3">
                         Key Features
                       </h4>
                       <ul className="text-base text-muted-foreground space-y-2">
-                        {project.features
-                          .slice(0, 3)
-                          .map((feature, featureIndex) => (
-                            <li
-                              key={featureIndex}
-                              className="flex items-start gap-3"
-                            >
-                              <ChevronRight className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
-                              <span>{feature}</span>
-                            </li>
-                          ))}
-                        {project.features.length > 3 && (
-                          <li className="text-primary text-base font-semibold mt-2">
-                            +{project.features.length - 3} more features
+                        {project.features.map((feature, featureIndex) => (
+                          <li
+                            key={featureIndex}
+                            className="flex items-start gap-3"
+                          >
+                            <ChevronRight className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                            <span>{feature}</span>
                           </li>
-                        )}
+                        ))}
                       </ul>
                     </div>
 
-                    {/* Current Challenge */}
-                    {project.challenges && (
-                      <div className="mt-6 pt-4 border-t border-primary/20">
-                        <h4 className="text-lg font-semibold text-foreground mb-3">
-                          Current Focus
-                        </h4>
-                        <p className="text-base text-muted-foreground leading-relaxed">
-                          {project.challenges}
-                        </p>
-                      </div>
-                    )}
+                    {/* GitHub Link */}
+                    <div className="mt-6 pt-4 border-t border-primary/20">
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-3 px-4 py-3 bg-primary/10 text-primary rounded-xl font-semibold hover:bg-primary/20 transition-all duration-300 hover:scale-105 group/link"
+                      >
+                        <Github size={20} />
+                        <span>View on GitHub</span>
+                        <ExternalLink size={16} className="group-hover/link:translate-x-1 transition-transform" />
+                      </a>
+                    </div>
                   </div>
 
                   {/* Hover Glow Effect */}
