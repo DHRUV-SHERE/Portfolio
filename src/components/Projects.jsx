@@ -265,7 +265,7 @@ class Projects extends Component {
                       </div>
                     </div>
 
-                    <p className="text-gray-300 mb-6 leading-relaxed font-['Inter'] text-xl line-clamp-3">
+                    <p className="text-gray-300 mb-6 leading-relaxed font-['Inter'] text-lg line-clamp-3">
                       {project.description}
                     </p>
                     
