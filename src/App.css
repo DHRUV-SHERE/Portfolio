@@ -62,6 +62,7 @@
 
 @layer base {
   * {
+    scroll-behavior: smooth;
     border-color: hsl(var(--border));
   }
 

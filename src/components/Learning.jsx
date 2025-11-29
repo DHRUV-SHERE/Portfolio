@@ -5,11 +5,7 @@ const Learning = () => {
     'AI',
     'Machine Learning',
     'AWS',
-    'MERN Stack',
     'Three.js',
-    'Docker',
-    'Kubernetes',
-    'GraphQL',
   ];
 
   return (

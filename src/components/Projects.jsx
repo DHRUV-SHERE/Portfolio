@@ -85,7 +85,7 @@ class Projects extends Component {
 
   getProjectImage = (repoName) => {
     const normalizedName = repoName.toLowerCase().replace(/-/g, '_');
-    console.log('Looking for image:', normalizedName, 'Available:', Object.keys(this.projectImages));
+    // console.log('Looking for image:', normalizedName, 'Available:', Object.keys(this.projectImages));
     return this.projectImages[normalizedName] || this.getFallbackImage();
   };
 
@@ -123,7 +123,7 @@ class Projects extends Component {
   };
 
   Button = ({ children, onClick, className = '', variant = 'default', size = 'default' }) => {
-    const baseStyles = 'px-4 py-2 rounded-xl font-medium transition-all duration-300 font-["Orbitron"] flex items-center gap-2';
+    const baseStyles = 'px-4 py-2 rounded-xl text-xl transition-all duration-300 font-["Orbitron"] flex items-center gap-2';
     
     const variants = {
       default: 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white hover:shadow-lg hover:shadow-cyan-500/25 hover:scale-105',
@@ -131,8 +131,8 @@ class Projects extends Component {
     };
 
     const sizes = {
-      default: 'text-sm',
-      sm: 'text-sm px-3 py-2',
+      default: 'text-xl',
+      sm: 'text-xl px-3 py-2',
       lg: 'text-lg px-6 py-3'
     };
 
@@ -233,7 +233,7 @@ class Projects extends Component {
                     {/* Language Badge */}
                     <div className="absolute top-4 right-4">
                       <span 
-                        className="px-3 py-1 rounded-full text-xs font-medium backdrop-blur-sm border border-white/20 text-white"
+                        className="px-3 py-1 rounded-full text-xs text-xl backdrop-blur-sm border border-white/20 text-white"
                         style={{ backgroundColor: `${this.getLanguageColor(project.language)}20` }}
                       >
                         {project.language}
@@ -242,11 +242,11 @@ class Projects extends Component {
 
                     {/* Stats Overlay */}
                     <div className="absolute bottom-4 left-4 flex items-center gap-4 text-white/80">
-                      <div className="flex items-center gap-1 text-sm">
+                      <div className="flex items-center gap-1 text-xl">
                         <Star size={14} className="text-yellow-400" />
                         <span>{project.stargazers_count}</span>
                       </div>
-                      <div className="flex items-center gap-1 text-sm">
+                      <div className="flex items-center gap-1 text-xl">
                         <GitFork size={14} className="text-gray-300" />
                         <span>{project.forks_count}</span>
                       </div>
@@ -256,7 +256,7 @@ class Projects extends Component {
                   {/* Content */}
                   <div className="p-6">
                     <div className="flex items-start justify-between mb-3">
-                      <h3 className="text-xl font-bold text-white font-['Orbitron'] group-hover:text-cyan-400 transition-colors duration-300">
+                      <h3 className="text-2xl font-bold text-white font-['Orbitron'] group-hover:text-cyan-400 transition-colors duration-300">
                         {this.formatProjectName(project.name)}
                       </h3>
                       <div className="flex items-center gap-1 text-xs text-gray-400">
@@ -265,7 +265,7 @@ class Projects extends Component {
                       </div>
                     </div>
 
-                    <p className="text-gray-300 mb-6 leading-relaxed font-['Inter'] text-sm line-clamp-3">
+                    <p className="text-gray-300 mb-6 leading-relaxed font-['Inter'] text-xl line-clamp-3">
                       {project.description}
                     </p>
                     
@@ -280,7 +280,7 @@ class Projects extends Component {
                         >
                           <Button
                             size="sm"
-                            className="w-full justify-center text-sm bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700"
+                            className="w-full justify-center text-xl bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700"
                           >
                             <ExternalLink size={16} />
                             Live Demo
@@ -296,7 +296,7 @@ class Projects extends Component {
                         <Button
                           size="sm"
                           variant={project.homepage && project.homepage !== project.html_url ? "outline" : "default"}
-                          className="w-full justify-center text-sm"
+                          className="w-full justify-center text-xl"
                         >
                           <Github size={16} />
                           Source Code

@@ -8,7 +8,6 @@ import Learning from '../components/Learning';
 import Projects from '../components/Projects';
 import Contact from '../components/Contact';
 import UpcomingProjects from '../components/UpcomingProjects';
-// import Footer from '@/components/Footer';
 
 const Index = () => {
   return (
@@ -16,16 +15,27 @@ const Index = () => {
       <BackgroundAnimation />
       <Navigation />
       <main className="relative z-10">
-        <Hero />
-        <About />
+        <section id="hero">
+          <Hero />
+        </section>
+        <section id="about">
+          <About />
+        </section>
         <Values />
-        <Skills />
+        <section id="skills">
+          <Skills />
+        </section>
         <Learning />
-        <Projects />
-        <UpcomingProjects />
-        <Contact />
+        <section id="projects">
+          <Projects />
+        </section>
+        <section id="upcoming-projects">
+          <UpcomingProjects />
+        </section>
+        <section id="contact">
+          <Contact />
+        </section>
       </main>
-      {/* <Footer /> */}
     </div>
   );
 };

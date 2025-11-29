@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { GraduationCap, User, Code, Book } from 'lucide-react';
+import { GraduationCap, User, Code, Book, Calendar, MapPin, Award } from 'lucide-react';
 
 class About extends Component {
   constructor(props) {
@@ -13,13 +13,13 @@ class About extends Component {
     {
       icon: User,
       title: 'About Me',
-      content: "Hello! I'm Dhruv. My name is Dhruv Shere. I am currently pursuing my B.Tech in Information Technology at U.V. Patel College of Engineering, Ganpat University.",
+      content: "Hello! I'm Dhruv Shere, a passionate full-stack developer currently pursuing my B.Tech in Information Technology at U.V. Patel College of Engineering, Ganpat University.",
       color: 'blue',
     },
     {
       icon: GraduationCap,
       title: 'Education',
-      content: "I have completed my Diploma in IT Engineering from Government Polytechnic College, Ahmedabad with a CGPA of 8.19. Currently pursuing B.Tech in Information Technology.",
+      content: "I have completed my Diploma in IT Engineering from Government Polytechnic College, Ahmedabad with excellent academic performance. Currently advancing my knowledge in B.Tech Information Technology.",
       color: 'purple',
     },
     {
@@ -34,6 +34,27 @@ class About extends Component {
       content: "These projects have helped me grow technically and strengthened my problem-solving and development skills, especially in React and Node.js-based applications.",
       color: 'blue',
     },
+  ];
+
+  educationDetails = [
+    {
+      period: "2023-26 (Ongoing)",
+      degree: "B.Tech in Information Technology",
+      institution: "U.V. Patel College of Engineering, Ganpat University",
+      location: "Kherva, Mehsana",
+      score: "Current CGPA: 7.88",
+      icon: Book,
+      color: "purple"
+    },
+    {
+      period: "2020-23",
+      degree: "Diploma in Information Technology",
+      institution: "Government Polytechnic College",
+      location: "Ahmedabad, Gujarat",
+      score: "CGPA: 8.19",
+      icon: GraduationCap,
+      color: "blue"
+    }
   ];
 
   getGlowClass = (color) => {
@@ -160,9 +181,70 @@ class About extends Component {
     }
   };
 
+  renderEducationItem = (education, index) => {
+    const IconComponent = education.icon;
+    
+    return (
+      <div
+        key={index}
+        className={`glass-card hover-lift group animate-slide-up relative overflow-hidden p-6 ${this.getCardGlowClass(education.color)}`}
+        style={{
+          animationDelay: `${index * 0.2}s`,
+          opacity: 0,
+          animationFillMode: 'forwards'
+        }}
+      >
+        {/* Animated background gradient */}
+        <div className={`absolute inset-0 bg-gradient-to-br ${this.getBackgroundClass(education.color)} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+        
+        <div className="relative z-10">
+          <div className="flex items-start gap-4 mb-4">
+            <div className={`inline-flex items-center justify-center p-3 rounded-xl ${this.getBackgroundClass(education.color)} ${this.getGlowClass(education.color)} group-hover:scale-110 transition-transform duration-300 border ${this.getBorderClass(education.color)} flex-shrink-0`}>
+              <IconComponent className={this.getTextColorClass(education.color)} size={28} />
+            </div>
+            <div className="flex-grow">
+              {/* Period and Degree */}
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3">
+                <span className="text-sm font-semibold font-['Inter'] bg-primary/10 text-primary px-3 py-1 rounded-full inline-flex items-center gap-1 w-fit">
+                  <Calendar size={14} />
+                  {education.period}
+                </span>
+                <h3 className="text-xl font-bold font-['Orbitron'] text-foreground">
+                  {education.degree}
+                </h3>
+              </div>
+              
+              {/* Institution and Location */}
+              <div className="space-y-2">
+                <p className="text-foreground font-['Inter'] font-medium text-xl">
+                  {education.institution}
+                </p>
+                <div className="flex items-center gap-1 text-muted-foreground text-sm">
+                  <MapPin size={14} />
+                  {education.location}
+                </div>
+              </div>
+              
+              {/* Score */}
+              <div className="flex items-center gap-2 mt-3 pt-3 border-t border-border/50">
+                <Award className={this.getTextColorClass(education.color)} size={16} />
+                <span className={`font-['Inter'] font-semibold text-base ${this.getTextColorClass(education.color)}`}>
+                  {education.score}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        {/* Hover effect */}
+        <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-current to-transparent opacity-0 group-hover:opacity-30 transition-opacity duration-500" />
+      </div>
+    );
+  };
+
   render() {
     return (
-      <section id="about" className="py-20 relative  overflow-hidden w-full">
+      <section id="about" className="py-8 relative overflow-hidden w-full">
         {/* Background Elements */}
         <div className="absolute top-0 left-0 w-72 h-72 bg-primary/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
@@ -173,7 +255,7 @@ class About extends Component {
             <h2 className="text-4xl md:text-5xl font-bold mb-4 font-['Orbitron']">
               About Me
             </h2>
-            <p className="text-muted-foreground text-lg font-['Inter']">
+            <p className="text-muted-foreground text-xl font-['Inter']">
               Get to know more about my journey and passion
             </p>
           </div>
@@ -207,7 +289,7 @@ class About extends Component {
                         </h3>
                       </div>
                       
-                      <p className="text-muted-foreground leading-relaxed font-['Inter'] flex-grow" style={{fontSize:"1.2rem"}}>
+                      <p className="text-muted-foreground text-xl leading-relaxed font-['Inter'] flex-grow text-base">
                         {card.content}
                       </p>
                     </div>
@@ -222,40 +304,19 @@ class About extends Component {
 
           {/* Education Details Section */}
           <div className="mt-16 w-full max-w-4xl mx-auto animate-slide-up">
-            <div className="glass-card p-8 hover-lift card-glow">
-              <h3 className="text-3xl font-bold font-['Orbitron'] text-center mb-8 text-primary">
-                Education
+            <div className="text-center mb-8">
+              <h3 className="text-3xl font-bold font-['Orbitron'] text-primary mb-4">
+                Education Timeline
               </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="text-center group">
-                  <div className="inline-flex items-center justify-center p-4 rounded-2xl bg-primary/10 glow-blue group-hover:glow-cyan transition-all duration-300 mb-4">
-                    <GraduationCap className="text-primary group-hover:text-cyan-400 transition-colors duration-300" size={32} />
-                  </div>
-                  <h4 className="text-xl font-bold font-['Orbitron'] text-foreground mb-2 group-hover:text-primary transition-colors duration-300">
-                    Diploma
-                  </h4>
-                  <p className=" text-muted-foreground font-['Inter'] group-hover:text-foreground transition-colors duration-300">
-                    Government Polytechnic College, Ahmedabad
-                  </p>
-                  <p className="text-primary font-['Inter'] font-semibold mt-2">
-                    CGPA: 8.19
-                  </p>
-                </div>
-                <div className="text-center group">
-                  <div className="inline-flex items-center justify-center p-4 rounded-2xl bg-secondary/10 glow-purple group-hover:glow-blue transition-all duration-300 mb-4">
-                    <Book className="text-secondary group-hover:text-blue-400 transition-colors duration-300" size={32} />
-                  </div>
-                  <h4 className="text-xl font-bold font-['Orbitron'] text-foreground mb-2 group-hover:text-secondary transition-colors duration-300">
-                    B.Tech
-                  </h4>
-                  <p className="text-muted-foreground font-['Inter'] group-hover:text-foreground transition-colors duration-300">
-                    U.V. Patel College of Engineering, Ganpat University
-                  </p>
-                  <p className="text-secondary font-['Inter'] font-semibold mt-2">
-                    Information Technology
-                  </p>
-                </div>
-              </div>
+              <p className="text-muted-foreground font-['Inter'] text-xl">
+                My academic journey and achievements
+              </p>
+            </div>
+            
+            <div className="space-y-6">
+              {this.educationDetails.map((education, index) => 
+                this.renderEducationItem(education, index)
+              )}
             </div>
           </div>
         </div>

@@ -7,6 +7,7 @@ import {
   Database,
   Lightbulb,
   Target,
+  ChevronRight,
 } from "lucide-react";
 
 class UpcomingProjects extends Component {
@@ -213,13 +214,13 @@ class UpcomingProjects extends Component {
           </div>
 
           {/* Projects Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 container mx-auto">
             {this.upcomingProjects.map((project, index) => {
               const Icon = project.icon;
               return (
                 <div
                   key={project.id}
-                  className="group relative bg-gradient-to-br from-gray-900/50 to-gray-800/30 backdrop-blur-sm border border-primary/20 rounded-2xl overflow-hidden hover:border-primary/40 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-primary/20"
+                  className="group relative glass-card border border-primary/20 rounded-2xl overflow-hidden hover:border-primary/40 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-primary/20"
                   style={{
                     animation: `slideUp 0.6s ease-out ${index * 0.2}s forwards`,
                     opacity: 0,
@@ -228,7 +229,7 @@ class UpcomingProjects extends Component {
                   {/* Status Badge */}
                   <div className="absolute top-4 right-4 z-10">
                     <span
-                      className={`px-3 py-1 rounded-full text-xs font-medium text-white bg-gradient-to-r ${this.getStatusColor(
+                      className={`px-4 py-2 rounded-full text-sm font-semibold text-white bg-gradient-to-r ${this.getStatusColor(
                         project.status
                       )} backdrop-blur-sm border border-white/20`}
                     >
@@ -239,42 +240,46 @@ class UpcomingProjects extends Component {
                   {/* Content */}
                   <div className="p-6">
                     {/* Project Header */}
-                    <div className="flex items-center gap-3 mb-4">
+                    <div className="flex items-center gap-4 mb-6">
                       <div className="p-3 rounded-xl bg-primary/10 glow-blue">
-                        <Icon className="text-primary" size={24} />
+                        <Icon className="text-primary" size={28} />
                       </div>
-                      <div>
-                        <h3 className="text-2xl font-bold text-foreground font-['Orbitron'] group-hover:text-primary transition-colors duration-300">
+                      <div className="flex-grow">
+                        <h3 className="text-2xl font-bold text-foreground font-['Orbitron'] group-hover:text-primary transition-colors duration-300 mb-2">
                           {project.name}
                         </h3>
-                        <div className="flex items-center gap-2 text-sm text-muted-foreground mt-1">
-                          <Users size={14} />
-                          <span>
-                            {project.teamSize}{" "}
-                            {project.teamSize === 1 ? "Person" : "People"}
-                          </span>
-                          <Calendar size={14} />
-                          <span>{project.launchDate}</span>
+                        <div className="flex items-center gap-3 text-base text-muted-foreground">
+                          <div className="flex items-center gap-1">
+                            <Users size={18} />
+                            <span>
+                              {project.teamSize}{" "}
+                              {project.teamSize === 1 ? "Person" : "People"}
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <Calendar size={18} />
+                            <span>{project.launchDate}</span>
+                          </div>
                         </div>
                       </div>
                     </div>
 
                     {/* Description */}
-                    <p className="text-muted-foreground mb-4 leading-relaxed font-['Inter'] text-sm">
+                    <p className="text-muted-foreground mb-6 leading-relaxed font-['Inter'] text-lg">
                       {project.description}
                     </p>
 
                     {/* Progress Bar */}
-                    <div className="mb-4">
-                      <div className="flex justify-between items-center mb-2">
-                        <span className="text-sm text-foreground font-medium">
+                    <div className="mb-6">
+                      <div className="flex justify-between items-center mb-3">
+                        <span className="text-lg text-foreground font-semibold">
                           Development Progress
                         </span>
-                        <span className="text-sm font-bold text-primary">
+                        <span className="text-lg font-bold text-primary">
                           {project.progress}%
                         </span>
                       </div>
-                      <div className="h-2 bg-muted/30 rounded-full overflow-hidden">
+                      <div className="h-3 bg-muted/30 rounded-full overflow-hidden">
                         <div
                           className={`h-full rounded-full transition-all duration-1000 ${this.getProgressColor(
                             project.progress
@@ -285,16 +290,16 @@ class UpcomingProjects extends Component {
                     </div>
 
                     {/* Tech Stack */}
-                    <div className="mb-4">
-                      <h4 className="text-sm font-semibold text-foreground mb-2 flex items-center gap-2">
-                        <Code size={16} />
+                    <div className="mb-6">
+                      <h4 className="text-lg font-semibold text-foreground mb-3 flex items-center gap-2">
+                        <Code size={20} />
                         Tech Stack
                       </h4>
                       <div className="flex flex-wrap gap-2">
                         {project.techStack.map((tech, techIndex) => (
                           <span
                             key={techIndex}
-                            className="px-2 py-1 bg-primary/10 text-primary rounded-lg text-xs font-medium border border-primary/20"
+                            className="px-3 py-2 bg-primary/10 text-primary rounded-lg text-sm font-medium border border-primary/20"
                           >
                             {tech}
                           </span>
@@ -303,34 +308,34 @@ class UpcomingProjects extends Component {
                     </div>
 
                     {/* My Role */}
-                    <div className="mb-4">
-                      <h4 className="text-sm font-semibold text-foreground mb-2">
+                    <div className="mb-6">
+                      <h4 className="text-lg font-semibold text-foreground mb-2">
                         My Role
                       </h4>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-base text-muted-foreground font-medium">
                         {project.myRole}
                       </p>
                     </div>
 
                     {/* Key Features */}
                     <div className="mb-4">
-                      <h4 className="text-sm font-semibold text-foreground mb-2">
+                      <h4 className="text-lg font-semibold text-foreground mb-3">
                         Key Features
                       </h4>
-                      <ul className="text-sm text-muted-foreground space-y-1">
+                      <ul className="text-base text-muted-foreground space-y-2">
                         {project.features
                           .slice(0, 3)
                           .map((feature, featureIndex) => (
                             <li
                               key={featureIndex}
-                              className="flex items-center gap-2"
+                              className="flex items-start gap-3"
                             >
-                              <div className="w-1 h-1 bg-primary rounded-full" />
-                              {feature}
+                              <ChevronRight className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                              <span>{feature}</span>
                             </li>
                           ))}
                         {project.features.length > 3 && (
-                          <li className="text-primary text-xs font-medium">
+                          <li className="text-primary text-base font-semibold mt-2">
                             +{project.features.length - 3} more features
                           </li>
                         )}
@@ -339,11 +344,11 @@ class UpcomingProjects extends Component {
 
                     {/* Current Challenge */}
                     {project.challenges && (
-                      <div className="mt-4 pt-4 border-t border-primary/20">
-                        <h4 className="text-sm font-semibold text-foreground mb-2">
+                      <div className="mt-6 pt-4 border-t border-primary/20">
+                        <h4 className="text-lg font-semibold text-foreground mb-3">
                           Current Focus
                         </h4>
-                        <p className="text-xs text-muted-foreground italic">
+                        <p className="text-base text-muted-foreground leading-relaxed">
                           {project.challenges}
                         </p>
                       </div>
@@ -359,11 +364,11 @@ class UpcomingProjects extends Component {
 
           {/* Call to Action */}
           <div className="text-center mt-16">
-            <div className="bg-gradient-to-br from-primary/10 to-secondary/10 backdrop-blur-sm border border-primary/20 rounded-2xl p-8 max-w-2xl mx-auto hover:border-primary/40 transition-all duration-500">
-              <h3 className="text-2xl font-bold text-foreground font-['Orbitron'] mb-4">
+            <div className="glass-card border border-primary/20 rounded-2xl p-8 max-w-2xl mx-auto hover:border-primary/40 transition-all duration-500">
+              <h3 className="text-3xl font-bold text-foreground font-['Orbitron'] mb-4">
                 Interested in Collaboration?
               </h3>
-              <p className="text-muted-foreground mb-6 font-['Inter']">
+              <p className="text-muted-foreground mb-6 font-['Inter'] text-lg leading-relaxed">
                 I'm always open to discussing new projects, creative ideas, or
                 opportunities to be part of your vision.
               </p>
@@ -373,7 +378,7 @@ class UpcomingProjects extends Component {
                     .getElementById("contact")
                     ?.scrollIntoView({ behavior: "smooth" })
                 }
-                className="px-8 py-3 bg-gradient-to-r from-primary to-secondary text-primary-foreground rounded-xl font-medium font-['Orbitron'] hover:scale-105 transition-transform duration-300 hover-glow"
+                className="px-8 py-4 bg-gradient-to-r from-primary to-secondary text-primary-foreground rounded-xl font-semibold font-['Orbitron'] hover:scale-105 transition-transform duration-300 hover-glow text-lg"
               >
                 Let's Build Together
               </button>

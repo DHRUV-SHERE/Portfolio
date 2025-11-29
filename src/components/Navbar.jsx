@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Resource } from '../resources';
+import { Link } from 'react-scroll';
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -14,14 +15,6 @@ const Navigation = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const scrollToSection = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setIsMobileMenuOpen(false);
-    }
-  };
 
   const navLinks = [
     { id: 'hero', label: 'Home' },
@@ -46,19 +39,17 @@ const Navigation = () => {
         isScrolled ? 'glass py-3 md:py-4' : 'py-4 md:py-6'
       }`}
     >
-      {/* Use the same container width as other components */}
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          <button
-            onClick={() => scrollToSection('hero')}
-            className="flex items-center justify-center hover:scale-105 transition-transform duration-300 group"
+          <Link
+            to="hero"
+            spy={true}
+            smooth={true}
+            duration={500}
+            className="flex items-center justify-center hover:scale-105 transition-transform duration-300 group cursor-pointer"
           >
-            {/* Logo with round glow effect */}
             <div className="relative">
-              {/* Glow effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary rounded-full blur-md group-hover:blur-lg transition-all duration-300 opacity-70 group-hover:opacity-100 scale-110"></div>
-              
-              {/* Logo container */}
               <div className="relative bg-background/80 backdrop-blur-sm rounded-full p-2 border border-primary/20 group-hover:border-primary/40 transition-colors">
                 <img 
                   src={Resource.logo} 
@@ -67,26 +58,35 @@ const Navigation = () => {
                 />
               </div>
             </div>
-          </button>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-6 lg:gap-8">
             {navLinks.map((link) => (
-              <button
+              <Link
                 key={link.id}
-                onClick={() => scrollToSection(link.id)}
-                className="text-foreground hover:text-primary transition-colors relative group font-medium font-['Inter'] text-base lg:text-lg"
+                to={link.id}
+                spy={true}
+                smooth={true}
+                duration={500}
+                offset={-80}
+                className="text-foreground hover:text-primary transition-colors relative group font-medium font-['Inter'] text-base lg:text-lg cursor-pointer"
               >
                 {link.label}
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary group-hover:w-full transition-all duration-300" />
-              </button>
+              </Link>
             ))}
-            <Button
-              onClick={() => scrollToSection('contact')}
-              className="bg-gradient-to-r from-primary to-secondary hover-glow text-primary-foreground"
+            <Link
+              to="contact"
+              spy={true}
+              smooth={true}
+              duration={500}
+              offset={-80}
             >
-              Get In Touch
-            </Button>
+              <Button className="bg-gradient-to-r from-primary to-secondary hover-glow text-primary-foreground cursor-pointer">
+                Get In Touch
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -98,27 +98,38 @@ const Navigation = () => {
           </button>
         </div>
 
-        {/* Mobile Menu - Full width but content aligned with container */}
+        {/* Mobile Menu */}
         <div className={`md:hidden transition-all duration-300 overflow-hidden ${
           isMobileMenuOpen ? 'max-h-96 opacity-100 mt-4' : 'max-h-0 opacity-0'
         }`}>
           <div className="glass rounded-2xl p-4 md:p-6 border border-primary/20">
             <div className="flex flex-col gap-2">
               {navLinks.map((link) => (
-                <button
+                <Link
                   key={link.id}
-                  onClick={() => scrollToSection(link.id)}
-                  className="text-foreground hover:text-primary transition-colors text-left py-3 px-4 rounded-lg hover:bg-primary/10 font-medium font-['Inter'] text-base"
+                  to={link.id}
+                  spy={true}
+                  smooth={true}
+                  duration={500}
+                  offset={-80}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-foreground hover:text-primary transition-colors text-left py-3 px-4 rounded-lg hover:bg-primary/10 font-medium font-['Inter'] text-base cursor-pointer"
                 >
                   {link.label}
-                </button>
+                </Link>
               ))}
-              <Button
-                onClick={() => scrollToSection('contact')}
-                className="bg-gradient-to-r from-primary to-secondary w-full text-primary-foreground mt-2 text-base"
+              <Link
+                to="contact"
+                spy={true}
+                smooth={true}
+                duration={500}
+                offset={-80}
+                onClick={() => setIsMobileMenuOpen(false)}
               >
-                Get In Touch
-              </Button>
+                <Button className="bg-gradient-to-r from-primary to-secondary w-full text-primary-foreground mt-2 text-base cursor-pointer">
+                  Get In Touch
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
