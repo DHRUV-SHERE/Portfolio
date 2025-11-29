@@ -14,64 +14,87 @@ const Skills = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, threshold: 0.1 });
 
-  // Single skills data with all technologies
+  // Categorized skills data
   const skillsData = [
-    { name: "React", type: "lucide", icon: Globe },
-    { name: "HTML", type: "lucide", icon: Code },
-    { name: "CSS", type: "lucide", icon: Palette },
-    { name: "JavaScript", type: "lucide", icon: Braces },
-    { name: "Node.js", type: "lucide", icon: Server },
-    { name: "Express JS", type: "lucide", icon: Terminal },
-    { name: "MongoDB", type: "lucide", icon: Database },
-    { name: "Java", type: "lucide", icon: Cpu },
-    { name: "Python", type: "lucide", icon: Box },
-    { name: "PHP", type: "lucide", icon: Zap },
-    { name: "MySQL", type: "lucide", icon: Layers },
-    { name: "Git", type: "lucide", icon: GitMerge },
-    { name: "GitHub", type: "lucide", icon: GitBranch },
-    { name: "ChatGPT", type: "lucide", icon: Bot },
-    { name: "Lovable", type: "fontawesome", icon: faHeart },
-    { name: "V0 Vercel", type: "lucide", icon: Rocket },
-    { name: "VS Code", type: "lucide", icon: Monitor },
-    { name: "Deep Seek", type: "lucide", icon: Cog }
+    // Frontend
+    { name: "React", type: "lucide", icon: Globe, category: "frontend" },
+    { name: "HTML", type: "lucide", icon: Code, category: "frontend" },
+    { name: "CSS", type: "lucide", icon: Palette, category: "frontend" },
+    { name: "JavaScript", type: "lucide", icon: Braces, category: "frontend" },
+    
+    // Backend
+    { name: "Node.js", type: "lucide", icon: Server, category: "backend" },
+    { name: "Express JS", type: "lucide", icon: Terminal, category: "backend" },
+    { name: "Java", type: "lucide", icon: Cpu, category: "backend" },
+    { name: "Python", type: "lucide", icon: Box, category: "backend" },
+    { name: "PHP", type: "lucide", icon: Zap, category: "backend" },
+    
+    // Databases
+    { name: "MongoDB", type: "lucide", icon: Database, category: "database" },
+    { name: "MySQL", type: "lucide", icon: Layers, category: "database" },
+    
+    // Tools & Others
+    { name: "Git", type: "lucide", icon: GitMerge, category: "tools" },
+    { name: "GitHub", type: "lucide", icon: GitBranch, category: "tools" },
+    { name: "VS Code", type: "lucide", icon: Monitor, category: "tools" },
+    { name: "ChatGPT", type: "lucide", icon: Bot, category: "ai" },
+    { name: "Deep Seek", type: "lucide", icon: Cog, category: "ai" },
+    { name: "Lovable", type: "fontawesome", icon: faHeart, category: "tools" },
+    { name: "V0 Vercel", type: "lucide", icon: Rocket, category: "deployment" },
+    { name: "Render", type: "lucide", icon: Cloud, category: "deployment" },
+  ];
+
+  const skillCategories = [
+    { name: "frontend", title: "Frontend Development", color: "from-blue-500 to-cyan-400" },
+    { name: "backend", title: "Backend Development", color: "from-purple-500 to-pink-500" },
+    { name: "database", title: "Database", color: "from-green-500 to-emerald-400" },
+    { name: "tools", title: "Tools & Platforms", color: "from-orange-500 to-red-400" },
+    { name: "ai", title: "AI Tools", color: "from-indigo-500 to-purple-400" },
+    { name: "deployment", title: "Deployment", color: "from-cyan-500 to-blue-400" },
   ];
 
   const specializedSkills = [
     {
       title: "Frontend Development",
-      description: "I build responsive, accessible, and high-performance UIs using modern frameworks like React and Tailwind CSS.",
+      description: "Building responsive, accessible, and high-performance user interfaces using modern frameworks like React, Next.js, and Tailwind CSS with focus on UX/UI principles.",
       icon: Monitor,
-      gradient: "from-purple-500 to-cyan-400"
+      gradient: "from-purple-500 to-cyan-400",
+      technologies: ["React", "Next.js", "Tailwind CSS", "JavaScript", "HTML5", "CSS3"]
     },
     {
       title: "Backend Development",
-      description: "Experienced in building scalable APIs and backend systems with frameworks like Django, Express, and Flask.",
+      description: "Developing scalable RESTful APIs and backend systems with Node.js, Express, and Python. Experience with authentication, middleware, and API design patterns.",
       icon: Server,
-      gradient: "from-cyan-500 to-blue-500"
+      gradient: "from-cyan-500 to-blue-500",
+      technologies: ["Node.js", "Express", "Python", "Java", "REST APIs", "JWT"]
     },
     {
       title: "Database Design",
-      description: "Designing efficient, well-structured database schemas with MongoDB, PostgreSQL, and other systems.",
+      description: "Designing efficient database schemas and optimizing queries for both SQL (MySQL) and NoSQL (MongoDB) databases with focus on performance and scalability.",
       icon: Database,
-      gradient: "from-blue-500 to-indigo-500"
+      gradient: "from-blue-500 to-indigo-500",
+      technologies: ["MongoDB", "MySQL", "Mongoose", "Database Design", "Query Optimization"]
     },
     {
-      title: "Deployment",
-      description: "Proficient in deploying applications on cloud platforms like AWS or Render.",
-      icon: Cloud,
-      gradient: "from-indigo-500 to-purple-500"
+      title: "Full Stack Integration",
+      description: "Seamlessly integrating frontend and backend systems, ensuring smooth data flow, real-time features, and optimal performance across the entire application stack.",
+      icon: Workflow,
+      gradient: "from-indigo-500 to-purple-500",
+      technologies: ["MERN Stack", "API Integration", "State Management", "Real-time Features"]
     },
     {
       title: "Performance Optimization",
-      description: "Focused on improving both frontend and backend performance to enhance overall app speed and user experience.",
+      description: "Optimizing both frontend and backend performance through code splitting, lazy loading, caching strategies, and database query optimization.",
       icon: Gauge,
-      gradient: "from-green-500 to-teal-500"
+      gradient: "from-green-500 to-teal-500",
+      technologies: ["Performance", "Caching", "Code Splitting", "Lazy Loading", "Optimization"]
     },
     {
-      title: "Code Quality",
-      description: "Writing clean, maintainable, and testable code that aligns with industry standards and best practices.",
+      title: "Code Quality & Testing",
+      description: "Writing clean, maintainable, and testable code following best practices. Implementing testing strategies and ensuring code quality through reviews and standards.",
       icon: TestTube,
-      gradient: "from-teal-500 to-cyan-500"
+      gradient: "from-teal-500 to-cyan-500",
+      technologies: ["Clean Code", "Testing", "Code Review", "Best Practices", "Maintainability"]
     }
   ];
 
@@ -82,7 +105,7 @@ const Skills = () => {
         initial={{ opacity: 0, scale: 0.8 }}
         animate={isInView ? { opacity: 1, scale: 1 } : {}}
         transition={{ 
-          delay: index * 0.1,
+          delay: index * 0.05,
           duration: 0.6,
           type: "spring",
           stiffness: 100
@@ -92,28 +115,23 @@ const Skills = () => {
           y: -5
         }}
       >
-        <div className="glass p-6 rounded-2xl border border-primary/20 hover:border-primary/50 transition-all duration-300 group-hover:glow-blue cursor-pointer h-full">
-          <div className="flex flex-col items-center text-center gap-4 h-full">
-            {/* Skill Icon */}
-            <div className="w-16 h-16 flex items-center justify-center rounded-xl bg-gradient-to-br from-primary/20 to-secondary/20 border border-primary/30 group-hover:from-primary/30 group-hover:to-secondary/30 transition-all duration-300">
-              {skill.type === "fontawesome" ? (
-                <FontAwesomeIcon 
-                  icon={skill.icon} 
-                  className="w-8 h-8 text-foreground opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300" 
-                />
-              ) : (
-                <skill.icon className="w-8 h-8 text-foreground opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300" />
-              )}
-            </div>
-            
-            {/* Skill Name */}
-            <h3 className="text-foreground font-['Inter'] font-medium text-lg group-hover:gradient-text transition-all duration-300 flex-grow">
-              {skill.name}
-            </h3>
+        <div className="glass p-5 rounded-2xl border border-primary/20 hover:border-primary/50 transition-all duration-300 group-hover:glow-blue cursor-pointer h-full flex flex-col items-center justify-center min-h-[120px]">
+          {/* Skill Icon */}
+          <div className="w-14 h-14 flex items-center justify-center rounded-xl bg-gradient-to-br from-primary/20 to-secondary/20 border border-primary/30 group-hover:from-primary/30 group-hover:to-secondary/30 transition-all duration-300 mb-3">
+            {skill.type === "fontawesome" ? (
+              <FontAwesomeIcon 
+                icon={skill.icon} 
+                className="w-7 h-7 text-foreground opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300" 
+              />
+            ) : (
+              <skill.icon className="w-7 h-7 text-foreground opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300" />
+            )}
           </div>
           
-          {/* Hover effect */}
-          <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary/5 to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          {/* Skill Name */}
+          <h3 className="text-foreground font-['Inter'] font-semibold text-base group-hover:text-primary transition-all duration-300 text-center leading-tight">
+            {skill.name}
+          </h3>
         </div>
       </motion.div>
     );
@@ -128,7 +146,7 @@ const Skills = () => {
         initial={{ opacity: 0, y: 50 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ 
-          delay: 0.8 + index * 0.2,
+          delay: 0.6 + index * 0.15,
           duration: 0.8,
           type: "spring",
           stiffness: 100
@@ -138,44 +156,48 @@ const Skills = () => {
           y: -5
         }}
       >
-        <div className="glass p-8 rounded-2xl border border-primary/20 hover:border-primary/50 transition-all duration-300 group-hover:glow-blue cursor-pointer h-full">
+        <div className="glass p-6 rounded-2xl border border-primary/20 hover:border-primary/50 transition-all duration-300 group-hover:glow-blue cursor-pointer h-full">
           {/* Animated border */}
           <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary to-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-md scale-105" />
           <div className="absolute inset-[1px] rounded-2xl bg-background" />
           
-          <div className="relative z-10">
+          <div className="relative z-10 h-full flex flex-col">
             {/* Icon */}
-            <div className={`w-20 h-20 flex items-center justify-center rounded-2xl bg-gradient-to-r ${skill.gradient} bg-opacity-20 border border-primary/30 mb-6 group-hover:scale-110 transition-transform duration-300`}>
-              <IconComponent className="w-10 h-10 text-primary" />
+            <div className={`w-16 h-16 flex items-center justify-center rounded-2xl bg-gradient-to-r ${skill.gradient} bg-opacity-20 border border-primary/30 mb-4 group-hover:scale-110 transition-transform duration-300`}>
+              <IconComponent className="w-8 h-8 text-primary" />
             </div>
             
             {/* Title */}
-            <h3 className="text-2xl font-bold font-['Orbitron'] text-foreground mb-4 group-hover:gradient-text transition-all duration-300">
+            <h3 className="text-xl font-bold font-['Orbitron'] text-foreground mb-3 group-hover:gradient-text transition-all duration-300">
               {skill.title}
             </h3>
             
             {/* Description */}
-            <p className="text-muted-foreground text-lg font-['Inter'] leading-relaxed">
+            <p className="text-muted-foreground text-base font-['Inter'] leading-relaxed mb-4 flex-grow">
               {skill.description}
             </p>
+
+            {/* Technologies */}
+            <div className="flex flex-wrap gap-1 mt-auto">
+              {skill.technologies.map((tech, techIndex) => (
+                <span
+                  key={techIndex}
+                  className="px-2 py-1 bg-primary/10 text-primary rounded-lg text-xs font-medium border border-primary/20"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
           </div>
-          
-          {/* Bottom glow effect */}
-          <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-1 bg-gradient-to-r from-primary to-secondary group-hover:w-3/4 transition-all duration-500 rounded-full" />
         </div>
       </motion.div>
     );
   };
 
   return (
-    <section id="skills" ref={ref} className="py-10 relative w-full overflow-hidden">
-      {/* Animated background elements */}
-      {/* <div className="absolute top-0 left-0 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 animate-pulse" />
-      <div className="absolute top-1/2 right-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2 animate-pulse delay-1000" />
-      <div className="absolute bottom-0 left-1/2 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl -translate-x-1/2 translate-y-1/2 animate-pulse delay-500" /> */}
-      
+    <section id="skills" ref={ref} className="py-20 relative w-full overflow-hidden">
       {/* Floating particles */}
-      {[...Array(15)].map((_, i) => (
+      {[...Array(12)].map((_, i) => (
         <motion.div
           key={i}
           className="absolute w-1 h-1 bg-primary/40 rounded-full"
@@ -223,33 +245,50 @@ const Skills = () => {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.4, duration: 0.8 }}
           >
-            Building scalable, performant applications with the best modern tools
+            Building scalable, performant applications with modern technologies and best practices
           </motion.p>
         </div>
 
-        {/* Technologies Grid */}
-        <motion.div
-          className="mb-20"
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.6 }}
-        >
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 container mx-auto">
-            {skillsData.map((skill, index) => (
-              <SkillCard 
-                key={skill.name}
-                skill={skill}
-                index={index}
-              />
-            ))}
-          </div>
-        </motion.div>
+        {/* Technologies Grid by Category */}
+        {skillCategories.map((category, categoryIndex) => {
+          const categorySkills = skillsData.filter(skill => skill.category === category.name);
+          if (categorySkills.length === 0) return null;
+
+          return (
+            <motion.div
+              key={category.name}
+              className="mb-12"
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.3 + categoryIndex * 0.1 }}
+            >
+              <div className="flex items-center gap-4 mb-8">
+                <div className={`w-8 h-1 bg-gradient-to-r ${category.color} rounded-full`} />
+                <h3 className="text-2xl md:text-3xl font-bold font-['Orbitron'] text-foreground bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                  {category.title}
+                </h3>
+                <div className={`flex-grow h-1 bg-gradient-to-r ${category.color} opacity-20 rounded-full`} />
+              </div>
+              
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                {categorySkills.map((skill, index) => (
+                  <SkillCard 
+                    key={skill.name}
+                    skill={skill}
+                    index={index}
+                  />
+                ))}
+              </div>
+            </motion.div>
+          );
+        })}
 
         {/* Specialized Skills Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.8, duration: 0.8 }}
+          className="mt-20"
         >
           <div className="text-center mb-12">
             <motion.h2 
@@ -258,7 +297,7 @@ const Skills = () => {
               animate={isInView ? { opacity: 1 } : {}}
               transition={{ delay: 1 }}
             >
-              Specialized Skills
+              Specialized Expertise
             </motion.h2>
             <motion.p 
               className="text-muted-foreground text-xl font-['Inter'] max-w-3xl mx-auto"
@@ -266,11 +305,11 @@ const Skills = () => {
               animate={isInView ? { opacity: 1 } : {}}
               transition={{ delay: 1.1 }}
             >
-              Backend developer with a passion for building scalable, production-ready systems.
+              Full-stack developer passionate about building end-to-end solutions with modern technologies
             </motion.p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 container mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {specializedSkills.map((skill, index) => (
               <SpecializedSkillCard 
                 key={skill.title}
@@ -279,24 +318,6 @@ const Skills = () => {
               />
             ))}
           </div>
-        </motion.div>
-
-        {/* Additional Info */}
-        <motion.div
-          className="text-center mt-16"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 1.8, duration: 0.8 }}
-        >
-          <motion.p 
-            className="text-muted-foreground text-lg font-['Inter'] inline-flex items-center gap-2 bg-background/50 backdrop-blur-sm rounded-full px-6 py-3 border border-primary/20"
-            whileHover={{ scale: 1.05, borderColor: "rgba(102, 126, 234, 0.5)" }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
-            <Sparkles size={18} className="text-primary" />
-            Continuously learning and expanding my skill set
-            <Sparkles size={18} className="text-secondary" />
-          </motion.p>
         </motion.div>
       </div>
     </section>
