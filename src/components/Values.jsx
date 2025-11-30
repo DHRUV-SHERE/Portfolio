@@ -26,7 +26,7 @@ const Values = () => {
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 gradient-text font-['Orbitron'] text-responsive-xl">
             My Values
           </h2>
-          <p className="text-muted-foreground text-base md:text-lg font-['Inter']">
+          <p className="text-muted-foreground text-base md:text-lg ">
             The principles that guide my work
           </p>
         </div>
@@ -59,7 +59,7 @@ const Values = () => {
                   <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-3 md:mb-4 text-foreground font-['Orbitron'] text-responsive-lg group-hover:text-primary transition-colors duration-300">
                     {value.title}
                   </h3>
-                  <p className="text-muted-foreground leading-relaxed font-['Inter'] text-sm md:text-base lg:text-lg group-hover:text-foreground transition-colors duration-300">
+                  <p className="text-muted-foreground leading-relaxed  text-sm md:text-base lg:text-lg group-hover:text-foreground transition-colors duration-300">
                     {value.description}
                   </p>
                 </div>

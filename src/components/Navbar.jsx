@@ -54,7 +54,7 @@ const Navigation = () => {
       smooth={true}
       duration={500}
       offset={-80}
-      className={`transition-all duration-300 relative group font-medium font-['Inter'] text-base lg:text-lg cursor-pointer px-3 py-2 rounded-lg ${
+      className={`transition-all duration-300 relative group font-medium  text-base lg:text-lg cursor-pointer px-3 py-2 rounded-lg ${
         isActive 
           ? 'text-primary bg-primary/10' 
           : 'text-foreground hover:text-primary hover:bg-primary/5'
@@ -143,7 +143,7 @@ const Navigation = () => {
                   duration={500}
                   offset={-80}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`text-foreground transition-colors text-left py-3 px-4 rounded-lg font-medium font-['Inter'] text-base cursor-pointer ${
+                  className={`text-foreground transition-colors text-left py-3 px-4 rounded-lg font-medium  text-base cursor-pointer ${
                     activeSection === link.id
                       ? 'bg-primary/10 text-primary'
                       : 'hover:bg-primary/10 hover:text-primary'

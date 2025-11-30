@@ -157,7 +157,7 @@ class Projects extends Component {
             <div className="text-center">
               <div className="inline-flex items-center gap-3 p-6 rounded-2xl bg-cyan-500/10 animate-pulse">
                 <div className="w-8 h-8 bg-cyan-500 rounded-full animate-spin border-2 border-cyan-300 border-t-transparent"></div>
-                <p className="text-gray-400 font-['Inter']">Loading projects...</p>
+                <p className="text-gray-400 ">Loading projects...</p>
               </div>
             </div>
           </div>
@@ -171,7 +171,7 @@ class Projects extends Component {
           <div className="container mx-auto px-4 w-full">
             <div className="text-center">
               <div className="inline-flex items-center gap-2 p-4 rounded-xl bg-red-500/10 border border-red-500/20">
-                <p className="text-red-400 font-['Inter']">Error loading projects: {error}</p>
+                <p className="text-red-400 ">Error loading projects: {error}</p>
               </div>
             </div>
           </div>
@@ -195,7 +195,7 @@ class Projects extends Component {
               </h2>
               <Sparkles className="text-blue-400" size={32} />
             </div>
-            <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto font-['Inter'] leading-relaxed">
+            <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto  leading-relaxed">
               A collection of my latest work and innovative solutions
             </p>
           </div>
@@ -265,7 +265,7 @@ class Projects extends Component {
                       </div>
                     </div>
 
-                    <p className="text-gray-300 mb-6 leading-relaxed font-['Inter'] text-lg line-clamp-3">
+                    <p className="text-gray-300 mb-6 leading-relaxed  text-lg line-clamp-3">
                       {project.description}
                     </p>
                     
@@ -315,7 +315,7 @@ class Projects extends Component {
           {/* Call to Action */}
           <div className="text-center mt-16 w-full">
             <div className="bg-gradient-to-br from-cyan-500/10 to-blue-500/10 backdrop-blur-sm border border-cyan-500/20 rounded-2xl p-8 max-w-2xl mx-auto hover:border-cyan-400/40 transition-all duration-500">
-              <p className="text-xl text-gray-300 mb-6 font-['Inter']">
+              <p className="text-xl text-gray-300 mb-6 ">
                 Want to explore more of my work?
               </p>
               <a

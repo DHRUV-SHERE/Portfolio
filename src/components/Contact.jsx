@@ -170,7 +170,7 @@ const Contact = () => {
           <h2 className="text-3xl md:text-4xl lg:text-6xl font-bold mb-4 md:mb-6 font-['Orbitron'] text-responsive-2xl">
             Get In <span className="name-gradient">Touch</span>
           </h2>
-          <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto font-['Inter'] leading-relaxed text-responsive">
+          <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto  leading-relaxed text-responsive">
             Let's discuss your next project or just say hello
           </p>
         </div>
@@ -182,7 +182,7 @@ const Contact = () => {
               <h3 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6 font-['Orbitron'] text-foreground text-responsive-lg">
                 Let's work together
               </h3>
-              <p className="text-muted-foreground mb-6 md:mb-8 leading-relaxed font-['Inter'] text-sm md:text-base lg:text-lg">
+              <p className="text-muted-foreground mb-6 md:mb-8 leading-relaxed  text-sm md:text-base lg:text-lg">
                 I'm always interested in new opportunities, whether it's a full-time position, 
                 freelance project, or just a conversation about technology. Feel free to reach out!
               </p>
@@ -196,16 +196,16 @@ const Contact = () => {
                         <Icon className={getTextColorClass(info.color)} size={24} />
                       </div>
                       <div className="flex-1">
-                        <p className="text-muted-foreground text-xs md:text-sm font-['Inter'] mb-1">{info.label}</p>
+                        <p className="text-muted-foreground text-xs md:text-sm  mb-1">{info.label}</p>
                         {info.href ? (
                           <a 
                             href={info.href}
-                            className="text-foreground font-medium hover:text-primary transition-colors font-['Inter'] text-sm md:text-base lg:text-lg"
+                            className="text-foreground font-medium hover:text-primary transition-colors  text-sm md:text-base lg:text-lg"
                           >
                             {info.value}
                           </a>
                         ) : (
-                          <p className="text-foreground font-medium font-['Inter'] text-sm md:text-base lg:text-lg">{info.value}</p>
+                          <p className="text-foreground font-medium  text-sm md:text-base lg:text-lg">{info.value}</p>
                         )}
                       </div>
                     </div>
@@ -246,7 +246,7 @@ const Contact = () => {
             <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                 <div>
-                  <label className="text-sm md:text-base lg:text-lg text-muted-foreground mb-2 block font-['Inter'] font-medium">
+                  <label className="text-sm md:text-base lg:text-lg text-muted-foreground mb-2 block  font-medium">
                     Name
                   </label>
                   <Input
@@ -259,7 +259,7 @@ const Contact = () => {
                   />
                 </div>
                 <div>
-                  <label className="text-sm md:text-base lg:text-lg text-muted-foreground mb-2 block font-['Inter'] font-medium">
+                  <label className="text-sm md:text-base lg:text-lg text-muted-foreground mb-2 block  font-medium">
                     Email
                   </label>
                   <Input
@@ -274,7 +274,7 @@ const Contact = () => {
               </div>
 
               <div>
-                <label className="text-sm md:text-base lg:text-lg text-muted-foreground mb-2 block font-['Inter'] font-medium">
+                <label className="text-sm md:text-base lg:text-lg text-muted-foreground mb-2 block  font-medium">
                   Subject
                 </label>
                 <Input
@@ -288,7 +288,7 @@ const Contact = () => {
               </div>
 
               <div>
-                <label className="text-sm md:text-base lg:text-lg text-muted-foreground mb-2 block font-['Inter'] font-medium">
+                <label className="text-sm md:text-base lg:text-lg text-muted-foreground mb-2 block  font-medium">
                   Message
                 </label>
                 <Textarea
@@ -321,13 +321,13 @@ const Contact = () => {
 
               {/* Success & Error Messages */}
               {submitStatus === "success" && (
-                <div className="p-3 md:p-4 rounded-xl bg-green-500/10 border border-green-500 text-green-400 font-['Inter'] text-sm md:text-base animate-fade-in">
+                <div className="p-3 md:p-4 rounded-xl bg-green-500/10 border border-green-500 text-green-400  text-sm md:text-base animate-fade-in">
                   ✅ Your message has been successfully delivered!
                 </div>
               )}
 
               {submitStatus === "error" && (
-                <div className="p-3 md:p-4 rounded-xl bg-red-500/10 border border-red-500 text-red-400 font-['Inter'] text-sm md:text-base animate-fade-in">
+                <div className="p-3 md:p-4 rounded-xl bg-red-500/10 border border-red-500 text-red-400  text-sm md:text-base animate-fade-in">
                   ❌ Something went wrong. Please try again.
                 </div>
               )}

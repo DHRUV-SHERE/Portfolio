@@ -129,7 +129,7 @@ const Skills = () => {
           </div>
           
           {/* Skill Name */}
-          <h3 className="text-foreground font-['Inter'] font-semibold text-base group-hover:text-primary transition-all duration-300 text-center leading-tight">
+          <h3 className="text-foreground  font-semibold text-base group-hover:text-primary transition-all duration-300 text-center leading-tight">
             {skill.name}
           </h3>
         </div>
@@ -173,7 +173,7 @@ const Skills = () => {
             </h3>
             
             {/* Description */}
-            <p className="text-muted-foreground text-base font-['Inter'] leading-relaxed mb-4 flex-grow">
+            <p className="text-muted-foreground text-base  leading-relaxed mb-4 flex-grow">
               {skill.description}
             </p>
 
@@ -240,7 +240,7 @@ const Skills = () => {
           </motion.div>
           
           <motion.p 
-            className="text-muted-foreground text-lg md:text-xl font-['Inter'] max-w-2xl mx-auto leading-relaxed"
+            className="text-muted-foreground text-lg md:text-xl  max-w-2xl mx-auto leading-relaxed"
             initial={{ opacity: 0, y: -20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.4, duration: 0.8 }}
@@ -300,7 +300,7 @@ const Skills = () => {
               Specialized Expertise
             </motion.h2>
             <motion.p 
-              className="text-muted-foreground text-xl font-['Inter'] max-w-3xl mx-auto"
+              className="text-muted-foreground text-xl  max-w-3xl mx-auto"
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : {}}
               transition={{ delay: 1.1 }}

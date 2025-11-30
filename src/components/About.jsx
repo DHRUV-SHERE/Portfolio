@@ -205,7 +205,7 @@ class About extends Component {
             <div className="flex-grow">
               {/* Period and Degree */}
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3">
-                <span className="text-sm font-semibold font-['Inter'] bg-primary/10 text-primary px-3 py-1 rounded-full inline-flex items-center gap-1 w-fit">
+                <span className="text-sm font-semibold  bg-primary/10 text-primary px-3 py-1 rounded-full inline-flex items-center gap-1 w-fit">
                   <Calendar size={14} />
                   {education.period}
                 </span>
@@ -216,7 +216,7 @@ class About extends Component {
               
               {/* Institution and Location */}
               <div className="space-y-2">
-                <p className="text-foreground font-['Inter'] font-medium text-xl">
+                <p className="text-foreground  font-medium text-xl">
                   {education.institution}
                 </p>
                 <div className="flex items-center gap-1 text-muted-foreground text-sm">
@@ -228,7 +228,7 @@ class About extends Component {
               {/* Score */}
               <div className="flex items-center gap-2 mt-3 pt-3 border-t border-border/50">
                 <Award className={this.getTextColorClass(education.color)} size={16} />
-                <span className={`font-['Inter'] font-semibold text-base ${this.getTextColorClass(education.color)}`}>
+                <span className={` font-semibold text-base ${this.getTextColorClass(education.color)}`}>
                   {education.score}
                 </span>
               </div>
@@ -255,7 +255,7 @@ class About extends Component {
             <h2 className="text-4xl md:text-5xl font-bold mb-4 font-['Orbitron']">
               About Me
             </h2>
-            <p className="text-muted-foreground text-xl font-['Inter']">
+            <p className="text-muted-foreground text-xl ">
               Get to know more about my journey and passion
             </p>
           </div>
@@ -289,7 +289,7 @@ class About extends Component {
                         </h3>
                       </div>
                       
-                      <p className="text-muted-foreground text-xl leading-relaxed font-['Inter'] flex-grow text-base">
+                      <p className="text-muted-foreground text-xl leading-relaxed  flex-grow text-base">
                         {card.content}
                       </p>
                     </div>
@@ -308,7 +308,7 @@ class About extends Component {
               <h3 className="text-3xl font-bold font-['Orbitron'] text-primary mb-4">
                 Education Timeline
               </h3>
-              <p className="text-muted-foreground font-['Inter'] text-xl">
+              <p className="text-muted-foreground  text-xl">
                 My academic journey and achievements
               </p>
             </div>

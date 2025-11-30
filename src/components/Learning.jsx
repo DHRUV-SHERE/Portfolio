@@ -18,7 +18,7 @@ const Learning = () => {
               What I'm Learning
             </h2>
           </div>
-          <p className="text-muted-foreground text-base md:text-lg font-['Inter']">
+          <p className="text-muted-foreground text-base md:text-lg ">
             Currently exploring these exciting technologies
           </p>
         </div>
@@ -34,7 +34,7 @@ const Learning = () => {
                 animationFillMode: 'forwards'
               }}
             >
-              <span className="text-sm md:text-base lg:text-lg font-medium gradient-text group-hover:text-glow-blue transition-all duration-300 font-['Inter']">
+              <span className="text-sm md:text-base lg:text-lg font-medium gradient-text group-hover:text-glow-blue transition-all duration-300 ">
                 {topic}
               </span>
             </div>

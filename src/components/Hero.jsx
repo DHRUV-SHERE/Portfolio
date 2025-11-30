@@ -242,7 +242,7 @@ class Hero extends Component {
                 className="animate-fade-in-up"
                 style={{ animationDelay: "0.6s" }}
               >
-                <p className="text-base md:text-xl lg:text-2xl text-muted-foreground max-w-3xl leading-relaxed font-['Inter'] bg-background/50 backdrop-blur-sm rounded-2xl p-4 md:p-6 border border-primary/10 mx-auto">
+                <p className="text-base md:text-xl lg:text-2xl text-muted-foreground max-w-3xl leading-relaxed  bg-background/50 backdrop-blur-sm rounded-2xl p-4 md:p-6 border border-primary/10 mx-auto">
                   Passionate about{" "}
                   <span className="text-primary font-semibold">
                     modern web technologies
@@ -316,7 +316,7 @@ class Hero extends Component {
                   <div className="text-2xl md:text-3xl font-bold text-primary font-['Orbitron']">
                     {stat.number}
                   </div>
-                  <div className="text-sm md:text-base text-muted-foreground font-['Inter']">
+                  <div className="text-sm md:text-base text-muted-foreground ">
                     {stat.label}
                   </div>
                 </div>
@@ -333,7 +333,7 @@ class Hero extends Component {
                 className="group flex flex-col items-center gap-2 text-primary hover:text-secondary transition-colors duration-300"
                 aria-label="Scroll to about section"
               >
-                <span className="text-xs md:text-sm font-['Inter'] font-medium tracking-wider uppercase opacity-80 group-hover:opacity-100">
+                <span className="text-xs md:text-sm  font-medium tracking-wider uppercase opacity-80 group-hover:opacity-100">
                   Discover More
                 </span>
                 <div className="relative">

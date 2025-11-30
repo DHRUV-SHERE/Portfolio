@@ -164,7 +164,7 @@ class UpcomingProjects extends Component {
               </h2>
               <Rocket className="text-secondary" size={32} />
             </div>
-            <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto font-['Inter'] leading-relaxed">
+            <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto  leading-relaxed">
               A glimpse into my current and future development endeavors
             </p>
           </div>
@@ -221,7 +221,7 @@ class UpcomingProjects extends Component {
                     </div>
 
                     {/* Description */}
-                    <p className="text-muted-foreground mb-6 leading-relaxed font-['Inter'] text-lg">
+                    <p className="text-muted-foreground mb-6 leading-relaxed  text-lg">
                       {project.description}
                     </p>
 
@@ -319,7 +319,7 @@ class UpcomingProjects extends Component {
               <h3 className="text-3xl font-bold text-foreground font-['Orbitron'] mb-4">
                 Interested in Collaboration?
               </h3>
-              <p className="text-muted-foreground mb-6 font-['Inter'] text-lg leading-relaxed">
+              <p className="text-muted-foreground mb-6  text-lg leading-relaxed">
                 I'm always open to discussing new projects, creative ideas, or
                 opportunities to be part of your vision.
               </p>
