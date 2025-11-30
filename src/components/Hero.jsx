@@ -1,23 +1,21 @@
-import { Component } from 'react';
-import { ArrowDown, Download, Eye, Star, Zap, Sparkles } from 'lucide-react';
-import heroProfile from '../assets/hero-profile.jpg';
-import Resume from '../assets/RESUME_DHRUV-SHERE.pdf';
+import { Component } from "react";
+import { ArrowDown, Download, Eye, Star, Zap, Sparkles } from "lucide-react";
+import heroProfile from "../assets/hero-profile.jpg";
+import Resume from "../assets/RESUME_DHRUV-SHERE.pdf";
 
 class Hero extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      typedText: '',
-      currentWordIndex: 0,
-      isDeleting: false,
-    };
-    this.words = ['Full Stack Developer', 'MERN Stack Expert', 'Problem Solver', 'Tech Enthusiast'];
+    this.words = [
+      "Full Stack Developer",
+      "MERN Stack Expert", 
+      "Problem Solver",
+      "Tech Enthusiast",
+    ];
   }
 
   componentDidMount() {
-    this.startTyping();
-    
-    const style = document.createElement('style');
+    const style = document.createElement("style");
     style.textContent = this.getStyles();
     document.head.appendChild(style);
     this.animationStyle = style;
@@ -27,48 +25,21 @@ class Hero extends Component {
     if (this.animationStyle) {
       document.head.removeChild(this.animationStyle);
     }
-    if (this.typingInterval) {
-      clearInterval(this.typingInterval);
-    }
   }
-
-  startTyping = () => {
-    this.typingInterval = setInterval(() => {
-      const { currentWordIndex, isDeleting, typedText } = this.state;
-      const currentWord = this.words[currentWordIndex];
-      
-      if (!isDeleting) {
-        if (typedText.length < currentWord.length) {
-          this.setState({ typedText: currentWord.substring(0, typedText.length + 1) });
-        } else {
-          setTimeout(() => this.setState({ isDeleting: true }), 2000);
-        }
-      } else {
-        if (typedText.length > 0) {
-          this.setState({ typedText: typedText.substring(0, typedText.length - 1) });
-        } else {
-          this.setState({ 
-            isDeleting: false, 
-            currentWordIndex: (currentWordIndex + 1) % this.words.length 
-          });
-        }
-      }
-    }, 100);
-  };
 
   scrollToSection = (id) => {
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
     }
   };
 
   downloadResume = () => {
     const resumeUrl = Resume;
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = resumeUrl;
-    link.download = 'DHRUV-SHERE_RESUME.pdf';
-    link.target = '_blank';
+    link.download = "DHRUV-SHERE_RESUME.pdf";
+    link.target = "_blank";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -120,28 +91,40 @@ class Hero extends Component {
       50% { background-position: 100% 50%; }
     }
 
-    .typing-cursor {
-      animation: blink 1s infinite;
-    }
-
-    @keyframes blink {
-      0%, 50% { opacity: 1; }
-      51%, 100% { opacity: 0; }
+    .skill-tag {
+      white-space: nowrap;
+      padding: 0.5rem 1rem;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      border-radius: 50px;
+      color: white;
+      font-weight: 600;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
     }
   `;
 
-  Button = ({ children, onClick, className = '', variant = 'default', size = 'default', icon: Icon }) => {
-    const baseStyles = 'inline-flex items-center justify-center px-4 md:px-6 py-3 rounded-xl font-medium transition-all duration-300 hover-lift font-["Orbitron"] relative overflow-hidden group';
-    
+  Button = ({
+    children,
+    onClick,
+    className = "",
+    variant = "default",
+    size = "default",
+    icon: Icon,
+  }) => {
+    const baseStyles =
+      'inline-flex items-center justify-center px-4 md:px-6 py-3 rounded-xl font-medium transition-all duration-300 hover-lift font-["Orbitron"] relative overflow-hidden group';
+
     const variants = {
-      default: 'bg-gradient-to-r from-primary to-secondary text-primary-foreground hover-glow shadow-lg hover:shadow-xl',
-      outline: 'border-2 border-primary/50 text-primary bg-primary/5 hover:bg-primary/10 hover:border-primary/80 backdrop-blur-sm',
-      outlinePurple: 'border-2 border-purple-400 text-purple-400 bg-purple-500/5 hover:bg-purple-500/10 hover:border-purple-300 backdrop-blur-sm'
+      default:
+        "bg-gradient-to-r from-primary to-secondary text-primary-foreground hover-glow shadow-lg hover:shadow-xl",
+      outline:
+        "border-2 border-primary/50 text-primary bg-primary/5 hover:bg-primary/10 hover:border-primary/80 backdrop-blur-sm",
+      outlinePurple:
+        "border-2 border-purple-400 text-purple-400 bg-purple-500/5 hover:bg-purple-500/10 hover:border-purple-300 backdrop-blur-sm",
     };
 
     const sizes = {
-      default: 'text-sm md:text-base px-4 py-3',
-      lg: 'text-base md:text-lg px-6 md:px-8 py-4'
+      default: "text-sm md:text-base px-4 py-3",
+      lg: "text-base md:text-lg px-6 md:px-8 py-4",
     };
 
     return (
@@ -158,11 +141,13 @@ class Hero extends Component {
 
   render() {
     const Button = this.Button;
-    const { typedText } = this.state;
 
     return (
-      <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-16 md:pt-20">
-        {/* Enhanced Animated Background */}
+      <section
+        id="hero"
+        className="min-h-screen flex items-center justify-center relative overflow-hidden pt-16 md:pt-20"
+      >
+        {/* Simplified Animated Background - Only Circles */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div className="relative w-full max-w-[800px] h-[400px] md:h-[800px]">
             {[...Array(3)].map((_, i) => (
@@ -175,21 +160,7 @@ class Hero extends Component {
                   top: `${i * 10}%`,
                   left: `${i * 10}%`,
                   animation: `orbit ${25 + i * 8}s linear infinite`,
-                  borderStyle: i % 2 === 0 ? 'solid' : 'dashed',
-                }}
-              />
-            ))}
-            
-            {/* Floating particles */}
-            {[...Array(12)].map((_, i) => (
-              <div
-                key={`particle-${i}`}
-                className="absolute w-1 h-1 md:w-2 md:h-2 bg-primary/30 rounded-full"
-                style={{
-                  top: `${Math.random() * 100}%`,
-                  left: `${Math.random() * 100}%`,
-                  animation: `float ${15 + Math.random() * 20}s infinite ease-in-out`,
-                  animationDelay: `${Math.random() * 5}s`,
+                  borderStyle: i % 2 === 0 ? "solid" : "dashed",
                 }}
               />
             ))}
@@ -209,7 +180,7 @@ class Hero extends Component {
               top: `${20 + Math.random() * 60}%`,
               left: `${Math.random() * 100}%`,
               animationDelay: `${i * 0.5}s`,
-              animation: 'sparkle 3s infinite',
+              animation: "sparkle 3s infinite",
             }}
             size={20}
           />
@@ -227,10 +198,10 @@ class Hero extends Component {
                 />
                 <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-primary/30 to-secondary/30 animate-pulse-glow" />
               </div>
-              
+
               {/* Status indicator */}
               <div className="absolute bottom-2 right-2 md:bottom-4 md:right-4 w-4 h-4 md:w-6 md:h-6 bg-green-500 rounded-full border-2 border-background glow-green animate-pulse" />
-              
+
               {/* Decorative elements */}
               <div className="absolute -top-2 -left-2 w-6 h-6 border-2 border-primary/50 rounded-full animate-ping" />
               <div className="absolute -bottom-2 -right-2 w-4 h-4 border-2 border-secondary/50 rounded-full animate-ping delay-1000" />
@@ -238,36 +209,64 @@ class Hero extends Component {
 
             {/* Enhanced Hero Text */}
             <div className="space-y-4 md:space-y-6 mb-8 md:mb-12 max-w-4xl">
-              <div className="animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+              <div
+                className="animate-fade-in-up"
+                style={{ animationDelay: "0.2s" }}
+              >
                 <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 md:mb-6 font-['Orbitron'] tracking-tight">
                   Hi, I'm <span className="name-gradient">Dhruv Shere</span>
                 </h1>
               </div>
-              
-              <div className="animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
-                <div className="inline-flex items-center gap-2 md:gap-3 px-4 md:px-6 py-2 md:py-3 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm mb-4 min-h-[60px]">
+
+              <div
+                className="animate-fade-in-up"
+                style={{ animationDelay: "0.4s" }}
+              >
+                <div className="inline-flex items-center gap-2 md:gap-3 px-4 md:px-6 py-2 md:py-3 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm mb-4 min-h-[60px] justify-center">
                   <Zap className="text-primary" size={18} />
-                  <p className="text-lg md:text-2xl lg:text-3xl text-foreground font-['Inter'] font-semibold">
-                    {typedText}
-                    <span className="typing-cursor">|</span>
-                  </p>
+                  {/* Simple Static Text Line */}
+                  <div className="flex items-center gap-3 md:gap-4 flex-wrap justify-center">
+                    {this.words.map((word, index) => (
+                      <span
+                        key={index}
+                        className="skill-tag text-xs md:text-sm"
+                      >
+                        {word}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
-              
-              <div className="animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
+
+              <div
+                className="animate-fade-in-up"
+                style={{ animationDelay: "0.6s" }}
+              >
                 <p className="text-base md:text-xl lg:text-2xl text-muted-foreground max-w-3xl leading-relaxed font-['Inter'] bg-background/50 backdrop-blur-sm rounded-2xl p-4 md:p-6 border border-primary/10 mx-auto">
-                  Passionate about <span className="text-primary font-semibold">modern web technologies</span>, 
-                  building <span className="text-secondary font-semibold">scalable full-stack applications</span>, 
-                  and creating <span className="text-primary font-semibold">impactful digital experiences</span> 
+                  Passionate about{" "}
+                  <span className="text-primary font-semibold">
+                    modern web technologies
+                  </span>
+                  , building{" "}
+                  <span className="text-secondary font-semibold">
+                    scalable full-stack applications
+                  </span>
+                  , and creating{" "}
+                  <span className="text-primary font-semibold">
+                    impactful digital experiences
+                  </span>
                   through clean, efficient code and innovative solutions.
                 </p>
               </div>
             </div>
 
             {/* Enhanced CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-3 md:gap-6 mb-8 md:mb-12 animate-fade-in-up w-full max-w-md mx-auto" style={{ animationDelay: '0.8s' }}>
+            <div
+              className="flex flex-col sm:flex-row gap-3 md:gap-6 mb-8 md:mb-12 animate-fade-in-up w-full max-w-md mx-auto"
+              style={{ animationDelay: "0.8s" }}
+            >
               <Button
-                onClick={() => this.scrollToSection('projects')}
+                onClick={() => this.scrollToSection("projects")}
                 size="lg"
                 variant="default"
                 icon={Eye}
@@ -276,7 +275,7 @@ class Hero extends Component {
                 View My Work
               </Button>
               <Button
-                onClick={() => this.scrollToSection('contact')}
+                onClick={() => this.scrollToSection("contact")}
                 size="lg"
                 variant="outline"
                 className="flex-1 justify-center transform hover:scale-105 transition-transform duration-300"
@@ -285,7 +284,10 @@ class Hero extends Component {
               </Button>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-3 md:gap-6 mb-12 md:mb-16 animate-fade-in-up w-full max-w-md mx-auto" style={{ animationDelay: '0.9s' }}>
+            <div
+              className="flex flex-col sm:flex-row gap-3 md:gap-6 mb-12 md:mb-16 animate-fade-in-up w-full max-w-md mx-auto"
+              style={{ animationDelay: "0.9s" }}
+            >
               <Button
                 onClick={this.downloadResume}
                 size="lg"
@@ -298,23 +300,36 @@ class Hero extends Component {
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-3 gap-4 md:gap-8 mb-8 md:mb-12 animate-fade-in-up w-full max-w-2xl mx-auto" style={{ animationDelay: '1s' }}>
+            <div
+              className="grid grid-cols-3 gap-4 md:gap-8 mb-8 md:mb-12 animate-fade-in-up w-full max-w-2xl mx-auto"
+              style={{ animationDelay: "1s" }}
+            >
               {[
-                { number: '10+', label: 'Projects' },
-                { number: '2+', label: 'Years Experience' },
-                { number: '5+', label: 'Technologies' }
+                { number: "10+", label: "Projects" },
+                { number: "2+", label: "Years Experience" },
+                { number: "5+", label: "Technologies" },
               ].map((stat, index) => (
-                <div key={index} className="text-center p-4 rounded-xl bg-primary/5 border border-primary/10 backdrop-blur-sm">
-                  <div className="text-2xl md:text-3xl font-bold text-primary font-['Orbitron']">{stat.number}</div>
-                  <div className="text-sm md:text-base text-muted-foreground font-['Inter']">{stat.label}</div>
+                <div
+                  key={index}
+                  className="text-center p-4 rounded-xl bg-primary/5 border border-primary/10 backdrop-blur-sm"
+                >
+                  <div className="text-2xl md:text-3xl font-bold text-primary font-['Orbitron']">
+                    {stat.number}
+                  </div>
+                  <div className="text-sm md:text-base text-muted-foreground font-['Inter']">
+                    {stat.label}
+                  </div>
                 </div>
               ))}
             </div>
 
             {/* Enhanced Scroll Indicator */}
-            <div className="animate-fade-in-up" style={{ animationDelay: '1.2s' }}>
+            <div
+              className="animate-fade-in-up"
+              style={{ animationDelay: "1.2s" }}
+            >
               <button
-                onClick={() => this.scrollToSection('about')}
+                onClick={() => this.scrollToSection("about")}
                 className="group flex flex-col items-center gap-2 text-primary hover:text-secondary transition-colors duration-300"
                 aria-label="Scroll to about section"
               >
@@ -323,9 +338,9 @@ class Hero extends Component {
                 </span>
                 <div className="relative">
                   <div className="w-10 h-10 md:w-12 md:h-12 border-2 border-primary/30 rounded-full flex items-center justify-center group-hover:border-secondary/50 transition-colors duration-300 group-hover:scale-110">
-                    <ArrowDown 
-                      className="animate-bounce group-hover:animate-pulse" 
-                      size={18} 
+                    <ArrowDown
+                      className="animate-bounce group-hover:animate-pulse"
+                      size={18}
                     />
                   </div>
                   <div className="absolute inset-0 border-2 border-primary/10 rounded-full animate-ping" />
