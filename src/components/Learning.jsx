@@ -14,7 +14,7 @@ const Learning = () => {
         <div className="text-center mb-12 md:mb-16 animate-slide-up">
           <div className="inline-flex items-center gap-2 mb-4">
             <Sparkles className="text-primary" size={24} />
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold gradient-text font-['Orbitron'] text-responsive-xl">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold gradient-text  text-responsive-xl">
               What I'm Learning
             </h2>
           </div>
@@ -34,7 +34,7 @@ const Learning = () => {
                 animationFillMode: 'forwards'
               }}
             >
-              <span className="text-sm md:text-base lg:text-lg font-medium gradient-text group-hover:text-glow-blue transition-all duration-300 ">
+              <span className="text-sm md:text-base lg:text-lg font-medium gradient-text group-hover:text-shadow-ocean transition-all duration-300 ">
                 {topic}
               </span>
             </div>

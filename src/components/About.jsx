@@ -60,11 +60,11 @@ class About extends Component {
   getGlowClass = (color) => {
     switch (color) {
       case 'purple':
-        return 'glow-purple';
+        return 'shadow-purple';
       case 'cyan':
         return 'glow-cyan';
       default:
-        return 'glow-blue';
+        return 'shadow-ocean';
     }
   };
 
@@ -146,7 +146,7 @@ class About extends Component {
         transform: translateY(-5px);
       }
 
-      .card-glow-purple:hover {
+      .card-shadow-purple:hover {
         box-shadow: 
           0 0 20px rgba(118, 75, 162, 0.4),
           0 0 40px rgba(118, 75, 162, 0.2),
@@ -173,7 +173,7 @@ class About extends Component {
   getCardGlowClass = (color) => {
     switch (color) {
       case 'purple':
-        return 'card-glow card-glow-purple';
+        return 'card-glow card-shadow-purple';
       case 'cyan':
         return 'card-glow card-glow-cyan';
       default:
@@ -209,7 +209,7 @@ class About extends Component {
                   <Calendar size={14} />
                   {education.period}
                 </span>
-                <h3 className="text-xl font-bold font-['Orbitron'] text-foreground">
+                <h3 className="text-xl font-bold  text-foreground">
                   {education.degree}
                 </h3>
               </div>
@@ -252,7 +252,7 @@ class About extends Component {
         <div className="w-full max-w-7xl mx-auto px-4 relative z-10 w-full">
           {/* Header Section */}
           <div className="text-center mb-16 animate-slide-up w-full">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 font-['Orbitron']">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 ">
               About Me
             </h2>
             <p className="text-muted-foreground text-xl ">
@@ -284,7 +284,7 @@ class About extends Component {
                         <div className={`inline-flex items-center justify-center p-3 rounded-xl ${this.getBackgroundClass(card.color)} ${this.getGlowClass(card.color)} group-hover:scale-110 transition-transform duration-300 border ${this.getBorderClass(card.color)}`}>
                           <Icon className={this.getTextColorClass(card.color)} size={28} />
                         </div>
-                        <h3 className={`text-3xl font-bold font-['Orbitron'] ${this.getTextColorClass(card.color)}`}>
+                        <h3 className={`text-3xl font-bold  ${this.getTextColorClass(card.color)}`}>
                           {card.title}
                         </h3>
                       </div>
@@ -305,7 +305,7 @@ class About extends Component {
           {/* Education Details Section */}
           <div className="mt-16 w-full max-w-4xl mx-auto animate-slide-up">
             <div className="text-center mb-8">
-              <h3 className="text-3xl font-bold font-['Orbitron'] text-primary mb-4">
+              <h3 className="text-3xl font-bold  text-primary mb-4">
                 Education Timeline
               </h3>
               <p className="text-muted-foreground  text-xl">

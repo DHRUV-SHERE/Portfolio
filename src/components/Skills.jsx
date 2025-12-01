@@ -45,12 +45,12 @@ const Skills = () => {
   ];
 
   const skillCategories = [
-    { name: "frontend", title: "Frontend Development", color: "from-blue-500 to-cyan-400" },
-    { name: "backend", title: "Backend Development", color: "from-purple-500 to-pink-500" },
-    { name: "database", title: "Database", color: "from-green-500 to-emerald-400" },
+    { name: "frontend", title: "Frontend Development", color: "from-primary to-secondary" },
+    { name: "backend", title: "Backend Development", color: "from-secondary to-accent" },
+    { name: "database", title: "Database", color: "from-accent to-green-400" },
     { name: "tools", title: "Tools & Platforms", color: "from-orange-500 to-red-400" },
-    { name: "ai", title: "AI Tools", color: "from-indigo-500 to-purple-400" },
-    { name: "deployment", title: "Deployment", color: "from-cyan-500 to-blue-400" },
+    { name: "ai", title: "AI Tools", color: "from-primary/50 to-secondary/50" },
+    { name: "deployment", title: "Deployment", color: "from-secondary to-primary" },
   ];
 
   const specializedSkills = [
@@ -58,28 +58,28 @@ const Skills = () => {
       title: "Frontend Development",
       description: "Building responsive, accessible, and high-performance user interfaces using modern frameworks like React, Next.js, and Tailwind CSS with focus on UX/UI principles.",
       icon: Monitor,
-      gradient: "from-purple-500 to-cyan-400",
+      gradient: "from-primary to-secondary",
       technologies: ["React", "Next.js", "Tailwind CSS", "JavaScript", "HTML5", "CSS3"]
     },
     {
       title: "Backend Development",
       description: "Developing scalable RESTful APIs and backend systems with Node.js, Express, and Python. Experience with authentication, middleware, and API design patterns.",
       icon: Server,
-      gradient: "from-cyan-500 to-blue-500",
+      gradient: "from-primary to-secondary",
       technologies: ["Node.js", "Express", "Python", "Java", "REST APIs", "JWT"]
     },
     {
       title: "Database Design",
       description: "Designing efficient database schemas and optimizing queries for both SQL (MySQL) and NoSQL (MongoDB) databases with focus on performance and scalability.",
       icon: Database,
-      gradient: "from-blue-500 to-indigo-500",
+      gradient: "from-primary to-secondary",
       technologies: ["MongoDB", "MySQL", "Mongoose", "Database Design", "Query Optimization"]
     },
     {
       title: "Full Stack Integration",
       description: "Seamlessly integrating frontend and backend systems, ensuring smooth data flow, real-time features, and optimal performance across the entire application stack.",
       icon: Workflow,
-      gradient: "from-indigo-500 to-purple-500",
+      gradient: "from-primary to-secondary",
       technologies: ["MERN Stack", "API Integration", "State Management", "Real-time Features"]
     },
     {
@@ -115,7 +115,7 @@ const Skills = () => {
           y: -5
         }}
       >
-        <div className="glass p-5 rounded-2xl border border-primary/20 hover:border-primary/50 transition-all duration-300 group-hover:glow-blue cursor-pointer h-full flex flex-col items-center justify-center min-h-[120px]">
+        <div className="glass p-5 rounded-2xl border border-primary/20 hover:border-primary/50 transition-all duration-300 group-hover:shadow-ocean cursor-pointer h-full flex flex-col items-center justify-center min-h-[120px] shadow-soft">
           {/* Skill Icon */}
           <div className="w-14 h-14 flex items-center justify-center rounded-xl bg-gradient-to-br from-primary/20 to-secondary/20 border border-primary/30 group-hover:from-primary/30 group-hover:to-secondary/30 transition-all duration-300 mb-3">
             {skill.type === "fontawesome" ? (
@@ -129,7 +129,7 @@ const Skills = () => {
           </div>
           
           {/* Skill Name */}
-          <h3 className="text-foreground  font-semibold text-base group-hover:text-primary transition-all duration-300 text-center leading-tight">
+          <h3 className="text-foreground font-semibold text-base group-hover:text-primary transition-all duration-300 text-center leading-tight">
             {skill.name}
           </h3>
         </div>
@@ -156,7 +156,7 @@ const Skills = () => {
           y: -5
         }}
       >
-        <div className="glass p-6 rounded-2xl border border-primary/20 hover:border-primary/50 transition-all duration-300 group-hover:glow-blue cursor-pointer h-full">
+        <div className="glass p-6 rounded-2xl border border-primary/20 hover:border-primary/50 transition-all duration-300 group-hover:shadow-ocean cursor-pointer h-full shadow-soft">
           {/* Animated border */}
           <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary to-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-md scale-105" />
           <div className="absolute inset-[1px] rounded-2xl bg-background" />
@@ -168,12 +168,12 @@ const Skills = () => {
             </div>
             
             {/* Title */}
-            <h3 className="text-xl font-bold font-['Orbitron'] text-foreground mb-3 group-hover:gradient-text transition-all duration-300">
+            <h3 className="text-xl font-bold text-foreground mb-3 group-hover:gradient-text transition-all duration-300">
               {skill.title}
             </h3>
             
             {/* Description */}
-            <p className="text-muted-foreground text-base  leading-relaxed mb-4 flex-grow">
+            <p className="text-muted-foreground text-base leading-relaxed mb-4 flex-grow">
               {skill.description}
             </p>
 
@@ -229,7 +229,7 @@ const Skills = () => {
           >
             <Sparkles className="text-primary" size={32} />
             <motion.h2 
-              className="text-4xl md:text-5xl lg:text-6xl font-bold gradient-text font-['Orbitron']"
+              className="text-4xl md:text-5xl lg:text-6xl font-bold gradient-text"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.8, delay: 0.2 }}
@@ -240,7 +240,7 @@ const Skills = () => {
           </motion.div>
           
           <motion.p 
-            className="text-muted-foreground text-lg md:text-xl  max-w-2xl mx-auto leading-relaxed"
+            className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto leading-relaxed"
             initial={{ opacity: 0, y: -20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.4, duration: 0.8 }}
@@ -264,7 +264,7 @@ const Skills = () => {
             >
               <div className="flex items-center gap-4 mb-8">
                 <div className={`w-8 h-1 bg-gradient-to-r ${category.color} rounded-full`} />
-                <h3 className="text-2xl md:text-3xl font-bold font-['Orbitron'] text-foreground bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                <h3 className="text-2xl md:text-3xl font-bold text-foreground bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
                   {category.title}
                 </h3>
                 <div className={`flex-grow h-1 bg-gradient-to-r ${category.color} opacity-20 rounded-full`} />
@@ -292,7 +292,7 @@ const Skills = () => {
         >
           <div className="text-center mb-12">
             <motion.h2 
-              className="text-3xl md:text-4xl lg:text-5xl font-bold font-['Orbitron'] gradient-text-cyan mb-4"
+              className="text-3xl md:text-4xl lg:text-5xl font-bold gradient-text mb-4"
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : {}}
               transition={{ delay: 1 }}
@@ -300,7 +300,7 @@ const Skills = () => {
               Specialized Expertise
             </motion.h2>
             <motion.p 
-              className="text-muted-foreground text-xl  max-w-3xl mx-auto"
+              className="text-muted-foreground text-xl max-w-3xl mx-auto"
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : {}}
               transition={{ delay: 1.1 }}

@@ -78,7 +78,7 @@ class Hero extends Component {
     }
 
     .name-gradient {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      background: linear-gradient(135deg, hsl(195 100% 40%), hsl(170 70% 45%));
       background-size: 200% 200%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -94,11 +94,11 @@ class Hero extends Component {
     .skill-tag {
       white-space: nowrap;
       padding: 0.5rem 1rem;
-      background: linear-gradient(45deg, #667eea, #764ba2);
+      background: linear-gradient(45deg, hsl(195 100% 40%), hsl(170 70% 45%));
       border-radius: 50px;
       color: white;
       font-weight: 600;
-      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+      box-shadow: 0 4px 15px hsl(195 100% 40% / 0.3);
     }
   `;
 
@@ -111,15 +111,15 @@ class Hero extends Component {
     icon: Icon,
   }) => {
     const baseStyles =
-      'inline-flex items-center justify-center px-4 md:px-6 py-3 rounded-xl font-medium transition-all duration-300 hover-lift font-["Orbitron"] relative overflow-hidden group';
+      'inline-flex items-center justify-center px-4 md:px-6 py-3 rounded-xl font-medium transition-all duration-300 hover-lift relative overflow-hidden group';
 
     const variants = {
       default:
-        "bg-gradient-to-r from-primary to-secondary text-primary-foreground hover-glow shadow-lg hover:shadow-xl",
+        "bg-gradient-ocean text-primary-foreground hover-glow shadow-medium hover:shadow-large",
       outline:
-        "border-2 border-primary/50 text-primary bg-primary/5 hover:bg-primary/10 hover:border-primary/80 backdrop-blur-sm",
+        "border-2 border-primary/50 text-primary bg-primary/5 hover:bg-primary/10 hover:border-primary/80 backdrop-blur-sm shadow-soft",
       outlinePurple:
-        "border-2 border-purple-400 text-purple-400 bg-purple-500/5 hover:bg-purple-500/10 hover:border-purple-300 backdrop-blur-sm",
+        "border-2 border-secondary text-secondary bg-secondary/5 hover:bg-secondary/10 hover:border-secondary backdrop-blur-sm shadow-soft",
     };
 
     const sizes = {
@@ -190,7 +190,7 @@ class Hero extends Component {
           <div className="flex flex-col items-center text-center">
             {/* Enhanced Profile Image */}
             <div className="relative mb-8 md:mb-12 group">
-              <div className="relative w-32 h-32 md:w-48 md:h-48 rounded-full border-4 border-primary/30 glow-blue overflow-hidden transform transition-all duration-500 group-hover:scale-105 group-hover:glow-intense">
+              <div className="relative w-32 h-32 md:w-48 md:h-48 rounded-full border-4 border-primary/30 overflow-hidden transform transition-all duration-500 group-hover:scale-105 group-hover:shadow-large">
                 <img
                   src={heroProfile}
                   alt="Dhruv Shere - Full Stack Developer"
@@ -200,7 +200,7 @@ class Hero extends Component {
               </div>
 
               {/* Status indicator */}
-              <div className="absolute bottom-2 right-2 md:bottom-4 md:right-4 w-4 h-4 md:w-6 md:h-6 bg-green-500 rounded-full border-2 border-background glow-green animate-pulse" />
+              <div className="absolute bottom-2 right-2 md:bottom-4 md:right-4 w-4 h-4 md:w-6 md:h-6 bg-green-500 rounded-full border-2 border-background animate-pulse" />
 
               {/* Decorative elements */}
               <div className="absolute -top-2 -left-2 w-6 h-6 border-2 border-primary/50 rounded-full animate-ping" />
@@ -213,7 +213,7 @@ class Hero extends Component {
                 className="animate-fade-in-up"
                 style={{ animationDelay: "0.2s" }}
               >
-                <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 md:mb-6 font-['Orbitron'] tracking-tight">
+                <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 md:mb-6 tracking-tight">
                   Hi, I'm <span className="name-gradient">Dhruv Shere</span>
                 </h1>
               </div>
@@ -222,7 +222,7 @@ class Hero extends Component {
                 className="animate-fade-in-up"
                 style={{ animationDelay: "0.4s" }}
               >
-                <div className="inline-flex items-center gap-2 md:gap-3 px-4 md:px-6 py-2 md:py-3 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm mb-4 min-h-[60px] justify-center">
+                <div className="inline-flex items-center gap-2 md:gap-3 px-4 md:px-6 py-2 md:py-3 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm mb-4 min-h-[60px] justify-center shadow-soft">
                   <Zap className="text-primary" size={18} />
                   {/* Simple Static Text Line */}
                   <div className="flex items-center gap-3 md:gap-4 flex-wrap justify-center">
@@ -242,7 +242,7 @@ class Hero extends Component {
                 className="animate-fade-in-up"
                 style={{ animationDelay: "0.6s" }}
               >
-                <p className="text-base md:text-xl lg:text-2xl text-muted-foreground max-w-3xl leading-relaxed  bg-background/50 backdrop-blur-sm rounded-2xl p-4 md:p-6 border border-primary/10 mx-auto">
+                <p className="text-base md:text-xl lg:text-2xl text-muted-foreground max-w-3xl leading-relaxed bg-background/50 backdrop-blur-sm rounded-2xl p-4 md:p-6 border border-primary/10 mx-auto shadow-soft">
                   Passionate about{" "}
                   <span className="text-primary font-semibold">
                     modern web technologies
@@ -311,12 +311,12 @@ class Hero extends Component {
               ].map((stat, index) => (
                 <div
                   key={index}
-                  className="text-center p-4 rounded-xl bg-primary/5 border border-primary/10 backdrop-blur-sm"
+                  className="text-center p-4 rounded-xl bg-primary/5 border border-primary/10 backdrop-blur-sm shadow-soft"
                 >
-                  <div className="text-2xl md:text-3xl font-bold text-primary font-['Orbitron']">
+                  <div className="text-2xl md:text-3xl font-bold text-primary">
                     {stat.number}
                   </div>
-                  <div className="text-sm md:text-base text-muted-foreground ">
+                  <div className="text-sm md:text-base text-muted-foreground">
                     {stat.label}
                   </div>
                 </div>
@@ -333,7 +333,7 @@ class Hero extends Component {
                 className="group flex flex-col items-center gap-2 text-primary hover:text-secondary transition-colors duration-300"
                 aria-label="Scroll to about section"
               >
-                <span className="text-xs md:text-sm  font-medium tracking-wider uppercase opacity-80 group-hover:opacity-100">
+                <span className="text-xs md:text-sm font-medium tracking-wider uppercase opacity-80 group-hover:opacity-100">
                   Discover More
                 </span>
                 <div className="relative">

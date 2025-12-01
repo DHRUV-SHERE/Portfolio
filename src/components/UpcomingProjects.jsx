@@ -112,9 +112,9 @@ class UpcomingProjects extends Component {
       case "completed":
         return "from-green-500 to-emerald-600";
       case "development":
-        return "from-blue-500 to-cyan-600";
+        return "from-primary to-secondary";
       case "planning":
-        return "from-purple-500 to-pink-600";
+        return "from-secondary to-accent";
       default:
         return "from-gray-500 to-gray-600";
     }
@@ -135,7 +135,7 @@ class UpcomingProjects extends Component {
 
   getProgressColor = (progress) => {
     if (progress >= 80) return "bg-green-500";
-    if (progress >= 60) return "bg-blue-500";
+    if (progress >= 60) return "bg-primary";
     if (progress >= 40) return "bg-yellow-500";
     return "bg-red-500";
   };
@@ -159,12 +159,12 @@ class UpcomingProjects extends Component {
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-3 mb-4">
               <Rocket className="text-primary" size={32} />
-              <h2 className="text-4xl md:text-6xl font-bold font-['Orbitron'] bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+              <h2 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
                 Upcoming Projects
               </h2>
               <Rocket className="text-secondary" size={32} />
             </div>
-            <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto  leading-relaxed">
+            <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
               A glimpse into my current and future development endeavors
             </p>
           </div>
@@ -176,7 +176,7 @@ class UpcomingProjects extends Component {
               return (
                 <div
                   key={project.id}
-                  className="group relative glass-card border border-primary/20 rounded-2xl overflow-hidden hover:border-primary/40 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-primary/20"
+                  className="group relative glass-card border border-primary/20 rounded-2xl overflow-hidden hover:border-primary/40 transition-all duration-500 hover:scale-105 hover:shadow-large"
                   style={{
                     animation: `slideUp 0.6s ease-out ${index * 0.2}s forwards`,
                     opacity: 0,
@@ -197,11 +197,11 @@ class UpcomingProjects extends Component {
                   <div className="p-6">
                     {/* Project Header */}
                     <div className="flex items-center gap-4 mb-6">
-                      <div className="p-3 rounded-xl bg-primary/10 glow-blue">
+                      <div className="p-3 rounded-xl bg-primary/10 shadow-ocean">
                         <Icon className="text-primary" size={28} />
                       </div>
                       <div className="flex-grow">
-                        <h3 className="text-2xl font-bold text-foreground font-['Orbitron'] group-hover:text-primary transition-colors duration-300 mb-2">
+                        <h3 className="text-2xl font-bold text-foreground group-hover:text-primary transition-colors duration-300 mb-2">
                           {project.name}
                         </h3>
                         <div className="flex items-center gap-3 text-base text-muted-foreground">
@@ -221,7 +221,7 @@ class UpcomingProjects extends Component {
                     </div>
 
                     {/* Description */}
-                    <p className="text-muted-foreground mb-6 leading-relaxed  text-lg">
+                    <p className="text-muted-foreground mb-6 leading-relaxed text-lg">
                       {project.description}
                     </p>
 
@@ -316,10 +316,10 @@ class UpcomingProjects extends Component {
           {/* Call to Action */}
           <div className="text-center mt-16">
             <div className="glass-card border border-primary/20 rounded-2xl p-8 max-w-2xl mx-auto hover:border-primary/40 transition-all duration-500">
-              <h3 className="text-3xl font-bold text-foreground font-['Orbitron'] mb-4">
+              <h3 className="text-3xl font-bold text-foreground mb-4">
                 Interested in Collaboration?
               </h3>
-              <p className="text-muted-foreground mb-6  text-lg leading-relaxed">
+              <p className="text-muted-foreground mb-6 text-lg leading-relaxed">
                 I'm always open to discussing new projects, creative ideas, or
                 opportunities to be part of your vision.
               </p>
@@ -329,7 +329,7 @@ class UpcomingProjects extends Component {
                     .getElementById("contact")
                     ?.scrollIntoView({ behavior: "smooth" })
                 }
-                className="px-8 py-4 bg-gradient-to-r from-primary to-secondary text-primary-foreground rounded-xl font-semibold font-['Orbitron'] hover:scale-105 transition-transform duration-300 hover-glow text-lg"
+                className="px-8 py-4 bg-gradient-ocean text-primary-foreground rounded-xl font-semibold hover:scale-105 transition-transform duration-300 hover-glow text-lg shadow-medium"
               >
                 Let's Build Together
               </button>

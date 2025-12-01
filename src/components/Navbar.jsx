@@ -41,7 +41,7 @@ const Navigation = () => {
   const Button = ({ children, onClick, className = '' }) => (
     <button
       onClick={onClick}
-      className={`px-4 md:px-6 py-2 md:py-3 rounded-xl font-medium transition-all duration-300 hover-lift font-['Orbitron'] text-sm md:text-base hover:shadow-lg hover:shadow-primary/25 ${className}`}
+      className={`px-4 md:px-6 py-2 md:py-3 rounded-xl font-medium transition-all duration-300 hover-lift  text-sm md:text-base hover:shadow-lg hover:shadow-primary/25 ${className}`}
     >
       {children}
     </button>
@@ -61,7 +61,7 @@ const Navigation = () => {
       }`}
     >
       {label}
-      <span className={`absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary group-hover:w-full transition-all duration-300 ${
+      <span className={`absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-ocean group-hover:w-full transition-all duration-300 ${
         isActive ? 'w-full' : ''
       }`} />
     </Link>
@@ -83,7 +83,7 @@ const Navigation = () => {
             className="flex items-center justify-center hover:scale-105 transition-transform duration-300 group cursor-pointer"
           >
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary rounded-full blur-md group-hover:blur-lg transition-all duration-300 opacity-70 group-hover:opacity-100 scale-110"></div>
+              <div className="absolute inset-0 bg-gradient-ocean rounded-full blur-md group-hover:blur-lg transition-all duration-300 opacity-70 group-hover:opacity-100 scale-110"></div>
               <div className="relative bg-background/80 backdrop-blur-sm rounded-full p-2 border border-primary/20 group-hover:border-primary/40 transition-colors">
                 <img 
                   src={Resource.logo} 
@@ -112,7 +112,7 @@ const Navigation = () => {
               duration={500}
               offset={-80}
             >
-              <Button className="bg-gradient-to-r from-primary to-secondary hover-glow text-primary-foreground cursor-pointer shadow-lg">
+              <Button className="bg-gradient-ocean hover-glow text-primary-foreground cursor-pointer shadow-lg">
                 Get In Touch
               </Button>
             </Link>
@@ -160,7 +160,7 @@ const Navigation = () => {
                 offset={-80}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                <Button className="bg-gradient-to-r from-primary to-secondary w-full text-primary-foreground mt-2 text-base cursor-pointer justify-center">
+                <Button className="bg-gradient-ocean w-full text-primary-foreground mt-2 text-base cursor-pointer justify-center">
                   Get In Touch
                 </Button>
               </Link>

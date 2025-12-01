@@ -23,7 +23,7 @@ const Values = () => {
     <section id="values" className="py-16 md:py-20 relative">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12 md:mb-16 animate-slide-up">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 gradient-text font-['Orbitron'] text-responsive-xl">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 gradient-text  text-responsive-xl">
             My Values
           </h2>
           <p className="text-muted-foreground text-base md:text-lg ">
@@ -48,15 +48,15 @@ const Values = () => {
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 
                 {/* Animated border effect */}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary to-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-md group-hover:blur-lg scale-105"></div>
+                <div className="absolute inset-0 rounded-2xl bg-gradient-ocean opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-md group-hover:blur-lg scale-105"></div>
                 <div className="absolute inset-[1px] rounded-2xl bg-background"></div>
 
                 {/* Content */}
                 <div className="relative z-10 p-6 md:p-8">
-                  <div className="inline-block p-4 md:p-6 rounded-full bg-primary/10 mb-4 md:mb-6 glow-blue group-hover:glow-cyan group-hover:scale-110 transition-all duration-300">
+                  <div className="inline-block p-4 md:p-6 rounded-full bg-primary/10 mb-4 md:mb-6 shadow-ocean group-hover:glow-cyan group-hover:scale-110 transition-all duration-300">
                     <Icon className="text-primary group-hover:text-cyan-400 transition-colors duration-300" size={32} />
                   </div>
-                  <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-3 md:mb-4 text-foreground font-['Orbitron'] text-responsive-lg group-hover:text-primary transition-colors duration-300">
+                  <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-3 md:mb-4 text-foreground  text-responsive-lg group-hover:text-primary transition-colors duration-300">
                     {value.title}
                   </h3>
                   <p className="text-muted-foreground leading-relaxed  text-sm md:text-base lg:text-lg group-hover:text-foreground transition-colors duration-300">
@@ -65,7 +65,7 @@ const Values = () => {
                 </div>
 
                 {/* Bottom glow effect on hover */}
-                <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-1 bg-gradient-to-r from-primary to-secondary group-hover:w-3/4 transition-all duration-500 rounded-full"></div>
+                <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-1 bg-gradient-ocean group-hover:w-3/4 transition-all duration-500 rounded-full"></div>
               </div>
             );
           })}

@@ -126,7 +126,7 @@ class Projects extends Component {
     const baseStyles = 'px-4 py-2 rounded-xl text-xl transition-all duration-300 font-["Orbitron"] flex items-center gap-2';
     
     const variants = {
-      default: 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white hover:shadow-lg hover:shadow-cyan-500/25 hover:scale-105',
+      default: 'bg-gradient-ocean text-white hover:shadow-lg hover:shadow-cyan-500/25 hover:scale-105',
       outline: 'border-2 border-cyan-400 text-cyan-400 hover:bg-cyan-400/10 hover:shadow-lg hover:shadow-cyan-400/25 hover:scale-105',
     };
 
@@ -190,7 +190,7 @@ class Projects extends Component {
           <div className="text-center mb-16 w-full">
             <div className="inline-flex items-center gap-3 mb-4">
               <Sparkles className="text-cyan-400" size={32} />
-              <h2 className="text-4xl md:text-6xl font-bold font-['Orbitron'] bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+              <h2 className="text-4xl md:text-6xl font-bold  bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
                 My Projects
               </h2>
               <Sparkles className="text-blue-400" size={32} />
@@ -256,7 +256,7 @@ class Projects extends Component {
                   {/* Content */}
                   <div className="p-6">
                     <div className="flex items-start justify-between mb-3">
-                      <h3 className="text-2xl font-bold text-white font-['Orbitron'] group-hover:text-cyan-400 transition-colors duration-300">
+                      <h3 className="text-2xl font-bold text-white  group-hover:text-cyan-400 transition-colors duration-300">
                         {this.formatProjectName(project.name)}
                       </h3>
                       <div className="flex items-center gap-1 text-xs text-gray-400">
@@ -324,7 +324,7 @@ class Projects extends Component {
                 rel="noopener noreferrer"
                 className="inline-block"
               >
-                <Button size="lg" className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 hover:scale-105 transition-transform">
+                <Button size="lg" className="bg-gradient-ocean hover:from-cyan-600 hover:to-blue-700 hover:scale-105 transition-transform">
                   <Github size={20} />
                   Explore My GitHub
                 </Button>

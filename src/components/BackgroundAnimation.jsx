@@ -9,9 +9,9 @@ function NeuronParticles() {
   const isMobile = window.innerWidth < 768;
 
   // ⚡ Auto–optimized values
-  const COUNT = isMobile ? 120 : 500;
+  const COUNT = isMobile ? 80 : 500;
   const RANGE = isMobile ? 25 : 50;
-  const SPEED = isMobile ? 0.004 : 0.04;
+  const SPEED = isMobile ? 0.004 : 0.05;
 
   // Particles
   const { positions, velocities } = useMemo(() => {
@@ -91,11 +91,11 @@ function NeuronParticles() {
           />
         </bufferGeometry>
         <pointsMaterial
-          size={isMobile ? 0.07 : 0.08}
-          color="#00eaff"
+          size={isMobile ? 0.1 : 0.12} // Slightly larger for visibility
+          color="#1A365D" // Dark blue for light theme (from foreground color)
           sizeAttenuation
           transparent
-          opacity={0.8}
+          opacity={0.8} // Higher opacity for better visibility
         />
       </points>
 
@@ -110,7 +110,12 @@ function NeuronParticles() {
               itemSize={3}
             />
           </bufferGeometry>
-          <lineBasicMaterial color="#00eaff" transparent opacity={0.2} />
+          <lineBasicMaterial 
+            color="#1A365D" // Dark blue for light theme
+            transparent 
+            opacity={0.4} // Higher opacity for visibility
+            linewidth={1.5} // Slightly thicker lines
+          />
         </lineSegments>
       )}
     </>
@@ -130,8 +135,11 @@ export default function NeuralBackground() {
       }}
     >
       <Canvas camera={{ position: [0, 0, 18], fov: 60 }}>
-        <color attach="background" args={["#01010f"]} />
+        <color attach="background" args={["#E6F7FF"]} /> {/* Light background */}
         <NeuronParticles />
+        
+        {/* Optional: Add some subtle ambient light for depth */}
+        <ambientLight intensity={0.3} />
       </Canvas>
     </div>
   );
