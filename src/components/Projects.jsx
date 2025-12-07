@@ -3,9 +3,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   ExternalLink,
   Github,
-  Code,
   X,
   ChevronRight,
+  ChevronDown,
   Calendar,
   Globe,
   Database,
@@ -19,11 +19,18 @@ import {
   Map,
   Zap,
   Users,
-  Monitor,
-  Cpu,
   Terminal,
-  MousePointerClick,
-  ArrowRight,
+  Settings,
+  Search,
+  Layout,
+  FileCode,
+  FolderOpen,
+  Folder,
+  Star,
+  GitFork,
+  Play,
+  Code as CodeIcon,
+  Menu,
 } from "lucide-react";
 
 const ProjectsSection = () => {
@@ -31,8 +38,22 @@ const ProjectsSection = () => {
   const [staticProjects, setStaticProjects] = useState([]);
   const [comingSoonProjects, setComingSoonProjects] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const projectsListRef = useRef(null);
+  const [explorerOpen, setExplorerOpen] = useState(true);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [mobileView, setMobileView] = useState("list"); // "list" or "details"
+
+  // Check for mobile view on mount and resize
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   // GitHub username
   const githubUsername = "DHRUV-SHERE";
@@ -51,134 +72,155 @@ const ProjectsSection = () => {
     "ToDoList"
   ];
 
-  // Project icons mapping
-  const projectIcons = {
-    "agrosence": <Globe className="w-5 h-5" />,
-    "pashumitra": <Database className="w-5 h-5" />,
-    "spotify": <Music className="w-5 h-5" />,
-    "knowbase": <BookOpen className="w-5 h-5" />,
-    "oracle": <Database className="w-5 h-5" />,
-    "amazon": <ShoppingCart className="w-5 h-5" />,
-    "rejoiuceclone": <Coffee className="w-5 h-5" />,
-    "online_learning_management_system": <GraduationCap className="w-5 h-5" />,
-    "react_text_site": <FileText className="w-5 h-5" />,
-    "todolist": <CheckSquare className="w-5 h-5" />
-  };
-
-  // Project colors
-  const projectColors = {
-    "agrosence": "border-l-green-500",
-    "pashumitra": "border-l-blue-500",
-    "spotify": "border-l-green-600",
-    "knowbase": "border-l-purple-500",
-    "oracle": "border-l-red-500",
-    "amazon": "border-l-yellow-500",
-    "rejoiuceclone": "border-l-pink-500",
-    "online_learning_management_system": "border-l-indigo-500",
-    "react_text_site": "border-l-cyan-500",
-    "todolist": "border-l-teal-500"
-  };
-
-  // Project data
-  const projectData = {
+  // Enhanced static data for better presentation
+  const projectEnhancements = {
     "agrosence": {
       title: "Agrosence",
-      description: "Farmer-centric marketplace platform eliminating middlemen",
+      longDescription: "A comprehensive farmer-centric marketplace platform that eliminates middlemen through direct buyer connections. Features include an AI chatbot for farming queries, government scheme portal, Direct Market Access, and Farming Resources hub. Built with MERN stack to deliver a seamless agricultural ecosystem.",
       tech: ["MERN Stack", "React", "Node.js", "MongoDB", "Bootstrap", "Cloudinary", "JWT", "REST API"],
+      icon: <Globe className="w-6 h-6" />,
+      duration: "December 2024 – Present",
       live: "https://agrosence.vercel.app/",
-      duration: "Dec 2024 – Present"
+      features: [
+        "AI Chatbot for farming queries",
+        "Government scheme portal",
+        "Direct Market Access",
+        "Farming Resources hub",
+        "Farmer authentication system"
+      ]
     },
     "pashumitra": {
       title: "PashuMitra",
-      description: "Veterinary healthcare platform with real-time consultations",
-      tech: ["MERN Stack", "Socket.io", "Tailwind CSS", "Cloudinary"],
+      longDescription: "Smart veterinary healthcare platform connecting farmers with veterinary doctors and medical stores. Features real-time chat consultations, medicine ordering, appointment booking, prescription management, and livestock awareness information. Built with real-time capabilities using Socket.io.",
+      tech: ["MERN Stack", "React", "Node.js", "MongoDB", "Tailwind CSS", "Socket.io", "Cloudinary", "JWT"],
+      icon: <Database className="w-6 h-6" />,
+      duration: "July 2025 – Present",
       live: "https://pashumitra.vercel.app/",
-      duration: "Jul 2025 – Present"
+      features: [
+        "Real-time chat consultations",
+        "Medicine ordering system",
+        "Appointment booking",
+        "Prescription management",
+        "Livestock awareness portal"
+      ]
     },
     "spotify": {
       title: "Spotify Clone",
-      description: "Music streaming platform with playlist management",
-      tech: ["React", "Spotify API", "Tailwind CSS", "Express.js"],
+      longDescription: "Full-featured music streaming platform clone with playlist management, music discovery, and user authentication. Integrates Spotify Web API for music data, features responsive design, and implements modern audio playback controls.",
+      tech: ["React", "Node.js", "Spotify API", "Tailwind CSS", "Express.js", "REST API"],
+      icon: <Music className="w-6 h-6" />,
+      duration: "September 2024",
       live: "https://spotify-clone-dhruv.vercel.app/",
-      duration: "Sep 2024"
+      features: [
+        "Playlist management",
+        "Music discovery",
+        "User authentication",
+        "Audio playback controls",
+        "Responsive design"
+      ]
     },
     "knowbase": {
       title: "KnowBase",
-      description: "Knowledge management system with advanced search",
-      tech: ["MERN Stack", "Search API", "JWT", "Tailwind CSS"],
+      longDescription: "Knowledge management system with advanced search, categorization, and tagging capabilities. Features include markdown support, user roles, content organization, and efficient information retrieval systems.",
+      tech: ["MERN Stack", "React", "Node.js", "MongoDB", "Tailwind CSS", "Search API", "JWT"],
+      icon: <BookOpen className="w-6 h-6" />,
+      duration: "October 2024",
       live: "https://knowbase-dhruv.vercel.app/",
-      duration: "Oct 2024"
+      features: [
+        "Advanced search functionality",
+        "Markdown support",
+        "User roles & permissions",
+        "Content categorization",
+        "Tagging system"
+      ]
     },
     "oracle": {
-      title: "Database System",
-      description: "Database management and query optimization",
-      tech: ["Oracle", "SQL", "PL/SQL", "Database Design"],
-      duration: "Aug 2024"
+      title: "Database Management System",
+      longDescription: "Comprehensive database project focusing on efficient data management, query optimization, and database administration. Includes complex SQL queries, stored procedures, triggers, and database design principles.",
+      tech: ["Oracle", "SQL", "PL/SQL", "Database Design", "Query Optimization"],
+      icon: <Database className="w-6 h-6" />,
+      duration: "August 2024",
+      features: [
+        "Complex SQL queries",
+        "Stored procedures",
+        "Database triggers",
+        "Query optimization",
+        "Database design principles"
+      ]
     },
     "amazon": {
       title: "Amazon Clone",
-      description: "E-commerce platform replica with payment integration",
-      tech: ["React", "Stripe API", "Redux", "Tailwind CSS"],
+      longDescription: "E-commerce platform replica with product listings, shopping cart functionality, user authentication, and payment integration. Features product search, filters, reviews, order tracking, and admin dashboard.",
+      tech: ["React", "Node.js", "MongoDB", "Stripe API", "Tailwind CSS", "Redux"],
+      icon: <ShoppingCart className="w-6 h-6" />,
+      duration: "July 2024",
       live: "https://amazon-clone-dhruv.vercel.app/",
-      duration: "Jul 2024"
+      features: [
+        "Product search & filters",
+        "Shopping cart functionality",
+        "User authentication",
+        "Payment integration",
+        "Admin dashboard"
+      ]
     },
     "rejoiuceclone": {
-      title: "Rejoiuce Clone",
-      description: "Food delivery system with real-time order updates",
-      tech: ["React", "Socket.io", "JWT", "Payment Gateway"],
+      title: "Animated Website - Rejoiuce Clone",
+      longDescription: "Food and beverage delivery system with product browsing, ordering, delivery tracking, and payment processing. Includes inventory management and real-time order updates.",
+      tech: ["React", "Express.js", "MongoDB", "JWT", "Socket.io", "Payment Gateway"],
+      icon: <Coffee className="w-6 h-6" />,
+      duration: "June 2024",
       live: "https://rejoiuce-clone.vercel.app/",
-      duration: "Jun 2024"
+      features: [
+        "Product browsing & ordering",
+        "Delivery tracking",
+        "Real-time order updates",
+        "Inventory management",
+        "Payment processing"
+      ]
     },
     "online_learning_management_system": {
-      title: "LMS Platform",
-      description: "Complete online education platform",
-      tech: ["MERN Stack", "Video Streaming", "JWT", "Tailwind CSS"],
-      duration: "May 2024"
+      title: "Learning Management System",
+      longDescription: "Complete online education platform with course creation, student enrollment, progress tracking, and assessment tools. Features video streaming, quiz system, and certificate generation.",
+      tech: ["MERN Stack", "React", "Node.js", "MongoDB", "Tailwind CSS", "Video Streaming", "JWT"],
+      icon: <GraduationCap className="w-6 h-6" />,
+      duration: "May 2024",
+      features: [
+        "Course creation & management",
+        "Student enrollment",
+        "Progress tracking",
+        "Video streaming",
+        "Quiz system"
+      ]
     },
     "react_text_site": {
-      title: "Text Tool",
-      description: "React-based text manipulation application",
+      title: "Text Processing Tool",
+      longDescription: "React-based text manipulation application with comprehensive text utilities. Features include word count, character count, text formatting, case conversion, and text analysis tools.",
       tech: ["React", "JavaScript", "CSS", "Local Storage"],
-      duration: "Apr 2024"
+      icon: <FileText className="w-6 h-6" />,
+      duration: "April 2024",
+      features: [
+        "Word & character count",
+        "Text formatting",
+        "Case conversion",
+        "Text analysis",
+        "Local storage"
+      ]
     },
     "todolist": {
-      title: "Task Manager",
-      description: "Advanced todo application with progress tracking",
+      title: "Task Management App",
+      longDescription: "Advanced todo list application with task prioritization, deadlines, reminders, and progress tracking. Features drag-and-drop interface, categories, and data persistence.",
       tech: ["React", "Local Storage", "CSS", "Date-fns"],
-      duration: "Mar 2024"
+      icon: <CheckSquare className="w-6 h-6" />,
+      duration: "March 2024",
+      features: [
+        "Task prioritization",
+        "Deadlines & reminders",
+        "Drag & drop interface",
+        "Progress tracking",
+        "Data persistence"
+      ]
     }
   };
-
-  // Coming Soon Projects
-  const upcomingProjects = [
-    {
-      id: "aryapath",
-      title: "AryaPath",
-      description: "Tourism platform for India travelers",
-      tech: ["MERN Stack", "Maps API", "Socket.io", "Payment"],
-      github: "https://github.com/DHRUV-SHERE/AryaPath",
-      icon: <Map className="w-5 h-5" />,
-      status: "planning"
-    },
-    {
-      id: "promptstudio",
-      title: "PromptStudio",
-      description: "AI prompt generator tool",
-      tech: ["MERN Stack", "OpenAI API", "Framer Motion", "JWT"],
-      github: "https://github.com/DHRUV-SHERE/PromptStudio",
-      icon: <Zap className="w-5 h-5" />,
-      status: "active"
-    },
-    {
-      id: "connectvista",
-      title: "ConnectVista",
-      description: "Service connection platform",
-      tech: ["MERN Stack", "Socket.io", "Algorithm", "Cloudinary"],
-      github: "https://github.com/DHRUV-SHERE/ConnectVista",
-      icon: <Users className="w-5 h-5" />,
-      status: "active"
-    }
-  ];
 
   useEffect(() => {
     fetchGitHubProjects();
@@ -204,45 +246,101 @@ const ProjectsSection = () => {
         )
       );
 
+      // Merge GitHub data with static enhancements
       const formattedProjects = mainProjects.map((repo) => {
         const repoKey = repo.name.toLowerCase();
-        const projectInfo = projectData[repoKey] || {};
+        const enhancement = projectEnhancements[repoKey] || {};
         
         return {
-          id: repoKey,
-          title: projectInfo.title || formatProjectName(repo.name),
-          description: projectInfo.description || (repo.description ? repo.description.substring(0, 100) : "A web development project"),
-          tech: projectInfo.tech || [repo.language || "Web Dev"],
+          id: repoKey.replace(/[^a-z]/g, '_'),
+          title: enhancement.title || formatProjectName(repo.name),
+          description: repo.description || "A software development project",
+          longDescription: enhancement.longDescription || 
+            (repo.description ? `${repo.description}. A project built with modern web technologies and best practices.` : 
+            `A ${repo.language || 'web'} application project.`),
+          tech: enhancement.tech || [repo.language || "Web Development"],
+          features: enhancement.features || ["Modern architecture", "Responsive design", "Clean code"],
           github: repo.html_url,
-          live: projectInfo.live || repo.homepage || null,
-          icon: projectIcons[repoKey] || <Code className="w-5 h-5" />,
-          color: projectColors[repoKey] || "border-l-primary",
+          live: enhancement.live || repo.homepage || null,
+          duration: enhancement.duration || getProjectDuration(repo.created_at, repo.updated_at),
           language: repo.language || "JavaScript",
           stars: repo.stargazers_count || 0,
-          duration: projectInfo.duration || "Recent",
-          forks: repo.forks_count || 0
+          forks: repo.forks_count || 0,
+          lastUpdated: repo.updated_at,
+          icon: enhancement.icon || <FileCode className="w-6 h-6" />,
+          fileName: `${(enhancement.title || formatProjectName(repo.name)).replace(/\s+/g, '')}.jsx`
         };
       });
 
       setStaticProjects(formattedProjects);
+      
+      // Coming Soon Projects
+      const upcomingProjects = [
+        {
+          id: "aryapath",
+          title: "AryaPath",
+          description: "Tourism platform for international travelers exploring India with itinerary planning and cultural insights",
+          tech: ["MERN Stack", "Tailwind CSS", "Cloudinary", "Socket.io", "Maps API", "Payment Gateway"],
+          status: "planning",
+          icon: <Map className="w-5 h-5" />,
+          github: "https://github.com/DHRUV-SHERE/AryaPath"
+        },
+        {
+          id: "promptstudio",
+          title: "PromptStudio",
+          description: "AI-driven prompt generator for image creation, code generation, and content creation",
+          tech: ["MERN Stack", "Tailwind CSS", "OpenAI API", "Framer Motion", "JWT Authentication"],
+          status: "active",
+          icon: <Zap className="w-5 h-5" />,
+          github: "https://github.com/DHRUV-SHERE/PromptStudio"
+        },
+        {
+          id: "connectvista",
+          title: "ConnectVista",
+          description: "Service-connection platform with smart matching algorithms and professional networking",
+          tech: ["MERN Stack", "Tailwind CSS", "Cloudinary", "Socket.io", "JWT", "Algorithm"],
+          status: "active",
+          icon: <Users className="w-5 h-5" />,
+          github: "https://github.com/DHRUV-SHERE/ConnectVista"
+        }
+      ];
+      
       setComingSoonProjects(upcomingProjects);
     } catch (err) {
       console.error("Error fetching GitHub data:", err);
-      // Fallback to static data
-      const fallbackProjects = Object.keys(projectData).map(key => ({
-        id: key,
-        ...projectData[key],
-        github: `https://github.com/${githubUsername}/${key}`,
-        icon: projectIcons[key] || <Code className="w-5 h-5" />,
-        color: projectColors[key] || "border-l-primary",
-        language: "JavaScript",
+      // Fallback to static data on error
+      const fallbackProjects = Object.values(projectEnhancements).map((proj, index) => ({
+        id: Object.keys(projectEnhancements)[index],
+        ...proj,
+        github: `https://github.com/${githubUsername}/${Object.keys(projectEnhancements)[index]}`,
+        language: proj.tech[0] || "JavaScript",
         stars: 0,
-        forks: 0
+        forks: 0,
+        lastUpdated: new Date().toISOString(),
+        fileName: `${proj.title.replace(/\s+/g, '')}.jsx`
       }));
       setStaticProjects(fallbackProjects);
-      setComingSoonProjects(upcomingProjects);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const getProjectDuration = (createdAt, updatedAt) => {
+    const created = new Date(createdAt);
+    const updated = new Date(updatedAt);
+    const now = new Date();
+    
+    const createdMonth = created.toLocaleString('default', { month: 'short' });
+    const createdYear = created.getFullYear();
+    
+    const daysSinceUpdate = Math.floor((now - updated) / (1000 * 60 * 60 * 24));
+    
+    if (daysSinceUpdate < 30) {
+      return `${createdMonth} ${createdYear} – Present`;
+    } else {
+      const updatedMonth = updated.toLocaleString('default', { month: 'short' });
+      const updatedYear = updated.getFullYear();
+      return `${createdMonth} ${createdYear} – ${updatedMonth} ${updatedYear}`;
     }
   };
 
@@ -272,17 +370,17 @@ const ProjectsSection = () => {
       Bootstrap: "#7952b3",
       Oracle: "#f80000",
     };
-    return colors[language] || "#8b949e";
+    return colors[language] || "#00eaff";
   };
 
   if (loading) {
     return (
-      <section id="projects" className="py-20 px-4 md:px-6 relative">
+      <section id="projects" className="py-24 px-4 md:px-6 relative">
         <div className="container mx-auto max-w-7xl">
           <div className="text-center">
             <div className="inline-flex items-center gap-4 p-8 rounded-2xl bg-primary/10 animate-pulse">
-              <div className="w-8 h-8 bg-primary rounded-full animate-spin border-2 border-primary border-t-transparent"></div>
-              <p className="text-muted-foreground">Loading projects...</p>
+              <div className="w-10 h-10 bg-primary rounded-full animate-spin border-3 border-primary border-t-transparent"></div>
+              <p className="text-muted-foreground text-lg">Loading VS Code Workspace...</p>
             </div>
           </div>
         </div>
@@ -290,289 +388,629 @@ const ProjectsSection = () => {
     );
   }
 
+  // Mobile View - Simple Card List
+  if (isMobile && mobileView === "list") {
+    return (
+      <section id="projects" className="py-12 px-4 relative">
+        <div className="container mx-auto max-w-7xl">
+          {/* Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center mb-8"
+          >
+            <div className="inline-flex items-center gap-2 mb-3">
+              <Terminal className="text-primary w-5 h-5" />
+              <p className="text-secondary font-mono text-sm">// Projects</p>
+            </div>
+            <h2 className="text-2xl font-bold mb-3">
+              <span className="gradient-text">My Projects</span>
+            </h2>
+            <p className="text-muted-foreground text-sm">
+              Tap any project to view details
+            </p>
+          </motion.div>
+
+          {/* Mobile Project List */}
+          <div className="space-y-4">
+            {staticProjects.map((project, index) => (
+              <motion.div
+                key={project.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.05 }}
+                onClick={() => {
+                  setSelectedProject(index);
+                  setMobileView("details");
+                }}
+                className="bg-card/50 backdrop-blur-sm rounded-xl border border-gray-800 p-4 active:scale-[0.99] transition-all duration-200 cursor-pointer"
+              >
+                <div className="flex items-start gap-3">
+                  <div className="p-2 rounded-lg bg-primary/10">
+                    {project.icon}
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex items-start justify-between">
+                      <h3 className="font-bold text-base">{project.title}</h3>
+                      <ChevronRight className="w-4 h-4 text-gray-400" />
+                    </div>
+                    <p className="text-muted-foreground text-sm mt-1 line-clamp-2">
+                      {project.description}
+                    </p>
+                    <div className="flex items-center gap-3 mt-2">
+                      <span className="text-xs px-2 py-1 rounded bg-gray-800/50 text-gray-300">
+                        {project.language}
+                      </span>
+                      {project.stars > 0 && (
+                        <span className="text-xs text-yellow-500 flex items-center gap-1">
+                          ★ {project.stars}
+                        </span>
+                      )}
+                    </div>
+                    <div className="flex flex-wrap gap-1 mt-2">
+                      {project.tech.slice(0, 3).map(tech => (
+                        <span key={tech} className="text-xs px-1.5 py-0.5 rounded bg-gray-800/30 text-gray-400">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* View Toggle Button */}
+          <div className="text-center mt-8">
+            <button
+              onClick={() => setMobileView("details")}
+              className="text-sm text-primary hover:underline"
+            >
+              Tap any project for details →
+            </button>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // Mobile View - Single Project Details
+  if (isMobile && mobileView === "details") {
+    const project = staticProjects[selectedProject];
+    
+    return (
+      <section id="projects" className="py-4 px-4 relative">
+        <div className="container mx-auto max-w-7xl">
+          {/* Back Button */}
+          <button
+            onClick={() => setMobileView("list")}
+            className="flex items-center gap-2 text-primary mb-6"
+          >
+            <ChevronRight className="w-4 h-4 rotate-180" />
+            <span className="text-sm">Back to Projects</span>
+          </button>
+
+          {/* Project Details */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="space-y-6"
+          >
+            {/* Header */}
+            <div className="flex items-start gap-3">
+              <div className="p-3 rounded-xl bg-primary/10">
+                {project.icon}
+              </div>
+              <div className="flex-1">
+                <h2 className="text-xl font-bold text-white">{project.title}</h2>
+                <p className="text-sm text-gray-400 mt-1">{project.duration}</p>
+              </div>
+              <div className="flex gap-2">
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded-lg bg-gray-800 text-gray-300 hover:bg-gray-700 transition-colors"
+                >
+                  <Github className="w-4 h-4" />
+                </a>
+                {project.live && (
+                  <a
+                    href={project.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 rounded-lg bg-primary/20 text-primary hover:bg-primary/30 transition-colors"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
+                )}
+              </div>
+            </div>
+
+            {/* Description */}
+            <div className="bg-card/30 rounded-xl p-4">
+              <h3 className="font-semibold text-primary mb-2">Description</h3>
+              <p className="text-gray-300 text-sm leading-relaxed">
+                {project.longDescription}
+              </p>
+            </div>
+
+            {/* Features */}
+            <div className="bg-card/30 rounded-xl p-4">
+              <h3 className="font-semibold text-primary mb-3">Features</h3>
+              <ul className="space-y-2">
+                {project.features.map((feature, index) => (
+                  <li key={index} className="flex items-start gap-2 text-gray-300 text-sm">
+                    <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5"></div>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Tech Stack */}
+            <div className="bg-card/30 rounded-xl p-4">
+              <h3 className="font-semibold text-primary mb-3">Tech Stack</h3>
+              <div className="flex flex-wrap gap-2">
+                {project.tech.map((tech) => (
+                  <span
+                    key={tech}
+                    className="px-3 py-1.5 text-xs font-mono rounded-lg bg-gray-800/50 text-gray-300 border border-gray-700"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex gap-3">
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 px-4 py-3 bg-gray-800 hover:bg-primary/20 text-gray-300 hover:text-primary rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
+              >
+                <Github className="w-4 h-4" />
+                <span className="text-sm font-medium">GitHub</span>
+              </a>
+              {project.live && (
+                <a
+                  href={project.live}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 px-4 py-3 bg-gradient-to-r from-primary to-secondary text-white rounded-lg hover:opacity-90 transition-all duration-300 flex items-center justify-center gap-2"
+                >
+                  <ExternalLink className="w-4 h-4" />
+                  <span className="text-sm font-medium">Live Demo</span>
+                </a>
+              )}
+            </div>
+
+            {/* Navigation */}
+            <div className="flex items-center justify-between pt-4 border-t border-gray-800">
+              <button
+                onClick={() => {
+                  setSelectedProject(prev => prev === 0 ? staticProjects.length - 1 : prev - 1);
+                }}
+                className="px-4 py-2 text-sm text-gray-400 hover:text-primary transition-colors"
+              >
+                ← Previous
+              </button>
+              <span className="text-sm text-gray-400">
+                {selectedProject + 1} / {staticProjects.length}
+              </span>
+              <button
+                onClick={() => {
+                  setSelectedProject(prev => prev === staticProjects.length - 1 ? 0 : prev + 1);
+                }}
+                className="px-4 py-2 text-sm text-gray-400 hover:text-primary transition-colors"
+              >
+                Next →
+              </button>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+    );
+  }
+
+  // Desktop View - VS Code Interface
   return (
-    <section id="projects" className="py-16 md:py-24 px-4 md:px-6 relative">
-      <div className="container mx-auto ">
+    <section id="projects" className="py-24 px-4 md:px-6 relative overflow-hidden">
+      {/* Background Glow Effects */}
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl"></div>
+      
+      <div className="container mx-auto max-w-7xl relative z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-12 md:mb-16"
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
         >
-          <div className="inline-flex items-center gap-2 md:gap-3 mb-3">
-            <Monitor className="text-primary w-5 h-5 md:w-6 md:h-6" />
-            <p className="text-secondary font-mono text-sm md:text-base">// Project Terminal</p>
-            <Terminal className="text-primary w-5 h-5 md:w-6 md:h-6" />
+          <div className="inline-flex items-center gap-3 mb-4">
+            <Terminal className="text-primary w-8 h-8" />
+            <p className="text-secondary font-mono text-lg">// Project Workspace</p>
+            <Layout className="text-primary w-8 h-8" />
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">
-            <span className="gradient-text">Project Workspace</span>
+          <h2 className="text-4xl md:text-6xl font-bold mb-6">
+            <span className="gradient-text">VS Code Style</span>
           </h2>
-          <p className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto">
-            Browse projects on the left, view details on the right
+          <p className="text-muted-foreground text-lg max-w-3xl mx-auto leading-relaxed">
+            Browse my projects like a code editor. Click files on the left to view details.
           </p>
         </motion.div>
 
-        {/* Laptop-like Container */}
-        <div className="relative">
-          {/* Laptop Top (Screen) */}
-          <div className="relative max-w-6xl mx-auto mb-8 md:mb-12">
-            {/* Laptop Frame */}
-            <div className="relative bg-gradient-to-br from-gray-900 to-gray-950 rounded-xl md:rounded-2xl overflow-hidden border border-gray-800 shadow-2xl">
-              {/* Screen Bezel */}
-              <div className="bg-gray-950 p-2 md:p-3">
-                {/* Camera */}
-                <div className="w-2 h-2 rounded-full bg-gray-700 mx-auto mb-2"></div>
-                
-                {/* Screen Content */}
-                <div className="bg-gradient-to-b from-gray-900 to-gray-950 rounded-lg md:rounded-xl overflow-hidden border border-gray-800">
-                  <div className="p-4 md:p-6">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="flex items-center gap-2 md:gap-3">
-                        <div className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-red-500"></div>
-                        <div className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-yellow-500"></div>
-                        <div className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-green-500"></div>
-                        <span className="text-xs md:text-sm text-gray-400 font-mono ml-2">
-                          projects-terminal
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Cpu className="w-4 h-4 text-primary" />
-                        <span className="text-xs text-muted-foreground font-mono">
-                          {staticProjects.length} Projects
-                        </span>
-                      </div>
-                    </div>
+        {/* VS Code Interface Container */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.98 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="relative"
+        >
+          {/* VS Code Top Bar */}
+          <div className="flex items-center justify-between bg-gray-900/80 backdrop-blur-lg border-b border-gray-800 rounded-t-2xl p-4">
+            <div className="flex items-center gap-4">
+              <div className="flex gap-2">
+                <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
+                <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
+              </div>
+              <span className="text-sm text-gray-400 font-mono">projects-workspace — Dhruv Shere</span>
+            </div>
+            <div className="flex items-center gap-4">
+              <Search className="w-4 h-4 text-gray-400" />
+              <Settings className="w-4 h-4 text-gray-400" />
+              <Play className="w-4 h-4 text-primary" />
+            </div>
+          </div>
 
-                    {/* Main Content Grid */}
-                    <div className="flex flex-col lg:flex-row gap-6">
-                      {/* Left Column - Project List */}
-                      <motion.div 
-                        ref={projectsListRef}
-                        className="lg:w-2/5"
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.5 }}
-                      >
-                        <div className="bg-gray-900/50 rounded-lg p-3 md:p-4 border border-gray-800">
-                          <div className="flex items-center justify-between mb-3">
-                            <h3 className="text-sm md:text-base font-semibold text-gray-300">
-                              Projects Directory
-                            </h3>
-                            <span className="text-xs text-gray-500 font-mono">
-                              {staticProjects.length} items
-                            </span>
-                          </div>
-                          
-                          <div className="space-y-2 max-h-[400px] overflow-y-auto pr-2">
-                            {staticProjects.map((project, index) => (
-                              <motion.div
-                                key={project.id}
-                                initial={{ opacity: 0, x: -10 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ delay: index * 0.05 }}
-                                onClick={() => setSelectedProject(index)}
-                                className={`group cursor-pointer p-3 rounded-lg transition-all duration-300 ${
-                                  selectedProject === index 
-                                    ? 'bg-gray-800/70 border-l-4' 
-                                    : 'hover:bg-gray-800/30 border-l-2'
-                                } ${project.color} border-gray-700`}
-                              >
-                                <div className="flex items-center justify-between">
-                                  <div className="flex items-center gap-3">
-                                    <div className={`p-2 rounded-md ${
-                                      selectedProject === index 
-                                        ? 'bg-primary/20' 
-                                        : 'bg-gray-800/50 group-hover:bg-primary/10'
-                                    }`}>
-                                      {project.icon}
-                                    </div>
-                                    <div>
-                                      <h4 className="text-sm font-medium text-gray-200 group-hover:text-primary transition-colors">
-                                        {project.title}
-                                      </h4>
-                                      <div className="flex items-center gap-2 mt-1">
-                                        <span 
-                                          className="text-xs px-2 py-0.5 rounded"
-                                          style={{
-                                            backgroundColor: `${getLanguageColor(project.language)}20`,
-                                            color: getLanguageColor(project.language),
-                                          }}
-                                        >
-                                          {project.language}
-                                        </span>
-                                        {project.stars > 0 && (
-                                          <span className="text-xs text-yellow-500 flex items-center gap-0.5">
-                                            ★ {project.stars}
-                                          </span>
-                                        )}
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <ChevronRight className={`w-4 h-4 transition-transform ${
-                                    selectedProject === index 
-                                      ? 'text-primary rotate-90' 
-                                      : 'text-gray-500 group-hover:text-gray-400'
-                                  }`} />
-                                </div>
-                              </motion.div>
-                            ))}
-                          </div>
-                        </div>
-                      </motion.div>
-
-                      {/* Right Column - Project Details */}
-                      <motion.div 
-                        className="lg:w-3/5"
-                        key={selectedProject}
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.5 }}
-                      >
-                        <div className="bg-gray-900/50 rounded-lg p-4 md:p-6 border border-gray-800 h-full">
-                          {staticProjects[selectedProject] && (
-                            <>
-                              <div className="flex items-start justify-between mb-4">
-                                <div>
-                                  <div className="flex items-center gap-3 mb-2">
-                                    <div className={`p-2.5 rounded-lg ${staticProjects[selectedProject].color.replace('border-l-', 'bg-')} bg-opacity-10`}>
-                                      {staticProjects[selectedProject].icon}
-                                    </div>
-                                    <div>
-                                      <h3 className="text-xl md:text-2xl font-bold text-white">
-                                        {staticProjects[selectedProject].title}
-                                      </h3>
-                                      <p className="text-sm text-gray-400 mt-1">
-                                        {staticProjects[selectedProject].duration}
-                                      </p>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div className="flex gap-2">
-                                  <a
-                                    href={staticProjects[selectedProject].github}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="p-2 rounded-lg bg-gray-800 hover:bg-primary/20 text-gray-400 hover:text-primary transition-colors"
-                                  >
-                                    <Github className="w-4 h-4 md:w-5 md:h-5" />
-                                  </a>
-                                  {staticProjects[selectedProject].live && (
-                                    <a
-                                      href={staticProjects[selectedProject].live}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                      className="p-2 rounded-lg bg-gray-800 hover:bg-green-500/20 text-gray-400 hover:text-green-500 transition-colors"
-                                    >
-                                      <ExternalLink className="w-4 h-4 md:w-5 md:h-5" />
-                                    </a>
-                                  )}
-                                </div>
-                              </div>
-
-                              <p className="text-gray-300 text-sm md:text-base mb-6 leading-relaxed">
-                                {staticProjects[selectedProject].description}
-                              </p>
-
-                              <div className="mb-6">
-                                <h4 className="text-sm font-semibold text-gray-300 mb-3 flex items-center gap-2">
-                                  <Code className="w-4 h-4" />
-                                  Technologies Used
-                                </h4>
-                                <div className="flex flex-wrap gap-2">
-                                  {staticProjects[selectedProject].tech.slice(0, 6).map((tech) => (
-                                    <span
-                                      key={tech}
-                                      className="px-3 py-1.5 text-xs font-mono rounded-lg bg-gray-800 text-gray-300 border border-gray-700 hover:border-primary/50 transition-colors"
-                                    >
-                                      {tech}
-                                    </span>
-                                  ))}
-                                </div>
-                              </div>
-
-                              <div className="flex flex-col sm:flex-row gap-4">
-                                <a
-                                  href={staticProjects[selectedProject].github}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="flex-1"
-                                >
-                                  <button className="w-full px-4 py-3 bg-gray-800 hover:bg-primary/20 text-gray-300 hover:text-primary rounded-lg transition-all duration-300 flex items-center justify-center gap-2 group">
-                                    <Github className="w-4 h-4" />
-                                    <span className="text-sm font-medium">View Source Code</span>
-                                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                                  </button>
-                                </a>
-                                
-                                {staticProjects[selectedProject].live && (
-                                  <a
-                                    href={staticProjects[selectedProject].live}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex-1"
-                                  >
-                                    <button className="w-full px-4 py-3 bg-gradient-to-r from-primary to-secondary text-white rounded-lg hover:opacity-90 transition-all duration-300 flex items-center justify-center gap-2 group">
-                                      <ExternalLink className="w-4 h-4" />
-                                      <span className="text-sm font-medium">Live Demo</span>
-                                    </button>
-                                  </a>
-                                )}
-                              </div>
-                            </>
-                          )}
-                        </div>
-                      </motion.div>
-                    </div>
+          {/* Main Content Area */}
+          <div className="bg-gray-900/60 backdrop-blur-lg border border-gray-800 rounded-b-2xl overflow-hidden">
+            <div className="flex">
+              {/* Left Sidebar - Activity Bar */}
+              <div className="w-16 bg-gray-900/90 border-r border-gray-800 py-4">
+                <div className="flex flex-col items-center gap-6">
+                  <div className="p-3 rounded-lg bg-primary/20 text-primary">
+                    <FileCode className="w-5 h-5" />
+                  </div>
+                  <div className="p-3 rounded-lg text-gray-400 hover:text-primary hover:bg-gray-800/50 transition-colors cursor-pointer">
+                    <Search className="w-5 h-5" />
+                  </div>
+                  <div className="p-3 rounded-lg text-gray-400 hover:text-primary hover:bg-gray-800/50 transition-colors cursor-pointer">
+                    <GitFork className="w-5 h-5" />
+                  </div>
+                  <div className="p-3 rounded-lg text-gray-400 hover:text-primary hover:bg-gray-800/50 transition-colors cursor-pointer">
+                    <Settings className="w-5 h-5" />
                   </div>
                 </div>
               </div>
-            </div>
-            
-            {/* Laptop Bottom (Keyboard) */}
-            <div className="mx-auto w-3/4 md:w-2/3">
-              <div className="h-4 md:h-6 bg-gradient-to-r from-gray-900 to-gray-950 rounded-b-xl md:rounded-b-2xl border-t-0 border border-gray-800"></div>
-              <div className="h-2 md:h-3 bg-gray-950 mx-auto w-1/3 rounded-b-md"></div>
+
+              {/* Explorer Sidebar */}
+              <motion.div
+                initial={{ width: sidebarCollapsed ? 0 : 280 }}
+                animate={{ width: sidebarCollapsed ? 0 : 280 }}
+                transition={{ duration: 0.3 }}
+                className={`overflow-hidden ${sidebarCollapsed ? 'w-0' : 'w-72'}`}
+              >
+                <div className="h-full bg-gray-900/80 border-r border-gray-800">
+                  {/* Explorer Header */}
+                  <div className="p-4 border-b border-gray-800">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-sm font-semibold text-gray-300 uppercase tracking-wider">
+                        EXPLORER
+                      </h3>
+                      <div
+                        onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+                        className="text-gray-400 hover:text-primary transition-colors cursor-pointer"
+                      >
+                        <ChevronRight className={`w-4 h-4 transition-transform ${sidebarCollapsed ? 'rotate-180' : ''}`} />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Projects Folder */}
+                  <div className="p-2">
+                    <div
+                      onClick={() => setExplorerOpen(!explorerOpen)}
+                      className="flex items-center gap-2 w-full p-2 rounded hover:bg-gray-800/50 text-gray-300 cursor-pointer transition-colors"
+                    >
+                      {explorerOpen ? (
+                        <ChevronDown className="w-4 h-4 text-primary" />
+                      ) : (
+                        <ChevronRight className="w-4 h-4 text-primary" />
+                      )}
+                      {explorerOpen ? (
+                        <FolderOpen className="w-4 h-4 text-primary" />
+                      ) : (
+                        <Folder className="w-4 h-4 text-primary" />
+                      )}
+                      <span className="text-sm font-medium">projects</span>
+                      <span className="ml-auto text-xs text-gray-500 bg-gray-800 px-2 py-1 rounded">
+                        {staticProjects.length}
+                      </span>
+                    </div>
+
+                    {/* Project Files */}
+                    <AnimatePresence>
+                      {explorerOpen && (
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          className="ml-6 mt-1 space-y-1"
+                        >
+                          {staticProjects.map((project, index) => (
+                            <motion.div
+                              key={project.id}
+                              initial={{ opacity: 0, x: -10 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ delay: index * 0.05 }}
+                              onClick={() => setSelectedProject(index)}
+                              className={`group flex items-center gap-3 w-full p-2 rounded-lg transition-all duration-200 cursor-pointer ${
+                                selectedProject === index
+                                  ? 'bg-primary/20 border-l-2 border-primary text-primary'
+                                  : 'hover:bg-gray-800/50 text-gray-400 hover:text-gray-300'
+                              }`}
+                              whileHover={{ 
+                                x: 3,
+                                scale: 1.02,
+                                boxShadow: selectedProject !== index ? "0 0 20px rgba(0, 234, 255, 0.3)" : "none"
+                              }}
+                            >
+                              <div className={`transition-transform group-hover:scale-110 ${
+                                selectedProject === index ? 'scale-110' : ''
+                              }`}>
+                                {project.icon}
+                              </div>
+                              <span className="text-sm font-mono truncate">{project.fileName}</span>
+                              {selectedProject === index && (
+                                <motion.div
+                                  className="ml-auto w-2 h-2 rounded-full bg-primary animate-pulse"
+                                  initial={{ scale: 0 }}
+                                  animate={{ scale: 1 }}
+                                />
+                              )}
+                            </motion.div>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Main Editor Area */}
+              <div className="flex-1 overflow-hidden">
+                {/* Tabs Bar */}
+                <div className="flex items-center bg-gray-900/90 border-b border-gray-800 overflow-x-auto">
+                  {staticProjects.map((project, index) => (
+                    <div
+                      key={project.id}
+                      onClick={() => setSelectedProject(index)}
+                      className={`flex items-center gap-2 px-4 py-3 border-r border-gray-800 transition-all duration-200 cursor-pointer ${
+                        selectedProject === index
+                          ? 'bg-gray-900 text-primary border-b-2 border-primary'
+                          : 'text-gray-400 hover:text-gray-300 hover:bg-gray-800/50'
+                      }`}
+                    >
+                      {project.icon}
+                      <span className="text-sm font-mono truncate max-w-[120px]">{project.fileName}</span>
+                      {selectedProject === index && (
+                        <div
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            // Handle tab close - implement your logic here
+                          }}
+                          className="ml-2 p-0.5 rounded hover:bg-gray-700 transition-colors"
+                        >
+                          <X className="w-3 h-3" />
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+
+                {/* Editor Content */}
+                <div className="p-6 md:p-8 h-[600px] overflow-y-auto bg-gradient-to-br from-gray-900/50 to-gray-950/50 backdrop-blur-sm">
+                  {staticProjects[selectedProject] && (
+                    <motion.div
+                      key={selectedProject}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: 0.12 }}
+                      className="space-y-6"
+                    >
+                      {/* File Header */}
+                      <div className="flex items-center justify-between mb-8">
+                        <div>
+                          <div className="flex items-center gap-3 mb-2">
+                            <div className="p-2 rounded-lg bg-primary/10 border border-primary/20">
+                              {staticProjects[selectedProject].icon}
+                            </div>
+                            <div>
+                              <h3 className="text-2xl md:text-3xl font-bold text-white">
+                                {staticProjects[selectedProject].title}
+                              </h3>
+                              <div className="flex items-center gap-3 mt-2">
+                                <span className="text-sm text-gray-400 font-mono flex items-center gap-1.5">
+                                  <Calendar className="w-4 h-4" />
+                                  {staticProjects[selectedProject].duration}
+                                </span>
+                                <span className="text-sm text-gray-400 font-mono flex items-center gap-1.5">
+                                  <Star className="w-4 h-4 text-yellow-500" />
+                                  {staticProjects[selectedProject].stars} stars
+                                </span>
+                                <span className="text-sm text-gray-400 font-mono flex items-center gap-1.5">
+                                  <GitFork className="w-4 h-4" />
+                                  {staticProjects[selectedProject].forks} forks
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="flex gap-2">
+                          {staticProjects[selectedProject].live && (
+                            <a
+                              href={staticProjects[selectedProject].live}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="px-4 py-2 bg-gradient-to-r from-primary to-secondary text-white rounded-lg hover:opacity-90 transition-all duration-300 flex items-center gap-2 text-sm"
+                            >
+                              <ExternalLink className="w-4 h-4" />
+                              Live Demo
+                            </a>
+                          )}
+                          <a
+                            href={staticProjects[selectedProject].github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-4 py-2 bg-gray-800 hover:bg-primary/20 text-gray-300 hover:text-primary rounded-lg transition-all duration-300 flex items-center gap-2 text-sm"
+                          >
+                            <Github className="w-4 h-4" />
+                            Source Code
+                          </a>
+                        </div>
+                      </div>
+
+                      {/* Description */}
+                      <div className="glass-card p-6 rounded-xl">
+                        <h4 className="text-lg font-semibold text-primary mb-3 flex items-center gap-2">
+                          <FileCode className="w-5 h-5" />
+                          Project Overview
+                        </h4>
+                        <p className="text-gray-300 leading-relaxed">
+                          {staticProjects[selectedProject].longDescription}
+                        </p>
+                      </div>
+
+                      {/* Features & Tech Stack Grid */}
+                      <div className="grid md:grid-cols-2 gap-6">
+                        {/* Features */}
+                        <div className="glass-card p-6 rounded-xl">
+                          <h4 className="text-lg font-semibold text-primary mb-4 flex items-center gap-2">
+                            <ChevronRight className="w-5 h-5" />
+                            Key Features
+                          </h4>
+                          <ul className="space-y-2">
+                            {staticProjects[selectedProject].features.map((feature, index) => (
+                              <motion.li
+                                key={index}
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: index * 0.05 }}
+                                className="flex items-start gap-2 text-gray-300"
+                              >
+                                <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2"></div>
+                                <span>{feature}</span>
+                              </motion.li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        {/* Tech Stack */}
+                        <div className="glass-card p-6 rounded-xl">
+                          <h4 className="text-lg font-semibold text-primary mb-4 flex items-center gap-2">
+                            <CodeIcon className="w-5 h-5" />
+                            Technology Stack
+                          </h4>
+                          <div className="flex flex-wrap gap-2">
+                            {staticProjects[selectedProject].tech.map((tech, index) => (
+                              <motion.span
+                                key={tech}
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ delay: index * 0.05 }}
+                                className="px-3 py-1.5 text-sm font-mono rounded-lg bg-gray-800/50 text-gray-300 border border-gray-700 hover:border-primary/50 transition-all duration-300 hover:scale-105"
+                                style={{
+                                  boxShadow: `0 0 10px ${getLanguageColor(tech)}30`
+                                }}
+                              >
+                                {tech}
+                              </motion.span>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Code Preview */}
+                      <div className="glass-card p-6 rounded-xl">
+                        <div className="flex items-center justify-between mb-4">
+                          <h4 className="text-lg font-semibold text-primary flex items-center gap-2">
+                            <Terminal className="w-5 h-5" />
+                            Code Preview
+                          </h4>
+                          <span className="text-sm text-gray-500 font-mono">
+                            {staticProjects[selectedProject].fileName}
+                          </span>
+                        </div>
+                        <div className="bg-gray-950 rounded-lg overflow-hidden border border-gray-800">
+                          <div className="flex items-center gap-2 px-4 py-3 bg-gray-900 border-b border-gray-800">
+                            <div className="flex gap-2">
+                              <div className="w-2 h-2 rounded-full bg-red-500"></div>
+                              <div className="w-2 h-2 rounded-full bg-yellow-500"></div>
+                              <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                            </div>
+                          </div>
+                          <pre className="p-6 font-mono text-sm text-gray-300 overflow-x-auto">
+                            <code>
+{`// ${staticProjects[selectedProject].title}
+// ${staticProjects[selectedProject].duration}
+
+import React from 'react';
+import { ${staticProjects[selectedProject].tech.slice(0, 3).join(', ')} } from 'tech-stack';
+
+const ${staticProjects[selectedProject].title.replace(/\s+/g, '')} = () => {
+  // Project initialized
+  const features = ${JSON.stringify(staticProjects[selectedProject].features.slice(0, 3), null, 2)};
+  
+  return (
+    <div className="project-container">
+      <h1>${staticProjects[selectedProject].title}</h1>
+      <p>${staticProjects[selectedProject].description.substring(0, 100)}...</p>
+    </div>
+  );
+};
+
+export default ${staticProjects[selectedProject].title.replace(/\s+/g, '')};`}
+                            </code>
+                          </pre>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
+        </motion.div>
 
-          {/* Instructions */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            className="text-center mb-12"
-          >
-            {/* <div className="inline-flex items-center gap-2 text-sm text-muted-foreground bg-card/30 px-4 py-2 rounded-full border border-border">
-              <MousePointerClick className="w-3 h-3" />
-              <span>Click any project on the left to view details</span>
-            </div> */}
-          </motion.div>
-        </div>
-
-        {/* Coming Soon Section */}
+        {/* Coming Soon Projects */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mt-16 md:mt-24"
+          transition={{ duration: 0.6 }}
+          className="mt-24"
         >
-          <div className="text-center mb-8 md:mb-12">
-            <div className="inline-flex items-center gap-3 mb-4">
-              <Calendar className="text-secondary" />
-              <h3 className="text-2xl md:text-3xl font-bold gradient-text">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-4 mb-6">
+              <Calendar className="text-secondary" size={32} />
+              <h3 className="text-3xl md:text-4xl font-bold gradient-text">
                 Coming Soon
               </h3>
-              <Calendar className="text-primary" />
+              <Calendar className="text-primary" size={32} />
             </div>
-            <p className="text-muted-foreground text-sm md:text-base max-w-xl mx-auto">
-              Projects currently in development
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
+              Projects currently in development pipeline
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {comingSoonProjects.map((project, index) => (
               <motion.div
                 key={project.id}
@@ -580,44 +1018,46 @@ const ProjectsSection = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
-                className="bg-card/30 backdrop-blur-sm rounded-xl border border-border/50 p-5 hover:border-primary/30 transition-all duration-300"
+                className="glass-card rounded-2xl p-6 border border-gray-800 group hover:border-primary/40 transition-all duration-500"
               >
-                <div className="flex items-start gap-3 mb-4">
-                  <div className="p-2 rounded-lg bg-primary/10">
-                    {project.icon}
+                <div className="flex items-start justify-between mb-5">
+                  <div className="flex items-center gap-3">
+                    <div className="p-3 rounded-xl bg-primary/10 border border-primary/20">
+                      {project.icon}
+                    </div>
+                    <h4 className="text-xl font-bold group-hover:text-primary transition-colors">
+                      {project.title}
+                    </h4>
                   </div>
-                  <div>
-                    <h4 className="font-bold text-lg">{project.title}</h4>
-                    <span className={`text-xs px-2 py-1 rounded ${
-                      project.status === "active" 
-                        ? "bg-green-500/20 text-green-400" 
-                        : "bg-blue-500/20 text-blue-400"
-                    }`}>
-                      {project.status === "active" ? "In Development" : "Planning"}
-                    </span>
-                  </div>
+                  <span className={`px-3 py-1.5 font-mono rounded-lg text-sm ${
+                    project.status === "active" 
+                      ? "bg-green-500/20 text-green-400 border border-green-500/30"
+                      : "bg-blue-500/20 text-blue-400 border border-blue-500/30"
+                  }`}>
+                    {project.status === "active" ? "In Dev" : "Planning"}
+                  </span>
                 </div>
-                
-                <p className="text-muted-foreground text-sm mb-4">
+
+                <p className="text-muted-foreground text-base mb-6 leading-relaxed">
                   {project.description}
                 </p>
-                
-                <div className="flex flex-wrap gap-1.5 mb-4">
-                  {project.tech.slice(0, 3).map((tech) => (
+
+                <div className="flex flex-wrap gap-1.5 mb-5">
+                  {project.tech.map((tech) => (
                     <span
                       key={tech}
-                      className="px-2 py-1 text-xs font-mono rounded bg-muted/30 text-muted-foreground"
+                      className="px-2.5 py-1 font-mono rounded-lg bg-gray-800/50 text-gray-400 text-sm"
                     >
                       {tech}
                     </span>
                   ))}
                 </div>
-                
+
                 <a
                   href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-secondary hover:text-primary transition-colors flex items-center gap-1.5"
+                  className="text-secondary hover:text-primary transition-colors flex items-center gap-1.5 text-sm"
                 >
                   <Github className="w-4 h-4" />
                   <span>View on GitHub</span>
@@ -629,15 +1069,15 @@ const ProjectsSection = () => {
 
         {/* Call to Action */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mt-16 md:mt-24"
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="text-center mt-24"
         >
-          <div className="p-6 md:p-8 rounded-xl border border-primary/10 bg-card/30 max-w-xl mx-auto">
-            <p className="text-muted-foreground text-sm md:text-base mb-4 md:mb-6">
-              Explore more projects and contributions
+          <div className="glass-card p-8 rounded-3xl border border-primary/20 max-w-2xl mx-auto hover:border-primary/40 transition-all duration-500">
+            <p className="text-muted-foreground text-lg mb-6">
+              Want to explore more projects in detail?
             </p>
             <a
               href="https://github.com/DHRUV-SHERE"
@@ -645,18 +1085,38 @@ const ProjectsSection = () => {
               rel="noopener noreferrer"
               className="inline-block"
             >
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-5 md:px-6 py-2.5 md:py-3 bg-gradient-to-r from-primary to-secondary text-white font-medium rounded-lg hover:opacity-90 transition-all duration-300 flex items-center gap-2 md:gap-3 mx-auto"
-              >
-                <Github className="w-4 h-4 md:w-5 md:h-5" />
-                <span className="text-sm md:text-base">View All Projects</span>
-              </motion.button>
+              <button className="px-6 py-3 bg-gradient-to-r from-primary to-secondary text-white font-medium rounded-xl hover:opacity-90 transition-all duration-300 flex items-center gap-3 shadow-xl shadow-primary/30 hover:shadow-primary/50 hover:scale-105">
+                <Github className="w-5 h-5" />
+                <span className="text-base">Browse All Projects</span>
+              </button>
             </a>
           </div>
         </motion.div>
       </div>
+
+      {/* Inline CSS for glass effect - without jsx attribute */}
+      <style dangerouslySetInnerHTML={{
+        __html: `
+          .glass-card {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+          }
+          
+          .gradient-text {
+            background: linear-gradient(90deg, #00eaff 0%, #00ff88 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+          }
+          
+          @media (max-width: 768px) {
+            .glass-card {
+              background: rgba(30, 41, 59, 0.7);
+            }
+          }
+        `
+      }} />
     </section>
   );
 };
