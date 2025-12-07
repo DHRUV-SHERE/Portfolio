@@ -16,7 +16,7 @@ const TerminalHero = () => {
     { text: '  role: "Full-Stack MERN Developer",', delay: 200 },
     { text: '  location: "Gujarat, India",', delay: 300 },
     {
-      text: '  skills: ["React", "Node.js", "MongoDB", "TypeScript"],',
+      text: '  skills: ["React", "Node.js", "Express JS","MongoDB"],',
       delay: 400,
     },
     { text: '  passion: "Building innovative web solutions",', delay: 500 },

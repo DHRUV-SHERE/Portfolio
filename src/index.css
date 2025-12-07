@@ -1,10 +1,12 @@
-*{
-    /* --background: 222 65% 6%; */
-    scroll-behavior: smooth;
-    font-family: 'Quicksand', sans-serif;
-    box-sizing: border-box;
+* {
+  /* --background: 222 65% 6%; */
+  scroll-behavior: smooth;
+  font-family: "Quicksand", sans-serif;
+  box-sizing: border-box;
 }
-html, body {
+html,
+body {
+  scroll-behavior: smooth;
   overflow-x: hidden;
   max-width: 100%;
 }
