@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Download, Github, Linkedin, Mail, ExternalLink } from "lucide-react";
+import resumePDF from "../assets/RESUME_DHRUV-SHERE.pdf"; // Adjust path based on your structure
 
 const TerminalHero = () => {
   const [displayedText, setDisplayedText] = useState("");
   const [currentLine, setCurrentLine] = useState(0);
   const [isTyping, setIsTyping] = useState(true);
+
+  // ADD THIS IMPORT AT THE TOP OF YOUR FILE (if using direct import)
 
   const codeLines = [
     { text: "const developer = {", delay: 0 },
@@ -36,6 +39,23 @@ const TerminalHero = () => {
       }, line.delay + index * 80);
     });
   }, []);
+
+  // ADD THIS FUNCTION (similar to your old portfolio)
+  const downloadResume = () => {
+    // Option 1: If PDF is in public folder
+    // const resumeUrl = "/Dhruv_Shere_Resume.pdf";
+    
+    // Option 2: If you want to import it (uncomment and adjust path)
+    const resumeUrl = resumePDF;
+    
+    const link = document.createElement("a");
+    link.href = resumeUrl;
+    link.download = "DHRUV-SHERE_RESUME.pdf";
+    link.target = "_blank";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   const syntaxHighlight = (text) => {
     return text.split("\n").map((line, i) => {
@@ -194,14 +214,14 @@ const TerminalHero = () => {
               >
                 <Linkedin className="w-5 h-5" />
               </a>
-              <a
-                href="/Dhruv_Shere_Resume.pdf"
-                download
+              {/* UPDATED RESUME DOWNLOAD BUTTON */}
+              <button
+                onClick={downloadResume}
                 className="p-3 rounded-lg glass hover:glass-hover transition-all duration-300"
                 aria-label="Download Resume"
               >
                 <Download className="w-5 h-5" />
-              </a>
+              </button>
             </motion.div>
           </motion.div>
 
