@@ -195,7 +195,7 @@ const TerminalHero = () => {
                 <Linkedin className="w-5 h-5" />
               </a>
               <a
-                href="/resume.pdf"
+                href="/Dhruv_Shere_Resume.pdf"
                 download
                 className="p-3 rounded-lg glass hover:glass-hover transition-all duration-300"
                 aria-label="Download Resume"
