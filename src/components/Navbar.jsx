@@ -1,174 +1,136 @@
 import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Code2 } from 'lucide-react';
-import { Resource } from '../resources';
-import { Link } from 'react-scroll';
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('hero');
+
+  const navItems = [
+    { label: 'Home', href: '#hero' },
+    { label: 'Skills', href: '#skills' },
+    { label: 'Projects', href: '#projects' },
+    { label: 'Experience', href: '#experience' },
+    { label: 'Contact', href: '#contact' },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
-      
-      // Update active section based on scroll position
-      const sections = ['hero', 'about', 'skills', 'projects', 'upcoming-projects', 'contact'];
-      const current = sections.find(section => {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          return rect.top <= 100 && rect.bottom >= 100;
-        }
-        return false;
-      });
-      if (current) setActiveSection(current);
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks = [
-    { id: 'hero', label: 'Home' },
-    { id: 'about', label: 'About' },
-    { id: 'skills', label: 'Skills' },
-    { id: 'projects', label: 'Projects' },
-    { id: 'upcoming-projects', label: 'Upcoming' },
-    { id: 'contact', label: 'Contact' },
-  ];
-
-  const Button = ({ children, onClick, className = '' }) => (
-    <button
-      onClick={onClick}
-      className={`px-4 md:px-6 py-2 md:py-3 rounded-xl font-medium transition-all duration-300 hover-lift  text-sm md:text-base hover:shadow-lg hover:shadow-primary/25 ${className}`}
-    >
-      {children}
-    </button>
-  );
-
-  const NavLink = ({ to, label, isActive }) => (
-    <Link
-      to={to}
-      spy={true}
-      smooth={true}
-      duration={500}
-      offset={-80}
-      className={`transition-all duration-300 relative group font-medium  text-base lg:text-lg cursor-pointer px-3 py-2 rounded-lg ${
-        isActive 
-          ? 'text-primary bg-primary/10' 
-          : 'text-foreground hover:text-primary hover:bg-primary/5'
-      }`}
-    >
-      {label}
-      <span className={`absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-ocean group-hover:w-full transition-all duration-300 ${
-        isActive ? 'w-full' : ''
-      }`} />
-    </Link>
-  );
+  const scrollToSection = (href) => {
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+    setIsMobileMenuOpen(false);
+  };
 
   return (
-    <nav
-      className={`w-full sticky top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-md ${
-        isScrolled ? 'glass py-3 md:py-4 shadow-lg' : 'py-4 md:py-6'
-      }`}
-    >
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
-          <Link
-            to="hero"
-            spy={true}
-            smooth={true}
-            duration={500}
-            className="flex items-center justify-center hover:scale-105 transition-transform duration-300 group cursor-pointer"
+    <>
+      <motion.nav
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5 }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          isScrolled 
+            ? 'glass py-3' 
+            : 'bg-transparent py-5'
+        }`}
+      >
+        <div className="container mx-auto px-4 flex items-center justify-between">
+          {/* Logo */}
+          <a 
+            href="#hero" 
+            onClick={(e) => { e.preventDefault(); scrollToSection('#hero'); }}
+            className="flex items-center gap-2 group"
           >
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-ocean rounded-full blur-md group-hover:blur-lg transition-all duration-300 opacity-70 group-hover:opacity-100 scale-110"></div>
-              <div className="relative bg-background/80 backdrop-blur-sm rounded-full p-2 border border-primary/20 group-hover:border-primary/40 transition-colors">
-                <img 
-                  src={Resource.logo} 
-                  alt="DS Logo" 
-                  className="h-8 w-8 md:h-10 md:w-10 object-contain" 
-                />
-              </div>
+              <Code2 className="w-8 h-8 text-primary group-hover:text-secondary transition-colors" />
+              <div className="absolute inset-0 bg-primary/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
-          </Link>
-
+            <span className="font-mono font-bold text-lg">
+              <span className="text-primary">{'<'}</span>
+              <span className="text-foreground">Dhruv</span>
+              <span className="text-secondary">{'/>'}</span>
+            </span>
+          </a>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-2 lg:gap-4">
-            {navLinks.map((link) => (
-              <NavLink
-                key={link.id}
-                to={link.id}
-                label={link.label}
-                isActive={activeSection === link.id}
-              />
-            ))}
-            <Link
-              to="contact"
-              spy={true}
-              smooth={true}
-              duration={500}
-              offset={-80}
-            >
-              <Button className="bg-gradient-ocean hover-glow text-primary-foreground cursor-pointer shadow-lg">
-                Get In Touch
-              </Button>
-            </Link>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden text-primary hover-lift p-2 rounded-lg bg-primary/10 hover:bg-primary/20 transition-colors"
-            aria-label="Toggle menu"
-          >
-            {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
-        </div>
-
-        {/* Mobile Menu */}
-        <div className={`md:hidden transition-all duration-300 overflow-hidden ${
-          isMobileMenuOpen ? 'max-h-96 opacity-100 mt-4' : 'max-h-0 opacity-0'
-        }`}>
-          <div className="glass rounded-2xl p-4 border border-primary/20 backdrop-blur-lg">
-            <div className="flex flex-col gap-1">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.id}
-                  to={link.id}
-                  spy={true}
-                  smooth={true}
-                  duration={500}
-                  offset={-80}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className={`text-foreground transition-colors text-left py-3 px-4 rounded-lg font-medium  text-base cursor-pointer ${
-                    activeSection === link.id
-                      ? 'bg-primary/10 text-primary'
-                      : 'hover:bg-primary/10 hover:text-primary'
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              ))}
-              <Link
-                to="contact"
-                spy={true}
-                smooth={true}
-                duration={500}
-                offset={-80}
-                onClick={() => setIsMobileMenuOpen(false)}
+          <div className="hidden md:flex items-center gap-1">
+            {navItems.map((item, index) => (
+              <motion.a
+                key={item.label}
+                href={item.href}
+                onClick={(e) => { e.preventDefault(); scrollToSection(item.href); }}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className="px-4 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all relative group"
               >
-                <Button className="bg-gradient-ocean w-full text-primary-foreground mt-2 text-base cursor-pointer justify-center">
-                  Get In Touch
-                </Button>
-              </Link>
-            </div>
+                {item.label}
+                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary group-hover:w-3/4 transition-all duration-300" />
+              </motion.a>
+            ))}
+          </div>
+
+          {/* Right side actions */}
+          <div className="flex items-center gap-3">
+            <button
+              className="hidden sm:flex px-4 py-2 bg-gradient-to-r from-primary to-secondary text-white font-mono text-sm rounded-lg hover:opacity-90 transition-opacity"
+              onClick={(e) => { e.preventDefault(); scrollToSection('#contact'); }}
+            >
+              Hire Me
+            </button>
+
+            {/* Mobile menu toggle */}
+            <button
+              className="md:hidden p-2 rounded-lg hover:bg-muted/50 transition-colors"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
           </div>
         </div>
-      </div>
-    </nav>
+      </motion.nav>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="fixed top-16 left-0 right-0 z-40 glass p-4 md:hidden"
+          >
+            <div className="flex flex-col gap-2">
+              {navItems.map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  onClick={(e) => { e.preventDefault(); scrollToSection(item.href); }}
+                  className="px-4 py-3 rounded-lg text-foreground hover:bg-muted/50 transition-all font-medium"
+                >
+                  {item.label}
+                </a>
+              ))}
+              <button 
+                className="mt-2 px-4 py-3 bg-gradient-to-r from-primary to-secondary text-white font-mono rounded-lg hover:opacity-90 transition-opacity font-medium"
+                onClick={(e) => { e.preventDefault(); scrollToSection('#contact'); }}
+              >
+                Hire Me
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 

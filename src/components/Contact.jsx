@@ -1,47 +1,56 @@
 import { useState } from 'react';
-import { Mail, MapPin, Clock, Send, Github, Linkedin, ExternalLink } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Send, Mail, MapPin, Github, Linkedin, Phone, CheckCircle, Loader2, Clock, ExternalLink } from 'lucide-react';
 
 // EmailJS config
 const SERVICE_ID = "service_mvmzvlq";
 const TEMPLATE_ID = "template_ofep908";
 const PUBLIC_KEY = "G3P48wd0AD6_lUVxK";
 
-const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
+const ContactSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitStatus(null);
 
-    emailjs
-      .send(SERVICE_ID, TEMPLATE_ID, formData, PUBLIC_KEY)
-      .then(() => {
-        setSubmitStatus("success");
-        setFormData({ name: "", email: "", subject: "", message: "" });
-      })
-      .catch(() => {
-        setSubmitStatus("error");
-      })
-      .finally(() => {
-        setIsSubmitting(false);
-        setTimeout(() => setSubmitStatus(null), 5000);
-      });
+    try {
+      await window.emailjs.send(SERVICE_ID, TEMPLATE_ID, formData, PUBLIC_KEY);
+      setSubmitStatus("success");
+      setIsSubmitted(true);
+      
+      // Reset form after delay
+      setTimeout(() => {
+        setIsSubmitted(false);
+        setFormData({ name: '', email: '', subject: '', message: '' });
+        setSubmitStatus(null);
+      }, 3000);
+    } catch (error) {
+      console.error('EmailJS error:', error);
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const socialLinks = [
+    { icon: <Github className="w-5 h-5" />, href: 'https://github.com/DHRUV-SHERE', label: 'GitHub' },
+    { icon: <Linkedin className="w-5 h-5" />, href: 'https://www.linkedin.com/in/dhruv-shere/', label: 'LinkedIn' },
+    { icon: <Mail className="w-5 h-5" />, href: 'mailto:sheredhruv@gmail.com', label: 'Email' },
+  ];
 
   const contactInfo = [
     {
@@ -54,7 +63,7 @@ const Contact = () => {
     {
       icon: MapPin,
       label: "Location",
-      value: "Ahmedabad, India",
+      value: "Gujarat, India",
       color: "purple",
     },
     {
@@ -65,277 +74,276 @@ const Contact = () => {
     },
   ];
 
-  const socialLinks = [
-    {
-      name: "GitHub",
-      icon: Github,
-      href: "https://github.com/DHRUV-SHERE",
-      color: "blue",
-    },
-    {
-      name: "LinkedIn",
-      icon: Linkedin,
-      href: "https://linkedin.com/in/dhruv-shere",
-      color: "purple",
-    },
-    {
-      name: "Portfolio",
-      icon: ExternalLink,
-      href: "#",
-      color: "cyan",
-    },
-  ];
-
-  const getGlowClass = (color) => {
-    switch (color) {
-      case 'purple':
-        return 'shadow-purple';
-      case 'cyan':
-        return 'shadow-sunset';
-      default:
-        return 'shadow-ocean';
-    }
-  };
-
-  const getTextColorClass = (color) => {
-    switch (color) {
-      case 'purple':
-        return 'text-secondary';
-      case 'cyan':
-        return 'text-accent';
-      default:
-        return 'text-primary';
-    }
-  };
-
-  const getBackgroundClass = (color) => {
-    switch (color) {
-      case 'purple':
-        return 'bg-secondary/10';
-      case 'cyan':
-        return 'bg-accent/10';
-      default:
-        return 'bg-primary/10';
-    }
-  };
-
-  const Button = ({ children, onClick, className = '', variant = 'default', size = 'default', disabled = false, type = 'button' }) => {
-    const baseStyles = 'px-4 md:px-6 py-2 md:py-3 rounded-xl font-medium transition-all duration-300 hover-lift flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed';
-    
-    const variants = {
-      default: 'bg-gradient-ocean text-primary-foreground hover-glow shadow-medium',
-      outline: 'border-2 border-primary text-primary hover:bg-primary/10 shadow-soft',
-    };
-
-    const sizes = {
-      default: 'text-sm md:text-base',
-      sm: 'text-sm px-3 md:px-4 py-2',
-      lg: 'text-base md:text-lg px-6 md:px-8 py-3 md:py-4'
-    };
-
-    return (
-      <button
-        type={type}
-        onClick={onClick}
-        disabled={disabled}
-        className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`}
-      >
-        {children}
-      </button>
-    );
-  };
-
+  // Input Components
   const Input = ({ className = '', ...props }) => (
     <input
-      className={`w-full px-3 md:px-4 py-2 md:py-3 bg-muted/50 border-2 border-primary/30 rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary focus:shadow-ocean transition-all duration-300 text-sm md:text-base ${className}`}
+      className={`w-full px-4 py-3 bg-muted/50 border border-border rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all duration-300 text-sm ${className}`}
       {...props}
     />
   );
 
   const Textarea = ({ className = '', ...props }) => (
     <textarea
-      className={`w-full px-3 md:px-4 py-2 md:py-3 bg-muted/50 border-2 border-primary/30 rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary focus:shadow-ocean transition-all duration-300 min-h-[120px] md:min-h-[150px] resize-vertical text-sm md:text-base ${className}`}
+      className={`w-full px-4 py-3 bg-muted/50 border border-border rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all duration-300 resize-none text-sm min-h-[120px] ${className}`}
       {...props}
     />
   );
 
   return (
-    <section id="contact" className="py-16 md:py-20 relative w-full">
-      {/* Background Elements */}
-      <div className="absolute top-0 left-0 w-48 h-48 md:w-72 md:h-72 bg-primary/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-      
-      <div className="container mx-auto px-4 relative z-10 w-full">
-        <div className="text-center mb-12 md:mb-16 animate-slide-up w-full">
-          <h2 className="text-3xl md:text-4xl lg:text-6xl font-bold mb-4 md:mb-6 text-responsive-2xl">
-            Get In <span className="name-gradient">Touch</span>
+    <section id="contact" className="py-24 px-4 relative">
+      <div className="container mx-auto max-w-7xl">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <p className="text-secondary font-mono text-sm mb-2">{'<Contact />'}</p>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            <span className="gradient-text">Get In Touch</span>
           </h2>
-          <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed text-responsive">
-            Let's discuss your next project or just say hello
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            Have a project in mind or want to collaborate? I'd love to hear from you. 
+            Let's build something amazing together.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 w-full max-w-7xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Info */}
-          <div className="space-y-6 md:space-y-8 animate-slide-up">
-            <div className="glass-card p-6 md:p-8">
-              <h3 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-foreground text-responsive-lg">
-                Let's work together
-              </h3>
-              <p className="text-muted-foreground mb-6 md:mb-8 leading-relaxed text-sm md:text-base lg:text-lg">
-                I'm always interested in new opportunities, whether it's a full-time position, 
-                freelance project, or just a conversation about technology. Feel free to reach out!
-              </p>
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="space-y-8"
+          >
+            {/* Terminal Card */}
+            <div className="gradient-border rounded-xl overflow-hidden">
+              <div className="bg-muted/50 px-4 py-3 flex items-center gap-2 border-b border-border">
+                <div className="flex gap-2">
+                  <div className="w-3 h-3 rounded-full bg-red-500" />
+                  <div className="w-3 h-3 rounded-full bg-yellow-500" />
+                  <div className="w-3 h-3 rounded-full bg-green-500" />
+                </div>
+                <span className="text-xs text-muted-foreground font-mono ml-4">
+                  contact.sh
+                </span>
+              </div>
+              <div className="bg-card/80 p-6 font-mono text-sm space-y-3">
+                <div className="code-line">
+                  <span className="text-muted-foreground">$</span>{' '}
+                  <span className="text-primary">cat</span> contact_info.txt
+                </div>
+                <div className="space-y-2 pl-4">
+                  <div className="flex items-center gap-3">
+                    <Phone className="w-4 h-4 text-secondary" />
+                    <span className="text-muted-foreground">+91 9316846548</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Mail className="w-4 h-4 text-secondary" />
+                    <span className="text-muted-foreground">sheredhruv@gmail.com</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <MapPin className="w-4 h-4 text-secondary" />
+                    <span className="text-muted-foreground">Gujarat, India</span>
+                  </div>
+                </div>
+                <div className="code-line pt-2">
+                  <span className="text-muted-foreground">$</span>{' '}
+                  <span className="text-primary">echo</span>{' '}
+                  <span className="string">"Seeking internship opportunities!"</span>
+                </div>
+                <div className="text-secondary pl-4">Seeking internship opportunities!</div>
+              </div>
+            </div>
 
-              <div className="space-y-4 md:space-y-6">
-                {contactInfo.map((info, index) => {
-                  const Icon = info.icon;
-                  return (
-                    <div key={index} className="flex items-start gap-3 md:gap-4 group">
-                      <div className={`p-3 md:p-4 rounded-xl ${getBackgroundClass(info.color)} ${getGlowClass(info.color)} group-hover:scale-110 transition-transform duration-300`}>
-                        <Icon className={getTextColorClass(info.color)} size={24} />
+            {/* Contact Information Cards */}
+            <div className="space-y-4">
+              {contactInfo.map((info, index) => {
+                const Icon = info.icon;
+                return (
+                  <div key={index} className="gradient-border rounded-xl p-4 bg-card/30 backdrop-blur-sm group hover:bg-card/50 transition-all duration-300">
+                    <div className="flex items-start gap-4">
+                      <div className="p-2 rounded-lg bg-primary/10">
+                        <Icon className="w-5 h-5 text-primary" />
                       </div>
                       <div className="flex-1">
-                        <p className="text-muted-foreground text-xs md:text-sm mb-1">{info.label}</p>
+                        <p className="text-sm text-muted-foreground mb-1">{info.label}</p>
                         {info.href ? (
                           <a 
                             href={info.href}
-                            className="text-foreground font-medium hover:text-primary transition-colors text-sm md:text-base lg:text-lg"
+                            className="text-foreground font-medium hover:text-primary transition-colors text-base"
                           >
                             {info.value}
                           </a>
                         ) : (
-                          <p className="text-foreground font-medium text-sm md:text-base lg:text-lg">{info.value}</p>
+                          <p className="text-foreground font-medium text-base">{info.value}</p>
                         )}
                       </div>
                     </div>
-                  );
-                })}
-              </div>
+                  </div>
+                );
+              })}
             </div>
 
             {/* Social Links */}
-            <div className="glass-card p-6 md:p-8">
-              <h3 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-foreground text-responsive-lg">
-                Find me online
-              </h3>
-              <div className="flex gap-3 md:gap-4">
-                {socialLinks.map((social, index) => {
-                  const Icon = social.icon;
-                  return (
-                    <a
-                      key={index}
-                      href={social.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`p-3 md:p-4 rounded-xl ${getBackgroundClass(social.color)} ${getGlowClass(social.color)} hover-lift hover-glow transition-all duration-300 group`}
-                    >
-                      <Icon className={`${getTextColorClass(social.color)} group-hover:scale-110 transition-transform duration-300`} size={24} />
-                    </a>
-                  );
-                })}
+            <div>
+              <h3 className="text-lg font-bold mb-4">Connect with me</h3>
+              <div className="flex gap-3">
+                {socialLinks.map((link) => (
+                  <motion.a
+                    key={link.label}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.1, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="p-3 rounded-xl glass glass-hover"
+                    aria-label={link.label}
+                  >
+                    {link.icon}
+                  </motion.a>
+                ))}
               </div>
             </div>
-          </div>
+
+            {/* Availability Status */}
+            <div className="gradient-border rounded-xl p-4 bg-card/30">
+              <div className="flex items-center gap-3">
+                <div className="relative">
+                  <div className="w-3 h-3 rounded-full bg-secondary" />
+                  <div className="absolute inset-0 w-3 h-3 rounded-full bg-secondary animate-ping opacity-50" />
+                </div>
+                <span className="font-medium">Open to internship opportunities</span>
+              </div>
+              <p className="text-sm text-muted-foreground mt-2 ml-6">
+                Response time: Usually within 24 hours
+              </p>
+            </div>
+
+            {/* Languages */}
+            <div className="gradient-border rounded-xl p-4 bg-card/30">
+              <h4 className="font-mono text-secondary text-sm mb-3">Languages</h4>
+              <div className="flex gap-3">
+                <span className="px-3 py-1 rounded-lg bg-muted/50 text-foreground text-sm">English (Fluent)</span>
+                <span className="px-3 py-1 rounded-lg bg-muted/50 text-foreground text-sm">Hindi (Fluent)</span>
+              </div>
+            </div>
+          </motion.div>
 
           {/* Contact Form */}
-          <div className="glass-card p-6 md:p-8 animate-slide-up" style={{ animationDelay: '0.2s' }}>
-            <h3 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-foreground text-responsive-lg">
-              Send me a message
-            </h3>
-            <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-                <div>
-                  <label className="text-sm md:text-base lg:text-lg text-muted-foreground mb-2 block font-medium">
-                    Name
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <form onSubmit={handleSubmit} className="gradient-border rounded-xl p-6 bg-card/50 backdrop-blur-sm space-y-6">
+              <div className="grid sm:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <label htmlFor="name" className="text-sm font-medium font-mono text-muted-foreground">
+                    name:
                   </label>
                   <Input
-                    type="text"
+                    id="name"
                     name="name"
+                    placeholder="John Doe"
                     value={formData.name}
-                    onChange={handleInputChange}
-                    placeholder="Your name"
+                    onChange={handleChange}
                     required
                   />
                 </div>
-                <div>
-                  <label className="text-sm md:text-base lg:text-lg text-muted-foreground mb-2 block font-medium">
-                    Email
+                <div className="space-y-2">
+                  <label htmlFor="email" className="text-sm font-medium font-mono text-muted-foreground">
+                    email:
                   </label>
                   <Input
-                    type="email"
+                    id="email"
                     name="email"
+                    type="email"
+                    placeholder="john@example.com"
                     value={formData.email}
-                    onChange={handleInputChange}
-                    placeholder="your@email.com"
+                    onChange={handleChange}
                     required
                   />
                 </div>
               </div>
 
-              <div>
-                <label className="text-sm md:text-base lg:text-lg text-muted-foreground mb-2 block font-medium">
-                  Subject
+              <div className="space-y-2">
+                <label htmlFor="subject" className="text-sm font-medium font-mono text-muted-foreground">
+                  subject:
                 </label>
                 <Input
-                  type="text"
+                  id="subject"
                   name="subject"
+                  placeholder="Project Inquiry"
                   value={formData.subject}
-                  onChange={handleInputChange}
-                  placeholder="What's this about?"
+                  onChange={handleChange}
                   required
                 />
               </div>
 
-              <div>
-                <label className="text-sm md:text-base lg:text-lg text-muted-foreground mb-2 block font-medium">
-                  Message
+              <div className="space-y-2">
+                <label htmlFor="message" className="text-sm font-medium font-mono text-muted-foreground">
+                  message:
                 </label>
                 <Textarea
+                  id="message"
                   name="message"
-                  value={formData.message}
-                  onChange={handleInputChange}
                   placeholder="Tell me about your project..."
+                  value={formData.message}
+                  onChange={handleChange}
                   required
                 />
               </div>
-
-              <Button
-                type="submit"
-                size="lg"
-                disabled={isSubmitting}
-                className="w-full"
-              >
-                {isSubmitting ? (
-                  <>
-                    <div className="w-5 h-5 md:w-6 md:h-6 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin" />
-                    Sending...
-                  </>
-                ) : (
-                  <>
-                    Send Message
-                    <Send size={20} />
-                  </>
-                )}
-              </Button>
 
               {/* Success & Error Messages */}
               {submitStatus === "success" && (
-                <div className="p-3 md:p-4 rounded-xl bg-green-500/10 border border-green-500 text-green-400 text-sm md:text-base animate-fade-in">
+                <div className="p-4 rounded-xl bg-green-500/10 border border-green-500 text-green-400 text-sm animate-fade-in">
                   ✅ Your message has been successfully delivered!
                 </div>
               )}
 
               {submitStatus === "error" && (
-                <div className="p-3 md:p-4 rounded-xl bg-red-500/10 border border-red-500 text-red-400 text-sm md:text-base animate-fade-in">
+                <div className="p-4 rounded-xl bg-red-500/10 border border-red-500 text-red-400 text-sm animate-fade-in">
                   ❌ Something went wrong. Please try again.
                 </div>
               )}
+
+              <button
+                type="submit"
+                disabled={isSubmitting || isSubmitted}
+                className="w-full px-6 py-4 bg-gradient-to-r from-primary to-secondary text-white font-medium rounded-lg hover:opacity-90 transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-primary/30 hover:shadow-primary/50 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    Sending...
+                  </>
+                ) : isSubmitted ? (
+                  <>
+                    <CheckCircle className="w-4 h-4" />
+                    Message Sent!
+                  </>
+                ) : (
+                  <>
+                    <Send className="w-4 h-4" />
+                    Send Message
+                  </>
+                )}
+              </button>
+
+              <p className="text-xs text-muted-foreground text-center">
+                Your message is encrypted and secure. I'll respond within 24 hours.
+              </p>
             </form>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
   );
 };
 
-export default Contact;
+export default ContactSection;
