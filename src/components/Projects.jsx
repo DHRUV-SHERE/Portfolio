@@ -31,6 +31,7 @@ import {
   Play,
   Code as CodeIcon,
   Menu,
+  Building2,
 } from "lucide-react";
 
 const ProjectsSection = () => {
@@ -61,7 +62,6 @@ const ProjectsSection = () => {
   // Selected repositories to display
   const selectedRepos = [
     "Agrosence",
-    "PashuMitra", 
     "Spotify",
     "knowBase",
     "Oracle",
@@ -69,7 +69,8 @@ const ProjectsSection = () => {
     "RejoiuceClone",
     "Online_Learning_Management_System",
     "React_Text_Site",
-    "ToDoList"
+    "ToDoList",
+    "PromptStudio",
   ];
 
   // Enhanced static data for better presentation
@@ -91,17 +92,19 @@ const ProjectsSection = () => {
     },
     "pashumitra": {
       title: "PashuMitra",
-      longDescription: "Smart veterinary healthcare platform connecting farmers with veterinary doctors and medical stores. Features real-time chat consultations, medicine ordering, appointment booking, prescription management, and livestock awareness information. Built with real-time capabilities using Socket.io.",
+      longDescription: "A smart veterinary healthcare platform connecting farmers with veterinary doctors and medical stores. Features real-time chat consultations, medicine ordering, appointment booking, prescription management, and livestock awareness information. Built with real-time capabilities using Socket.io.",
       tech: ["MERN Stack", "React", "Node.js", "MongoDB", "Tailwind CSS", "Socket.io", "Cloudinary", "JWT"],
-      icon: <Database className="w-6 h-6" />,
-      duration: "July 2025 – Present",
-      live: "https://pashumitra.vercel.app/",
+      icon: <Zap className="w-6 h-6" />,
+      duration: "November 2024 – Present",
+      live: null,
       features: [
         "Real-time chat consultations",
         "Medicine ordering system",
         "Appointment booking",
         "Prescription management",
-        "Livestock awareness portal"
+        "Livestock awareness portal",
+        "Veterinary doctor connections",
+        "Medical store integration"
       ]
     },
     "spotify": {
@@ -219,7 +222,22 @@ const ProjectsSection = () => {
         "Progress tracking",
         "Data persistence"
       ]
-    }
+    },
+    "promptstudio": {
+      title: "PromptStudio",
+      longDescription: "AI-driven prompt generator for image creation, code generation, and content creation. Utilizes OpenAI API to provide users with tailored prompts based on their needs, enhancing creativity and productivity.",
+      tech: ["MERN Stack", "React", "Node.js", "OpenAI API", "Tailwind CSS", "JWT"],
+      icon: <Zap className="w-6 h-6" />,
+      duration: "November 2024 – Present",
+      live: "https://thepromptstudio.vercel.app/",
+      features: [
+        "AI-driven prompt generation",
+        "Image creation prompts",
+        "Code generation prompts",
+        "Content creation prompts",
+        "User authentication"
+      ]
+    },
   };
 
   useEffect(() => {
@@ -230,30 +248,54 @@ const ProjectsSection = () => {
     try {
       setLoading(true);
       
-      const response = await fetch(
+      // Fetch personal repositories
+      const personalResponse = await fetch(
         `https://api.github.com/users/${githubUsername}/repos?sort=updated&per_page=100`
       );
 
-      if (!response.ok) {
-        throw new Error(`GitHub API error! Status: ${response.status}`);
+      if (!personalResponse.ok) {
+        throw new Error(`GitHub API error! Status: ${personalResponse.status}`);
       }
 
-      const allRepos = await response.json();
+      const personalRepos = await personalResponse.json();
       
-      const mainProjects = allRepos.filter((repo) =>
+      // Fetch organization repository
+      const orgResponse = await fetch(
+        `https://api.github.com/repos/ProjectSGH/PashuMitra`
+      );
+      
+      let orgRepo = null;
+      if (orgResponse.ok) {
+        orgRepo = await orgResponse.json();
+      }
+
+      // Filter personal projects
+      const mainProjects = personalRepos.filter((repo) =>
         selectedRepos.some(selected => 
           selected.toLowerCase() === repo.name.toLowerCase()
         )
       );
+
+      // Add organization project if fetched successfully
+      if (orgRepo) {
+        mainProjects.push({
+          ...orgRepo,
+          isOrgProject: true,
+          org: "ProjectSGH"
+        });
+      }
 
       // Merge GitHub data with static enhancements
       const formattedProjects = mainProjects.map((repo) => {
         const repoKey = repo.name.toLowerCase();
         const enhancement = projectEnhancements[repoKey] || {};
         
+        // For organization projects, create a special title
+        const projectTitle = enhancement.title || formatProjectName(repo.name);
+        
         return {
           id: repoKey.replace(/[^a-z]/g, '_'),
-          title: enhancement.title || formatProjectName(repo.name),
+          title: projectTitle,
           description: repo.description || "A software development project",
           longDescription: enhancement.longDescription || 
             (repo.description ? `${repo.description}. A project built with modern web technologies and best practices.` : 
@@ -268,7 +310,9 @@ const ProjectsSection = () => {
           forks: repo.forks_count || 0,
           lastUpdated: repo.updated_at,
           icon: enhancement.icon || <FileCode className="w-6 h-6" />,
-          fileName: `${(enhancement.title || formatProjectName(repo.name)).replace(/\s+/g, '')}.jsx`
+          fileName: `${(enhancement.title || formatProjectName(repo.name)).replace(/\s+/g, '')}.jsx`,
+          isOrgProject: repo.isOrgProject || false,
+          org: repo.org || null
         };
       });
 
@@ -286,15 +330,6 @@ const ProjectsSection = () => {
           github: "https://github.com/DHRUV-SHERE/AryaPath"
         },
         {
-          id: "promptstudio",
-          title: "PromptStudio",
-          description: "AI-driven prompt generator for image creation, code generation, and content creation",
-          tech: ["MERN Stack", "Tailwind CSS", "OpenAI API", "Framer Motion", "JWT Authentication"],
-          status: "active",
-          icon: <Zap className="w-5 h-5" />,
-          github: "https://github.com/DHRUV-SHERE/PromptStudio"
-        },
-        {
           id: "connectvista",
           title: "ConnectVista",
           description: "Service-connection platform with smart matching algorithms and professional networking",
@@ -309,17 +344,47 @@ const ProjectsSection = () => {
     } catch (err) {
       console.error("Error fetching GitHub data:", err);
       // Fallback to static data on error
-      const fallbackProjects = Object.values(projectEnhancements).map((proj, index) => ({
-        id: Object.keys(projectEnhancements)[index],
-        ...proj,
-        github: `https://github.com/${githubUsername}/${Object.keys(projectEnhancements)[index]}`,
-        language: proj.tech[0] || "JavaScript",
-        stars: 0,
-        forks: 0,
-        lastUpdated: new Date().toISOString(),
-        fileName: `${proj.title.replace(/\s+/g, '')}.jsx`
-      }));
+      const fallbackProjects = Object.keys(projectEnhancements).map((key) => {
+        const proj = projectEnhancements[key];
+        return {
+          id: key,
+          ...proj,
+          github: key === "pashumitra" 
+            ? `https://github.com/ProjectSGH/PashuMitra`
+            : `https://github.com/${githubUsername}/${key}`,
+          language: proj.tech[0] || "JavaScript",
+          stars: 0,
+          forks: 0,
+          lastUpdated: new Date().toISOString(),
+          fileName: `${proj.title.replace(/\s+/g, '')}.jsx`,
+          isOrgProject: key === "pashumitra",
+          org: key === "pashumitra" ? "ProjectSGH" : null,
+          description: proj.title
+        };
+      });
       setStaticProjects(fallbackProjects);
+      
+      // Fallback for coming soon projects
+      setComingSoonProjects([
+        {
+          id: "aryapath",
+          title: "AryaPath",
+          description: "Tourism platform for international travelers exploring India with itinerary planning and cultural insights",
+          tech: ["MERN Stack", "Tailwind CSS", "Cloudinary", "Socket.io", "Maps API", "Payment Gateway"],
+          status: "planning",
+          icon: <Map className="w-5 h-5" />,
+          github: "https://github.com/DHRUV-SHERE/AryaPath"
+        },
+        {
+          id: "connectvista",
+          title: "ConnectVista",
+          description: "Service-connection platform with smart matching algorithms and professional networking",
+          tech: ["MERN Stack", "Tailwind CSS", "Cloudinary", "Socket.io", "JWT", "Algorithm"],
+          status: "active",
+          icon: <Users className="w-5 h-5" />,
+          github: "https://github.com/DHRUV-SHERE/ConnectVista"
+        }
+      ]);
     } finally {
       setLoading(false);
     }
@@ -431,7 +496,15 @@ const ProjectsSection = () => {
                   </div>
                   <div className="flex-1">
                     <div className="flex items-start justify-between">
-                      <h3 className="font-bold text-base">{project.title}</h3>
+                      <div className="flex items-center gap-2">
+                        <h3 className="font-bold text-base">{project.title}</h3>
+                        {project.isOrgProject && (
+                          <span className="text-xs px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-300 flex items-center gap-1">
+                            <Building2 className="w-3 h-3" />
+                            Org
+                          </span>
+                        )}
+                      </div>
                       <ChevronRight className="w-4 h-4 text-gray-400" />
                     </div>
                     <p className="text-muted-foreground text-sm mt-1 line-clamp-2">
@@ -444,6 +517,11 @@ const ProjectsSection = () => {
                       {project.stars > 0 && (
                         <span className="text-xs text-yellow-500 flex items-center gap-1">
                           ★ {project.stars}
+                        </span>
+                      )}
+                      {project.isOrgProject && project.org && (
+                        <span className="text-xs text-purple-300 flex items-center gap-1">
+                          {project.org}
                         </span>
                       )}
                     </div>
@@ -502,8 +580,21 @@ const ProjectsSection = () => {
                 {project.icon}
               </div>
               <div className="flex-1">
-                <h2 className="text-xl font-bold text-white">{project.title}</h2>
+                <div className="flex items-center gap-2 mb-1">
+                  <h2 className="text-xl font-bold text-white">{project.title}</h2>
+                  {project.isOrgProject && (
+                    <span className="text-xs px-2 py-1 rounded bg-purple-500/20 text-purple-300 flex items-center gap-1">
+                      <Building2 className="w-3 h-3" />
+                      Organization
+                    </span>
+                  )}
+                </div>
                 <p className="text-sm text-gray-400 mt-1">{project.duration}</p>
+                {project.isOrgProject && project.org && (
+                  <p className="text-xs text-purple-300 mt-1">
+                    Organization: {project.org}
+                  </p>
+                )}
               </div>
               <div className="flex gap-2">
                 <a
@@ -767,10 +858,24 @@ const ProjectsSection = () => {
                               }`}>
                                 {project.icon}
                               </div>
-                              <span className="text-sm font-mono truncate">{project.fileName}</span>
+                              <div className="flex flex-col flex-1 min-w-0">
+                                <div className="flex items-center gap-2">
+                                  <span className="text-sm font-mono truncate">{project.fileName}</span>
+                                  {project.isOrgProject && (
+                                    <span className="text-xs px-1 py-0.5 rounded bg-purple-500/20 text-purple-300 flex items-center gap-1">
+                                      <Building2 className="w-3 h-3" />
+                                    </span>
+                                  )}
+                                </div>
+                                {project.isOrgProject && (
+                                  <span className="text-xs text-purple-300 truncate">
+                                    {project.org}
+                                  </span>
+                                )}
+                              </div>
                               {selectedProject === index && (
                                 <motion.div
-                                  className="ml-auto w-2 h-2 rounded-full bg-primary animate-pulse"
+                                  className="ml-2 w-2 h-2 rounded-full bg-primary animate-pulse"
                                   initial={{ scale: 0 }}
                                   animate={{ scale: 1 }}
                                 />
@@ -799,7 +904,14 @@ const ProjectsSection = () => {
                       }`}
                     >
                       {project.icon}
-                      <span className="text-sm font-mono truncate max-w-[120px]">{project.fileName}</span>
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm font-mono truncate max-w-[120px]">{project.fileName}</span>
+                        {project.isOrgProject && (
+                          <span className="text-xs px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-300">
+                            Org
+                          </span>
+                        )}
+                      </div>
                       {selectedProject === index && (
                         <div
                           onClick={(e) => {
@@ -833,9 +945,17 @@ const ProjectsSection = () => {
                               {staticProjects[selectedProject].icon}
                             </div>
                             <div>
-                              <h3 className="text-2xl md:text-3xl font-bold text-white">
-                                {staticProjects[selectedProject].title}
-                              </h3>
+                              <div className="flex items-center gap-3">
+                                <h3 className="text-2xl md:text-3xl font-bold text-white">
+                                  {staticProjects[selectedProject].title}
+                                </h3>
+                                {staticProjects[selectedProject].isOrgProject && (
+                                  <span className="text-sm px-3 py-1 rounded-lg bg-purple-500/20 text-purple-300 border border-purple-500/30 flex items-center gap-1">
+                                    <Building2 className="w-4 h-4" />
+                                    Organization Project
+                                  </span>
+                                )}
+                              </div>
                               <div className="flex items-center gap-3 mt-2">
                                 <span className="text-sm text-gray-400 font-mono flex items-center gap-1.5">
                                   <Calendar className="w-4 h-4" />
@@ -849,6 +969,12 @@ const ProjectsSection = () => {
                                   <GitFork className="w-4 h-4" />
                                   {staticProjects[selectedProject].forks} forks
                                 </span>
+                                {staticProjects[selectedProject].isOrgProject && staticProjects[selectedProject].org && (
+                                  <span className="text-sm text-purple-400 font-mono flex items-center gap-1.5">
+                                    <Users className="w-4 h-4" />
+                                    {staticProjects[selectedProject].org}
+                                  </span>
+                                )}
                               </div>
                             </div>
                           </div>
@@ -960,6 +1086,7 @@ const ProjectsSection = () => {
                             <code>
 {`// ${staticProjects[selectedProject].title}
 // ${staticProjects[selectedProject].duration}
+${staticProjects[selectedProject].isOrgProject ? `// Organization: ${staticProjects[selectedProject].org}` : ''}
 
 import React from 'react';
 import { ${staticProjects[selectedProject].tech.slice(0, 3).join(', ')} } from 'tech-stack';
@@ -1094,7 +1221,7 @@ export default ${staticProjects[selectedProject].title.replace(/\s+/g, '')};`}
         </motion.div>
       </div>
 
-      {/* Inline CSS for glass effect - without jsx attribute */}
+      {/* Inline CSS for glass effect */}
       <style dangerouslySetInnerHTML={{
         __html: `
           .glass-card {
