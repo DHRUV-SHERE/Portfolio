@@ -985,7 +985,7 @@ const ProjectsSection = () => {
                               href={staticProjects[selectedProject].live}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="px-4 py-2 bg-gradient-to-r from-primary to-secondary text-white rounded-lg hover:opacity-90 transition-all duration-300 flex items-center gap-2 text-sm"
+                              className="px-6 py-4 bg-card/50 border border-primary/30 text-primary font-mono rounded-lg hover:bg-primary hover:text-white transition-all duration-300 flex items-center gap-2 backdrop-blur-sm"
                             >
                               <ExternalLink className="w-4 h-4" />
                               Live Demo
@@ -995,7 +995,7 @@ const ProjectsSection = () => {
                             href={staticProjects[selectedProject].github}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="px-4 py-2 bg-gray-800 hover:bg-primary/20 text-gray-300 hover:text-primary rounded-lg transition-all duration-300 flex items-center gap-2 text-sm"
+                            className="px-6 py-4 bg-card/50 border border-primary/30 text-primary font-mono rounded-lg hover:bg-primary hover:text-white transition-all duration-300 flex items-center gap-2 backdrop-blur-sm"
                           >
                             <Github className="w-4 h-4" />
                             Source Code
@@ -1212,7 +1212,7 @@ export default ${staticProjects[selectedProject].title.replace(/\s+/g, '')};`}
               rel="noopener noreferrer"
               className="inline-block"
             >
-              <button className="px-6 py-3 bg-gradient-to-r from-primary to-secondary text-white font-medium rounded-xl hover:opacity-90 transition-all duration-300 flex items-center gap-3 shadow-xl shadow-primary/30 hover:shadow-primary/50 hover:scale-105">
+              <button className="px-6 py-4 bg-card/50 border border-primary/30 text-primary font-mono rounded-lg hover:bg-primary hover:text-white transition-all duration-300 flex items-center gap-2 backdrop-blur-sm">
                 <Github className="w-5 h-5" />
                 <span className="text-base">Browse All Projects</span>
               </button>

@@ -82,7 +82,7 @@ const Navigation = () => {
           {/* Right side actions */}
           <div className="flex items-center gap-3">
             <button
-              className="hidden sm:flex px-4 py-2 bg-gradient-to-r from-primary to-secondary text-white font-mono text-sm rounded-lg hover:opacity-90 transition-opacity"
+              className="hidden sm:flex px-6 py-4 bg-card/50 border border-primary/30 text-primary font-mono rounded-lg hover:bg-primary hover:text-white transition-all duration-300 flex items-center gap-2 backdrop-blur-sm"
               onClick={(e) => { e.preventDefault(); scrollToSection('#contact'); }}
             >
               Hire Me
@@ -121,7 +121,7 @@ const Navigation = () => {
                 </a>
               ))}
               <button 
-                className="mt-2 px-4 py-3 bg-gradient-to-r from-primary to-secondary text-white font-mono rounded-lg hover:opacity-90 transition-opacity font-medium"
+                className="mt-2 px-6 py-4 bg-card/50 border border-primary/30 text-primary font-mono rounded-lg hover:bg-primary hover:text-white transition-all duration-300 flex items-center gap-2 backdrop-blur-sm"
                 onClick={(e) => { e.preventDefault(); scrollToSection('#contact'); }}
               >
                 Hire Me

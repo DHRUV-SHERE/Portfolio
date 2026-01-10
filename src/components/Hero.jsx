@@ -167,19 +167,19 @@ const TerminalHero = () => {
             >
               {/* Hero Button - Matches original variant="hero" */}
               <button
-                className="px-6 py-4 bg-gradient-to-r from-primary to-secondary text-white font-medium rounded-lg hover:opacity-90 transition-all duration-300 flex items-center gap-2 shadow-lg shadow-primary/30 hover:shadow-primary/50"
+                className="px-6 py-4 bg-card/50 border border-primary/30 text-primary font-mono rounded-lg hover:bg-primary hover:text-white transition-all duration-300 flex items-center gap-2 backdrop-blur-sm"
                 onClick={(e) => {
                   e.preventDefault();
                   scrollToSection("#contact");
                 }}
               >
                 <Mail className="w-5 h-5" />
-                Let's Connect
+                Hire Me
               </button>
 
               {/* Terminal Button - Matches original variant="terminal" */}
               <button
-                className="px-6 py-4 bg-card/50 border border-primary/30 text-primary font-mono rounded-lg hover:bg-card/70 hover:border-primary/50 transition-all duration-300 flex items-center gap-2 backdrop-blur-sm"
+                className="px-6 py-4 bg-card/50 border border-primary/30 text-primary font-mono rounded-lg  hover:bg-primary hover:text-white transition-all duration-300 flex items-center gap-2 backdrop-blur-sm"
                 onClick={(e) => {
                   e.preventDefault();
                   scrollToSection("#projects");

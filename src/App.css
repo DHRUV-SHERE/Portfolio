@@ -278,6 +278,16 @@
     60% { transform: translate(2px, 2px); }
     80% { transform: translate(2px, -2px); }
   }
+
+  /* Hide scrollbars */
+  * {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  *::-webkit-scrollbar {
+    display: none;
+  }
 }
 /* Add these to your existing @layer components */
 
