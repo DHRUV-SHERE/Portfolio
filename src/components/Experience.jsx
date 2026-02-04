@@ -21,7 +21,7 @@ const ExperienceSection = () => {
   const [isTyping, setIsTyping] = useState(true);
   const [daysAtLumos, setDaysAtLumos] = useState(0);
 
-  const experience = {
+const experience = {
     company: 'Lumos Logic India LLP',
     role: 'Software Development Intern',
     timeline: 'Jan 2026 — Present',
@@ -30,26 +30,29 @@ const ExperienceSection = () => {
     
     techStack: [
       { name: 'React', icon: Code, category: 'Frontend' },
+      { name: 'Next.js', icon: Layers, category: 'Frontend' },
       { name: 'Node.js', icon: Layers, category: 'Backend' },
-      { name: 'MongoDB', icon: Database, category: 'Database' },
-      { name: 'AWS', icon: Cloud, category: 'Cloud' },
-      { name: 'Git', icon: GitBranch, category: 'Tools' },
+      { name: 'Express', icon: Terminal, category: 'Backend' },
+      { name: 'Tailwind CSS', icon: Cloud, category: 'Styling' },
     ],
 
     achievements: [
-      { title: 'Onboarding Complete', status: 'completed', icon: CheckCircle },
-      { title: 'First Code Review', status: 'completed', icon: GitCommit },
-      { title: 'Feature Development', status: 'active', icon: Code },
-      { title: 'Team Integration', status: 'active', icon: Target },
+      { title: '6+ Projects Completed', status: 'completed', icon: CheckCircle },
+      { title: 'Code Reviews', status: 'completed', icon: GitCommit },
+      { title: 'SEO Optimization', status: 'completed', icon: Target },
+      { title: 'Production Features', status: 'completed', icon: Code },
     ],
   };
 
-  const terminalCommands = [
+const terminalCommands = [
     '$ git log --oneline --author="Dhruv Shere"',
     '',
-    'a7f8d3c (HEAD -> career) feat: Start internship at Lumos Logic',
-    'b5e9f2a feat: Complete B.Tech IT program setup',
-    'c4d7e1b feat: Master full-stack development skills',
+    'a7f8d3c (HEAD -> career) feat: Complete 6+ projects at Lumos Logic',
+    'b5e9f2a feat: Create official SEO reports for company',
+    'c4d7e1b feat: Implement SEO optimization for client projects',
+    'd3c8f4a feat: Build production-ready Next.js applications',
+    'e2b7e5d feat: Master React, Node.js, Express stack',
+    'f1a6c4b feat: Start internship at Lumos Logic',
     '',
     '$ git show HEAD --stat',
     '',
@@ -57,31 +60,34 @@ const ExperienceSection = () => {
     'Author: Dhruv Shere <dhruv@example.com>',
     `Date: ${daysAtLumos} days ago`,
     '',
-    '    feat: Start Software Development Internship',
+    '    feat: Complete 6+ projects at Lumos Logic',
     '    ',
-    '    - Join Lumos Logic India LLP as Software Dev Intern',
-    '    - Focus on React, Node.js, and MongoDB stack',
-    '    - Learn enterprise development practices',
-    '    - Contribute to real-world projects',
+    '    - Developed 6+ production-ready web applications',
+    '    - Implemented SEO optimization strategies',
+    '    - Created official SEO reports for company use',
+    '    - Built React, Next.js, Node.js, Express applications',
+    '    - Conducted code reviews and contributed to team success',
     '',
-    ' experience/lumos-logic.md     | 1 +',
-    ' skills/react.js              | 15 +++++++++++++++',
-    ' skills/nodejs.js             | 12 ++++++++++++',
-    ' projects/enterprise-apps.md  | 8 ++++++++',
-    ' 4 files changed, 36 insertions(+)',
+    ' projects/web-apps.md           | 150 +++++++++++++++++++++++',
+    ' skills/seo-optimization.md     | 45 ++++++++++',
+    ' reports/seo-company-report.md  | 25 ++++++',
+    ' skills/react-nextjs.md         | 80 +++++++++++++++',
+    ' skills/tailwind-css.md         | 60 +++++++++++',
+    ' 5 files changed, 360 insertions(+)',
     '',
     '$ git status',
     'On branch career',
-    'Your branch is ahead of origin/main by 1 commit.',
+    'Your branch is ahead of origin/main by 6 commits.',
     '',
     'Changes to be committed:',
     '  modified:   skills/problem-solving.js',
     '  modified:   experience/team-collaboration.md',
+    '  modified:   projects/code-review-participation.md',
     '  new file:   projects/production-ready-features.js',
     '',
     'Untracked files:',
-    '  learning/aws-deployment.md',
-    '  learning/agile-methodologies.md',
+    '  learning/advanced-seo-techniques.md',
+    '  learning/system-design.md',
     '',
   ];
 
@@ -161,7 +167,7 @@ const ExperienceSection = () => {
               </div>
 
               {/* Terminal Content */}
-              <div className="p-6 font-mono text-sm bg-black/40 min-h-[500px]">
+              <div className="p-6 font-mono text-sm bg-card/80 min-h-[500px]">
                 <pre className="text-terminal-green whitespace-pre-wrap">
                   {terminalText}
                   {isTyping && <span className="terminal-cursor ml-1"></span>}
@@ -230,19 +236,19 @@ const ExperienceSection = () => {
                   <ul className="space-y-2 text-sm">
                     <li className="flex items-start gap-2">
                       <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2"></div>
-                      <span>Building production-ready React applications</span>
+                      <span>Building production-ready React & Next.js applications</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2"></div>
-                      <span>Learning enterprise development workflows</span>
+                      <span>Implementing SEO optimization for client projects</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2"></div>
-                      <span>Participating in Agile/Scrum processes</span>
+                      <span>Creating official SEO reports for company use</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2"></div>
-                      <span>Contributing to team code reviews</span>
+                      <span>Conducting code reviews and team collaboration</span>
                     </li>
                   </ul>
                 </div>
@@ -295,11 +301,11 @@ const ExperienceSection = () => {
                   <div className="text-xs text-muted-foreground">Days Active</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-secondary">2</div>
+                  <div className="text-2xl font-bold text-secondary">6+</div>
                   <div className="text-xs text-muted-foreground">Projects</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-primary">5</div>
+                  <div className="text-2xl font-bold text-primary">10+</div>
                   <div className="text-xs text-muted-foreground">Code Reviews</div>
                 </div>
                 <div className="text-center">

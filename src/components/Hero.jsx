@@ -253,14 +253,14 @@ const TerminalHero = () => {
             </div>
 
             {/* Floating badges */}
-            <motion.div
+            {/* <motion.div
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 1.5, type: "spring" }}
               className="absolute -top-4 -right-4 px-3 py-1 rounded-full bg-secondary/20 border border-secondary/50 text-secondary text-xs font-mono"
             >
               Open to Work
-            </motion.div>
+            </motion.div> */}
           </motion.div>
         </div>
       </div>
