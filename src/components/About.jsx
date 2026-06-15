@@ -7,8 +7,8 @@ const ExperienceSection = () => {
       id: 'btech',
       degree: 'Bachelor of Technology in Information Technology',
       institution: 'U.V. Patel College of Engineering - Ganpat University, Mehsana',
-      duration: '2023 - 2026 (Expected)',
-      grade: '8.30/10 CGPA',
+      duration: '2023 - 2026',
+      grade: '8.45/10 CGPA',
     },
     {
       id: 'diploma',

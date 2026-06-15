@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, Mail, MapPin, Github, Linkedin, Phone, CheckCircle, Loader2, Clock, ExternalLink } from 'lucide-react';
+import { Send, Mail, MapPin, Github, Linkedin, Phone, CheckCircle, Loader2, ExternalLink } from 'lucide-react';
 
 // Resend backend — set VITE_API_URL in your .env to the Render deployment URL
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
@@ -84,12 +84,6 @@ const ContactSection = () => {
       value: "Gujarat, India",
       color: "purple",
     },
-    {
-      icon: Clock,
-      label: "Response Time",
-      value: "Within 24 hours",
-      color: "cyan",
-    },
   ];
 
 
@@ -157,9 +151,9 @@ const ContactSection = () => {
                 <div className="code-line pt-2">
                   <span className="text-muted-foreground">$</span>{' '}
                   <span className="text-primary">echo</span>{' '}
-                  <span className="string">"Seeking internship opportunities!"</span>
+                  <span className="string">"Seeking job opportunities!"</span>
                 </div>
-                <div className="text-secondary pl-4">Seeking internship opportunities!</div>
+                <div className="text-secondary pl-4">Seeking job opportunities!</div>
               </div>
             </div>
 
@@ -220,19 +214,7 @@ const ContactSection = () => {
                   <div className="w-3 h-3 rounded-full bg-secondary" />
                   <div className="absolute inset-0 w-3 h-3 rounded-full bg-secondary animate-ping opacity-50" />
                 </div>
-                <span className="font-medium">Open to internship opportunities</span>
-              </div>
-              <p className="text-sm text-muted-foreground mt-2 ml-6">
-                Response time: Usually within 24 hours
-              </p>
-            </div>
-
-            {/* Languages */}
-            <div className="gradient-border rounded-xl p-4 bg-card/30">
-              <h4 className="font-mono text-secondary text-sm mb-3">Languages</h4>
-              <div className="flex gap-3">
-                <span className="px-3 py-1 rounded-lg bg-muted/50 text-foreground text-sm">English (Fluent)</span>
-                <span className="px-3 py-1 rounded-lg bg-muted/50 text-foreground text-sm">Hindi (Fluent)</span>
+                <span className="font-medium">Open to job opportunities</span>
               </div>
             </div>
           </motion.div>

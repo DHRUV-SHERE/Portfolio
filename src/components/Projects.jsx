@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ChevronLeft, ChevronRight, Search, LayoutGrid, List, AlignJustify,
@@ -270,59 +270,9 @@ const ProjectsSection = () => {
 
   const currentMeta = folder ? FOLDER_META[folder.id] : null;
 
-  /* ── Fullscreen state ── */
-  const [isFs, setIsFs]           = useState(false);
-  const [hasExited, setHasExited] = useState(false);
-  const [macRect, setMacRect]     = useState(null);
-  const sectionRef = useRef(null);
-  const macWrapRef = useRef(null);
-
-  const enterFs = useCallback(() => {
-    if (isFs || hasExited || !macWrapRef.current) return;
-    const r = macWrapRef.current.getBoundingClientRect();
-    // Clamp top/left so the animation origin is always inside the viewport
-    setMacRect({
-      top:    Math.max(0, r.top),
-      left:   Math.max(0, r.left),
-      width:  r.width,
-      height: r.height,
-    });
-    setIsFs(true);
-    document.body.style.overflow = "hidden";
-  }, [isFs, hasExited]);
-
-  const exitFs = useCallback(() => {
-    setIsFs(false);
-    setHasExited(true);
-    document.body.style.overflow = "";
-  }, []);
-
-  // Trigger fullscreen when section enters viewport
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) enterFs(); },
-      { threshold: 0.15 }   // fires when 15% visible — reliable on all screen sizes
-    );
-    if (sectionRef.current) obs.observe(sectionRef.current);
-    return () => obs.disconnect();
-  }, [enterFs]);
-
-  // Scroll ↓ or Esc exits fullscreen
-  useEffect(() => {
-    if (!isFs) return;
-    const onWheel = (e) => { if (e.deltaY > 10) exitFs(); };
-    const onKey   = (e) => { if (e.key === "Escape") exitFs(); };
-    window.addEventListener("wheel", onWheel, { passive: true });
-    window.addEventListener("keydown", onKey);
-    return () => {
-      window.removeEventListener("wheel", onWheel);
-      window.removeEventListener("keydown", onKey);
-    };
-  }, [isFs, exitFs]);
-
   /* ━━━━━━━━━━━━━━━━━━━━━━━━ RENDER */
   return (
-    <section ref={sectionRef} id="projects" className="py-24 px-4 md:px-6 relative overflow-hidden">
+    <section id="projects" className="py-24 px-4 md:px-6 relative overflow-hidden">
       {/* bg blobs */}
       <div className="absolute top-1/3 left-1/5 w-80 h-80 bg-primary/6 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-1/3 right-1/5 w-80 h-80 bg-secondary/6 rounded-full blur-3xl pointer-events-none" />
@@ -421,12 +371,9 @@ const ProjectsSection = () => {
         </div>
 
         {/* ════════════════════════ DESKTOP — Full macOS UI */}
-        {/* ref wrapper: invisible when portal is live, keeps layout space */}
-        <div ref={macWrapRef} className="hidden md:block"
-          style={{ transition:"opacity 0.25s", opacity: isFs ? 0 : 1, pointerEvents: isFs ? "none" : "auto" }}>
         <motion.div initial={{opacity:0,y:30,scale:0.985}} whileInView={{opacity:1,y:0,scale:1}}
           viewport={{once:true}} transition={{duration:0.7}}
-          className="relative rounded-[18px] overflow-hidden"
+          className="hidden md:block relative rounded-[18px] overflow-hidden"
           style={{
             height: 760,
             boxShadow:"0 60px 120px rgba(0,0,0,0.85), 0 0 0 1.5px rgba(255,255,255,0.12)",
@@ -759,19 +706,9 @@ const ProjectsSection = () => {
           </div>
 
         </motion.div>
-        </div>{/* /macWrapRef */}
 
-        {/* ════════ FULLSCREEN PORTAL ════════ */}
-        <AnimatePresence>
-          {isFs && macRect && (
+        {false && (
             <motion.div
-              key="fs-portal"
-              className="fixed z-[200] overflow-hidden"
-              style={{ background:"#0a0a14" }}
-              initial={{ top:macRect.top, left:macRect.left, width:macRect.width, height:macRect.height, borderRadius:18 }}
-              animate={{ top:0, left:0, width:window.innerWidth, height:window.innerHeight, borderRadius:0 }}
-              exit={{ opacity:0, scale:0.97, transition:{ duration:0.35, ease:[0.22,0,0.36,1] } }}
-              transition={{ type:"spring", stiffness:260, damping:32, mass:0.85 }}
             >
               {/* ── Wallpaper (same as section) ── */}
               <div className="absolute inset-0 pointer-events-none" style={{
@@ -805,7 +742,7 @@ const ProjectsSection = () => {
                 <div className="flex items-center px-3 gap-2 flex-shrink-0"
                   style={{ height:40, background:"rgba(45,45,55,0.95)", borderBottom:"1px solid rgba(255,255,255,0.08)" }}>
                   <div className="flex gap-2 mr-2">
-                    <button onClick={exitFs} className="w-3 h-3 rounded-full hover:opacity-80 transition-opacity" style={{background:"#ff5f57"}} title="Exit Fullscreen"/>
+                    <button onClick={goHome} className="w-3 h-3 rounded-full hover:opacity-80 transition-opacity" style={{background:"#ff5f57"}} title="Home"/>
                     <div className="w-3 h-3 rounded-full" style={{background:"#febc2e"}}/>
                     <div className="w-3 h-3 rounded-full" style={{background:"#28c840"}}/>
                   </div>
@@ -1016,7 +953,7 @@ const ProjectsSection = () => {
                 <div className="w-px self-stretch mx-1" style={{background:"rgba(255,255,255,0.2)"}}/>
                 <DockItem icon={Github} label="GitHub" color="linear-gradient(135deg,#333,#555)" action={()=>window.open("https://github.com/DHRUV-SHERE","_blank")}/>
                 <DockItem icon={Linkedin} label="LinkedIn" color="linear-gradient(135deg,#0077b5,#0ea5e9)" action={()=>window.open("https://www.linkedin.com/in/dhruv-shere/","_blank")}/>
-                <DockItem icon={Mail} label="Contact" color="linear-gradient(135deg,#6366f1,#8b5cf6)" action={()=>{ exitFs(); setTimeout(()=>document.querySelector("#contact")?.scrollIntoView({behavior:"smooth"}),450); }}/>
+                <DockItem icon={Mail} label="Contact" color="linear-gradient(135deg,#6366f1,#8b5cf6)" action={()=>document.querySelector("#contact")?.scrollIntoView({behavior:"smooth"})}/>
               </div>
 
               {/* ── Scroll-to-exit hint ── */}
@@ -1032,7 +969,6 @@ const ProjectsSection = () => {
               </motion.div>
             </motion.div>
           )}
-        </AnimatePresence>
 
         {/* GitHub CTA */}
         <motion.div initial={{opacity:0,y:16}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{delay:0.3}}
