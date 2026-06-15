@@ -5,6 +5,21 @@ import { Send, Mail, MapPin, Github, Linkedin, Phone, CheckCircle, Loader2, Cloc
 // Resend backend — set VITE_API_URL in your .env to the Render deployment URL
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
 
+// Defined outside ContactSection so React doesn't remount them on every keystroke
+const Input = ({ className = "", ...props }) => (
+  <input
+    className={`w-full px-4 py-3 bg-muted/50 border border-border rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all duration-300 text-sm ${className}`}
+    {...props}
+  />
+);
+
+const Textarea = ({ className = "", ...props }) => (
+  <textarea
+    className={`w-full px-4 py-3 bg-muted/50 border border-border rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all duration-300 resize-none text-sm min-h-[120px] ${className}`}
+    {...props}
+  />
+);
+
 const ContactSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted]   = useState(false);
@@ -77,20 +92,6 @@ const ContactSection = () => {
     },
   ];
 
-  // Input Components
-  const Input = ({ className = '', ...props }) => (
-    <input
-      className={`w-full px-4 py-3 bg-muted/50 border border-border rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all duration-300 text-sm ${className}`}
-      {...props}
-    />
-  );
-
-  const Textarea = ({ className = '', ...props }) => (
-    <textarea
-      className={`w-full px-4 py-3 bg-muted/50 border border-border rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all duration-300 resize-none text-sm min-h-[120px] ${className}`}
-      {...props}
-    />
-  );
 
   return (
     <section id="contact" className="py-24 px-4 relative">

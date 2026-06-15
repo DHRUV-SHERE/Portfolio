@@ -280,7 +280,13 @@ const ProjectsSection = () => {
   const enterFs = useCallback(() => {
     if (isFs || hasExited || !macWrapRef.current) return;
     const r = macWrapRef.current.getBoundingClientRect();
-    setMacRect({ top: r.top, left: r.left, width: r.width, height: r.height });
+    // Clamp top/left so the animation origin is always inside the viewport
+    setMacRect({
+      top:    Math.max(0, r.top),
+      left:   Math.max(0, r.left),
+      width:  r.width,
+      height: r.height,
+    });
     setIsFs(true);
     document.body.style.overflow = "hidden";
   }, [isFs, hasExited]);
@@ -291,11 +297,11 @@ const ProjectsSection = () => {
     document.body.style.overflow = "";
   }, []);
 
-  // Trigger fullscreen when 30 % of the section is visible
+  // Trigger fullscreen when section enters viewport
   useEffect(() => {
     const obs = new IntersectionObserver(
       ([e]) => { if (e.isIntersecting) enterFs(); },
-      { threshold: 0.3 }
+      { threshold: 0.15 }   // fires when 15% visible — reliable on all screen sizes
     );
     if (sectionRef.current) obs.observe(sectionRef.current);
     return () => obs.disconnect();
@@ -759,12 +765,13 @@ const ProjectsSection = () => {
         <AnimatePresence>
           {isFs && macRect && (
             <motion.div
+              key="fs-portal"
               className="fixed z-[200] overflow-hidden"
-              style={{ willChange:"top,left,width,height,border-radius", background:"#0a0a14" }}
+              style={{ background:"#0a0a14" }}
               initial={{ top:macRect.top, left:macRect.left, width:macRect.width, height:macRect.height, borderRadius:18 }}
-              animate={{ top:0, left:0, width:"100vw", height:"100dvh", borderRadius:0 }}
-              exit={{ opacity:0, scale:0.96, transition:{ duration:0.38, ease:[0.22,0,0.36,1] } }}
-              transition={{ type:"spring", stiffness:220, damping:28, mass:0.9 }}
+              animate={{ top:0, left:0, width:window.innerWidth, height:window.innerHeight, borderRadius:0 }}
+              exit={{ opacity:0, scale:0.97, transition:{ duration:0.35, ease:[0.22,0,0.36,1] } }}
+              transition={{ type:"spring", stiffness:260, damping:32, mass:0.85 }}
             >
               {/* ── Wallpaper (same as section) ── */}
               <div className="absolute inset-0 pointer-events-none" style={{
