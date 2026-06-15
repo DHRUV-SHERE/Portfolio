@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Download, Github, Linkedin, Mail, ExternalLink } from "lucide-react";
-import resumePDF from "../assets/RESUME_DHRUV-SHERE.pdf"; // Adjust path based on your structure
+import resumePDF from "../assets/Dhruv_Shere_Software_Engineer_Resume_2026.pdf";
 
 const TerminalHero = () => {
   const [displayedText, setDisplayedText] = useState("");
@@ -13,13 +13,13 @@ const TerminalHero = () => {
   const codeLines = [
     { text: "const developer = {", delay: 0 },
     { text: '  name: "Dhruv Shere",', delay: 100 },
-    { text: '  role: "Full-Stack MERN Developer",', delay: 200 },
-    { text: '  location: "Gujarat, India",', delay: 300 },
+    { text: '  role: "Software Engineer | Full-Stack Developer",', delay: 200 },
+    { text: '  location: "Ahmedabad, Gujarat, India",', delay: 300 },
     {
-      text: '  skills: ["React", "Node.js", "Express JS","MongoDB"],',
+      text: '  skills: ["React", "Node.js", "MongoDB", "Cloud"],',
       delay: 400,
     },
-    { text: '  passion: "Building innovative web solutions",', delay: 500 },
+    { text: '  passion: "Building scalable production applications",', delay: 500 },
     { text: "  available: true,", delay: 600 },
     { text: "};", delay: 700 },
     { text: "", delay: 800 },
@@ -143,7 +143,7 @@ const TerminalHero = () => {
                 transition={{ delay: 0.6 }}
                 className="text-xl md:text-2xl text-muted-foreground"
               >
-                Full-Stack MERN Developer
+                Software Engineer | Full-Stack Developer
               </motion.p>
             </div>
 
@@ -153,10 +153,7 @@ const TerminalHero = () => {
               transition={{ delay: 0.8 }}
               className="text-muted-foreground leading-relaxed max-w-lg"
             >
-              Experienced in building real-world web applications using React,
-              Node.js, MongoDB, and REST APIs. Strong problem-solving skills
-              with experience leading development teams. Let's turn your ideas
-              into reality.
+              Software Engineer with production-level experience building scalable full-stack web applications, RESTful APIs, and real-time communication systems. Proficient in React.js, Node.js, Express.js, MongoDB, and cloud deployment across Google Cloud Run, Firebase, and Vercel.
             </motion.p>
 
             <motion.div

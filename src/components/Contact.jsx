@@ -2,20 +2,15 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Send, Mail, MapPin, Github, Linkedin, Phone, CheckCircle, Loader2, Clock, ExternalLink } from 'lucide-react';
 
-// EmailJS config
-const SERVICE_ID = "service_mvmzvlq";
-const TEMPLATE_ID = "template_ofep908";
-const PUBLIC_KEY = "G3P48wd0AD6_lUVxK";
+// Resend backend — set VITE_API_URL in your .env to the Render deployment URL
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
 
 const ContactSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitted, setIsSubmitted]   = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
+    name: '', email: '', subject: '', message: '',
   });
 
   const handleSubmit = async (e) => {
@@ -24,18 +19,26 @@ const ContactSection = () => {
     setSubmitStatus(null);
 
     try {
-      await window.emailjs.send(SERVICE_ID, TEMPLATE_ID, formData, PUBLIC_KEY);
+      const res = await fetch(`${API_URL}/api/contact`, {
+        method:  "POST",
+        headers: { "Content-Type": "application/json" },
+        body:    JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) throw new Error(data.error || "Failed to send");
+
       setSubmitStatus("success");
       setIsSubmitted(true);
-      
-      // Reset form after delay
+
       setTimeout(() => {
         setIsSubmitted(false);
         setFormData({ name: '', email: '', subject: '', message: '' });
         setSubmitStatus(null);
-      }, 3000);
+      }, 4000);
     } catch (error) {
-      console.error('EmailJS error:', error);
+      console.error("Contact form error:", error);
       setSubmitStatus("error");
     } finally {
       setIsSubmitting(false);

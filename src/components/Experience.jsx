@@ -30,64 +30,66 @@ const experience = {
     
     techStack: [
       { name: 'React', icon: Code, category: 'Frontend' },
-      { name: 'Next.js', icon: Layers, category: 'Frontend' },
       { name: 'Node.js', icon: Layers, category: 'Backend' },
       { name: 'Express', icon: Terminal, category: 'Backend' },
-      { name: 'Tailwind CSS', icon: Cloud, category: 'Styling' },
+      { name: 'MongoDB', icon: Database, category: 'Database' },
+      { name: 'Firebase', icon: Cloud, category: 'Cloud' },
+      { name: 'Google Cloud Run', icon: Cloud, category: 'Cloud' },
+      { name: 'Tailwind CSS', icon: Layers, category: 'Styling' },
     ],
 
     achievements: [
-      { title: '6+ Projects Completed', status: 'completed', icon: CheckCircle },
-      { title: 'Code Reviews', status: 'completed', icon: GitCommit },
-      { title: 'SEO Optimization', status: 'completed', icon: Target },
-      { title: 'Production Features', status: 'completed', icon: Code },
+      { title: 'Production-grade Full-Stack Apps', status: 'completed', icon: CheckCircle },
+      { title: 'REST APIs with JWT Auth & RBAC', status: 'completed', icon: GitCommit },
+      { title: 'Cloud Deployment (GCR, Firebase, Vercel)', status: 'completed', icon: Target },
+      { title: 'Core Web Vitals & Technical SEO', status: 'completed', icon: Code },
+      { title: 'Cross-functional Collaboration', status: 'completed', icon: CheckCircle },
     ],
   };
 
 const terminalCommands = [
     '$ git log --oneline --author="Dhruv Shere"',
     '',
-    'a7f8d3c (HEAD -> career) feat: Complete 6+ projects at Lumos Logic',
-    'b5e9f2a feat: Create official SEO reports for company',
-    'c4d7e1b feat: Implement SEO optimization for client projects',
-    'd3c8f4a feat: Build production-ready Next.js applications',
-    'e2b7e5d feat: Master React, Node.js, Express stack',
-    'f1a6c4b feat: Start internship at Lumos Logic',
+    'a7f8d3c (HEAD -> career) feat: Deliver production-grade full-stack applications',
+    'b5e9f2a feat: Drive Core Web Vitals & technical SEO improvements',
+    'c4d7e1b feat: Manage multi-env deployments (GCR, Firebase, Vercel)',
+    'd3c8f4a feat: Implement modular REST APIs with JWT auth & RBAC',
+    'e2b7e5d feat: Architect scalable React.js & Node.js solutions',
+    'f1a6c4b feat: Start internship at Lumos Logic India LLP',
     '',
     '$ git show HEAD --stat',
     '',
     'commit a7f8d3c (HEAD -> career)',
-    'Author: Dhruv Shere <dhruv@example.com>',
+    'Author: Dhruv Shere <sheredhruv@gmail.com>',
     `Date: ${daysAtLumos} days ago`,
     '',
-    '    feat: Complete 6+ projects at Lumos Logic',
+    '    feat: Deliver production-grade full-stack applications',
     '    ',
-    '    - Developed 6+ production-ready web applications',
-    '    - Implemented SEO optimization strategies',
-    '    - Created official SEO reports for company use',
-    '    - Built React, Next.js, Node.js, Express applications',
-    '    - Conducted code reviews and contributed to team success',
+    '    - Architect & deliver web apps using React.js, Node.js, Express.js, MongoDB',
+    '    - Design scalable REST APIs with modular architecture, JWT auth & RBAC',
+    '    - Manage cloud deployments on GCR, Firebase & Vercel (99%+ uptime)',
+    '    - Drive Core Web Vitals & SEO improvements for client applications',
+    '    - Collaborate cross-functionally with designers & stakeholders',
     '',
-    ' projects/web-apps.md           | 150 +++++++++++++++++++++++',
-    ' skills/seo-optimization.md     | 45 ++++++++++',
-    ' reports/seo-company-report.md  | 25 ++++++',
-    ' skills/react-nextjs.md         | 80 +++++++++++++++',
-    ' skills/tailwind-css.md         | 60 +++++++++++',
-    ' 5 files changed, 360 insertions(+)',
+    ' apps/production-web-apps.md        | 200 ++++++++++++++++++++++',
+    ' api/rest-jwt-rbac.md               | 90 +++++++++++++',
+    ' cloud/gcp-firebase-vercel.md       | 60 +++++++++',
+    ' seo/core-web-vitals.md             | 45 +++++++',
+    ' collab/cross-functional.md         | 30 +++++',
+    ' 5 files changed, 425 insertions(+)',
     '',
     '$ git status',
     'On branch career',
-    'Your branch is ahead of origin/main by 6 commits.',
+    'Your branch is ahead of origin/main by 5 commits.',
     '',
     'Changes to be committed:',
-    '  modified:   skills/problem-solving.js',
-    '  modified:   experience/team-collaboration.md',
-    '  modified:   projects/code-review-participation.md',
-    '  new file:   projects/production-ready-features.js',
+    '  modified:   skills/system-design.js',
+    '  modified:   skills/dsa.md',
+    '  new file:   projects/connectvista.jsx',
     '',
     'Untracked files:',
-    '  learning/advanced-seo-techniques.md',
-    '  learning/system-design.md',
+    '  learning/advanced-cloud-architecture.md',
+    '  learning/devops-pipelines.md',
     '',
   ];
 
@@ -236,19 +238,23 @@ const terminalCommands = [
                   <ul className="space-y-2 text-sm">
                     <li className="flex items-start gap-2">
                       <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2"></div>
-                      <span>Building production-ready React & Next.js applications</span>
+                      <span>Architecting & delivering production-grade React.js, Node.js, Express.js & MongoDB applications</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2"></div>
-                      <span>Implementing SEO optimization for client projects</span>
+                      <span>Designing scalable REST APIs with modular backend architecture, JWT auth & RBAC</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2"></div>
-                      <span>Creating official SEO reports for company use</span>
+                      <span>Managing multi-environment cloud deployments on Google Cloud Run, Firebase & Vercel (99%+ uptime)</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2"></div>
-                      <span>Conducting code reviews and team collaboration</span>
+                      <span>Driving Core Web Vitals & technical SEO improvements, reducing page load times</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2"></div>
+                      <span>Collaborating cross-functionally with designers & stakeholders to ship business-critical features</span>
                     </li>
                   </ul>
                 </div>
@@ -301,12 +307,12 @@ const terminalCommands = [
                   <div className="text-xs text-muted-foreground">Days Active</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-secondary">6+</div>
-                  <div className="text-xs text-muted-foreground">Projects</div>
+                  <div className="text-2xl font-bold text-secondary">5+</div>
+                  <div className="text-xs text-muted-foreground">Production Apps</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-primary">10+</div>
-                  <div className="text-xs text-muted-foreground">Code Reviews</div>
+                  <div className="text-2xl font-bold text-primary">99%+</div>
+                  <div className="text-xs text-muted-foreground">Uptime</div>
                 </div>
                 <div className="text-center">
                   <div className="text-2xl font-bold text-secondary">∞</div>
