@@ -7,10 +7,22 @@ const app    = express();
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 /* ── Middleware ── */
+const allowed = [
+  process.env.FRONTEND_URL?.replace(/\/$/, ""),   // strip trailing slash
+  "http://localhost:5173",
+  "http://localhost:3000",
+].filter(Boolean);
+
 app.use(cors({
-  origin: process.env.FRONTEND_URL || "*",
-  methods: ["POST", "GET"],
+  origin: (origin, cb) => {
+    // allow requests with no origin (Postman, curl) or matching origin
+    if (!origin || allowed.includes(origin)) return cb(null, true);
+    cb(new Error(`CORS: origin ${origin} not allowed`));
+  },
+  methods: ["GET", "POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type"],
 }));
+app.options("*", cors());   // handle preflight for all routes
 app.use(express.json());
 
 /* ── Health check ── */
