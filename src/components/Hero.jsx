@@ -1,284 +1,108 @@
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { Download, Github, Linkedin, Mail, ExternalLink } from "lucide-react";
-import resumePDF from "../assets/Dhruv_Shere_Software_Engineer_Resume_2026.pdf";
+import { lazy, Suspense, useEffect, useRef } from 'react'
+import { gsap, ScrollTrigger } from '../lib/scroll'
+const ShaderBG = lazy(() => import('./ShaderBG'))
+import { Chars, Magnetic } from './ui'
 
-const TerminalHero = () => {
-  const [displayedText, setDisplayedText] = useState("");
-  const [currentLine, setCurrentLine] = useState(0);
-  const [isTyping, setIsTyping] = useState(true);
+const roles = ['Full-Stack Engineer', 'Real-time Systems', 'Cloud & Performance', 'AI Integrations']
 
-  // ADD THIS IMPORT AT THE TOP OF YOUR FILE (if using direct import)
+export default function Hero({ ready }) {
+  const root = useRef(null)
+  const played = useRef(false)
 
-  const codeLines = [
-    { text: "const developer = {", delay: 0 },
-    { text: '  name: "Dhruv Shere",', delay: 100 },
-    { text: '  role: "Software Engineer | Full-Stack Developer",', delay: 200 },
-    { text: '  location: "Ahmedabad, Gujarat, India",', delay: 300 },
-    {
-      text: '  skills: ["React", "Node.js", "MongoDB", "Cloud"],',
-      delay: 400,
-    },
-    { text: '  passion: "Building scalable production applications",', delay: 500 },
-    { text: "  available: true,", delay: 600 },
-    { text: "};", delay: 700 },
-    { text: "", delay: 800 },
-    { text: "developer.contact(); // Let's connect!", delay: 900 },
-  ];
-
+  // Scroll parallax: title drifts and fades while the hero leaves
   useEffect(() => {
-    let fullText = "";
-    codeLines.forEach((line, index) => {
-      setTimeout(() => {
-        fullText += (index > 0 ? "\n" : "") + line.text;
-        setDisplayedText(fullText);
-        setCurrentLine(index);
-        if (index === codeLines.length - 1) {
-          setTimeout(() => setIsTyping(false), 500);
-        }
-      }, line.delay + index * 80);
-    });
-  }, []);
+    const ctx = gsap.context(() => {
+      gsap.to('.hero__title', {
+        yPercent: -18, scale: 0.94, opacity: 0.2, ease: 'none',
+        scrollTrigger: { trigger: root.current, start: 'top top', end: 'bottom top', scrub: true },
+      })
+      gsap.to('.sticker', {
+        yPercent: (i) => -40 - i * 25, ease: 'none',
+        scrollTrigger: { trigger: root.current, start: 'top top', end: 'bottom top', scrub: true },
+      })
+      // role ticker
+      const items = gsap.utils.toArray('.hero__role-item')
+      gsap.set(items, { yPercent: 110 })
+      const tl = gsap.timeline({ repeat: -1 })
+      items.forEach((it) => {
+        tl.fromTo(it, { yPercent: 110 }, { yPercent: 0, duration: 0.7, ease: 'expo.out' })
+          .to(it, { yPercent: -110, duration: 0.6, ease: 'expo.in' }, '+=1.6')
+      })
+    }, root)
+    return () => ctx.revert()
+  }, [])
 
-  // ADD THIS FUNCTION (similar to your old portfolio)
-  const downloadResume = () => {
-    // Option 1: If PDF is in public folder
-    // const resumeUrl = "/Dhruv_Shere_Resume.pdf";
-    
-    // Option 2: If you want to import it (uncomment and adjust path)
-    const resumeUrl = resumePDF;
-    
-    const link = document.createElement("a");
-    link.href = resumeUrl;
-    link.download = "DHRUV-SHERE_RESUME.pdf";
-    link.target = "_blank";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
+  // Intro, runs once when the loader finishes
+  useEffect(() => {
+    if (!ready || played.current) return
+    played.current = true
+    const ctx = gsap.context(() => {
+      gsap.set('.hero [data-in]', { autoAlpha: 0, y: 24 })
+      gsap.timeline({ defaults: { ease: 'expo.out' } })
+        .to('.hero__title .ch', { yPercent: 0, duration: 1.4, stagger: 0.04 })
+        .to('.hero [data-in]', { autoAlpha: 1, y: 0, duration: 1, stagger: 0.1 }, '-=0.9')
+        .to('.sticker', { scale: 1, duration: 1.1, stagger: 0.12, ease: 'elastic.out(1, 0.55)' }, '-=0.8')
+        .from('.hero__line', { scaleX: 0, transformOrigin: 'left', duration: 1.4 }, '-=1.2')
+    }, root)
+    return () => ctx.revert()
+  }, [ready])
 
-  const syntaxHighlight = (text) => {
-    return text.split("\n").map((line, i) => {
-      const parts = [];
-      let remaining = line;
+  // Pre-ready state so nothing flashes behind the loader
+  useEffect(() => {
+    gsap.set(root.current.querySelectorAll('[data-in]'), { autoAlpha: 0 })
+    gsap.set(root.current.querySelectorAll('.ch'), { yPercent: 115 })
+    gsap.set(root.current.querySelectorAll('.sticker'), { scale: 0 })
+  }, [])
 
-      // Keywords
-      remaining = remaining.replace(
-        /(const|let|var|function|return|true|false)/g,
-        "##KEYWORD##$1##/KEYWORD##"
-      );
-      // Strings
-      remaining = remaining.replace(/(".*?")/g, "##STRING##$1##/STRING##");
-      // Comments
-      remaining = remaining.replace(/(\/\/.*$)/g, "##COMMENT##$1##/COMMENT##");
-
-      const tokens = remaining.split(/(##\/?(?:KEYWORD|STRING|COMMENT)##)/);
-      let currentClass = "";
-
-      tokens.forEach((token, j) => {
-        if (token === "##KEYWORD##") currentClass = "keyword";
-        else if (token === "##STRING##") currentClass = "string";
-        else if (token === "##COMMENT##") currentClass = "comment";
-        else if (token.startsWith("##/")) currentClass = "";
-        else if (token)
-          parts.push(
-            <span key={j} className={currentClass}>
-              {token}
-            </span>
-          );
-      });
-
-      return (
-        <div key={i} className="code-line flex">
-          <span className="text-muted-foreground w-8 select-none text-right mr-4 opacity-50">
-            {String(i + 1).padStart(2, "0")}
-          </span>
-          <span>{parts}</span>
-        </div>
-      );
-    });
-  };
-
-  const scrollToSection = (sectionId) => {
-    const element = document.querySelector(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+  // Drop-in tilt on stickers following the cursor
+  useEffect(() => {
+    if (window.matchMedia('(hover: none)').matches) return
+    const move = (e) => {
+      const nx = e.clientX / window.innerWidth - 0.5
+      const ny = e.clientY / window.innerHeight - 0.5
+      gsap.to('.sticker__inner', { x: nx * 30, y: ny * 24, rotate: nx * 6, duration: 1.2, ease: 'power3.out', stagger: 0.04, overwrite: 'auto' })
     }
-  };
+    window.addEventListener('mousemove', move)
+    return () => window.removeEventListener('mousemove', move)
+  }, [])
+
+  useEffect(() => { ScrollTrigger.refresh() }, [ready])
 
   return (
-    <section
-      id="hero"
-      className="relative min-h-screen flex items-center justify-center px-4 py-20"
-    >
-      <div className="container mx-auto max-w-7xl">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left: Introduction */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="space-y-6"
-          >
-            <div className="space-y-2">
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.2 }}
-                className="text-secondary font-mono text-sm"
-              >
-                {">"} Hello World! I'm
-              </motion.p>
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-                className="text-5xl md:text-7xl font-bold"
-              >
-                <span className="gradient-text">Dhruv Shere</span>
-              </motion.h1>
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6 }}
-                className="text-xl md:text-2xl text-muted-foreground"
-              >
-                Software Engineer | Full-Stack Developer
-              </motion.p>
+    <section className="hero" ref={root} id="top">
+      <Suspense fallback={<div className="shader shader--fallback" />}><ShaderBG /></Suspense>
+      <div className="hero__inner">
+        <div className="hero__meta" data-in>
+          <span className="pill"><span className="dot-live" /> Full-time at Lumos Logic</span>
+          <span className="mono">Software Engineer — Ahmedabad, IN</span>
+        </div>
+
+        <h1 className="hero__title" aria-label="Dhruv Shere">
+          <span className="hero__row"><Chars text="Dhruv" /></span>
+          <span className="hero__row hero__row--it"><Chars text="Shere" /></span>
+        </h1>
+
+        <div className="sticker sticker--a"><div className="sticker__inner">Ships to prod ✦</div></div>
+        <div className="sticker sticker--b"><div className="sticker__inner">99%+ uptime</div></div>
+        <div className="sticker sticker--c"><div className="sticker__inner">Socket.io ⚡</div></div>
+
+        <div className="hero__line" />
+
+        <div className="hero__foot">
+          <p className="hero__lede" data-in>
+            I build the parts of the internet people rely on: fast interfaces, resilient APIs and the cloud that carries them.
+          </p>
+          <div className="hero__role" data-in aria-hidden="true">
+            <span className="mono">Currently into</span>
+            <div className="hero__role-mask">
+              {roles.map((r) => <span className="hero__role-item" key={r}>{r}</span>)}
             </div>
-
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.8 }}
-              className="text-muted-foreground leading-relaxed max-w-lg"
-            >
-              Software Engineer with production-level experience building scalable full-stack web applications, RESTful APIs, and real-time communication systems. Proficient in React.js, Node.js, Express.js, MongoDB, and cloud deployment across Google Cloud Run, Firebase, and Vercel.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1 }}
-              className="flex flex-wrap gap-4"
-            >
-              {/* Hero Button - Matches original variant="hero" */}
-              <button
-                className="px-6 py-4 bg-card/50 border border-primary/30 text-primary font-mono rounded-lg hover:bg-primary hover:text-white transition-all duration-300 flex items-center gap-2 backdrop-blur-sm"
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection("#contact");
-                }}
-              >
-                <Mail className="w-5 h-5" />
-                Hire Me
-              </button>
-
-              {/* Terminal Button - Matches original variant="terminal" */}
-              <button
-                className="px-6 py-4 bg-card/50 border border-primary/30 text-primary font-mono rounded-lg  hover:bg-primary hover:text-white transition-all duration-300 flex items-center gap-2 backdrop-blur-sm"
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection("#projects");
-                }}
-              >
-                <ExternalLink className="w-5 h-5" />
-                View Projects
-              </button>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.2 }}
-              className="flex gap-4 pt-4"
-            >
-              <a
-                href="https://github.com/DHRUV-SHERE"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 rounded-lg glass hover:glass-hover transition-all duration-300"
-                aria-label="GitHub Profile"
-              >
-                <Github className="w-5 h-5" />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/dhruv-shere/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 rounded-lg glass hover:glass-hover transition-all duration-300"
-                aria-label="LinkedIn Profile"
-              >
-                <Linkedin className="w-5 h-5" />
-              </a>
-              {/* UPDATED RESUME DOWNLOAD BUTTON */}
-              <button
-                onClick={downloadResume}
-                className="p-3 rounded-lg glass hover:glass-hover transition-all duration-300"
-                aria-label="Download Resume"
-              >
-                <Download className="w-5 h-5" />
-              </button>
-            </motion.div>
-          </motion.div>
-
-          {/* Right: Terminal */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-            className="relative"
-          >
-            <div className="gradient-border rounded-xl overflow-hidden shadow-2xl shadow-primary/20 max-w-full">
-              {/* Terminal Header */}
-              <div className="bg-muted/50 px-4 py-3 flex items-center gap-2 border-b border-border">
-                <div className="flex gap-2">
-                  <div className="w-3 h-3 rounded-full bg-red-500" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-500" />
-                  <div className="w-3 h-3 rounded-full bg-green-500" />
-                </div>
-                <span className="text-xs text-muted-foreground font-mono ml-4">
-                  developer.js — ~/portfolio
-                </span>
-              </div>
-
-              {/* Terminal Content */}
-              <div className="bg-card/80 backdrop-blur-sm p-6 font-mono text-sm min-h-[320px]">
-                {syntaxHighlight(displayedText)}
-                {isTyping && <span className="terminal-cursor" />}
-              </div>
-            </div>
-
-            {/* Floating badges */}
-            {/* <motion.div
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 1.5, type: "spring" }}
-              className="absolute -top-4 -right-4 px-3 py-1 rounded-full bg-secondary/20 border border-secondary/50 text-secondary text-xs font-mono"
-            >
-              Open to Work
-            </motion.div> */}
-          </motion.div>
+          </div>
+          <Magnetic as="a" className="scroll-cue" href="#work" data-in data-cursor="Scroll">
+            <span>Scroll</span><i />
+          </Magnetic>
         </div>
       </div>
-
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
-      >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="w-6 h-10 rounded-full border-2 border-muted-foreground/30 flex justify-center pt-2"
-        >
-          <div className="w-1 h-2 rounded-full bg-secondary" />
-        </motion.div>
-      </motion.div>
     </section>
-  );
-};
-
-export default TerminalHero;
+  )
+}

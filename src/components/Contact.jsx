@@ -1,335 +1,121 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Send, Mail, MapPin, Github, Linkedin, Phone, CheckCircle, Loader2, ExternalLink } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react'
+import { gsap, scrollToTarget } from '../lib/scroll'
+import { Magnetic, SectionLabel } from './ui'
+import { profile } from '../data'
 
-// Resend backend — set VITE_API_URL in your .env to the Render deployment URL
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
+// Resend backend; VITE_API_URL points at the deployed API
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001'
 
-// Defined outside ContactSection so React doesn't remount them on every keystroke
-const Input = ({ className = "", ...props }) => (
-  <input
-    className={`w-full px-4 py-3 bg-muted/50 border border-border rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all duration-300 text-sm ${className}`}
-    {...props}
-  />
-);
+function Field({ label, name, type = 'text', value, onChange, required, textarea }) {
+  const Tag = textarea ? 'textarea' : 'input'
+  return (
+    <label className="field">
+      <Tag name={name} type={textarea ? undefined : type} value={value} onChange={onChange} required={required} rows={textarea ? 4 : undefined} placeholder=" " />
+      <span>{label}</span>
+      <i />
+    </label>
+  )
+}
 
-const Textarea = ({ className = "", ...props }) => (
-  <textarea
-    className={`w-full px-4 py-3 bg-muted/50 border border-border rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all duration-300 resize-none text-sm min-h-[120px] ${className}`}
-    {...props}
-  />
-);
+export default function Contact() {
+  const root = useRef(null)
+  const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' })
+  const [status, setStatus] = useState('idle') // idle | sending | sent | error
+  const [time, setTime] = useState('')
 
-const ContactSection = () => {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted]   = useState(false);
-  const [submitStatus, setSubmitStatus] = useState(null);
-  const [formData, setFormData] = useState({
-    name: '', email: '', subject: '', message: '',
-  });
+  useEffect(() => {
+    const f = () => setTime(new Date().toLocaleTimeString('en-GB', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit' }))
+    f()
+    const id = setInterval(f, 30000)
+    return () => clearInterval(id)
+  }, [])
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitStatus(null);
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from('.contact__title .ch', {
+        yPercent: 115, duration: 1.3, stagger: 0.025, ease: 'expo.out',
+        scrollTrigger: { trigger: '.contact__title', start: 'top 80%' },
+      })
+      gsap.from('.contact__col > *', {
+        y: 40, opacity: 0, duration: 1, stagger: 0.1, ease: 'expo.out',
+        scrollTrigger: { trigger: '.contact__cols', start: 'top 82%' },
+      })
+      // giant footer wordmark rises as the page ends
+      gsap.fromTo('.foot__mark', { yPercent: 40 }, {
+        yPercent: 0, ease: 'none',
+        scrollTrigger: { trigger: '.foot', start: 'top bottom', end: 'bottom bottom', scrub: true },
+      })
+    }, root)
+    return () => ctx.revert()
+  }, [])
 
+  const set = (e) => setForm((f) => ({ ...f, [e.target.name]: e.target.value }))
+
+  const submit = async (e) => {
+    e.preventDefault()
+    setStatus('sending')
     try {
       const res = await fetch(`${API_URL}/api/contact`, {
-        method:  "POST",
-        headers: { "Content-Type": "application/json" },
-        body:    JSON.stringify(formData),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) throw new Error(data.error || "Failed to send");
-
-      setSubmitStatus("success");
-      setIsSubmitted(true);
-
-      setTimeout(() => {
-        setIsSubmitted(false);
-        setFormData({ name: '', email: '', subject: '', message: '' });
-        setSubmitStatus(null);
-      }, 4000);
-    } catch (error) {
-      console.error("Contact form error:", error);
-      setSubmitStatus("error");
-    } finally {
-      setIsSubmitting(false);
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      })
+      if (!res.ok) throw new Error('bad status')
+      setStatus('sent')
+      setForm({ name: '', email: '', subject: '', message: '' })
+    } catch {
+      setStatus('error')
     }
-  };
+  }
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const socialLinks = [
-    { icon: <Github className="w-5 h-5" />, href: 'https://github.com/DHRUV-SHERE', label: 'GitHub' },
-    { icon: <Linkedin className="w-5 h-5" />, href: 'https://www.linkedin.com/in/dhruv-shere/', label: 'LinkedIn' },
-    { icon: <Mail className="w-5 h-5" />, href: 'mailto:sheredhruv@gmail.com', label: 'Email' },
-  ];
-
-  const contactInfo = [
-    {
-      icon: Mail,
-      label: "Email",
-      value: "sheredhruv@gmail.com",
-      href: "mailto:sheredhruv@gmail.com",
-      color: "blue",
-    },
-    {
-      icon: MapPin,
-      label: "Location",
-      value: "Gujarat, India",
-      color: "purple",
-    },
-  ];
-
+  const title = (t) => [...t].map((c, i) => <span className="chw" key={i}><span className="ch">{c === ' ' ? ' ' : c}</span></span>)
 
   return (
-    <section id="contact" className="py-24 px-4 relative">
-      <div className="container mx-auto max-w-7xl">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <p className="text-secondary font-mono text-sm mb-2">{'<Contact />'}</p>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="gradient-text">Get In Touch</span>
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Have a project in mind or want to collaborate? I'd love to hear from you. 
-            Let's build something amazing together.
+    <section className="contact section" ref={root} id="contact">
+      <SectionLabel index="07">Contact</SectionLabel>
+      <h2 className="contact__title" aria-label="Have an idea? Let's ship it.">
+        <span className="contact__row">{title('Have an idea?')}</span>
+        <span className="contact__row it">{title("Let's ship it.")}</span>
+      </h2>
+
+      <div className="contact__cols">
+        <div className="contact__col">
+          <p className="contact__lede">
+            Open to full-time roles, interesting collaborations and the occasional hard problem. I usually reply within a day.
           </p>
-        </motion.div>
-
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Contact Info */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="space-y-8"
-          >
-            {/* Terminal Card */}
-            <div className="gradient-border rounded-xl overflow-hidden">
-              <div className="bg-muted/50 px-4 py-3 flex items-center gap-2 border-b border-border">
-                <div className="flex gap-2">
-                  <div className="w-3 h-3 rounded-full bg-red-500" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-500" />
-                  <div className="w-3 h-3 rounded-full bg-green-500" />
-                </div>
-                <span className="text-xs text-muted-foreground font-mono ml-4">
-                  contact.sh
-                </span>
-              </div>
-              <div className="bg-card/80 p-6 font-mono text-sm space-y-3">
-                <div className="code-line">
-                  <span className="text-muted-foreground">$</span>{' '}
-                  <span className="text-primary">cat</span> contact_info.txt
-                </div>
-                <div className="space-y-2 pl-4">
-                  <div className="flex items-center gap-3">
-                    <Phone className="w-4 h-4 text-secondary" />
-                    <span className="text-muted-foreground">+91 9316846548</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Mail className="w-4 h-4 text-secondary" />
-                    <span className="text-muted-foreground">sheredhruv@gmail.com</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <MapPin className="w-4 h-4 text-secondary" />
-                    <span className="text-muted-foreground">Gujarat, India</span>
-                  </div>
-                </div>
-                <div className="code-line pt-2">
-                  <span className="text-muted-foreground">$</span>{' '}
-                  <span className="text-primary">echo</span>{' '}
-                  <span className="string">"Seeking job opportunities!"</span>
-                </div>
-                <div className="text-secondary pl-4">Seeking job opportunities!</div>
-              </div>
-            </div>
-
-            {/* Contact Information Cards */}
-            <div className="space-y-4">
-              {contactInfo.map((info, index) => {
-                const Icon = info.icon;
-                return (
-                  <div key={index} className="gradient-border rounded-xl p-4 bg-card/30 backdrop-blur-sm group hover:bg-card/50 transition-all duration-300">
-                    <div className="flex items-start gap-4">
-                      <div className="p-2 rounded-lg bg-primary/10">
-                        <Icon className="w-5 h-5 text-primary" />
-                      </div>
-                      <div className="flex-1">
-                        <p className="text-sm text-muted-foreground mb-1">{info.label}</p>
-                        {info.href ? (
-                          <a 
-                            href={info.href}
-                            className="text-foreground font-medium hover:text-primary transition-colors text-base"
-                          >
-                            {info.value}
-                          </a>
-                        ) : (
-                          <p className="text-foreground font-medium text-base">{info.value}</p>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Social Links */}
-            <div>
-              <h3 className="text-lg font-bold mb-4">Connect with me</h3>
-              <div className="flex gap-3">
-                {socialLinks.map((link) => (
-                  <motion.a
-                    key={link.label}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.1, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="p-3 rounded-xl glass glass-hover"
-                    aria-label={link.label}
-                  >
-                    {link.icon}
-                  </motion.a>
-                ))}
-              </div>
-            </div>
-
-            {/* Availability Status */}
-            <div className="gradient-border rounded-xl p-4 bg-card/30">
-              <div className="flex items-center gap-3">
-                <div className="relative">
-                  <div className="w-3 h-3 rounded-full bg-secondary" />
-                  <div className="absolute inset-0 w-3 h-3 rounded-full bg-secondary animate-ping opacity-50" />
-                </div>
-                <span className="font-medium">Open to job opportunities</span>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <form onSubmit={handleSubmit} className="gradient-border rounded-xl p-6 bg-card/50 backdrop-blur-sm space-y-6">
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <label htmlFor="name" className="text-sm font-medium font-mono text-muted-foreground">
-                    name:
-                  </label>
-                  <Input
-                    id="name"
-                    name="name"
-                    placeholder="John Doe"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label htmlFor="email" className="text-sm font-medium font-mono text-muted-foreground">
-                    email:
-                  </label>
-                  <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    placeholder="john@example.com"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <label htmlFor="subject" className="text-sm font-medium font-mono text-muted-foreground">
-                  subject:
-                </label>
-                <Input
-                  id="subject"
-                  name="subject"
-                  placeholder="Project Inquiry"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label htmlFor="message" className="text-sm font-medium font-mono text-muted-foreground">
-                  message:
-                </label>
-                <Textarea
-                  id="message"
-                  name="message"
-                  placeholder="Tell me about your project..."
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-
-              {/* Success & Error Messages */}
-              {submitStatus === "success" && (
-                <div className="p-4 rounded-xl bg-green-500/10 border border-green-500 text-green-400 text-sm animate-fade-in">
-                  ✅ Your message has been successfully delivered!
-                </div>
-              )}
-
-              {submitStatus === "error" && (
-                <div className="p-4 rounded-xl bg-red-500/10 border border-red-500 text-red-400 text-sm animate-fade-in">
-                  ❌ Something went wrong. Please try again.
-                </div>
-              )}
-
-              <button
-                type="submit"
-                disabled={isSubmitting || isSubmitted}
-                className="w-full px-6 py-4 bg-card/50 border border-primary/30 text-primary font-mono rounded-lg hover:bg-primary hover:text-white transition-all duration-300 flex items-center justify-center gap-2 backdrop-blur-sm disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {isSubmitting ? (
-                  <>
-                    <Loader2 className="w-4 h-4 animate-spin" />
-                    Sending...
-                  </>
-                ) : isSubmitted ? (
-                  <>
-                    <CheckCircle className="w-4 h-4" />
-                    Message Sent!
-                  </>
-                ) : (
-                  <>
-                    <Send className="w-4 h-4" />
-                    Send Message
-                  </>
-                )}
-              </button>
-
-              <p className="text-xs text-muted-foreground text-center">
-                Your message is encrypted and secure. I'll respond within 24 hours.
-              </p>
-            </form>
-          </motion.div>
+          <ul className="contact__links">
+            <li><span className="mono">Email</span><Magnetic as="a" href={`mailto:${profile.email}`}>{profile.email}</Magnetic></li>
+            <li><span className="mono">Phone</span><a href={`tel:${profile.phone.replace(/\s/g, '')}`}>{profile.phone}</a></li>
+            <li><span className="mono">LinkedIn</span><a href={profile.linkedin} target="_blank" rel="noreferrer">dhruv-shere ↗</a></li>
+            <li><span className="mono">GitHub</span><a href={profile.github} target="_blank" rel="noreferrer">DHRUV-SHERE ↗</a></li>
+          </ul>
         </div>
-      </div>
-    </section>
-  );
-};
 
-export default ContactSection;
+        <form className="contact__col form" onSubmit={submit}>
+          <Field label="Your name" name="name" value={form.name} onChange={set} required />
+          <Field label="Email address" name="email" type="email" value={form.email} onChange={set} required />
+          <Field label="Subject" name="subject" value={form.subject} onChange={set} />
+          <Field label="Tell me about it" name="message" value={form.message} onChange={set} required textarea />
+          <div className="form__foot">
+            <button className="btn btn--solid" type="submit" disabled={status === 'sending'} data-cursor="Send">
+              {status === 'sending' ? 'Sending…' : 'Send message →'}
+            </button>
+            <p className={`form__status form__status--${status}`} role="status">
+              {status === 'sent' && 'Thanks, your message is in my inbox.'}
+              {status === 'error' && 'Something went wrong. Please email me directly.'}
+            </p>
+          </div>
+        </form>
+      </div>
+
+      <footer className="foot">
+        <div className="foot__bar">
+          <span className="mono">© 2026 Dhruv Shere</span>
+          <span className="mono"><span className="dot-live" /> {time} in Ahmedabad</span>
+          <button className="mono foot__top" onClick={() => scrollToTarget('body')} data-cursor="Top">Back to top ↑</button>
+        </div>
+        <div className="foot__mark it" aria-hidden="true">Dhruv Shere</div>
+      </footer>
+    </section>
+  )
+}
