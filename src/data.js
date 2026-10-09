@@ -1,12 +1,4 @@
 import AgroSence from './assets/Home page.png'
-import KnowBase from './assets/KnowBase.png'
-import Spotify from './assets/Spotify.png'
-import Oracle from './assets/Oracle.png'
-import Amazon from './assets/Amazon.png'
-import Rejouice from './assets/Rejouice.png'
-import LMS from './assets/Online_Learning_Management_System.png'
-import TextSite from './assets/React-Text-Site.png'
-import ToDo from './assets/ToDoList.png'
 
 export const profile = {
   name: 'Dhruv Shere',
@@ -111,15 +103,8 @@ export const bigBuilds = [
 ]
 
 export const smallBuilds = [
-  { id: 'spotify', title: 'Spotify Clone', year: '2024', kind: 'Music streaming UI', blurb: 'Spotify Web API integration with playlists, discovery and playback controls.', stack: ['React', 'Express', 'Spotify API', 'Tailwind'], image: Spotify, links: [{ label: 'Live', url: 'https://spotify-clone-dhruv.vercel.app/' }, { label: 'GitHub', url: 'https://github.com/DHRUV-SHERE/Spotify' }] },
-  { id: 'knowbase', title: 'KnowBase', year: '2024', kind: 'Knowledge management', blurb: 'Searchable knowledge base with tagging, markdown, categories and user roles.', stack: ['MERN', 'Tailwind', 'JWT'], image: KnowBase, links: [{ label: 'Live', url: 'https://knowbase-dhruv.vercel.app/' }, { label: 'GitHub', url: 'https://github.com/DHRUV-SHERE/knowBase' }] },
-  { id: 'amazon', title: 'Amazon Clone', year: '2024', kind: 'E-commerce', blurb: 'Product listings, cart, auth, Stripe payments, filters and an admin dashboard.', stack: ['React', 'Node.js', 'MongoDB', 'Stripe', 'Redux'], image: Amazon, links: [{ label: 'Live', url: 'https://amazon-clone-dhruv.vercel.app/' }, { label: 'GitHub', url: 'https://github.com/DHRUV-SHERE/Amazon' }] },
-  { id: 'rejoiuce', title: 'Rejoiuce Clone', year: '2024', kind: 'GSAP animated site', blurb: 'Animated food and beverage site with GSAP scroll effects and a responsive layout.', stack: ['React', 'GSAP', 'Express', 'MongoDB'], image: Rejouice, links: [{ label: 'Live', url: 'https://rejoiuce-clone.vercel.app/' }, { label: 'GitHub', url: 'https://github.com/DHRUV-SHERE/RejoiuceClone' }] },
-  { id: 'oracle', title: 'Oracle Website Clone', year: '2024', kind: 'Pixel-perfect UI', blurb: 'Faithful, responsive recreation of Oracle.com with SQL and PL/SQL demos.', stack: ['HTML', 'CSS', 'JavaScript', 'SQL'], image: Oracle, links: [{ label: 'GitHub', url: 'https://github.com/DHRUV-SHERE/Oracle' }] },
-  { id: 'lms', title: 'Learning Management System', year: '2024', kind: 'Online education', blurb: 'Courses, enrollment, progress tracking, video streaming, quizzes and certificates.', stack: ['MERN', 'Tailwind', 'JWT'], image: LMS, links: [{ label: 'GitHub', url: 'https://github.com/DHRUV-SHERE/Online_Learning_Management_System' }] },
-  { id: 'textsite', title: 'Text Processing Tool', year: '2024', kind: 'React utility', blurb: 'Word and character count, formatting, case conversion and text analysis.', stack: ['React', 'JavaScript', 'CSS'], image: TextSite, links: [{ label: 'GitHub', url: 'https://github.com/DHRUV-SHERE/React_Text_Site' }] },
-  { id: 'todolist', title: 'Task Management App', year: '2024', kind: 'Todo with drag & drop', blurb: 'Prioritised tasks with deadlines, reminders, categories and drag and drop.', stack: ['React', 'Local Storage', 'date-fns'], image: ToDo, links: [{ label: 'GitHub', url: 'https://github.com/DHRUV-SHERE/ToDoList' }] },
-  { id: 'aryapath', title: 'AryaPath', year: 'Coming', kind: 'In planning', blurb: 'A tourism platform for international travellers exploring India: itineraries, cultural insights, local guides, maps and payments.', stack: ['MERN', 'Maps API', 'Socket.io', 'Payments'], links: [{ label: 'GitHub', url: 'https://github.com/DHRUV-SHERE/AryaPath' }] },
+  // Old 2024 builds removed from the portfolio.
+  // { id: 'aryapath', title: 'AryaPath', year: 'Coming', kind: 'In planning', blurb: 'A tourism platform for international travellers exploring India: itineraries, cultural insights, local guides, maps and payments.', stack: ['MERN', 'Maps API', 'Socket.io', 'Payments'], links: [{ label: 'GitHub', url: 'https://github.com/DHRUV-SHERE/AryaPath' }] },
 ]
 
 export const experience = [

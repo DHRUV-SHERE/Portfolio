@@ -73,7 +73,9 @@ export default function Personal() {
       <h2 className="h2">Everything <span className="it">else I've shipped.</span></h2>
       <List title="Sites at Lumos Logic" note={`${clientSites.length} live`} items={clientSites} />
       <List title="Big builds" note={`${bigBuilds.length} full-stack`} items={bigBuilds} />
-      <List title="Smaller builds & experiments" note={`${smallBuilds.length} projects`} items={smallBuilds} />
+      {smallBuilds.length > 0 && (
+        <List title="Smaller builds & experiments" note={`${smallBuilds.length} projects`} items={smallBuilds} />
+      )}
     </section>
   )
 }

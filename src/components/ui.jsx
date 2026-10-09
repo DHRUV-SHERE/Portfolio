@@ -61,7 +61,6 @@ export function SectionLabel({ index, children }) {
   return (
     <div className="label" data-reveal>
       <span className="label__idx">{index}</span>
-      <span className="label__line" />
       <span>{children}</span>
     </div>
   )
